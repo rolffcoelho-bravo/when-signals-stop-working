@@ -49,8 +49,6 @@ The Version 2 design predeclares:
 
 The frozen design is documented in [`V2_DESIGN_FREEZE.md`](V2_DESIGN_FREEZE.md). The machine-readable experiment space is defined in [`configs/v2_experiment_registry.json`](configs/v2_experiment_registry.json) and protected by [`V2_PROTOCOL_LOCK.json`](V2_PROTOCOL_LOCK.json).
 
-The current implementation checkpoint is **D0: development scaffold**. It establishes development/holdout separation, horizon-safe targets, purged nested fold plans, the complete confirmatory candidate inventory, and explicit holdout-access controls. It performs no Version 2 model fitting and produces no holdout performance evidence. See [`V2_IMPLEMENTATION_CHECKPOINT.md`](V2_IMPLEMENTATION_CHECKPOINT.md) and [`docs/V2_IMPLEMENTATION_ARCHITECTURE.md`](docs/V2_IMPLEMENTATION_ARCHITECTURE.md).
-
 ## Institutional relevance
 
 The repository is designed for quantitative research, model validation, investment research governance, and reproducible methodological review. It demonstrates:
@@ -136,26 +134,6 @@ The replication process validates the tracked data snapshot, executes the implem
 
 For a governed replication followed by Git commit and push, use `PUBLISH_PUBLIC_REPLICATION.ps1`.
 
-### Version 2 development scaffold
-
-On the Version 2 research branch, the D0 implementation checkpoint is executed with:
-
-```powershell
-.\RUN_V2_DEVELOPMENT_SCAFFOLD.ps1
-```
-
-This command verifies the frozen protocol, creates development-only partition and fold assets, verifies that no holdout output exists, and runs the complete test suite. It does not fit predictive models.
-
-### Version 2 D1 causal engine
-
-After D0, execute:
-
-```powershell
-.\RUN_V2_D1_CAUSAL_ENGINE.ps1
-```
-
-D1 constructs prefix-invariant benchmark and signal features, fits fold-scoped filtered-state engines on development training partitions, and publishes forward-only state evidence. It does not fit predictive benchmark or candidate models and does not access locked-evaluation performance.
-
 ## Status governance
 
 - `NOT_ESTABLISHED` - stable incremental value was not demonstrated under the declared validation contract.
@@ -194,12 +172,6 @@ See [`ROADMAP.md`](ROADMAP.md).
 - Version 2 design freeze: [`V2_DESIGN_FREEZE.md`](V2_DESIGN_FREEZE.md)
 - Version 2 research protocol: [`docs/V2_RESEARCH_PROTOCOL.md`](docs/V2_RESEARCH_PROTOCOL.md)
 - Version 2 validation gates: [`docs/V2_VALIDATION_GATES.md`](docs/V2_VALIDATION_GATES.md)
-- Version 2 implementation checkpoint: [`V2_IMPLEMENTATION_CHECKPOINT.md`](V2_IMPLEMENTATION_CHECKPOINT.md)
-- Version 2 implementation architecture: [`docs/V2_IMPLEMENTATION_ARCHITECTURE.md`](docs/V2_IMPLEMENTATION_ARCHITECTURE.md)
-- Version 2 development execution plan: [`docs/V2_DEVELOPMENT_EXECUTION_PLAN.md`](docs/V2_DEVELOPMENT_EXECUTION_PLAN.md)
-- Version 2 D1 causal engine checkpoint: [`V2_D1_CAUSAL_ENGINE_CHECKPOINT.md`](V2_D1_CAUSAL_ENGINE_CHECKPOINT.md)
-- Version 2 causal feature specification: [`docs/V2_CAUSAL_FEATURE_SPECIFICATION.md`](docs/V2_CAUSAL_FEATURE_SPECIFICATION.md)
-- Version 2 filtered-state engine: [`docs/V2_FILTERED_STATE_ENGINE.md`](docs/V2_FILTERED_STATE_ENGINE.md)
 
 ## Scope boundaries
 
@@ -211,10 +183,9 @@ The repository provides reproducible research evidence. It does not constitute i
 
 ShockBridge-authored code and documentation are licensed under the MIT License. Third-party market data are included exclusively to support transparent replication and remain subject to the source venue's applicable terms and availability.
 
+## Version 2 checkpoint D2B
 
-## Version 2 checkpoint D2A
-
-The active research branch now includes a development-only nested signal-specification screening stage. D2A evaluates all registered standalone RSI and Bollinger definitions with a fixed regularized-linear matched benchmark. It does not select the final model family, access the locked evaluation segment, or alter the frozen Version 1 determination.
+The active research branch now includes full development-only nested selection across the frozen model families, hyperparameters, estimation windows, soft state conditioning, confirmatory calibration methods, and abstention thresholds. D2B uses only D2A-selected signal specifications, evaluates each selected pipeline once on its untouched outer development fold, and does not access or freeze the methodology-locked evaluation pipeline.
 
 ## Citation
 

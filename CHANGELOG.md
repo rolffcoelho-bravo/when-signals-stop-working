@@ -1,15 +1,12 @@
 # Changelog
 
-## 2.0.0.dev2 - Version 2 D1 causal engine
-
-- added deterministic trailing benchmark features;
-- added registered RSI and Bollinger signal-feature construction and prefix-invariance audit;
-- added fold-scoped forward Gaussian Markov state filtering;
-- added state-parameter, chronology, normalization, and covariance evidence;
-- preserved the Version 1 release, Version 2 protocol freeze, D0 lock, and holdout prohibition.
-
 ## Unreleased - Version 2 methodological design freeze
 
+- establishes D0 development partitioning, target, fold, and candidate-inventory controls;
+- adds the D1 causal feature and fold-scoped filtered-state engine;
+- completes D2A nested benchmark-relative screening for all registered RSI and Bollinger definitions;
+- adds D2B full nested model-family, window, calibration, state-conditioning, and abstention selection;
+- keeps isotonic calibration diagnostic-only and preserves the locked-evaluation access boundary;
 - freezes the Version 2 confirmatory hypothesis family before implementation;
 - separates RSI and Bollinger directional claims from secondary targets and the combined model;
 - defines the development and methodology-locked evaluation segments;
@@ -45,22 +42,3 @@
 - robust structural-deterioration monitor;
 - vector-first evidence suite;
 - public references, citation metadata, and methodological roadmap.
-
-## 2.0.0.dev1 — Version 2 implementation checkpoint D0
-
-- added a separate governed Version 2 software namespace;
-- implemented frozen-registry validation and development/holdout partition controls;
-- implemented horizon-safe target construction and purged nested fold planning;
-- added complete confirmatory candidate and decision-policy inventories;
-- added development-only manifests and public verification scripts;
-- added explicit holdout authorization guards;
-- preserved all Version 1 evidence and all protocol-locked files;
-- performed no Version 2 model fitting and accessed no holdout performance.
-
-
-## 2.0.0.dev3 - D2A nested signal screening
-
-- added matched benchmark/candidate logistic screening;
-- added inner-fold signal-specification selection and untouched outer-fold evaluation;
-- added preliminary development stability summaries with explicit non-final governance labels;
-- retained locked-evaluation exclusion and all prior checkpoint locks.

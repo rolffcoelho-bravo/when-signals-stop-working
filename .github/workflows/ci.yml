@@ -29,7 +29,10 @@ jobs:
         run: python scripts/verify_v2_d0_lock.py
       - name: Verify Version 2 D1 engine lock
         run: python scripts/verify_v2_d1_lock.py
-          python scripts/verify_v2_d2a_lock.py
+      - name: Verify Version 2 D2A selection lock
+        run: python scripts/verify_v2_d2a_lock.py
+      - name: Verify Version 2 D2B selection lock
+        run: python scripts/verify_v2_d2b_lock.py
       - name: Test
         env:
           MPLBACKEND: Agg

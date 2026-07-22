@@ -8,7 +8,6 @@ when-signals-stop-working/
 ├── RESEARCH_SCOPE.md
 ├── V2_DESIGN_FREEZE.md
 ├── V2_PROTOCOL_LOCK.json
-├── V2_IMPLEMENTATION_CHECKPOINT.md
 ├── START_HERE.md
 ├── CITATION.cff
 ├── REPLICATION_MANIFEST.json
@@ -16,41 +15,23 @@ when-signals-stop-working/
 ├── PUBLIC_RELEASE_AUDIT.json
 ├── RUN_REPLICATION.ps1
 ├── RUN_REPLICATION.sh
-├── RUN_V2_DEVELOPMENT_SCAFFOLD.ps1
-├── RUN_V2_DEVELOPMENT_SCAFFOLD.sh
 ├── PUBLISH_PUBLIC_REPLICATION.ps1
 ├── configs/
 │   ├── sol_4h_primary.json
-│   ├── v2_experiment_registry.json
-│   └── v2_runtime_defaults.json
+│   └── v2_experiment_registry.json
 ├── data/
 │   ├── README.md
 │   ├── raw/
 │   └── processed/
-│       └── v2/development/
 ├── environment/
 ├── outputs/
 │   ├── README.md
-│   ├── figures/
-│   └── v2/development/
+│   └── figures/
 ├── scripts/
-│   ├── verify_v2_protocol_lock.py
-│   ├── build_v2_development_assets.py
-│   └── verify_v2_development_scaffold.py
+│   └── verify_v2_protocol_lock.py
 ├── src/shockbridge_signal_validity/
-│   └── v2/
-│       ├── contracts.py
-│       ├── inventory.py
-│       ├── manifests.py
-│       ├── partitions.py
-│       ├── registry.py
-│       ├── signals.py
-│       ├── splits.py
-│       └── targets.py
 ├── tests/
-│   ├── test_v2_design_freeze.py
-│   ├── test_v2_implementation_scaffold.py
-│   └── test_v2_holdout_guard.py
+│   └── test_v2_design_freeze.py
 ├── docs/
 │   ├── STATUS_GOVERNANCE.md
 │   ├── REPLICATION_PACKAGE.md
@@ -64,8 +45,6 @@ when-signals-stop-working/
 │   ├── V2_MULTIPLE_TESTING_CONTROL.md
 │   ├── V2_DATA_AND_REPLICATION_PLAN.md
 │   ├── V2_HOLDOUT_GOVERNANCE.md
-│   ├── V2_IMPLEMENTATION_ARCHITECTURE.md
-│   ├── V2_DEVELOPMENT_EXECUTION_PLAN.md
 │   ├── FIGURE_CATALOG.md
 │   └── REFERENCES.md
 └── .github/workflows/ci.yml
@@ -93,34 +72,28 @@ when-signals-stop-working/
 8. `docs/V2_DATA_AND_REPLICATION_PLAN.md`
 9. `V2_PROTOCOL_LOCK.json`
 
-## Version 2 D0 implementation review sequence
+## Version 2 implementation checkpoints
 
-1. `V2_IMPLEMENTATION_CHECKPOINT.md`
-2. `docs/V2_IMPLEMENTATION_ARCHITECTURE.md`
-3. `docs/V2_DEVELOPMENT_EXECUTION_PLAN.md`
-4. `configs/v2_runtime_defaults.json`
-5. `src/shockbridge_signal_validity/v2/`
-6. `scripts/build_v2_development_assets.py`
-7. `scripts/verify_v2_development_scaffold.py`
-8. `tests/test_v2_implementation_scaffold.py`
-9. `tests/test_v2_holdout_guard.py`
+```text
+RUN_V2_DEVELOPMENT_SCAFFOLD.*      D0 development partition and fold assets
+RUN_V2_D1_CAUSAL_ENGINE.*          D1 causal features and filtered states
+RUN_V2_D2A_SCREENING.*             D2A signal-specification screening
+RUN_V2_D2B_SELECTION.*             D2B full nested pipeline selection
+configs/v2_d2b_selection.json      D2B fixed execution controls
+src/.../v2/pipeline_selection.py   matched pipeline, calibration, and policy engine
+data/processed/v2/development/     governed D0-D2B development evidence
+outputs/v2/development/            checkpoint status records
+```
 
+## Version 2 D2B review sequence
 
-## Version 2 D1 causal engine
-
-- `V2_D1_CAUSAL_ENGINE_CHECKPOINT.md` - D1 checkpoint scope and governance.
-- `configs/v2_d1_engine.json` - fixed D1 numerical and causal controls.
-- `src/shockbridge_signal_validity/v2/causal_features.py` - benchmark and registered signal features.
-- `src/shockbridge_signal_validity/v2/filtered_states.py` - fold-scoped forward state filter.
-- `scripts/build_v2_d1_assets.py` - development-only D1 asset builder.
-- `scripts/verify_v2_d1_assets.py` - generated-asset validation.
-- `V2_D1_ENGINE_LOCK.json` - tamper-evident D1 code lock.
-
-
-## D2A nested screening
-
-- `configs/v2_d2a_screening.json`: fixed screening estimator and governance boundaries.
-- `src/shockbridge_signal_validity/v2/predictive_screening.py`: matched predictive screening primitives.
-- `scripts/build_v2_d2a_assets.py`: development-only nested screening execution.
-- `scripts/verify_v2_d2a_assets.py`: generated-evidence verification.
-- `V2_D2A_SELECTION_LOCK.json`: tamper-evident D2A implementation lock.
+1. `V2_D2B_SELECTION_CHECKPOINT.md`
+2. `docs/V2_D2B_FULL_NESTED_SELECTION.md`
+3. `configs/v2_d2b_selection.json`
+4. `src/shockbridge_signal_validity/v2/pipeline_selection.py`
+5. `data/processed/v2/development/d2b_selected_structural_pipelines.csv`
+6. `data/processed/v2/development/d2b_selected_calibrations.csv`
+7. `data/processed/v2/development/d2b_selected_decision_policies.csv`
+8. `data/processed/v2/development/d2b_outer_fold_results.csv`
+9. `data/processed/v2/development/d2b_family_horizon_summary.csv`
+10. `V2_D2B_SELECTION_LOCK.json`

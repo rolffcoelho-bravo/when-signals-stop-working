@@ -1,0 +1,55 @@
+{
+  "checkpoint": "D2B_FULL_NESTED_PIPELINE_SELECTION",
+  "execution_scope": "DEVELOPMENT_ONLY_FULL_NESTED_PIPELINE_SELECTION",
+  "random_state": 42,
+  "structural_selection": {
+    "inventory_rows": 90,
+    "inner_metric": "mean_incremental_log_loss",
+    "minimum_positive_inner_folds": 2,
+    "brier_dominance_tolerance": 0.0025,
+    "ece_dominance_tolerance": 0.01,
+    "tie_breakers": [
+      "positive_inner_folds_descending",
+      "standard_error_ascending",
+      "complexity_rank_ascending",
+      "pipeline_id_ascending"
+    ]
+  },
+  "calibration": {
+    "confirmatory_candidates": [
+      "none",
+      "sigmoid"
+    ],
+    "diagnostic_only": [
+      "isotonic"
+    ],
+    "chronological_fraction": 0.2,
+    "minimum_fit_rows": 120,
+    "minimum_calibration_rows": 60,
+    "selection_metric": "incremental_log_loss_with_brier_and_ece_tie_breaks"
+  },
+  "decision_policy": {
+    "thresholds": [
+      0.0,
+      0.02,
+      0.05,
+      0.1
+    ],
+    "primary_one_way_cost_bps": 10.0,
+    "minimum_development_coverage": 0.1,
+    "minimum_development_nonzero_decisions": 100,
+    "governance_role": "DEVELOPMENT_POLICY_SELECTION_NOT_ECONOMIC_GATE"
+  },
+  "governance": {
+    "economic_gate_evaluated": false,
+    "holdout_performance_access_enabled": false,
+    "holdout_pipeline_freeze_performed": false,
+    "isotonic_eligible_for_confirmatory_selection": false,
+    "next_checkpoint": "D2C_DEVELOPMENT_ADMISSION_AND_PIPELINE_FREEZE"
+  },
+  "validation_override": {
+    "environment_variable": "WSSW_D2B_SYNTHETIC_VALIDATION",
+    "required_environment_value": "YES",
+    "production_use_prohibited": true
+  }
+}
