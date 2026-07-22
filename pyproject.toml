@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "when-signals-stop-working"
+version = "0.2.0"
+description = "A small ShockBridge challenge testing when RSI and Bollinger Band signals lose incremental value."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "ccxt>=4.4",
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+    "pandas>=2.1",
+    "scikit-learn>=1.4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+shockbridge-signal-validity = "shockbridge_signal_validity.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "tests"]
+testpaths = ["tests"]

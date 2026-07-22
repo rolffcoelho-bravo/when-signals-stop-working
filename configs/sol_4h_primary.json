@@ -1,0 +1,21 @@
+{
+  "research_asset": "SOL/USDT",
+  "market_context": "BTC/USDT",
+  "timeframe": "4h",
+  "forecast_horizon_candles": 1,
+  "primary_signal": "bollinger",
+  "comparison_signal": "rsi",
+  "rsi": {
+    "period": 14,
+    "lower": 30,
+    "upper": 70
+  },
+  "bollinger": {
+    "period": 20,
+    "standard_deviations": 2.0
+  },
+  "estimated_one_way_cost_bps": 10,
+  "chronological_folds": 5,
+  "monitor_window_observations": 180,
+  "consecutive_failure_windows": 3
+}
