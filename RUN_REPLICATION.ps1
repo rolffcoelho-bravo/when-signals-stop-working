@@ -21,7 +21,7 @@ function Invoke-NativeStep {
 
 Write-Host ""
 Write-Host "WHEN SIGNALS STOP WORKING"
-Write-Host "ShockBridge Pulse - V1 Signal Validity Framework"
+Write-Host "ShockBridge Pulse - Institutional Version 1 Replication"
 Write-Host "=================================================="
 
 if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
@@ -72,12 +72,12 @@ Invoke-NativeStep -Label "7. Running the three-stage framework" -Executable $Pyt
     "--output-directory", "outputs"
 )
 
-Invoke-NativeStep -Label "8. Printing the direct conclusions" -Executable $Python -Arguments @("scripts\summarize_results.py")
+Invoke-NativeStep -Label "8. Printing the institutional determinations" -Executable $Python -Arguments @("scripts\summarize_results.py")
 Invoke-NativeStep -Label "9. Building the public replication assets" -Executable $Python -Arguments @("scripts\build_replication_assets.py")
 Invoke-NativeStep -Label "10. Auditing the public release" -Executable $Python -Arguments @("scripts\audit_public_release.py")
 Invoke-NativeStep -Label "11. Verifying replication checksums" -Executable $Python -Arguments @("scripts\verify_replication.py")
 
-Write-Host "`nFramework completed successfully."
+Write-Host "`nInstitutional replication completed successfully."
 Write-Host "Report: outputs\research_report.md"
 Write-Host "Figures: outputs\figures"
 Write-Host "Manifest: outputs\run_manifest.json"

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "data_snapshot_id": "binance-spot-sol-btc-4h-20210101-20260722T0800Z",
-  "original_downloaded_at_utc": "2026-07-22T11:48:01.419369+00:00",
+  "original_downloaded_at_utc": null,
   "venue": "Binance spot",
   "access_library": "CCXT",
   "authentication": "none; public market data",

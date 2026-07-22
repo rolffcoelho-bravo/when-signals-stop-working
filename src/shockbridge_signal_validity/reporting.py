@@ -24,29 +24,32 @@ REFERENCES = [
 ]
 
 
-def _direct_answer(signal: str, result: dict) -> str:
+def _institutional_determination(signal: str, result: dict) -> str:
     label = DISPLAY[signal]
     status = result["status"]
     if status == "NOT_ESTABLISHED":
         return (
-            f"{label} did not establish stable incremental value over the "
-            "non-indicator benchmark under the frozen V1 specification. The "
-            "appropriate conclusion is not that the signal stopped working; "
-            "its edge was not established by this test."
+            f"Under the frozen Version 1 specification, {label} did not "
+            "demonstrate stable incremental predictive and economic "
+            "contribution over the common non-indicator benchmark. The "
+            "appropriate operational status is NOT_ESTABLISHED."
         )
     if status == "ACTIVE":
         return (
-            f"{label} established benchmark-relative value and remains active "
-            "under the current filtered regime and sequential monitor."
+            f"{label} satisfied the historical establishment requirement and "
+            "remains ACTIVE under the current market-state and monitoring "
+            "evidence."
         )
     if status == "REDUCED":
         return (
-            f"{label} showed historical incremental value, but the current "
-            "evidence is uncertain, regime-dependent, or deteriorating."
+            f"{label} satisfied the historical establishment requirement, but "
+            "current evidence is uncertain, regime-dependent, or deteriorating. "
+            "The appropriate operational status is REDUCED."
         )
     return (
-        f"{label} previously established incremental value, but the structural "
-        "monitor and current predictive and economic gates support suspension."
+        f"{label} previously satisfied the historical establishment requirement. "
+        "The structural-deterioration and recent-performance gates support a "
+        "SUSPENDED operational status."
     )
 
 
@@ -138,15 +141,15 @@ def _write_markdown_report(
     config: object,
 ) -> None:
     lines = [
-        "# When Signals Stop Working - V1 Evidence Report",
+        "# Technical Signal Validity Framework - Version 1 Evidence Report",
         "",
-        "> Benchmark-relative validation of RSI and Bollinger Band information on four-hour SOL data.",
+        "> Institutional benchmark-relative assessment of RSI and Bollinger Band information on four-hour SOL/USDT data.",
         "",
-        "## Executive finding",
+        "## Executive determination",
         "",
-        _direct_answer("rsi", verdicts["rsi"]),
+        _institutional_determination("rsi", verdicts["rsi"]),
         "",
-        _direct_answer("bollinger", verdicts["bollinger"]),
+        _institutional_determination("bollinger", verdicts["bollinger"]),
         "",
         (
             "The combined model is secondary. It tests complementarity between "
@@ -154,7 +157,7 @@ def _write_markdown_report(
             "replace either standalone conclusion."
         ),
         "",
-        "## Evidence frame",
+        "## Assessment scope",
         "",
         f"- Sample: **{data.index.min()}** to **{data.index.max()}**",
         f"- Usable observations: **{len(data):,}**",
@@ -163,18 +166,18 @@ def _write_markdown_report(
         f"- Cost assumption: **{config.feature.cost_bps:.1f} bps per one-way position change**",
         f"- Primary empirical signal: **{DISPLAY[primary_signal]}**",
         "",
-        "## Why the conclusion is stronger than a conventional backtest",
+        "## Evidence hierarchy",
         "",
-        "The framework distinguishes four claims:",
+        "The framework separates four evidence layers:",
         "",
         "1. a threshold event was followed by a movement;",
         "2. the signal improved a probability forecast beyond market variables;",
         "3. the improvement remained economically positive after assumed costs;",
         "4. any established contribution survived regime change and sequential monitoring.",
         "",
-        "This separation prevents a visually compelling indicator event from being treated as evidence of stable incremental predictability.",
+        "This hierarchy prevents descriptive indicator behaviour from being treated as evidence of stable incremental predictability.",
         "",
-        "## Signal verdicts",
+        "## Candidate-model determinations",
         "",
         "| Signal | Stage 1 | Status | Predictive gain | Net edge | 95% interval | Current regime | Change alarm |",
         "|---|---:|---:|---:|---:|---:|---:|---:|",
@@ -193,7 +196,7 @@ def _write_markdown_report(
 
     lines.extend([
         "",
-        "## Regime-conditioned evidence",
+        "## Market-state-conditioned evidence",
         "",
         "| Signal | Regime | Observations | Predictive gain | Net edge | Mean state probability |",
         "|---|---:|---:|---:|---:|---:|",
@@ -223,15 +226,15 @@ def _write_markdown_report(
         lines.extend([f"### {captions[figure]}", "", f"![{captions[figure]}]({figure})", ""])
 
     lines.extend([
-        "## Interpretation",
+        "## Institutional interpretation",
         "",
-        "A `NOT_ESTABLISHED` result is informative: the candidate may describe market conditions without adding information beyond trend, volatility, recent returns, volume, and BTC context. It does not imply that every historical indicator event was wrong; it means the incremental claim did not survive the declared validation contract.",
+        "A `NOT_ESTABLISHED` determination is substantive: the candidate may describe market conditions without adding information beyond trend, volatility, recent returns, volume, and BTC context. It does not imply that every historical indicator event was wrong; it means the incremental claim did not survive the declared validation contract.",
         "",
-        "An active structural-change alarm is not sufficient by itself to suspend a signal that never passed establishment. The status hierarchy prevents a deterioration detector from creating a false narrative of a previously proven edge.",
+        "A structural-deterioration alarm is not sufficient to suspend a candidate that did not pass establishment. The status hierarchy requires establishment before deterioration and deterioration before suspension.",
         "",
-        "## Research boundaries",
+        "## Scope boundaries",
         "",
-        "The V1 results are venue-, symbol-, timeframe-, sample-, and cost-specific. They exclude order-book depth, funding, open interest, liquidation intensity, venue-specific slippage, capacity, taxation, and live execution. The outputs are research evidence, not investment advice.",
+        "The V1 results are venue-, symbol-, timeframe-, sample-, and cost-specific. They exclude order-book depth, funding, open interest, liquidation intensity, venue-specific slippage, capacity, taxation, and live execution. The outputs constitute research evidence and do not represent investment advice or a trading recommendation.",
         "",
         "## Sources, methodology, and reproducibility",
         "",

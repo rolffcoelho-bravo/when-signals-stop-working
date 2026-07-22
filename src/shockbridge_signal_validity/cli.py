@@ -122,12 +122,12 @@ def main() -> int:
         print(f"Observations: {result['observations']}")
         print(f"Primary signal: {result['primary_signal']}")
         print(
-            "Primary operational status: "
+            "Primary model status: "
             f"{result['primary_verdict']['status']}"
         )
         print(result["primary_verdict"]["explanation"])
         print(f"Outputs: {args.output_directory.resolve()}")
-        print("\nAll verdicts:")
+        print("\nComplete model determinations:")
         print(json.dumps(result["verdicts"], indent=2))
         return 0
 

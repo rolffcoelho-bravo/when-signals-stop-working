@@ -9,7 +9,7 @@ export MKL_NUM_THREADS=1
 mkdir -p "$MPLCONFIGDIR"
 
 echo
-printf '%s\n' "WHEN SIGNALS STOP WORKING" "ShockBridge Pulse - V1 Signal Validity Framework" "=================================================="
+printf '%s\n' "TECHNICAL SIGNAL VALIDITY FRAMEWORK" "ShockBridge Pulse - Institutional Version 1 Replication" "=================================================="
 
 if [ ! -d .venv ]; then
   python3 -m venv .venv
@@ -38,3 +38,5 @@ find outputs -mindepth 1 ! -name .gitkeep ! -name README.md -delete 2>/dev/null 
 
 echo "Report: outputs/research_report.md"
 echo "Figures: outputs/figures"
+
+echo "Institutional replication completed successfully."

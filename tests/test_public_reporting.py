@@ -24,6 +24,7 @@ def test_public_report_and_svg_suite(tmp_path: Path) -> None:
 
     assert result["primary_signal"] == "bollinger"
     report = (tmp_path / "research_report.md").read_text(encoding="utf-8")
+    assert "Executive determination" in report
     assert "Sources, methodology, and reproducibility" in report
     assert "NOT_ESTABLISHED" in report or "ACTIVE" in report or "REDUCED" in report or "SUSPENDED" in report
     assert (tmp_path / "run_manifest.json").exists()

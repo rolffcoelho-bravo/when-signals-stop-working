@@ -8,13 +8,13 @@ from pathlib import Path
 DISPLAY = {
     "bollinger": "Bollinger Bands",
     "rsi": "RSI",
-    "combined": "Combined RSI + Bollinger",
+    "combined": "Combined RSI and Bollinger specification",
 }
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Print the direct RSI and Bollinger conclusions."
+        description="Print the institutional Version 1 signal determinations."
     )
     parser.add_argument(
         "--verdicts",
@@ -24,81 +24,74 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def direct_answer(signal_name: str, result: dict) -> str:
+def institutional_determination(signal_name: str, result: dict) -> str:
     label = DISPLAY[signal_name]
+    status = result["status"]
 
-    if result["status"] == "NOT_ESTABLISHED":
+    if status == "NOT_ESTABLISHED":
         return (
-            f"Under the frozen specification, {label} did not establish "
-            "reliable incremental predictive and economic value over the "
-            "non-indicator benchmark. The correct conclusion is not that it "
-            "stopped working; its edge was not established by this test."
+            f"Under the frozen Version 1 specification, {label} did not "
+            "demonstrate stable incremental predictive and economic "
+            "contribution over the common non-indicator benchmark. The "
+            "appropriate operational status is NOT_ESTABLISHED."
         )
 
-    if result["status"] == "ACTIVE":
+    if status == "ACTIVE":
         return (
-            f"{label} established benchmark-relative value and remains active "
-            "under the current filtered regime and monitoring rule. It has not "
-            "currently stopped working, although its usefulness is conditional "
-            "and must continue to be monitored."
+            f"{label} satisfied the historical establishment requirement and "
+            "remains ACTIVE under the current market-state and monitoring "
+            "evidence."
         )
 
-    if result["status"] == "REDUCED":
+    if status == "REDUCED":
         return (
-            f"{label} showed some historical incremental value, but its current "
-            "contribution is uncertain, weakening, or concentrated in specific "
-            "regimes. It should be treated as reduced rather than as a stable "
-            "unconditional signal."
+            f"{label} satisfied the historical establishment requirement, but "
+            "the current evidence is uncertain, regime-concentrated, or "
+            "deteriorating. The appropriate status is REDUCED."
         )
 
     return (
-        f"{label} previously established incremental value, but the online "
-        "structural-change alarm and current predictive and economic gates now "
-        "indicate failure. Under the declared model contract, it has stopped "
-        "working sufficiently to be classified as suspended."
+        f"{label} previously satisfied the establishment requirement. The "
+        "structural-deterioration condition and recent predictive and economic "
+        "evidence support a SUSPENDED status under the model contract."
     )
 
 
 def print_model_details(signal: str, result: dict) -> None:
     print(f"\n{DISPLAY[signal]}")
     print("-" * len(DISPLAY[signal]))
-    print(f"Status: {result['status']}")
-    print(result["explanation"])
-    print(f"Current filtered regime: {result['current_regime']}")
+    print(f"Operational status: {result['status']}")
+    print(f"Current filtered market state: {result['current_regime']}")
     print(
-        "Regime probabilities: "
+        "Filtered probabilities: "
         f"range={result['current_regime_probabilities']['range']:.3f}, "
         f"trend={result['current_regime_probabilities']['trend']:.3f}, "
         f"stress={result['current_regime_probabilities']['stress']:.3f}"
     )
-    print(f"Structural-change alarm: {result['structural_change_alarm']}")
+    print(f"Structural-deterioration alarm: {result['structural_change_alarm']}")
 
 
 def main() -> int:
     args = parse_args()
     verdicts = json.loads(args.verdicts.read_text(encoding="utf-8"))
 
-    print("\nWHEN SIGNALS STOP WORKING")
-    print("=" * 25)
+    print("\nTECHNICAL SIGNAL VALIDITY - VERSION 1")
+    print("=" * 37)
 
     for signal in ("rsi", "bollinger", "combined"):
         print_model_details(signal, verdicts[signal])
 
-    print("\nRSI CONCLUSION")
-    print("-" * 42)
-    print(direct_answer("rsi", verdicts["rsi"]))
+    print("\nINSTITUTIONAL DETERMINATIONS")
+    print("-" * 28)
+    print(institutional_determination("rsi", verdicts["rsi"]))
+    print(institutional_determination("bollinger", verdicts["bollinger"]))
 
-    print("\nBOLLINGER BANDS CONCLUSION")
-    print("-" * 49)
-    print(direct_answer("bollinger", verdicts["bollinger"]))
-
-    print("\nCROSS-SIGNAL INTERPRETATION")
-    print("-" * 24)
+    print("\nCROSS-SPECIFICATION ASSESSMENT")
+    print("-" * 30)
     print(
-        "RSI and Bollinger Bands are evaluated separately because they measure "
-        "different market structures. The combined model is only a secondary "
-        "test of complementary information and does not replace either direct "
-        "conclusion."
+        "RSI and Bollinger Bands are assessed independently because they "
+        "represent different information families. The combined specification "
+        "is secondary and does not replace either standalone determination."
     )
     return 0
 

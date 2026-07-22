@@ -1,5 +1,14 @@
-# Generated Evidence
+# Generated Analytical Evidence
 
-The tracked V1 evidence includes the complete report, verdicts, fold summaries, observation-level out-of-sample predictions, regime summaries, run manifest, and SVG figures.
+The tracked Version 1 evidence includes:
 
-These files are generated from the frozen data snapshot and should match `REPLICATION_CHECKSUMS.sha256`. Run `python scripts/verify_replication.py` after execution to confirm integrity.
+- the institutional research report;
+- operational determinations;
+- event-study evidence;
+- fold-level model-comparison results;
+- observation-level out-of-sample predictions;
+- regime-conditioned summaries;
+- run manifest;
+- vector analytical figures.
+
+These files are generated from the frozen data snapshot and must conform to `REPLICATION_CHECKSUMS.sha256`. Execute `python scripts/verify_replication.py` after replication to confirm integrity.

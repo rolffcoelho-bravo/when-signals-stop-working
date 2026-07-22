@@ -1,129 +1,162 @@
 # When Signals Stop Working
 
-**A fully reproducible, benchmark-relative framework for testing whether technical indicators contain incremental information, where that information survives, and when deterioration becomes operationally meaningful.**
+## Technical Signal Validity, Regime Dependence, and Structural Deterioration Framework
 
 [![CI](https://github.com/rolffcoelho-bravo/when-signals-stop-working/actions/workflows/ci.yml/badge.svg)](https://github.com/rolffcoelho-bravo/when-signals-stop-working/actions/workflows/ci.yml)
 
-## Research question
+## Executive overview
 
-The repository evaluates RSI and Bollinger Bands on four-hour SOL data. It does not ask whether an indicator occasionally appears correct. It asks whether indicator information:
+This repository provides a governed, fully reproducible framework for determining whether technical indicators contribute incremental predictive and economic information beyond a transparent market-state benchmark.
 
-1. improves a non-indicator benchmark on unseen chronological data;
-2. remains economically relevant after the declared cost assumption;
-3. survives market-regime changes;
-4. can be governed with explicit establishment and suspension rules.
+The Version 1 assessment evaluates Relative Strength Index and Bollinger Band information on four-hour SOL/USDT data, with BTC/USDT included as broader market context. The framework separates descriptive indicator behaviour from benchmark-relative forecasting value, regime dependence, and structural deterioration.
 
-A signal cannot be said to have **stopped working** unless it first established stable incremental value. If it never clears that gate, the correct status is `NOT_ESTABLISHED`.
+The central governance principle is explicit:
 
-## Published V1 finding
+> A signal cannot be classified as deteriorated or suspended unless stable out-of-sample value was first established under a predeclared validation contract.
 
-The frozen V1 experiment uses 12,171 aligned Binance spot candles from **2021-01-01 00:00 UTC** through **2026-07-22 08:00 UTC**. RSI and Bollinger Bands each improved predictive log loss in only 1 of 5 chronological folds; the combined model improved 2 of 5. All three models received `NOT_ESTABLISHED`.
+Where that establishment requirement is not met, the appropriate status is `NOT_ESTABLISHED`.
 
-See [`RESULTS.md`](RESULTS.md) and the complete generated [`outputs/research_report.md`](outputs/research_report.md).
+## Published Version 1 determination
 
-## Frozen V1 specification
+The frozen Version 1 sample contains 12,171 aligned Binance spot observations from **1 January 2021, 00:00 UTC** through **22 July 2026, 08:00 UTC**.
 
-| Component | Setting |
+| Candidate model | Chronological folds with positive predictive contribution | Version 1 status |
+|---|---:|---|
+| RSI | 1 of 5 | `NOT_ESTABLISHED` |
+| Bollinger Bands | 1 of 5 | `NOT_ESTABLISHED` |
+| Combined specification | 2 of 5 | `NOT_ESTABLISHED` |
+
+Under the frozen specification, none of the candidate models demonstrated sufficiently stable incremental value to pass the establishment gate. This determination does not imply that all historical indicator events were incorrect. It means that the incremental forecasting claim did not survive the declared benchmark-relative and chronological validation requirements.
+
+The complete determination is documented in [`RESULTS.md`](RESULTS.md) and the generated [`outputs/research_report.md`](outputs/research_report.md).
+
+## Institutional relevance
+
+The repository is designed for quantitative research, model validation, investment research governance, and reproducible methodological review. It demonstrates:
+
+- predeclared research assumptions;
+- common-benchmark model comparison;
+- chronological out-of-sample validation;
+- explicit separation of predictive and economic evidence;
+- regime-conditioned analysis;
+- sequential deterioration monitoring;
+- reproducible data, features, folds, predictions, figures, and manifests;
+- disciplined publication of negative findings.
+
+## Frozen Version 1 specification
+
+| Component | Specification |
 |---|---|
 | Research asset | SOL/USDT spot |
 | Market context | BTC/USDT spot |
-| Venue | Binance |
-| Frequency | Four-hour candles |
-| Forecast horizon | Next four-hour candle |
-| RSI | 14 periods; 30/70 events |
-| Bollinger Bands | 20 periods; 2 standard deviations |
-| Validation | 5 expanding chronological folds with a gap |
-| Cost assumption | 10 bps per one-way position change |
-| Regimes | Filtered range, trend, stress |
-| Monitoring | Robust one-sided CUSUM |
+| Data venue | Binance |
+| Frequency | Four-hour observations |
+| Forecast horizon | Next four-hour return |
+| RSI specification | 14 periods; 30/70 threshold events |
+| Bollinger specification | 20 periods; 2 standard deviations |
+| Validation design | Five expanding chronological folds with a forecast-horizon gap |
+| Economic cost assumption | 10 basis points per one-way position change |
+| Market-state layer | Filtered range, trend, and stress probabilities |
+| Deterioration monitor | Robust one-sided CUSUM |
 
-These settings are predeclared research assumptions, not claimed optimal parameters.
-
-## Complete replication package
-
-The public repository tracks the evidence necessary to reproduce V1 exactly:
-
-```text
-data/raw/                 frozen SOL and BTC OHLCV, provenance, validation
-data/processed/           aligned data, model features, exact fold assignments
-outputs/                  report, verdicts, all folds, OOS predictions, SVG figures
-environment/              sanitized package versions
-REPLICATION_MANIFEST.json snapshot definition and public-evidence map
-REPLICATION_CHECKSUMS.sha256 file-integrity record
-PUBLIC_RELEASE_AUDIT.json sensitive-information audit
-```
-
-No private account data or API credentials are used. The public snapshot was retrieved through public market-data interfaces.
-
-## Run and verify
-
-### Windows
-
-```powershell
-Set-ExecutionPolicy -Scope Process Bypass
-.\RUN_CHALLENGE.ps1
-```
-
-### macOS or Linux
-
-```bash
-chmod +x RUN_CHALLENGE.sh
-./RUN_CHALLENGE.sh
-```
-
-For a governed run plus Git commit and push, use `PUBLISH_PUBLIC_REPLICATION.ps1`.
-
-The runner:
-
-1. reuses the frozen snapshot by default;
-2. validates timestamps and OHLCV integrity;
-3. executes the implementation tests;
-4. regenerates all model outputs and SVG figures;
-5. builds processed replication datasets and fold assignments;
-6. records sanitized runtime versions and SHA-256 checksums;
-7. audits the public tree for credentials and local absolute paths;
-8. verifies the generated replication package.
-
-`-RefreshData` re-downloads the same frozen V1 date range. A genuinely new vintage requires explicit downloader dates and a new versioned experiment.
+These settings are fixed research assumptions. They are not presented as optimal trading parameters.
 
 ## Evidence architecture
 
 ```text
-Conventional event evidence
+Indicator event description
         ↓
 Common non-indicator benchmark
         ↓
 Chronological out-of-sample comparison
         ↓
-Filtered range / trend / stress state
+Predictive and economic evidence
+        ↓
+Filtered market-state assessment
         ↓
 Sequential deterioration monitoring
         ↓
 NOT_ESTABLISHED / ACTIVE / REDUCED / SUSPENDED
 ```
 
-## Why the negative result is valuable
+## Reproducibility package
 
-The V1 result shows that descriptive indicator events should not automatically be interpreted as stable forecasting edge. A rigorous negative finding narrows the next research question: whether information is conditional on horizon, target, regime, nonlinear response, or reversal-versus-continuation interpretation.
+The public repository contains the complete evidence chain required to reproduce Version 1:
 
-The predeclared V2 design is documented in [`ROADMAP.md`](ROADMAP.md). It uses nested walk-forward selection, multiple reported horizons and targets, a locked holdout, cross-venue replication, and formal predictive-comparison controls rather than post-hoc tuning.
+```text
+data/raw/                 frozen OHLCV snapshot, provenance, and validation
+data/processed/           aligned data, features, fold boundaries, assignments
+outputs/                  report, verdicts, predictions, summaries, SVG figures
+environment/              sanitized package-version record
+REPLICATION_MANIFEST.json public evidence map and snapshot definition
+REPLICATION_CHECKSUMS.sha256 file-integrity record
+PUBLIC_RELEASE_AUDIT.json sensitive-information audit
+```
+
+No private account data, credentials, or authenticated trading interfaces are required.
+
+## Execution
+
+### Windows
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\RUN_REPLICATION.ps1
+```
+
+### macOS or Linux
+
+```bash
+chmod +x RUN_REPLICATION.sh
+./RUN_REPLICATION.sh
+```
+
+The replication process validates the tracked data snapshot, executes the implementation tests, regenerates the analytical outputs and vector figures, rebuilds the replication assets, audits the public tree, and verifies the published checksums.
+
+For a governed replication followed by Git commit and push, use `PUBLISH_PUBLIC_REPLICATION.ps1`.
+
+## Status governance
+
+- `NOT_ESTABLISHED` - stable incremental value was not demonstrated under the declared validation contract.
+- `ACTIVE` - established value remains positive under the current evidence and monitoring rules.
+- `REDUCED` - historical value exists, but current evidence is uncertain, regime-concentrated, or deteriorating.
+- `SUSPENDED` - previously established value has crossed both the structural-deterioration and recent-performance gates.
+
+The complete status logic is documented in [`docs/STATUS_GOVERNANCE.md`](docs/STATUS_GOVERNANCE.md).
+
+## Methodological development programme
+
+Version 1 is intentionally parsimonious. Later phases increase complexity only where it improves out-of-sample evidence, uncertainty quantification, or operational control.
+
+The approved programme covers:
+
+1. conditional validity across horizons, targets, regimes, and signal interpretations;
+2. dynamic coefficients and fully estimated latent-state models;
+3. online failure probabilities and Bayesian changepoint inference;
+4. cross-market transmission, liquidity, and production-governance layers.
+
+See [`ROADMAP.md`](ROADMAP.md).
 
 ## Documentation
 
-- Results: [`RESULTS.md`](RESULTS.md)
-- Start guide: [`START_HERE.md`](START_HERE.md)
-- Replication package: [`docs/REPLICATION_PACKAGE.md`](docs/REPLICATION_PACKAGE.md)
-- Public release policy: [`docs/PUBLIC_RELEASE_POLICY.md`](docs/PUBLIC_RELEASE_POLICY.md)
+- Empirical determination: [`RESULTS.md`](RESULTS.md)
+- Research scope: [`RESEARCH_SCOPE.md`](RESEARCH_SCOPE.md)
+- Replication guide: [`START_HERE.md`](START_HERE.md)
 - Model contract: [`docs/MODEL_CONTRACT.md`](docs/MODEL_CONTRACT.md)
 - Research protocol: [`docs/RESEARCH_PROTOCOL.md`](docs/RESEARCH_PROTOCOL.md)
-- Figure catalog: [`docs/FIGURE_CATALOG.md`](docs/FIGURE_CATALOG.md)
+- Status governance: [`docs/STATUS_GOVERNANCE.md`](docs/STATUS_GOVERNANCE.md)
+- Replication package: [`docs/REPLICATION_PACKAGE.md`](docs/REPLICATION_PACKAGE.md)
+- Public release policy: [`docs/PUBLIC_RELEASE_POLICY.md`](docs/PUBLIC_RELEASE_POLICY.md)
+- Figure catalogue: [`docs/FIGURE_CATALOG.md`](docs/FIGURE_CATALOG.md)
 - References: [`docs/REFERENCES.md`](docs/REFERENCES.md)
 - Citation metadata: [`CITATION.cff`](CITATION.cff)
 
-## Research boundaries
+## Scope boundaries
 
-The results are venue-, pair-, timeframe-, sample-, target-, and cost-specific. V1 excludes funding, open interest, liquidations, order-book depth, venue-specific slippage, capacity, taxation, and live execution. This repository provides research evidence, not investment advice.
+The findings are specific to the declared venue, instruments, frequency, sample, target, benchmark, validation design, and cost assumption. Version 1 does not include funding rates, open interest, liquidations, order-book depth, venue-specific slippage, market capacity, taxation, or live execution.
+
+The repository provides reproducible research evidence. It does not constitute investment advice, a trading recommendation, or a claim of universal indicator validity.
 
 ## License and data notice
 
-ShockBridge-authored code and documentation are licensed under MIT. Third-party market data are included solely to support transparent replication and remain subject to the source venue's applicable terms and availability.
+ShockBridge-authored code and documentation are licensed under the MIT License. Third-party market data are included exclusively to support transparent replication and remain subject to the source venue's applicable terms and availability.

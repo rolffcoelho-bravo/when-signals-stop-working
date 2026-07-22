@@ -1,16 +1,16 @@
-# When Signals Stop Working - V1 Evidence Report
+# Technical Signal Validity Framework - Version 1 Evidence Report
 
-> Benchmark-relative validation of RSI and Bollinger Band information on four-hour SOL data.
+> Institutional benchmark-relative assessment of RSI and Bollinger Band information on four-hour SOL/USDT data.
 
-## Executive finding
+## Executive determination
 
-RSI did not establish stable incremental value over the non-indicator benchmark under the frozen V1 specification. The appropriate conclusion is not that the signal stopped working; its edge was not established by this test.
+Under the frozen Version 1 specification, RSI did not demonstrate stable incremental predictive and economic contribution over the common non-indicator benchmark. The appropriate operational status is NOT_ESTABLISHED.
 
-Bollinger Bands did not establish stable incremental value over the non-indicator benchmark under the frozen V1 specification. The appropriate conclusion is not that the signal stopped working; its edge was not established by this test.
+Under the frozen Version 1 specification, Bollinger Bands did not demonstrate stable incremental predictive and economic contribution over the common non-indicator benchmark. The appropriate operational status is NOT_ESTABLISHED.
 
 The combined model is secondary. It tests complementarity between momentum and volatility-relative price location and does not replace either standalone conclusion.
 
-## Evidence frame
+## Assessment scope
 
 - Sample: **2021-01-05 20:00:00+00:00** to **2026-07-22 04:00:00+00:00**
 - Usable observations: **12,141**
@@ -19,18 +19,18 @@ The combined model is secondary. It tests complementarity between momentum and v
 - Cost assumption: **10.0 bps per one-way position change**
 - Primary empirical signal: **Bollinger Bands**
 
-## Why the conclusion is stronger than a conventional backtest
+## Evidence hierarchy
 
-The framework distinguishes four claims:
+The framework separates four evidence layers:
 
 1. a threshold event was followed by a movement;
 2. the signal improved a probability forecast beyond market variables;
 3. the improvement remained economically positive after assumed costs;
 4. any established contribution survived regime change and sequential monitoring.
 
-This separation prevents a visually compelling indicator event from being treated as evidence of stable incremental predictability.
+This hierarchy prevents descriptive indicator behaviour from being treated as evidence of stable incremental predictability.
 
-## Signal verdicts
+## Candidate-model determinations
 
 | Signal | Stage 1 | Status | Predictive gain | Net edge | 95% interval | Current regime | Change alarm |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -38,7 +38,7 @@ This separation prevents a visually compelling indicator event from being treate
 | Bollinger Bands | INCONCLUSIVE | NOT_ESTABLISHED | -1.104e-03 | 4.377e-05 | [-8.458e-05, 1.760e-04] | range | False |
 | Combined | NO_DESCRIPTIVE_EDGE | NOT_ESTABLISHED | -2.617e-03 | -1.223e-04 | [-2.985e-04, 5.395e-05] | range | False |
 
-## Regime-conditioned evidence
+## Market-state-conditioned evidence
 
 | Signal | Regime | Observations | Predictive gain | Net edge | Mean state probability |
 |---|---:|---:|---:|---:|---:|
@@ -82,15 +82,15 @@ This separation prevents a visually compelling indicator event from being treate
 
 ![Combined-model online monitoring](figures/monitoring_combined.svg)
 
-## Interpretation
+## Institutional interpretation
 
-A `NOT_ESTABLISHED` result is informative: the candidate may describe market conditions without adding information beyond trend, volatility, recent returns, volume, and BTC context. It does not imply that every historical indicator event was wrong; it means the incremental claim did not survive the declared validation contract.
+A `NOT_ESTABLISHED` determination is substantive: the candidate may describe market conditions without adding information beyond trend, volatility, recent returns, volume, and BTC context. It does not imply that every historical indicator event was wrong; it means the incremental claim did not survive the declared validation contract.
 
-An active structural-change alarm is not sufficient by itself to suspend a signal that never passed establishment. The status hierarchy prevents a deterioration detector from creating a false narrative of a previously proven edge.
+A structural-deterioration alarm is not sufficient to suspend a candidate that did not pass establishment. The status hierarchy requires establishment before deterioration and deterioration before suspension.
 
-## Research boundaries
+## Scope boundaries
 
-The V1 results are venue-, symbol-, timeframe-, sample-, and cost-specific. They exclude order-book depth, funding, open interest, liquidation intensity, venue-specific slippage, capacity, taxation, and live execution. The outputs are research evidence, not investment advice.
+The V1 results are venue-, symbol-, timeframe-, sample-, and cost-specific. They exclude order-book depth, funding, open interest, liquidation intensity, venue-specific slippage, capacity, taxation, and live execution. The outputs constitute research evidence and do not represent investment advice or a trading recommendation.
 
 ## Sources, methodology, and reproducibility
 

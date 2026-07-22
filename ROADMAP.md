@@ -1,96 +1,148 @@
-# Methodology Roadmap
+# Methodological Development Programme
 
-## V1 — Transparent signal-validity framework (current)
+## Governing principle
 
-V1 is the simplest defensible implementation. It establishes whether fixed RSI and Bollinger specifications add information beyond a market-state benchmark before complexity is introduced.
+Methodological complexity is admitted only where it improves one or more of the following:
 
-- conventional event studies;
-- common non-indicator benchmark;
-- regularized logistic probability models;
-- five expanding chronological folds with a horizon gap;
-- cost-adjusted incremental edge and block-bootstrap intervals;
-- training-only three-state Gaussian Markov forward filter;
-- robust one-sided CUSUM monitoring;
+- locked out-of-sample evidence;
+- uncertainty quantification;
+- structural interpretation;
+- operational monitoring;
+- reproducibility and model governance.
+
+Complexity is not introduced to reverse an unfavourable Version 1 result.
+
+## Phase I - Parsimonious signal-validity framework
+
+**Status:** completed and published.
+
+Phase I establishes whether fixed RSI and Bollinger specifications contribute information beyond a common market-state benchmark before advanced models are introduced.
+
+Core elements:
+
+- conventional event evidence;
+- regularized benchmark-relative probability models;
+- five expanding chronological folds with a forecast-horizon gap;
+- cost-adjusted incremental economic evidence;
+- dependence-aware bootstrap intervals;
+- training-only three-state Gaussian Markov filtering;
+- robust one-sided structural-deterioration monitoring;
 - complete public replication package.
 
-**Published finding:** RSI, Bollinger Bands, and their combined specification are `NOT_ESTABLISHED` under the frozen SOL four-hour V1 design.
+**Published determination:** RSI, Bollinger Bands, and the combined specification are `NOT_ESTABLISHED` under the frozen SOL four-hour design.
 
-## V2 — Conditional validity and inference hardening
+## Phase II - Conditional validity and inference hardening
 
-V2 addresses the low fold stability without tuning V1 until it becomes positive. Every extension is predeclared and evaluated on nested chronological validation with a locked final holdout.
+Phase II determines whether the Version 1 instability reflects an absence of information or a conditional structure not represented by the parsimonious specification.
 
-### Targets
+### Predeclared targets
 
 - next-period direction;
 - expected cumulative return;
 - large-move or tail-event probability.
 
-### Horizons
+### Predeclared horizons
 
-- 4, 8, 12, and 24 hours, all reported;
-- no selection of only the best horizon after observing the holdout.
+- 4 hours;
+- 8 hours;
+- 12 hours;
+- 24 hours.
+
+All declared horizons will be reported. The final holdout will not be used for horizon selection.
 
 ### Signal interpretation
 
-- contrarian or mean-reversion interpretation;
-- continuation or breakout interpretation;
-- regime-conditioned choice defined inside training data.
+- contrarian or mean-reversion formulation;
+- continuation or breakout formulation;
+- regime-conditioned interpretation selected only within training data.
 
 ### Conditional structure
 
 - interactions with filtered range, trend, and stress probabilities;
-- nonlinear splines or shallow boosted trees alongside regularized logistic regression;
-- abstention thresholds with both performance and coverage reported.
+- restrained nonlinear specifications, including splines and shallow boosted trees;
+- abstention thresholds with both performance and coverage reported;
+- expanding, one-year rolling, and two-year rolling estimation windows.
 
 ### Selection and inference
 
-- nested walk-forward selection of a restrained RSI and Bollinger parameter grid;
-- expanding versus one-year and two-year rolling windows;
+- nested walk-forward selection over a restrained parameter grid;
 - locked final holdout;
-- probability calibration and calibration drift;
-- Diebold–Mariano comparison for fixed alternatives;
-- Superior Predictive Ability controls when many candidates are evaluated;
-- cost and threshold sensitivity with dependence-aware bootstrap intervals.
+- probability calibration and calibration-drift analysis;
+- Diebold-Mariano comparison for fixed alternatives;
+- Superior Predictive Ability controls where multiple candidates are evaluated;
+- cost and decision-threshold sensitivity with dependence-aware intervals.
 
-### Replication
+### External replication
 
 - Binance SOL/USDT remains the primary case;
-- independent venue replication where comparable history exists;
-- BTC and ETH secondary cross-asset validation.
+- independent venue replication where comparable history is available;
+- BTC and ETH as secondary cross-asset validation cases.
 
-V2 succeeds only if the improvement survives the locked holdout and is not dependent on one venue, one horizon, or one narrow parameter choice.
+**Admission criterion for Phase III:** any reported improvement must survive the locked holdout and must not depend exclusively on one venue, one horizon, or one narrow parameter choice.
 
-## V3 — Dynamic signal coefficients and richer regimes
+## Phase III - Dynamic coefficients and richer latent states
+
+Phase III introduces dynamic model structure after the conditional validity layer is established.
+
+Planned components:
 
 - time-varying logistic or state-space coefficients;
-- filtered probability that each signal coefficient is positive;
-- fully estimated hidden Markov or semi-Markov regimes;
-- regime-dependent transition probabilities and duration dependence;
-- transparent-versus-latent regime model averaging.
+- fully estimated hidden Markov or Markov-switching response models;
+- state-duration dependence and transition uncertainty;
+- dynamic model averaging;
+- uncertainty bands for regime probabilities and signal effects;
+- formal stability tests across assets, venues, and data vintages.
 
-## V4 — Online changepoints and failure probability
+The transparent Phase I filter remains as a challenger model.
+
+## Phase IV - Online failure probability
+
+Phase IV converts structural deterioration into a forward-looking risk measure.
+
+Planned components:
 
 - Bayesian online changepoint detection;
-- posterior run-length distribution;
-- probability of recent structural break;
-- horizon-specific signal-failure hazard;
-- false-alarm and detection-delay calibration;
-- governed retraining, suspension, and reactivation rules.
+- posterior run-length distributions;
+- signal-survival probabilities;
+- probability of failure within specified future horizons;
+- expected time to operational review or suspension;
+- calibrated escalation thresholds and alert governance.
 
-This version approaches the literal forward-looking question:
+The intended output is not a deterministic failure date. It is a conditional probability statement:
 
 \[
-P(	ext{signal failure within the next } H 	ext{ periods}\mid\mathcal F_t).
+P(\text{operational failure within } H \mid \mathcal{F}_t)
 \]
 
-## V5 — Transmission, microstructure, and production governance
+## Phase V - Market transmission and production governance
 
-- funding, open interest, liquidations, spreads, and order-book imbalance;
-- BTC, ETH, and market-wide transmission variables;
-- multivariate state-space, network, or point-process propagation models;
-- venue-specific execution, capacity, and slippage controls;
-- versioned snapshots, model registry, CI gates, and scheduled monitoring.
+Phase V extends the framework beyond price-only technical indicators.
 
-## Promotion principle
+Planned data layers:
 
-A more complex version is promoted only when it improves locked out-of-sample evidence, uncertainty quantification, interpretability, or operational control. Complexity is never treated as evidence by itself.
+- funding rates;
+- open interest;
+- liquidation intensity;
+- order-book imbalance and depth;
+- cross-venue price dispersion;
+- cross-asset volatility and liquidity transmission.
+
+Planned governance layers:
+
+- challenger-model comparison;
+- data-quality and feature-drift controls;
+- threshold approval and override policy;
+- monitoring ownership and escalation workflow;
+- periodic revalidation and model-change documentation;
+- decision-grade dashboards and audit evidence.
+
+## Programme control
+
+Each phase must preserve:
+
+- predeclared hypotheses and parameter ranges;
+- chronological validation;
+- locked evaluation data;
+- complete reporting of negative and positive results;
+- public replication assets where data rights permit;
+- explicit separation between research evidence and investment decision-making.

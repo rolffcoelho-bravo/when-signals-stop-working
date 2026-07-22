@@ -1,32 +1,31 @@
-# Replication Package
+# Replication Package Specification
 
 ## Purpose
 
-The public release contains the minimum complete chain required to audit and reproduce the V1 conclusion:
+The public release contains the minimum complete evidence chain required to audit and reproduce the Version 1 determination:
 
 1. frozen raw market data;
 2. provenance and data-quality records;
-3. deterministic feature and fold definitions;
-4. complete out-of-sample predictions;
-5. summary evidence and verdicts;
-6. publication-grade figures;
-7. runtime versions and file checksums.
+3. deterministic feature and target definitions;
+4. exact chronological fold membership;
+5. complete out-of-sample predictions;
+6. summary evidence and operational determinations;
+7. vector analytical figures;
+8. sanitized runtime versions and integrity checksums.
 
 ## Exact replication
 
-Run the repository without refreshing data:
-
 ```powershell
 Set-ExecutionPolicy -Scope Process Bypass
-.\RUN_CHALLENGE.ps1
+.\RUN_REPLICATION.ps1
 ```
 
-The runner uses the tracked frozen data snapshot, validates it, executes the tests, regenerates the model evidence, creates processed replication assets, verifies checksums, and audits the public release for sensitive paths or credentials.
+The runner uses the tracked frozen snapshot, validates the data, executes the tests, regenerates the analytical evidence, creates processed replication assets, audits the public tree, and verifies the checksum record.
 
 ## New data vintage
 
-`RUN_CHALLENGE.ps1 -RefreshData` re-downloads the same frozen V1 window. Extending the end date requires explicit downloader arguments and must be published as a new versioned experiment.
+`RUN_REPLICATION.ps1 -RefreshData` retrieves the same frozen Version 1 window. Extending the sample requires explicit downloader arguments and constitutes a new versioned experiment.
 
-## Public-surface rule
+## Public-surface control
 
-Tracked evidence includes data and outputs necessary for replication. Excluded content is limited to virtual environments, caches, build metadata, local logs, credentials, private keys, and optional raster exports.
+Tracked evidence includes only the data and outputs required for replication. Excluded content comprises virtual environments, caches, packaging metadata, local logs, credentials, private keys, machine-specific paths, and optional raster duplicates.

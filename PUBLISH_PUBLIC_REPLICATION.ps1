@@ -23,16 +23,16 @@ if (-not (Test-Path ".git")) {
     throw "Run this script from the initialized repository root."
 }
 
-Write-Host "`nWHEN SIGNALS STOP WORKING"
-Write-Host "Professional Public Replication Release"
+Write-Host "`nTECHNICAL SIGNAL VALIDITY FRAMEWORK"
+Write-Host "Institutional Public Replication Release"
 Write-Host "======================================="
 
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 
 if ($RefreshFrozenData) {
-    & ".\RUN_CHALLENGE.ps1" -RefreshData
+    & ".\RUN_REPLICATION.ps1" -RefreshData
 } else {
-    & ".\RUN_CHALLENGE.ps1"
+    & ".\RUN_REPLICATION.ps1"
 }
 if (-not $?) {
     throw "The replication framework did not complete successfully."
@@ -93,7 +93,7 @@ Write-Host "`nFinal verification"
 git status
 git log -2 --oneline
 
-Write-Host "`nPUBLIC REPLICATION RELEASE COMPLETED SUCCESSFULLY."
+Write-Host "`nINSTITUTIONAL PUBLIC REPLICATION RELEASE COMPLETED SUCCESSFULLY."
 Write-Host "Results: RESULTS.md"
 Write-Host "Report: outputs\research_report.md"
 Write-Host "Manifest: REPLICATION_MANIFEST.json"

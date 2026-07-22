@@ -3,7 +3,7 @@
   "compile_returncode": 0,
   "compile_stderr": "",
   "pytest_returncode": 0,
-  "pytest_stdout": "......                                                                   [100%]\n6 passed in 14.25s\n",
+  "pytest_stdout": ".........                                                                [100%]\n9 passed in 14.90s\n",
   "pytest_stderr": "",
   "public_surface_review": {
     "conversation_specific_files_removed": true,
@@ -39,5 +39,8 @@
   "tracked_oos_predictions": true,
   "checksum_verification": true,
   "sensitive_information_audit": true,
-  "ci_workflow": true
+  "ci_workflow": true,
+  "version": "1.2.0",
+  "editorial_standard": "Institutional research and model-governance writing",
+  "legacy_challenge_language_removed": true
 }

@@ -1,7 +1,7 @@
 cff-version: 1.2.0
-message: "If you use this research framework, please cite it as below."
-title: "When Signals Stop Working"
-version: "1.1.0"
+message: "Please cite this research framework using the metadata below."
+title: "When Signals Stop Working: Technical Signal Validity and Structural Deterioration Framework"
+version: "1.2.0"
 type: software
 authors:
   - family-names: "Pereira"
@@ -10,15 +10,16 @@ repository-code: "https://github.com/rolffcoelho-bravo/when-signals-stop-working
 url: "https://github.com/rolffcoelho-bravo/when-signals-stop-working"
 license: MIT
 abstract: >-
-  A benchmark-relative framework for testing whether RSI and Bollinger Band
-  information adds out-of-sample predictive and economic value, under which
-  filtered market regimes, and when sequential deterioration warrants a
-  change in operational status.
+  A governed, benchmark-relative framework for assessing whether RSI and
+  Bollinger Band information contributes out-of-sample predictive and economic
+  value, how that contribution varies across filtered market states, and when
+  structural deterioration warrants a change in operational status.
 keywords:
-  - technical signals
-  - model validation
-  - regime switching
-  - structural change
+  - technical signal validation
+  - model governance
+  - chronological validation
+  - regime dependence
+  - structural deterioration
   - cryptocurrency
   - RSI
   - Bollinger Bands
