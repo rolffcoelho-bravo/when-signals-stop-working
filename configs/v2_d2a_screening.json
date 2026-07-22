@@ -1,0 +1,48 @@
+{
+  "checkpoint": "D2A_NESTED_LINEAR_SIGNAL_SCREENING",
+  "eligible_signal_families": [
+    "rsi",
+    "bollinger"
+  ],
+  "execution_scope": "DEVELOPMENT_ONLY_PREDICTIVE_SCREENING",
+  "governance": {
+    "economic_gate_evaluated": false,
+    "final_pipeline_selection_performed": false,
+    "holdout_performance_access_enabled": false,
+    "next_checkpoint": "D2B_FULL_MODEL_AND_WINDOW_SELECTION",
+    "nonlinear_model_selection_performed": false
+  },
+  "horizons_candles": [
+    1,
+    2,
+    3,
+    6
+  ],
+  "outer_evaluation": {
+    "folds": 5,
+    "maximum_single_fold_share_of_positive_gain": 0.6,
+    "minimum_positive_folds_for_preliminary_screening_gate": 3
+  },
+  "screening_model": {
+    "benchmark_C": 1.0,
+    "benchmark_classifier": "logistic_regression_l2",
+    "benchmark_family": "regularized_linear",
+    "calibration": "none",
+    "candidate_ridge": 1.0,
+    "candidate_screen": "one_step_ridge_score_augmentation_with_benchmark_logit_offset",
+    "random_state": 42,
+    "window_scheme": "expanding"
+  },
+  "selection": {
+    "calibration_dominance_tolerance_brier": 0.0025,
+    "inner_metric": "mean_incremental_log_loss",
+    "matched_benchmark": true,
+    "tie_breakers": [
+      "positive_inner_folds_descending",
+      "standard_error_ascending",
+      "signal_spec_id_ascending"
+    ],
+    "unit": "signal_specification_within_family_horizon_outer_fold"
+  },
+  "target": "direction"
+}

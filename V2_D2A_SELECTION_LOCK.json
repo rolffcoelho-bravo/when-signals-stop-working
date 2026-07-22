@@ -1,0 +1,26 @@
+{
+  "checkpoint": "V2_D2A_NESTED_LINEAR_SIGNAL_SCREENING",
+  "d0_lock_id": "v2-d0-0e1cca99b90e5a50",
+  "d1_lock_id": "v2-d1-53c53a61a3011a65",
+  "execution_scope": "DEVELOPMENT_ONLY_PREDICTIVE_SCREENING",
+  "lock_id": "v2-d2a-43b7dcb8379cc9c7",
+  "lock_version": "1.0.0",
+  "parent_d1_commit": "50b5ef7",
+  "parent_d1_tag": "v2-d1-causal-engine-20260722",
+  "protected_files": {
+    "RUN_V2_D2A_SCREENING.ps1": "346add50482856e3de36ece1a08937fb85d3007cb63132d8541c49c3ddd876bc",
+    "RUN_V2_D2A_SCREENING.sh": "c645b541e558d77972aab12bb660a698772def5407c2ed0b32b010241176caf8",
+    "V2_D2A_SELECTION_CHECKPOINT.md": "daa8c93080cbaa46c22c175082ca97ed7eca45ae5c27ed5f8aa8b99baed12021",
+    "configs/v2_d2a_screening.json": "04b01703194108fde2f4c7f180b390bfbfddda1923f45a65dfdd854be5fc5d50",
+    "docs/V2_D2A_NESTED_SCREENING.md": "7546701d80490f1b71e8f4956e93a9fb6ae179b1633152ed9f146ebd091a1a4a",
+    "scripts/build_v2_d2a_assets.py": "ef14fbe500fba982d389188894f67e17651f49ed8152374b232217259031162e",
+    "scripts/verify_v2_d2a_assets.py": "46f97e7e908e0e00465d1e48e3747d4c39959ae8364108b8a9ccf603e37a3907",
+    "scripts/verify_v2_d2a_lock.py": "f161d2fa8c1838cdcb5b564193cd9ec0df331fe9abf8e2d535272af681e67b42",
+    "src/shockbridge_signal_validity/v2/predictive_screening.py": "f4b86a64a64466e46e11dd5ec3492d1784368c03cef118b445150b83cfb1d7fa",
+    "tests/test_v2_d2a_assets.py": "6752927ea8fa64a783879a8922cd08e62da2b3dda900eacc93bb11c0fc772e14",
+    "tests/test_v2_d2a_lock.py": "ebc9f86df9fef12adfb2044e9b23d489ebdb29fa8f49a13437e18119580d771d",
+    "tests/test_v2_d2a_matched_model.py": "134a4485737e179d43747c444f11c47b006071e01b8468cd24486ba312cb41f0",
+    "tests/test_v2_d2a_screening.py": "ed5d01ccd6d967365b9bbb2ffe887b9e1b1ce12422bb5e33e68f3e6fcab51cb9"
+  },
+  "protocol_lock_id": "v2-protocol-068f03ca1452c5ef"
+}

@@ -115,3 +115,12 @@ when-signals-stop-working/
 - `scripts/build_v2_d1_assets.py` - development-only D1 asset builder.
 - `scripts/verify_v2_d1_assets.py` - generated-asset validation.
 - `V2_D1_ENGINE_LOCK.json` - tamper-evident D1 code lock.
+
+
+## D2A nested screening
+
+- `configs/v2_d2a_screening.json`: fixed screening estimator and governance boundaries.
+- `src/shockbridge_signal_validity/v2/predictive_screening.py`: matched predictive screening primitives.
+- `scripts/build_v2_d2a_assets.py`: development-only nested screening execution.
+- `scripts/verify_v2_d2a_assets.py`: generated-evidence verification.
+- `V2_D2A_SELECTION_LOCK.json`: tamper-evident D2A implementation lock.

@@ -210,3 +210,8 @@ The repository provides reproducible research evidence. It does not constitute i
 ## License and data notice
 
 ShockBridge-authored code and documentation are licensed under the MIT License. Third-party market data are included exclusively to support transparent replication and remain subject to the source venue's applicable terms and availability.
+
+
+## Version 2 checkpoint D2A
+
+The active research branch now includes a development-only nested signal-specification screening stage. D2A evaluates all registered standalone RSI and Bollinger definitions with a fixed regularized-linear matched benchmark. It does not select the final model family, access the locked evaluation segment, or alter the frozen Version 1 determination.

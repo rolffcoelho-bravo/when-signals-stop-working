@@ -56,3 +56,11 @@
 - added explicit holdout authorization guards;
 - preserved all Version 1 evidence and all protocol-locked files;
 - performed no Version 2 model fitting and accessed no holdout performance.
+
+
+## 2.0.0.dev3 - D2A nested signal screening
+
+- added matched benchmark/candidate logistic screening;
+- added inner-fold signal-specification selection and untouched outer-fold evaluation;
+- added preliminary development stability summaries with explicit non-final governance labels;
+- retained locked-evaluation exclusion and all prior checkpoint locks.
