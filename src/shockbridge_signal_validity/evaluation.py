@@ -99,15 +99,29 @@ def stage_one_event_study(
 
 
 def stage_three_regime_summary(predictions: pd.DataFrame) -> pd.DataFrame:
+    data = predictions.copy()
+    data["assigned_regime_probability"] = np.select(
+        [
+            data["latent_regime"].eq("range"),
+            data["latent_regime"].eq("trend"),
+            data["latent_regime"].eq("stress"),
+        ],
+        [
+            data["latent_prob_range"],
+            data["latent_prob_trend"],
+            data["latent_prob_stress"],
+        ],
+        default=np.nan,
+    )
     return (
-        predictions.groupby(["signal", "latent_regime"], observed=True)
+        data.groupby(["signal", "latent_regime"], observed=True)
         .agg(
             observations=("incremental_net_edge", "size"),
             mean_incremental_log_loss=("incremental_log_loss", "mean"),
             mean_incremental_net_edge=("incremental_net_edge", "mean"),
             mean_signal_net_return=("signal_net_return", "mean"),
             mean_baseline_net_return=("baseline_net_return", "mean"),
-            mean_filtered_probability=("latent_prob_range", "mean"),
+            mean_filtered_probability=("assigned_regime_probability", "mean"),
         )
         .reset_index()
         .rename(columns={"latent_regime": "regime"})

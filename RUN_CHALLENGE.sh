@@ -1,38 +1,29 @@
+\
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo
-echo "WHEN SIGNALS STOP WORKING"
-echo "ShockBridge Pulse Technical Signal Validity Challenge"
-echo "====================================================="
-echo
+export MPLBACKEND=Agg
+export MPLCONFIGDIR="$(pwd)/.matplotlib"
+export PYTHONUNBUFFERED=1
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+mkdir -p "$MPLCONFIGDIR"
 
-if ! command -v python3 >/dev/null 2>&1; then
-  echo "Python 3 was not found. Install Python 3.11 or later."
-  exit 1
-fi
+echo
+printf '%s\n' "WHEN SIGNALS STOP WORKING" "ShockBridge Pulse - V1 Signal Validity Framework" "=================================================="
 
-if [ ! -d ".venv" ]; then
-  echo "1. Creating virtual environment..."
+if [ ! -d .venv ]; then
   python3 -m venv .venv
 fi
+PYTHON=.venv/bin/python
+"$PYTHON" -m pip install -e '.[dev]'
 
-PYTHON=".venv/bin/python"
-
-echo "2. Installing the project..."
-"$PYTHON" -m pip install --upgrade pip
-"$PYTHON" -m pip install -e ".[dev]"
-
-echo "3. Downloading free public SOL and BTC data..."
-"$PYTHON" scripts/download_free_data.py
-
-echo "4. Validating the market data..."
+if [ ! -f data/raw/sol_usdt_4h.csv ] || [ ! -f data/raw/btc_usdt_4h.csv ]; then
+  "$PYTHON" scripts/download_free_data.py
+fi
 "$PYTHON" scripts/validate_market_data.py
-
-echo "5. Running implementation tests..."
 "$PYTHON" -m pytest -q
-
-echo "6. Running the three-stage challenge..."
+find outputs -mindepth 1 ! -name .gitkeep -delete 2>/dev/null || true
 "$PYTHON" -m shockbridge_signal_validity \
   --sol-csv data/raw/sol_usdt_4h.csv \
   --btc-csv data/raw/btc_usdt_4h.csv \
@@ -41,10 +32,7 @@ echo "6. Running the three-stage challenge..."
   --horizon 1 \
   --cost-bps 10 \
   --output-directory outputs
-
-echo "7. Printing the direct conclusion..."
 "$PYTHON" scripts/summarize_results.py
 
-echo
-echo "Challenge complete."
-echo "Open outputs/research_report.md for the complete result."
+echo "Report: outputs/research_report.md"
+echo "Figures: outputs/figures"

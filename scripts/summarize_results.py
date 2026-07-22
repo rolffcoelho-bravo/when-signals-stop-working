@@ -84,15 +84,15 @@ def main() -> int:
     for signal in ("rsi", "bollinger", "combined"):
         print_model_details(signal, verdicts[signal])
 
-    print("\nDIRECT ANSWER TO THE ORIGINAL RSI QUESTION")
+    print("\nRSI CONCLUSION")
     print("-" * 42)
     print(direct_answer("rsi", verdicts["rsi"]))
 
-    print("\nDIRECT ANSWER TO THE CORRECTED BOLLINGER QUESTION")
+    print("\nBOLLINGER BANDS CONCLUSION")
     print("-" * 49)
     print(direct_answer("bollinger", verdicts["bollinger"]))
 
-    print("\nRELATION BETWEEN THE TWO")
+    print("\nCROSS-SIGNAL INTERPRETATION")
     print("-" * 24)
     print(
         "RSI and Bollinger Bands are evaluated separately because they measure "

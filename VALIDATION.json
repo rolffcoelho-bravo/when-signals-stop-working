@@ -1,13 +1,35 @@
 {
-  "repository_name": "when-signals-stop-working",
+  "repository_version": "1.0.0",
   "compile_returncode": 0,
-  "compile_stderr": "Spreadsheet runtime warmup failed during python startup\nTraceback (most recent call last):\n  File \"/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py\", line 26, in warm_spreadsheet_runtime_on_startup\n  File \"/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/spreadsheet_warmup.py\", line 785, in warm_spreadsheet_runtime\n  File \"/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/spreadsheet_warmup.py\", line 720, in _warm_feature_flows\n  File \"/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/spreadsheet_warmup.py\", line 704, in _warm_collaboration_flows\n  File \"/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/generated/interface/models.py\", line 30820, in hydrate_crdt_from_proto\n  File \"/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/rpc/remote.py\", line 749, in __call__\n  File \"/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/rpc/client.py\", line 150, in call\nartifact_tool.rpc.client.RemoteError: hydrateCrdtFromProto requires an empty collaborative document.\n",
+  "compile_stderr": "",
   "pytest_returncode": 0,
-  "pytest_stdout": "\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m                                                                    [100%]\u001b[0m\n\u001b[32m\u001b[32m\u001b[1m5 passed\u001b[0m\u001b[32m in 14.02s\u001b[0m\u001b[0m\n",
-  "pytest_stderr": "Spreadsheet runtime warmup failed during python startup\nTraceback (most recent call last):\n  File \"/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py\", line 26, in warm_spreadsheet_runtime_on_startup\n  File \"/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/spreadsheet_warmup.py\", line 785, in warm_spreadsheet_runtime\n  File \"/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/spreadsheet_warmup.py\", line 720, in _warm_feature_flows\n  File \"/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/spreadsheet_warmup.py\", line 704, in _warm_collaboration_flows\n  File \"/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/generated/interface/models.py\", line 30820, in hydrate_crdt_from_proto\n  File \"/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/rpc/remote.py\", line 749, in __call__\n  File \"/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/rpc/client.py\", line 150, in call\nartifact_tool.rpc.client.RemoteError: hydrateCrdtFromProto requires an empty collaborative document.\n",
-  "network_execution": "The free-data download step was not executed in this environment. The downloader uses public ccxt OHLCV endpoints when the user runs it.",
-  "empirical_boundary": "Automated tests use synthetic data only. No empirical conclusion about SOL, RSI, or Bollinger Bands is included in the package.",
-  "dual_question_design": true,
-  "original_question": "When will RSI stop working?",
-  "corrected_signal": "Bollinger Bands"
+  "pytest_stdout": "......                                                                   [100%]\n6 passed in 14.25s\n",
+  "pytest_stderr": "",
+  "public_surface_review": {
+    "conversation_specific_files_removed": true,
+    "public_references_added": true,
+    "vector_first_figures": true,
+    "source_footer_on_figures": true,
+    "report_reference_frame": true,
+    "roadmap_versions": [
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5"
+    ],
+    "native_command_failure_gate": true,
+    "headless_matplotlib_backend": true
+  },
+  "figure_suite": [
+    "market_signal_anatomy",
+    "validation_evidence",
+    "probability_calibration",
+    "regime_evidence_matrix",
+    "signal_monitoring"
+  ],
+  "empirical_boundary": "Automated tests use synthetic OHLCV only; real-market conclusions are generated only when the framework is run with downloaded data.",
+  "package_integrity_test": true,
+  "powershell_runner_header": "param(",
+  "final_package_tests": "7 passed"
 }

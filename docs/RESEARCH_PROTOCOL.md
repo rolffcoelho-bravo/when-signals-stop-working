@@ -1,62 +1,36 @@
 # Research Protocol
 
-## 1. Freeze the demonstration design
+## Predeclare
 
-Primary asset: SOL/USDT  
-Context asset: BTC/USDT  
-Frequency: 4 hours  
-Forecast horizon: one candle  
-Primary signal: Bollinger Bands  
-Comparator: RSI  
-Secondary bridge: combined model  
+Freeze the symbol, venue, frequency, horizon, RSI settings, Bollinger settings, cost assumption, fold design, and status thresholds before interpreting the final evidence.
 
-## 2. Do not optimize first
+## Separate the claims
 
-The initial conclusion must use:
+1. descriptive event effect;
+2. incremental predictive value;
+3. incremental economic value;
+4. regime-conditioned persistence;
+5. structural deterioration.
 
-- RSI 14, 30/70;
-- Bollinger 20, 2 standard deviations;
-- five chronological folds;
-- declared execution-cost scenarios.
+## Reject model shopping
 
-Alternative parameters belong in robustness analysis after the primary verdict.
+Bollinger Bands and RSI receive standalone verdicts. The combined model is secondary. No model is promoted solely because it performs best after the results are observed.
 
-## 3. Interpret the stages separately
+## Report completely
 
-### Stage 1
+Publish:
 
-Did conventional threshold events exhibit the expected signed return?
-
-### Stage 2
-
-Did the indicator add information beyond the non-indicator benchmark?
-
-### Stage 3
-
-Was the incremental contribution stable by regime, and did the recent evidence cross the failure gate?
-
-## 4. Conclusion hierarchy
-
-1. No Stage 2 evidence: NOT_ESTABLISHED.
-2. Some evidence but unstable: REDUCED.
-3. Established and currently positive: ACTIVE.
-4. Historically established, current failure gate crossed, and CUSUM alarm active: SUSPENDED.
-
-## 5. Publication discipline
-
-A ShockBridge Pulse publication should report:
-
-- exact exchange and symbol;
-- timestamp convention;
-- sample dates;
-- missing-data treatment;
-- all frozen parameters;
+- data provenance and validation;
+- sample dates and observations;
+- frozen parameters;
 - all chronological folds;
-- baseline and candidate metrics;
-- costs;
+- probability and economic metrics;
 - confidence intervals;
-- regime results;
-- final status;
-- model boundaries.
+- regime-conditioned evidence;
+- structural monitor state;
+- research boundaries;
+- references and reproducibility frame.
 
-No result should be presented as a trading recommendation.
+## Interpretation discipline
+
+`NOT_ESTABLISHED` is not a failed project. It is evidence that the candidate did not add stable information beyond the benchmark under the declared test.

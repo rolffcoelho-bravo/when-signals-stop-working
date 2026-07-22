@@ -1,156 +1,62 @@
-# Model Contract
+# V1 Model Contract
 
-## Research question
+## Objective
 
-Do RSI or Bollinger Band variables add incremental out-of-sample information for the next SOL return after controlling for recent SOL behavior, Bitcoin conditions, volatility, volume, and market state?
+Test whether RSI or Bollinger Band information adds benchmark-relative, out-of-sample predictive and economic value for the next SOL return, and whether any established contribution remains operationally credible.
 
-## Primary and secondary hypotheses
+## Data contract
 
-### Primary
+- SOL/USDT and BTC/USDT spot OHLCV;
+- equal four-hour timestamps;
+- UTC index;
+- no duplicate timestamps or missing OHLCV fields;
+- venue, symbol, sample, and retrieval timestamp recorded in the data manifest.
 
-Bollinger Band location and width improve the non-indicator baseline because Bollinger Bands were the indicator Richard actually used.
+## Target
 
-### Secondary
+For horizon `h`:
 
-RSI adds distinct momentum information.
+```text
+future_return[t] = log(close[t+h] / close[t])
+target_up[t] = 1{future_return[t] > 0}
+```
 
-### Bridge hypothesis
+## Baseline
 
-A combined model may improve robustness when RSI and Bollinger information agree, but the combined result is secondary and must not overwrite the predeclared Bollinger primary conclusion.
+The non-indicator model contains recent SOL and BTC returns, trend, realized volatility, price range, volume, and transparent lagged market-state descriptors.
 
-## Stage 1 contract
+## Candidate models
 
-Each indicator is first evaluated through a conventional threshold event.
+- baseline + RSI level, slope, extremes, and interactions;
+- baseline + Bollinger %B, BandWidth, distances, extremes, and interactions;
+- baseline + both families and concordance features as a secondary model.
 
-RSI:
-
-\[
-q_t^{RSI} =
-\begin{cases}
-+1 & RSI_t < 30 \text{ after crossing from above}\\
--1 & RSI_t > 70 \text{ after crossing from below}\\
-0 & \text{otherwise}
-\end{cases}
-\]
-
-Bollinger Bands:
-
-\[
-q_t^{BB} =
-\begin{cases}
-+1 & P_t < Lower_t \text{ after crossing from inside}\\
--1 & P_t > Upper_t \text{ after crossing from inside}\\
-0 & \text{otherwise}
-\end{cases}
-\]
-
-The fixed-horizon event return is:
-
-\[
-\pi_t = q_t r_{t,t+h} - 2c
-\]
-
-where \(c\) is the assumed one-way execution cost.
-
-## Stage 2 contract
-
-Baseline:
-
-\[
-M_0 = f(R^{SOL}_{1}, R^{SOL}_{3}, R^{BTC}_{1}, R^{BTC}_{3},
-Trend, Volatility, Range, Volume, State)
-\]
-
-RSI model:
-
-\[
-M_{RSI} = f(M_0, RSI, \Delta RSI, RSI \times State)
-\]
-
-Bollinger model:
-
-\[
-M_{BB} = f(M_0, \%B, Bandwidth, Distance, BB \times State)
-\]
-
-Combined model:
-
-\[
-M_C = f(M_{RSI}, M_{BB}, Agreement)
-\]
-
-The principal predictive quantity is:
-
-\[
-\Delta L_t = L(M_0)_t - L(M_s)_t
-\]
-
-The principal economic quantity is:
-
-\[
-\Delta \pi_t = \pi(M_s)_t - \pi(M_0)_t
-\]
-
-## Leakage controls
+## Validation
 
 - no random shuffle;
-- features use information available at or before time \(t\);
-- rolling state thresholds are shifted one period;
-- scaling is fitted within each training fold;
-- expanding chronological windows are used;
-- a gap equal to the forecast horizon separates train and test;
-- only out-of-sample predictions enter final conclusions.
+- expanding chronological folds;
+- gap equal to the forecast horizon;
+- fold-local scaling and estimation;
+- out-of-sample probability predictions only;
+- log loss as the primary probability score;
+- cost-adjusted incremental net edge;
+- moving-block bootstrap confidence intervals.
 
-## Stage 3 contract
+## Filtered regimes
 
-Each chronological fold fits a three-state Gaussian Markov model on the training sample using return, realized volatility, and trend.
+V1 uses a transparent three-state Gaussian Markov forward filter initialized from training-only clusters of return, realized volatility, and trend. The test period is processed sequentially. No smoothed full-sample state is used for a historical decision.
 
-The test sample is processed through the forward filter:
+## Structural monitor
 
-\[
-p(S_t \mid x_{1:t})
-\propto
-p(x_t \mid S_t)
-\sum_j p(S_t \mid S_{t-1}=j)p(S_{t-1}=j \mid x_{1:t-1})
-\]
+A one-sided CUSUM monitors robustly standardized deterioration in incremental log-loss improvement and incremental net edge.
 
-This produces filtered - not smoothed - probabilities for range, trend, and stress states. No future test observation is used to classify the current regime.
+## Status rules
 
-A one-sided CUSUM monitors a robustly standardized combination of:
-
-- incremental log-loss improvement;
-- incremental net economic edge.
-
-The detector is calibrated on the initial out-of-sample segment and updated sequentially.
-
-## Failure gate
-
-A signal is ACTIVE when historical evidence is established and the recent monitoring window has:
-
-\[
-E[\Delta L_t] > 0
-\]
-
-and:
-
-\[
-LCB_{95\%}(E[\Delta \pi_t]) > 0
-\]
-
-It is SUSPENDED only when historical value was established, the online CUSUM signals deterioration, and the current monitoring window satisfies:
-
-\[
-E[\Delta L_t] \leq 0
-\]
-
-and:
-
-\[
-UCB_{95\%}(E[\Delta \pi_t]) \leq 0
-\]
-
-When historical value is not established, the verdict is NOT_ESTABLISHED rather than SUSPENDED.
+- `NOT_ESTABLISHED`: historical incremental evidence fails the establishment gate;
+- `ACTIVE`: established signal, positive current evidence, no deterioration alarm;
+- `REDUCED`: established signal with uncertain, regime-dependent, or deteriorating current evidence;
+- `SUSPENDED`: established signal, active deterioration alarm, non-positive current predictive and economic gates.
 
 ## Model boundaries
 
-The framework evaluates signal validity, not production execution. It excludes exchange-specific order books, funding rates, liquidation cascades, tax effects, and capacity constraints.
+V1 is not a parameter-optimization engine, execution simulator, or universal claim about SOL. Advanced inference, richer market data, and probabilistic failure hazards are reserved for later roadmap versions.

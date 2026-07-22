@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "when-signals-stop-working"
-version = "0.2.0"
-description = "A small ShockBridge challenge testing when RSI and Bollinger Band signals lose incremental value."
+version = "1.0.0"
+description = "Benchmark-relative validation of RSI and Bollinger Band signal persistence under changing market regimes."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

@@ -1,48 +1,28 @@
 # Direct Answer Logic
 
-## Original question
+## The operational question
 
-> When will RSI stop working?
+A model cannot know a certain future calendar date on which an indicator will fail. It can define, estimate, and monitor the conditions under which the indicator no longer contributes incremental information.
 
-The model does not forecast a certain calendar date. It answers the question operationally.
+## Establishment
 
-### Step 1 - Establishment
+A signal must first improve the non-indicator benchmark on unseen chronological data and show positive incremental economic evidence after the declared cost assumption.
 
-RSI must first improve the non-indicator benchmark on unseen chronological data and retain positive incremental economic value after assumed costs.
+If it does not pass this gate:
 
-If it does not pass this step:
+> The signal did not stop working; its edge was not established under this test.
 
-> RSI did not stop working; its edge was not established.
+## Conditional validity
 
-### Step 2 - Conditional validity
+If established, the signal is evaluated under filtered range, trend, and stress probabilities. A signal may be useful only in a subset of market states.
 
-If established, RSI is evaluated under filtered range, trend, and stress regimes.
+## Failure
 
-A possible conclusion is:
+A signal is classified as `SUSPENDED` only when:
 
-> RSI works conditionally, mainly in range-bound markets, and should not be applied unconditionally during persistent trend or stress regimes.
+1. historical incremental value was established;
+2. the sequential deterioration monitor is active;
+3. recent benchmark-relative predictive contribution is non-positive;
+4. recent incremental economic contribution is non-positive.
 
-### Step 3 - Failure
-
-RSI is classified as having stopped working only when:
-
-1. it previously established incremental value;
-2. the online structural-change detector signals deterioration;
-3. recent benchmark-relative predictive improvement is non-positive;
-4. recent incremental economic value is non-positive.
-
-Then the direct conclusion is:
-
-> Under the predeclared model contract, RSI has stopped working sufficiently to be suspended.
-
-## Corrected Bollinger question
-
-The exact same logic is applied independently to Bollinger Bands.
-
-This preserves scientific comparability while recognizing that RSI measures momentum and Bollinger Bands measure price location relative to recent volatility.
-
-## Why both conclusions matter
-
-Richard's correction identifies the signal he actually used. His original RSI question remains valuable because it asks the broader model-risk question: how do we know whether a financial signal's relationship with future returns has changed?
-
-The repository therefore answers both without conflating them.
+This rule is applied separately to RSI and Bollinger Bands. Their combined model remains secondary and does not overwrite either standalone conclusion.

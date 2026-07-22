@@ -76,12 +76,14 @@ def run_framework(
 
     save_outputs(
         output_directory=output_directory,
+        data=data,
         stage_one=stage_one,
         folds=folds,
         predictions=predictions,
         regimes=regimes,
         verdicts=verdicts,
         primary_signal=config.primary_signal,
+        config=config,
     )
 
     return {

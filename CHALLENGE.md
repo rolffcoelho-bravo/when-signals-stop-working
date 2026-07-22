@@ -1,53 +1,30 @@
-# ShockBridge Pulse Technical Signal Validity Challenge
+# Public Research Challenge
 
-## Challenge title
+## Question
 
-**When Signals Stop Working**
+When does a technical signal stop adding useful information?
 
-## The two questions
+## Candidate signals
 
-Richard first asked:
+- RSI as a momentum-state signal;
+- Bollinger Bands as a volatility-relative price-location signal;
+- a secondary combined model testing whether the two information families are complementary.
 
-> When will RSI stop working?
+## Required evidence
 
-He later clarified that the indicator he had actually used was Bollinger Bands.
+A candidate is evaluated through three gates:
 
-The challenge therefore preserves both questions:
+1. **Event gate** - conventional threshold events must be described without implying causality.
+2. **Incremental-value gate** - the candidate must improve the same non-indicator benchmark on unseen chronological observations.
+3. **Persistence gate** - any established edge must remain credible across filtered regimes and sequential deterioration monitoring.
 
-1. **Original RSI question:** Did RSI ever establish incremental predictive value for SOL, under which regimes, and has that contribution deteriorated?
-2. **Corrected Bollinger question:** Did Bollinger Band information establish incremental predictive value for SOL, under which regimes, and has that contribution deteriorated?
+## Public verdicts
 
-The same validation contract is applied independently to both indicators.
+- `NOT_ESTABLISHED` - stable incremental value was not demonstrated;
+- `ACTIVE` - established value remains positive under the current monitor;
+- `REDUCED` - historical value exists, but present evidence is uncertain or regime-concentrated;
+- `SUSPENDED` - established value has crossed the structural and recent-performance failure gates.
 
-## Primary empirical hypothesis
+## Standard of proof
 
-Bollinger Band variables improve a non-indicator benchmark because Bollinger Bands were Richard's corrected practical signal.
-
-## Parallel RSI hypothesis
-
-RSI variables improve the same benchmark and answer Richard's original conceptual question directly.
-
-## Secondary bridge hypothesis
-
-A combined RSI + Bollinger model may add value when momentum and volatility-position information reinforce each other. This combined result is secondary and cannot replace either standalone conclusion.
-
-## Three stages
-
-1. Conventional event validity
-2. Benchmark-relative out-of-sample value
-3. Filtered regime inference and online structural-change monitoring
-
-## The key logical distinction
-
-A signal can receive one of four conclusions:
-
-- **NOT_ESTABLISHED:** It never demonstrated reliable incremental value.
-- **ACTIVE:** Its incremental value is established and remains positive.
-- **REDUCED:** Some value exists, but it is uncertain or regime-dependent.
-- **SUSPENDED:** It previously demonstrated value, but the structural-change and recent-performance gates now indicate failure.
-
-A signal cannot be described as having stopped working unless it first passed the establishment test.
-
-## Deliverable
-
-A reproducible repository containing separate RSI and Bollinger conclusions, one common non-indicator benchmark, chronological validation, filtered regime probabilities, online structural-change evidence, and a direct answer to both of Richard's questions.
+The framework does not promote a signal because it wins a few trades, looks compelling on a chart, or outperforms after extensive parameter search. Promotion requires predeclared assumptions, chronological evidence, a benchmark-relative comparison, and transparent boundaries.

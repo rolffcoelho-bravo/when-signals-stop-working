@@ -1,2 +1,0 @@
-[console_scripts]
-shockbridge-signal-validity = shockbridge_signal_validity.cli:main

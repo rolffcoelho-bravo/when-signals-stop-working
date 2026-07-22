@@ -2,35 +2,39 @@
 
 ```text
 when-signals-stop-working/
+├── README.md
 ├── START_HERE.md
 ├── CHALLENGE.md
-├── README.md
+├── ROADMAP.md
+├── CITATION.cff
 ├── RUN_CHALLENGE.ps1
 ├── RUN_CHALLENGE.sh
 ├── configs/
-│   └── sol_4h_primary.json
 ├── scripts/
-│   ├── download_free_data.py
-│   ├── validate_market_data.py
-│   └── summarize_results.py
 ├── src/shockbridge_signal_validity/
+│   ├── data.py
 │   ├── indicators.py
 │   ├── features.py
 │   ├── modeling.py
 │   ├── regimes.py
 │   ├── structural_change.py
 │   ├── evaluation.py
+│   ├── visualization.py
 │   └── reporting.py
 ├── tests/
 ├── docs/
+│   ├── MODEL_CONTRACT.md
+│   ├── RESEARCH_PROTOCOL.md
 │   ├── DIRECT_ANSWER_LOGIC.md
-└── outputs/                 # created after running
+│   ├── FIGURE_CATALOG.md
+│   └── REFERENCES.md
+└── outputs/                 # generated evidence; not tracked by default
 ```
 
-## Reading order
+## Recommended reading order
 
-1. `START_HERE.md`
+1. `README.md`
 2. `CHALLENGE.md`
 3. `docs/MODEL_CONTRACT.md`
-4. `src/shockbridge_signal_validity/`
+4. `ROADMAP.md`
 5. generated `outputs/research_report.md`

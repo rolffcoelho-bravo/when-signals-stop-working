@@ -29,8 +29,10 @@ def add_structural_change_monitor(
         mad = float(
             np.median(np.abs(calibration[column].to_numpy() - median))
         )
-        robust_scale = max(1.4826 * mad, 1e-8)
-        quality_parts.append((data[column] - median) / robust_scale)
+        standard_deviation = float(calibration[column].std(ddof=0))
+        robust_scale = max(1.4826 * mad, 0.10 * standard_deviation, 1e-6)
+        standardized = (data[column] - median) / robust_scale
+        quality_parts.append(standardized.clip(-6.0, 6.0))
 
     data["signal_quality_score"] = 0.5 * (
         quality_parts[0] + quality_parts[1]
@@ -48,5 +50,8 @@ def add_structural_change_monitor(
         alarms[index] = cusum <= -threshold
 
     data["structural_cusum"] = cusum_values
+    data["structural_deterioration_index"] = np.log1p(
+        np.maximum(0.0, -cusum_values) / threshold
+    )
     data["structural_change_alarm"] = alarms
     return data
