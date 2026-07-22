@@ -1,4 +1,3 @@
-\
 #!/usr/bin/env bash
 set -euo pipefail
 
@@ -23,7 +22,7 @@ if [ ! -f data/raw/sol_usdt_4h.csv ] || [ ! -f data/raw/btc_usdt_4h.csv ]; then
 fi
 "$PYTHON" scripts/validate_market_data.py
 "$PYTHON" -m pytest -q
-find outputs -mindepth 1 ! -name .gitkeep -delete 2>/dev/null || true
+find outputs -mindepth 1 ! -name .gitkeep ! -name README.md -delete 2>/dev/null || true
 "$PYTHON" -m shockbridge_signal_validity \
   --sol-csv data/raw/sol_usdt_4h.csv \
   --btc-csv data/raw/btc_usdt_4h.csv \
@@ -33,6 +32,9 @@ find outputs -mindepth 1 ! -name .gitkeep -delete 2>/dev/null || true
   --cost-bps 10 \
   --output-directory outputs
 "$PYTHON" scripts/summarize_results.py
+"$PYTHON" scripts/build_replication_assets.py
+"$PYTHON" scripts/audit_public_release.py
+"$PYTHON" scripts/verify_replication.py
 
 echo "Report: outputs/research_report.md"
 echo "Figures: outputs/figures"

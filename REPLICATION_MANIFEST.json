@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-07-22T13:29:28.335514+00:00",
+  "data_snapshot_id": "binance-spot-sol-btc-4h-20210101-20260722T0800Z",
+  "source": {
+    "venue": "Binance spot",
+    "pairs": [
+      "SOL/USDT",
+      "BTC/USDT"
+    ],
+    "timeframe": "4h",
+    "access": "public OHLCV through CCXT; no API key",
+    "source_terms_notice": "The repository MIT license covers ShockBridge-authored code and documentation, not third-party market data. Reuse remains subject to the source venue's applicable terms."
+  },
+  "snapshot": {
+    "requested_start_utc": "2021-01-01T00:00:00Z",
+    "last_included_candle_utc": "2026-07-22T08:00:00Z",
+    "download_end_exclusive_utc": "2026-07-22T12:00:00Z",
+    "sol_rows": 12171,
+    "btc_rows": 12171,
+    "aligned_rows": 12171,
+    "model_rows": 12141
+  },
+  "public_evidence": {
+    "raw_data": [
+      "data/raw/sol_usdt_4h.csv",
+      "data/raw/btc_usdt_4h.csv",
+      "data/raw/download_manifest.json",
+      "data/raw/data_validation.json"
+    ],
+    "processed_data": [
+      "data/processed/aligned_market_data.csv",
+      "data/processed/model_features.csv",
+      "data/processed/fold_boundaries.csv",
+      "data/processed/fold_assignments.csv",
+      "data/processed/feature_manifest.json"
+    ],
+    "model_outputs": [
+      "outputs/research_report.md",
+      "outputs/run_manifest.json",
+      "outputs/final_verdicts.json",
+      "outputs/stage_1_event_study.csv",
+      "outputs/stage_2_fold_results.csv",
+      "outputs/stage_2_oos_predictions.csv",
+      "outputs/stage_3_regime_summary.csv",
+      "outputs/figures/*.svg"
+    ]
+  },
+  "verification": {
+    "checksums": "REPLICATION_CHECKSUMS.sha256",
+    "public_release_audit": "scripts/audit_public_release.py"
+  }
+}

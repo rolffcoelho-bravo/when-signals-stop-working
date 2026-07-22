@@ -1,125 +1,129 @@
 # When Signals Stop Working
 
-**A benchmark-relative framework for testing whether technical signals contain incremental information, where that information survives, and when deterioration becomes operationally meaningful.**
+**A fully reproducible, benchmark-relative framework for testing whether technical indicators contain incremental information, where that information survives, and when deterioration becomes operationally meaningful.**
 
-The repository evaluates two widely used signal families on four-hour SOL data:
+[![CI](https://github.com/rolffcoelho-bravo/when-signals-stop-working/actions/workflows/ci.yml/badge.svg)](https://github.com/rolffcoelho-bravo/when-signals-stop-working/actions/workflows/ci.yml)
 
-- **RSI** - recent gain-loss momentum;
-- **Bollinger Bands** - price location relative to a volatility-adjusted range.
+## Research question
 
-The central question is not whether either indicator occasionally predicts the correct direction. It is whether the indicator improves a non-indicator benchmark on unseen chronological data, remains economically relevant after assumed costs, and retains that contribution across changing market regimes.
+The repository evaluates RSI and Bollinger Bands on four-hour SOL data. It does not ask whether an indicator occasionally appears correct. It asks whether indicator information:
 
-## Research logic
+1. improves a non-indicator benchmark on unseen chronological data;
+2. remains economically relevant after the declared cost assumption;
+3. survives market-regime changes;
+4. can be governed with explicit establishment and suspension rules.
 
-```text
-Conventional signal event
-        |
-        v
-Non-indicator benchmark comparison
-        |
-        v
-Chronological out-of-sample evidence
-        |
-        v
-Filtered range / trend / stress state
-        |
-        v
-Sequential deterioration monitoring
-        |
-        v
-NOT_ESTABLISHED / ACTIVE / REDUCED / SUSPENDED
-```
+A signal cannot be said to have **stopped working** unless it first established stable incremental value. If it never clears that gate, the correct status is `NOT_ESTABLISHED`.
 
-A signal cannot be said to have “stopped working” unless it first demonstrated incremental value. If it never improves the benchmark, the correct conclusion is `NOT_ESTABLISHED`, not `SUSPENDED`.
+## Published V1 finding
 
-## Current methodology - V1
+The frozen V1 experiment uses 12,171 aligned Binance spot candles from **2021-01-01 00:00 UTC** through **2026-07-22 08:00 UTC**. RSI and Bollinger Bands each improved predictive log loss in only 1 of 5 chronological folds; the combined model improved 2 of 5. All three models received `NOT_ESTABLISHED`.
 
-V1 is deliberately simple, transparent, and reproducible:
+See [`RESULTS.md`](RESULTS.md) and the complete generated [`outputs/research_report.md`](outputs/research_report.md).
 
-1. threshold-event evidence for RSI, Bollinger Bands, and their secondary concordance test;
-2. regularized logistic models compared with the same market-information benchmark;
-3. expanding-window validation with a forecast-horizon gap;
-4. transaction-cost-adjusted incremental edge and dependence-aware confidence intervals;
-5. a training-only three-state Gaussian Markov forward filter;
-6. a one-sided CUSUM deterioration monitor;
-7. separate public verdicts for RSI and Bollinger Bands.
+## Frozen V1 specification
 
-The advanced methodology roadmap is documented in [`ROADMAP.md`](ROADMAP.md).
-
-## Default public specification
-
-| Component | Frozen V1 setting |
+| Component | Setting |
 |---|---|
-| Asset | SOL/USDT spot |
+| Research asset | SOL/USDT spot |
 | Market context | BTC/USDT spot |
+| Venue | Binance |
 | Frequency | Four-hour candles |
 | Forecast horizon | Next four-hour candle |
 | RSI | 14 periods; 30/70 events |
 | Bollinger Bands | 20 periods; 2 standard deviations |
-| Validation | 5 expanding chronological folds |
-| Cost assumption | 10 basis points per one-way position change |
-| Regimes | Range, trend, stress |
-| Monitoring | One-sided online CUSUM |
+| Validation | 5 expanding chronological folds with a gap |
+| Cost assumption | 10 bps per one-way position change |
+| Regimes | Filtered range, trend, stress |
+| Monitoring | Robust one-sided CUSUM |
 
-These are predeclared research assumptions, not claimed optimal parameters.
+These settings are predeclared research assumptions, not claimed optimal parameters.
 
-## One-command Windows run
+## Complete replication package
+
+The public repository tracks the evidence necessary to reproduce V1 exactly:
+
+```text
+data/raw/                 frozen SOL and BTC OHLCV, provenance, validation
+data/processed/           aligned data, model features, exact fold assignments
+outputs/                  report, verdicts, all folds, OOS predictions, SVG figures
+environment/              sanitized package versions
+REPLICATION_MANIFEST.json snapshot definition and public-evidence map
+REPLICATION_CHECKSUMS.sha256 file-integrity record
+PUBLIC_RELEASE_AUDIT.json sensitive-information audit
+```
+
+No private account data or API credentials are used. The public snapshot was retrieved through public market-data interfaces.
+
+## Run and verify
+
+### Windows
 
 ```powershell
 Set-ExecutionPolicy -Scope Process Bypass
 .\RUN_CHALLENGE.ps1
 ```
 
-The runner reuses valid downloaded data, creates an isolated Matplotlib environment, executes implementation tests, stops on any native-command failure, and generates the evidence report and SVG figure suite.
+### macOS or Linux
 
-Manual instructions are in [`START_HERE.md`](START_HERE.md).
-
-## Evidence outputs
-
-```text
-outputs/
-├── research_report.md
-├── final_verdicts.json
-├── run_manifest.json
-├── stage_1_event_study.csv
-├── stage_2_fold_results.csv
-├── stage_2_oos_predictions.csv
-├── stage_3_regime_summary.csv
-└── figures/
-    ├── figure_01_market_signal_anatomy.svg
-    ├── figure_02_validation_evidence.svg
-    ├── figure_03_probability_calibration.svg
-    ├── figure_04_regime_evidence_matrix.svg
-    ├── monitoring_rsi.svg
-    ├── monitoring_bollinger.svg
-    └── monitoring_combined.svg
+```bash
+chmod +x RUN_CHALLENGE.sh
+./RUN_CHALLENGE.sh
 ```
 
-The figures are vector-first, publication-oriented, and memory-safe. Raster export is optional rather than the default.
+For a governed run plus Git commit and push, use `PUBLISH_PUBLIC_REPLICATION.ps1`.
 
-## Interpretation
+The runner:
 
-The framework separates four different claims that are often conflated:
+1. reuses the frozen snapshot by default;
+2. validates timestamps and OHLCV integrity;
+3. executes the implementation tests;
+4. regenerates all model outputs and SVG figures;
+5. builds processed replication datasets and fold assignments;
+6. records sanitized runtime versions and SHA-256 checksums;
+7. audits the public tree for credentials and local absolute paths;
+8. verifies the generated replication package.
 
-- **descriptive event effect** - what usually followed a conventional threshold event;
-- **incremental predictive value** - whether the signal improves the benchmark probability forecast;
-- **incremental economic value** - whether that improvement survives the declared cost assumption;
-- **structural persistence** - whether the contribution remains credible under the current filtered regime and sequential monitor.
+`-RefreshData` re-downloads the same frozen V1 date range. A genuinely new vintage requires explicit downloader dates and a new versioned experiment.
 
-A negative result is informative. It can indicate that the indicator’s apparent effect was already encoded by trend, volatility, recent returns, or broader crypto-market movement.
+## Evidence architecture
 
-## Public research boundaries
+```text
+Conventional event evidence
+        ↓
+Common non-indicator benchmark
+        ↓
+Chronological out-of-sample comparison
+        ↓
+Filtered range / trend / stress state
+        ↓
+Sequential deterioration monitoring
+        ↓
+NOT_ESTABLISHED / ACTIVE / REDUCED / SUSPENDED
+```
 
-The V1 framework does not use order-book depth, funding, open interest, liquidation data, venue-specific slippage, tax treatment, or live execution. It is a research-validation repository, not an investment recommendation or a claim of universal market efficiency.
+## Why the negative result is valuable
 
-## Reproducibility and references
+The V1 result shows that descriptive indicator events should not automatically be interpreted as stable forecasting edge. A rigorous negative finding narrows the next research question: whether information is conditional on horizon, target, regime, nonlinear response, or reversal-versus-continuation interpretation.
 
+The predeclared V2 design is documented in [`ROADMAP.md`](ROADMAP.md). It uses nested walk-forward selection, multiple reported horizons and targets, a locked holdout, cross-venue replication, and formal predictive-comparison controls rather than post-hoc tuning.
+
+## Documentation
+
+- Results: [`RESULTS.md`](RESULTS.md)
+- Start guide: [`START_HERE.md`](START_HERE.md)
+- Replication package: [`docs/REPLICATION_PACKAGE.md`](docs/REPLICATION_PACKAGE.md)
+- Public release policy: [`docs/PUBLIC_RELEASE_POLICY.md`](docs/PUBLIC_RELEASE_POLICY.md)
 - Model contract: [`docs/MODEL_CONTRACT.md`](docs/MODEL_CONTRACT.md)
 - Research protocol: [`docs/RESEARCH_PROTOCOL.md`](docs/RESEARCH_PROTOCOL.md)
 - Figure catalog: [`docs/FIGURE_CATALOG.md`](docs/FIGURE_CATALOG.md)
 - References: [`docs/REFERENCES.md`](docs/REFERENCES.md)
 - Citation metadata: [`CITATION.cff`](CITATION.cff)
 
-## License
+## Research boundaries
 
-MIT. Data remain subject to the terms and availability of their source venue and API provider.
+The results are venue-, pair-, timeframe-, sample-, target-, and cost-specific. V1 excludes funding, open interest, liquidations, order-book depth, venue-specific slippage, capacity, taxation, and live execution. This repository provides research evidence, not investment advice.
+
+## License and data notice
+
+ShockBridge-authored code and documentation are licensed under MIT. Third-party market data are included solely to support transparent replication and remain subject to the source venue's applicable terms and availability.

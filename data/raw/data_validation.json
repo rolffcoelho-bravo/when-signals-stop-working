@@ -1,0 +1,35 @@
+{
+  "sol": {
+    "name": "SOL",
+    "path": "data\\raw\\sol_usdt_4h.csv",
+    "rows": 12171,
+    "start": "2021-01-01 00:00:00+00:00",
+    "end": "2026-07-22 08:00:00+00:00",
+    "duplicate_timestamps": 0,
+    "missing_values": 0,
+    "chronological": true,
+    "expected_interval_hours": 4,
+    "nonstandard_intervals": 0,
+    "large_gaps": 0,
+    "largest_gap_hours": 0.0
+  },
+  "btc": {
+    "name": "BTC",
+    "path": "data\\raw\\btc_usdt_4h.csv",
+    "rows": 12171,
+    "start": "2021-01-01 00:00:00+00:00",
+    "end": "2026-07-22 08:00:00+00:00",
+    "duplicate_timestamps": 0,
+    "missing_values": 0,
+    "chronological": true,
+    "expected_interval_hours": 4,
+    "nonstandard_intervals": 0,
+    "large_gaps": 0,
+    "largest_gap_hours": 0.0
+  },
+  "overlapping_timestamps": 12171,
+  "overlap_start": "2021-01-01 00:00:00+00:00",
+  "overlap_end": "2026-07-22 08:00:00+00:00",
+  "status": "PASS",
+  "warnings": []
+}

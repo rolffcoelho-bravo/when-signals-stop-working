@@ -1,65 +1,96 @@
 # Methodology Roadmap
 
-## V1 - Transparent signal-validity framework (current)
+## V1 — Transparent signal-validity framework (current)
 
-V1 is the simplest defensible implementation. It is designed to make the research question auditable before adding complexity.
+V1 is the simplest defensible implementation. It establishes whether fixed RSI and Bollinger specifications add information beyond a market-state benchmark before complexity is introduced.
 
-- conventional RSI and Bollinger event studies;
-- a common non-indicator benchmark;
+- conventional event studies;
+- common non-indicator benchmark;
 - regularized logistic probability models;
-- expanding-window out-of-sample validation with a forecast-horizon gap;
-- transaction-cost-adjusted incremental edge;
-- a three-state Gaussian Markov forward filter initialized only from training data;
-- a one-sided CUSUM for sequential deterioration;
-- separate verdicts: `NOT_ESTABLISHED`, `ACTIVE`, `REDUCED`, and `SUSPENDED`.
+- five expanding chronological folds with a horizon gap;
+- cost-adjusted incremental edge and block-bootstrap intervals;
+- training-only three-state Gaussian Markov forward filter;
+- robust one-sided CUSUM monitoring;
+- complete public replication package.
 
-V1 is intentionally not an optimization engine. Its role is to establish whether a signal contains information beyond simpler market variables and whether that information remains operationally credible.
+**Published finding:** RSI, Bollinger Bands, and their combined specification are `NOT_ESTABLISHED` under the frozen SOL four-hour V1 design.
 
-## V2 - Inference hardening and replication
+## V2 — Conditional validity and inference hardening
 
-The next layer strengthens statistical claims without changing the core research question.
+V2 addresses the low fold stability without tuning V1 until it becomes positive. Every extension is predeclared and evaluated on nested chronological validation with a locked final holdout.
 
-- locked final holdout period;
-- exchange and quote-currency replication;
+### Targets
+
+- next-period direction;
+- expected cumulative return;
+- large-move or tail-event probability.
+
+### Horizons
+
+- 4, 8, 12, and 24 hours, all reported;
+- no selection of only the best horizon after observing the holdout.
+
+### Signal interpretation
+
+- contrarian or mean-reversion interpretation;
+- continuation or breakout interpretation;
+- regime-conditioned choice defined inside training data.
+
+### Conditional structure
+
+- interactions with filtered range, trend, and stress probabilities;
+- nonlinear splines or shallow boosted trees alongside regularized logistic regression;
+- abstention thresholds with both performance and coverage reported.
+
+### Selection and inference
+
+- nested walk-forward selection of a restrained RSI and Bollinger parameter grid;
+- expanding versus one-year and two-year rolling windows;
+- locked final holdout;
 - probability calibration and calibration drift;
-- Diebold-Mariano tests for pairwise forecast comparison;
-- Superior Predictive Ability testing when multiple configurations are evaluated;
-- block-bootstrap cost and threshold sensitivity;
-- explicit data-vintage and run-manifest controls.
+- Diebold–Mariano comparison for fixed alternatives;
+- Superior Predictive Ability controls when many candidates are evaluated;
+- cost and threshold sensitivity with dependence-aware bootstrap intervals.
 
-## V3 - Dynamic signal coefficients and richer regimes
+### Replication
 
-Replace fixed indicator effects with time-varying parameter models.
+- Binance SOL/USDT remains the primary case;
+- independent venue replication where comparable history exists;
+- BTC and ETH secondary cross-asset validation.
 
-- dynamic logistic or state-space coefficients;
-- posterior or filtered probability that the signal coefficient is positive;
-- maximum-likelihood or Bayesian hidden Markov regimes;
-- regime-dependent transition probabilities;
-- duration dependence and semi-Markov extensions;
-- model averaging across transparent and latent regime specifications.
+V2 succeeds only if the improvement survives the locked holdout and is not dependent on one venue, one horizon, or one narrow parameter choice.
 
-## V4 - Online changepoints and failure probability
+## V3 — Dynamic signal coefficients and richer regimes
 
-Move from a binary deterioration alarm to a probabilistic failure layer.
+- time-varying logistic or state-space coefficients;
+- filtered probability that each signal coefficient is positive;
+- fully estimated hidden Markov or semi-Markov regimes;
+- regime-dependent transition probabilities and duration dependence;
+- transparent-versus-latent regime model averaging.
+
+## V4 — Online changepoints and failure probability
 
 - Bayesian online changepoint detection;
 - posterior run-length distribution;
-- probability of a structural break in the recent window;
+- probability of recent structural break;
 - horizon-specific signal-failure hazard;
-- decision thresholds calibrated to false-alarm and detection-delay objectives;
-- adaptive retraining only after a validated change in the predictive mechanism.
+- false-alarm and detection-delay calibration;
+- governed retraining, suspension, and reactivation rules.
 
-## V5 - Transmission, microstructure, and production governance
+This version approaches the literal forward-looking question:
 
-Extend the framework from a single-market indicator test to a decision-grade research system.
+\[
+P(	ext{signal failure within the next } H 	ext{ periods}\mid\mathcal F_t).
+\]
 
-- funding rates, open interest, liquidation intensity, spreads, and order-book imbalance;
+## V5 — Transmission, microstructure, and production governance
+
+- funding, open interest, liquidations, spreads, and order-book imbalance;
 - BTC, ETH, and market-wide transmission variables;
 - multivariate state-space, network, or point-process propagation models;
-- venue-specific execution and capacity constraints;
-- versioned data snapshots, model registry, automated validation evidence, and CI gates;
-- scheduled monitoring with documented promotion, reduction, suspension, and reactivation rules.
+- venue-specific execution, capacity, and slippage controls;
+- versioned snapshots, model registry, CI gates, and scheduled monitoring.
 
 ## Promotion principle
 
-A more complex version is promoted only if it improves locked out-of-sample evidence, interpretability, or operational control. Complexity is not treated as evidence by itself.
+A more complex version is promoted only when it improves locked out-of-sample evidence, uncertainty quantification, interpretability, or operational control. Complexity is never treated as evidence by itself.

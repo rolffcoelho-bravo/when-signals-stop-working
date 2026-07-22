@@ -4,7 +4,6 @@ from dataclasses import asdict
 from datetime import datetime, timezone
 import json
 from pathlib import Path
-import platform
 import sys
 
 import pandas as pd
@@ -104,8 +103,7 @@ def save_outputs(
             "feature": asdict(config.feature),
         },
         "runtime": {
-            "python": sys.version,
-            "platform": platform.platform(),
+            "python": ".".join(map(str, sys.version_info[:3])),
             "pandas": pd.__version__,
             "scikit_learn": sklearn.__version__,
         },

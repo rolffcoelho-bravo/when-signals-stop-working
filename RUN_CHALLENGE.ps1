@@ -57,7 +57,7 @@ Invoke-NativeStep -Label "5. Running implementation tests" -Executable $Python -
 
 Write-Host "`n6. Clearing stale generated evidence"
 if (Test-Path "outputs") {
-    Get-ChildItem "outputs" -Force | Where-Object { $_.Name -ne ".gitkeep" } | Remove-Item -Recurse -Force
+    Get-ChildItem "outputs" -Force | Where-Object { $_.Name -notin @(".gitkeep", "README.md") } | Remove-Item -Recurse -Force
 }
 New-Item -ItemType Directory -Force -Path "outputs" | Out-Null
 
@@ -73,6 +73,9 @@ Invoke-NativeStep -Label "7. Running the three-stage framework" -Executable $Pyt
 )
 
 Invoke-NativeStep -Label "8. Printing the direct conclusions" -Executable $Python -Arguments @("scripts\summarize_results.py")
+Invoke-NativeStep -Label "9. Building the public replication assets" -Executable $Python -Arguments @("scripts\build_replication_assets.py")
+Invoke-NativeStep -Label "10. Auditing the public release" -Executable $Python -Arguments @("scripts\audit_public_release.py")
+Invoke-NativeStep -Label "11. Verifying replication checksums" -Executable $Python -Arguments @("scripts\verify_replication.py")
 
 Write-Host "`nFramework completed successfully."
 Write-Host "Report: outputs\research_report.md"

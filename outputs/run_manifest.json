@@ -1,0 +1,50 @@
+{
+  "generated_at_utc": "2026-07-22T13:28:26.039550+00:00",
+  "sample_start": "2021-01-05 20:00:00+00:00",
+  "sample_end": "2026-07-22 04:00:00+00:00",
+  "usable_observations": 12141,
+  "out_of_sample_observations_per_signal": {
+    "bollinger": 10115,
+    "combined": 10115,
+    "rsi": 10115
+  },
+  "configuration": {
+    "signals": [
+      "rsi",
+      "bollinger",
+      "combined"
+    ],
+    "primary_signal": "bollinger",
+    "splits": 5,
+    "lower_probability": 0.45,
+    "upper_probability": 0.55,
+    "bootstrap_samples": 2000,
+    "block_size": 10,
+    "monitor_window": 180,
+    "feature": {
+      "horizon": 1,
+      "cost_bps": 10.0,
+      "rsi_period": 14,
+      "rsi_lower": 30.0,
+      "rsi_upper": 70.0,
+      "bollinger_period": 20,
+      "bollinger_std": 2.0,
+      "regime_lookback": 180
+    }
+  },
+  "runtime": {
+    "python": "3.12.10",
+    "pandas": "3.0.3",
+    "scikit_learn": "1.9.0"
+  },
+  "figure_files": [
+    "figures/figure_01_market_signal_anatomy.svg",
+    "figures/figure_02_validation_evidence.svg",
+    "figures/figure_03_probability_calibration.svg",
+    "figures/figure_04_regime_evidence_matrix.svg",
+    "figures/monitoring_rsi.svg",
+    "figures/monitoring_bollinger.svg",
+    "figures/monitoring_combined.svg"
+  ],
+  "reference_file": "../docs/REFERENCES.md"
+}

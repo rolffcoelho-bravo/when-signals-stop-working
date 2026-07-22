@@ -16,8 +16,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--sol-symbol", default="SOL/USDT")
     parser.add_argument("--btc-symbol", default="BTC/USDT")
     parser.add_argument("--timeframe", default="4h")
-    parser.add_argument("--start", default="2021-01-01")
-    parser.add_argument("--end", default=None)
+    parser.add_argument("--start", default="2021-01-01T00:00:00Z")
+    parser.add_argument("--end", default="2026-07-22T12:00:00Z")
     parser.add_argument(
         "--output-directory",
         type=Path,
@@ -77,9 +77,18 @@ def main() -> int:
             "sol": str(sol_path),
             "btc": str(btc_path),
         },
+        "source_endpoint_class": "Binance public spot market-data API accessed through CCXT",
+        "source_documentation": [
+            "https://developers.binance.com/en/docs/products/spot/rest-api",
+            "https://github.com/ccxt/ccxt/wiki/manual",
+        ],
+        "snapshot_policy": (
+            "The default end is frozen for exact V1 replication. Use explicit "
+            "arguments to create a new data vintage."
+        ),
         "note": (
-            "Public exchange OHLCV data. No account credentials or trading "
-            "permissions were used."
+            "Public exchange OHLCV data. No account credentials, private account "
+            "data, or trading permissions were used."
         ),
     }
 

@@ -16,6 +16,12 @@
   },
   "estimated_one_way_cost_bps": 10,
   "chronological_folds": 5,
-  "monitor_window_observations": 180,
-  "consecutive_failure_windows": 3
+  "sample_start_utc": "2021-01-01T00:00:00Z",
+  "sample_last_candle_utc": "2026-07-22T08:00:00Z",
+  "download_end_exclusive_utc": "2026-07-22T12:00:00Z",
+  "data_snapshot_id": "binance-spot-sol-btc-4h-20210101-20260722T0800Z",
+  "monitoring": {
+    "window_observations": 180,
+    "method": "robust one-sided CUSUM"
+  }
 }

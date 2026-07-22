@@ -1,5 +1,5 @@
 {
-  "repository_version": "1.0.0",
+  "repository_version": "1.1.0",
   "compile_returncode": 0,
   "compile_stderr": "",
   "pytest_returncode": 0,
@@ -31,5 +31,13 @@
   "empirical_boundary": "Automated tests use synthetic OHLCV only; real-market conclusions are generated only when the framework is run with downloaded data.",
   "package_integrity_test": true,
   "powershell_runner_header": "param(",
-  "final_package_tests": "7 passed"
+  "final_package_tests": "7 passed",
+  "public_replication_release": true,
+  "tracked_raw_data": true,
+  "tracked_processed_features": true,
+  "tracked_fold_assignments": true,
+  "tracked_oos_predictions": true,
+  "checksum_verification": true,
+  "sensitive_information_audit": true,
+  "ci_workflow": true
 }

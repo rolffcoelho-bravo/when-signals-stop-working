@@ -1,12 +1,35 @@
+# Python environments and build artifacts
 .venv/
+venv/
 __pycache__/
 .pytest_cache/
 *.py[cod]
 *.egg-info/
+build/
+dist/
 .matplotlib/
-outputs/*
-!outputs/.gitkeep
-data/*
-!data/raw/
-data/raw/*
-!data/raw/.gitkeep
+
+# Editors and operating-system metadata
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Secrets and local credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# Local logs, temporary files, and archives
+*.log
+*.tmp
+*.temp
+*.bak
+*.zip
+
+# Optional raster exports; vector SVG figures are tracked
+outputs/figures/*.png

@@ -1,0 +1,83 @@
+{
+  "bollinger": {
+    "status": "NOT_ESTABLISHED",
+    "explanation": "The signal did not establish stable incremental value over the benchmark under chronological validation.",
+    "stage_one_verdict": "INCONCLUSIVE",
+    "event_count": 765,
+    "overall_mean_incremental_log_loss": -0.001103925653838436,
+    "positive_log_loss_folds": 1,
+    "required_positive_folds": 3,
+    "overall_mean_incremental_net_edge": 4.377080029780406e-05,
+    "overall_edge_ci_95_lower": -8.45810195017929e-05,
+    "overall_edge_ci_95_upper": 0.00017599062834925127,
+    "current_window_observations": 180,
+    "current_mean_incremental_log_loss": -0.0011679551489265133,
+    "current_mean_incremental_net_edge": -0.00022430294528869412,
+    "current_edge_ci_95_lower": -0.0008744666495021921,
+    "current_edge_ci_95_upper": 0.0002622261389849502,
+    "structural_change_alarm": false,
+    "structural_cusum": -0.0006059310836039472,
+    "current_regime": "range",
+    "current_regime_probabilities": {
+      "range": 0.9881440004606379,
+      "trend": 0.010911758092272563,
+      "stress": 0.000944241447089546
+    },
+    "best_historical_regime": "trend",
+    "latest_signal_probability": 0.5070342704377141
+  },
+  "combined": {
+    "status": "NOT_ESTABLISHED",
+    "explanation": "The signal did not establish stable incremental value over the benchmark under chronological validation.",
+    "stage_one_verdict": "NO_DESCRIPTIVE_EDGE",
+    "event_count": 616,
+    "overall_mean_incremental_log_loss": -0.002617115662914051,
+    "positive_log_loss_folds": 2,
+    "required_positive_folds": 3,
+    "overall_mean_incremental_net_edge": -0.00012231507258083157,
+    "overall_edge_ci_95_lower": -0.00029851903900689127,
+    "overall_edge_ci_95_upper": 5.394893032391834e-05,
+    "current_window_observations": 180,
+    "current_mean_incremental_log_loss": -0.0027246013879457655,
+    "current_mean_incremental_net_edge": -0.00032234214292795277,
+    "current_edge_ci_95_lower": -0.0008392754170611704,
+    "current_edge_ci_95_upper": 0.00010218905636731694,
+    "structural_change_alarm": false,
+    "structural_cusum": -0.0429926376262616,
+    "current_regime": "range",
+    "current_regime_probabilities": {
+      "range": 0.9881440004606379,
+      "trend": 0.010911758092272563,
+      "stress": 0.000944241447089546
+    },
+    "best_historical_regime": "trend",
+    "latest_signal_probability": 0.497905348789024
+  },
+  "rsi": {
+    "status": "NOT_ESTABLISHED",
+    "explanation": "The signal did not establish stable incremental value over the benchmark under chronological validation.",
+    "stage_one_verdict": "INCONCLUSIVE",
+    "event_count": 396,
+    "overall_mean_incremental_log_loss": -0.001149627162041639,
+    "positive_log_loss_folds": 1,
+    "required_positive_folds": 3,
+    "overall_mean_incremental_net_edge": 6.781501005385956e-05,
+    "overall_edge_ci_95_lower": -5.406720775844749e-05,
+    "overall_edge_ci_95_upper": 0.00018480423219429558,
+    "current_window_observations": 180,
+    "current_mean_incremental_log_loss": 0.0005713212784013162,
+    "current_mean_incremental_net_edge": -6.533542241504027e-05,
+    "current_edge_ci_95_lower": -0.0001960062672451208,
+    "current_edge_ci_95_upper": 0.0,
+    "structural_change_alarm": false,
+    "structural_cusum": 0.0,
+    "current_regime": "range",
+    "current_regime_probabilities": {
+      "range": 0.9881440004606379,
+      "trend": 0.010911758092272563,
+      "stress": 0.000944241447089546
+    },
+    "best_historical_regime": "trend",
+    "latest_signal_probability": 0.5173841737534285
+  }
+}

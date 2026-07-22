@@ -23,8 +23,10 @@ The framework is intentionally compact, but its design is grounded in establishe
 
 ## Data access and implementation
 
-11. CCXT. Unified exchange API manual and public OHLCV documentation. https://github.com/ccxt/ccxt/wiki/manual
-12. scikit-learn. `LogisticRegression` documentation. https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+11. Binance. Public historical market-data repository and file organization. https://github.com/binance/binance-public-data
+12. Binance. Spot REST API and market-data-only endpoints. https://developers.binance.com/en/docs/products/spot/rest-api
+13. CCXT. Unified exchange API manual and public OHLCV documentation. https://github.com/ccxt/ccxt/wiki/manual
+14. scikit-learn. `LogisticRegression` documentation. https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
 
 ## Citation policy
 

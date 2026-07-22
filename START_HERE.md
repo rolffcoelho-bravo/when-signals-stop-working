@@ -1,46 +1,36 @@
 # Start Here
 
-## Windows
+## Exact public V1 replication
 
-Run from the repository root:
+The repository includes the frozen market-data snapshot. No API key or exchange account is required.
+
+### Windows
 
 ```powershell
 Set-ExecutionPolicy -Scope Process Bypass
 .\RUN_CHALLENGE.ps1
 ```
 
-The runner will:
-
-1. create or reuse `.venv`;
-2. install the project in editable mode;
-3. reuse valid local OHLCV files or download public SOL/USDT and BTC/USDT candles;
-4. validate timestamps, overlap, missing values, and four-hour spacing;
-5. run the implementation tests;
-6. clear stale generated evidence;
-7. execute RSI, Bollinger, and combined models;
-8. generate vector SVG figures and the referenced research report;
-9. print separate direct conclusions.
-
-Use `./RUN_CHALLENGE.ps1 -RefreshData` to force a fresh public-data download.
-
-## macOS or Linux
+### macOS or Linux
 
 ```bash
 chmod +x RUN_CHALLENGE.sh
 ./RUN_CHALLENGE.sh
 ```
 
-## Principal outputs
+After execution, inspect:
 
-Open these first:
+1. `RESULTS.md` — concise public conclusion;
+2. `outputs/research_report.md` — complete generated evidence;
+3. `outputs/figures/` — publication-grade SVG figures;
+4. `REPLICATION_MANIFEST.json` — snapshot and evidence map;
+5. `REPLICATION_CHECKSUMS.sha256` — integrity record;
+6. `PUBLIC_RELEASE_AUDIT.json` — sensitive-information audit.
 
-```text
-outputs/research_report.md
-outputs/final_verdicts.json
-outputs/figures/figure_02_validation_evidence.svg
-outputs/figures/monitoring_bollinger.svg
+## Creating a new data vintage
+
+```powershell
+.\RUN_CHALLENGE.ps1 -RefreshData
 ```
 
-## Reproducibility note
-
-The public data route uses CCXT exchange OHLCV endpoints. No trading credentials are required for the default download. Results are venue-, symbol-, frequency-, sample-, and cost-specific.
+`-RefreshData` re-downloads the frozen V1 window. To extend the sample, run the downloader with explicit dates and publish the result as a new versioned experiment.
