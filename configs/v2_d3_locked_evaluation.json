@@ -1,0 +1,33 @@
+{
+  "checkpoint": "D3_METHODOLOGY_LOCKED_EVALUATION",
+  "execution_scope": "SINGLE_ACCESS_METHODOLOGY_LOCKED_EVALUATION",
+  "expected_parent_commit": "5153f2e",
+  "expected_parent_tag": "v2-d2c-admission-20260722",
+  "expected_frozen_pipeline_count": 1,
+  "expected_signal_family": "bollinger",
+  "expected_pipeline_hash": "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851",
+  "locked_evaluation": {
+    "start_utc": "2025-07-01T00:00:00+00:00",
+    "end_utc": "2026-07-22T08:00:00+00:00",
+    "subperiod_rule": "three_approximately_equal_chronological_blocks",
+    "single_access": true
+  },
+  "authorization": {
+    "environment_variable": "SHOCKBRIDGE_V2_HOLDOUT_AUTHORIZED",
+    "required_environment_value": "YES",
+    "status": "APPROVED_FOR_SINGLE_ACCESS",
+    "approved_by": "Rodolfo Pereira",
+    "approval_date_utc": "2026-07-23",
+    "forbidden_signal_families": ["rsi"]
+  },
+  "governance": {
+    "pipeline_retuning_permitted": false,
+    "alternative_pipeline_execution_permitted": false,
+    "rsi_reentry_permitted": false,
+    "statistical_gate_evaluated": false,
+    "economic_gate_evaluated": false,
+    "robustness_gate_evaluated": false,
+    "multiplicity_adjustment_applied": false,
+    "next_checkpoint": "D4_CONFIRMATORY_INFERENCE_AND_ECONOMIC_GATES"
+  }
+}

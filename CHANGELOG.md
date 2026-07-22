@@ -7,6 +7,8 @@
 - completes D2A nested benchmark-relative screening for all registered RSI and Bollinger definitions;
 - adds D2B full nested model-family, window, calibration, state-conditioning, and abstention selection;
 - adds D2C development admission, explicit family rejection, and tamper-evident pipeline freezing;
+- adds D3 single-access methodology-locked evaluation for the sole D2C-admitted Bollinger pipeline;
+- records the approved V2.1 panic-state module as a non-interfering secondary diagnostic extension;
 - keeps isotonic calibration diagnostic-only and preserves the locked-evaluation access boundary;
 - freezes the Version 2 confirmatory hypothesis family before implementation;
 - separates RSI and Bollinger directional claims from secondary targets and the combined model;

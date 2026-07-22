@@ -183,14 +183,6 @@ The repository provides reproducible research evidence. It does not constitute i
 
 ShockBridge-authored code and documentation are licensed under the MIT License. Third-party market data are included exclusively to support transparent replication and remain subject to the source venue's applicable terms and availability.
 
-## Version 2 checkpoint D2B
-
-The active research branch now includes full development-only nested selection across the frozen model families, hyperparameters, estimation windows, soft state conditioning, confirmatory calibration methods, and abstention thresholds. D2B uses only D2A-selected signal specifications, evaluates each selected pipeline once on its untouched outer development fold, and does not access or freeze the methodology-locked evaluation pipeline.
-
-## Version 2 checkpoint D2C
-
-The active research branch now includes development admission and family-level pipeline freezing. D2C applies the frozen predictive-stability, calibration, coverage, and fold-concentration controls to RSI and Bollinger horizons, records an explicit admission or rejection for each family, and assigns a canonical hash to every admitted pipeline. The final economic gate and methodology-locked evaluation remain unopened.
-
 ## Citation
 
 Pereira, Rodolfo. (2026). *When Signals Stop Working: Technical Signal Validity Framework*. ShockBridge Pulse Research. Python research software. https://github.com/rolffcoelho-bravo/when-signals-stop-working
@@ -207,3 +199,19 @@ Pereira, Rodolfo. (2026). *When Signals Stop Working: Technical Signal Validity 
   url = {https://github.com/rolffcoelho-bravo/when-signals-stop-working}
 }
 ```
+
+## Version 2 checkpoint D2B
+
+The active research branch now includes full development-only nested selection across the frozen model families, hyperparameters, estimation windows, soft state conditioning, confirmatory calibration methods, and abstention thresholds. D2B uses only D2A-selected signal specifications, evaluates each selected pipeline once on its untouched outer development fold, and does not access or freeze the methodology-locked evaluation pipeline.
+
+## Version 2 checkpoint D2C
+
+The active research branch now includes development admission and family-level pipeline freezing. D2C applies the frozen predictive-stability, calibration, coverage, and fold-concentration controls to RSI and Bollinger horizons, records an explicit admission or rejection for each family, and assigns a canonical hash to every admitted pipeline. The final economic gate and methodology-locked evaluation remain unopened.
+
+## Version 2 checkpoint D3
+
+D3 authorizes a single methodology-locked evaluation for the sole D2C-admitted Bollinger pipeline. The authorization record is committed before result access, RSI remains excluded, and the frozen pipeline cannot be retuned after the locked evidence is exposed. D3 records raw prediction-level evidence but defers statistical, economic, robustness, and operational verdicts to later gates.
+
+## Version 2.1 panic-state diagnostic
+
+A separate V2.1 extension is approved to study panic-consistent regimes after the Version 2 confirmatory verdict is frozen. It cannot alter the RSI rejection, the Bollinger pipeline, D3 evidence, or confirmatory verdicts.

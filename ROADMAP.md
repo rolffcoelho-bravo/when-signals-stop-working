@@ -84,6 +84,13 @@ All declared horizons will be reported. The final holdout will not be used for h
 
 **Admission criterion for Phase III:** any reported improvement must survive the locked evaluation and must not depend exclusively on one venue, one horizon, or one narrow parameter choice.
 
+
+## Version 2.1 - Panic-consistent state diagnostics
+
+After the Version 2 confirmatory verdict is frozen, a separate V2.1 extension will evaluate panic-consistent market states using downside acceleration, volatility jumps, abnormal volume, dependence, liquidity, leverage, liquidation, and cross-venue stress evidence where available. The extension cannot modify the frozen RSI decision, Bollinger pipeline, D3 predictions, or Version 2 confirmatory gates.
+
+See `docs/V2_1_PANIC_STATE_EXTENSION_SCOPE.md`.
+
 ## Phase III - Dynamic coefficients and richer latent states
 
 Phase III introduces dynamic model structure after the conditional validity layer is established.

@@ -80,6 +80,7 @@ RUN_V2_D1_CAUSAL_ENGINE.*          D1 causal features and filtered states
 RUN_V2_D2A_SCREENING.*             D2A signal-specification screening
 RUN_V2_D2B_SELECTION.*             D2B full nested pipeline selection
 RUN_V2_D2C_ADMISSION.*             D2C development admission and pipeline freeze
+RUN_V2_D3_LOCKED_EVALUATION.*       D3 single-access methodology-locked evaluation
 configs/v2_d2b_selection.json      D2B fixed execution controls
 src/.../v2/pipeline_selection.py   matched pipeline, calibration, and policy engine
 data/processed/v2/development/     governed D0-D2B development evidence
@@ -110,3 +111,19 @@ outputs/v2/development/            checkpoint status records
 7. `data/processed/v2/development/d2c_frozen_pipeline_registry.json`
 8. `outputs/v2/development/d2c_holdout_authorization.json`
 9. `V2_D2C_ADMISSION_LOCK.json`
+
+## Version 2 D3 review sequence
+
+1. `V2_D3_EVALUATION_CHECKPOINT.md`
+2. `docs/V2_D3_METHODOLOGY_LOCKED_EVALUATION.md`
+3. `configs/v2_d3_locked_evaluation.json`
+4. `src/shockbridge_signal_validity/v2/locked_evaluation.py`
+5. `outputs/v2/development/d3_holdout_authorization.json`
+6. `data/processed/v2/holdout/d3_locked_predictions.csv`
+7. `outputs/v2/holdout/d3_raw_metric_summary.json`
+8. `outputs/v2/holdout/d3_locked_evaluation_status.json`
+9. `V2_D3_EVALUATION_LOCK.json`
+
+## Version 2.1 extension scope
+
+`docs/V2_1_PANIC_STATE_EXTENSION_SCOPE.md` records the approved panic-consistent state diagnostic as a separate, non-confirmatory extension.
