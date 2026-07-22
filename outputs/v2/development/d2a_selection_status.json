@@ -1,0 +1,16 @@
+{
+  "checkpoint": "V2_D2A_NESTED_LINEAR_SIGNAL_SCREENING",
+  "d2a_lock_id": "v2-d2a-43b7dcb8379cc9c7",
+  "final_pipeline_selection_performed": false,
+  "holdout_performance_accessed": false,
+  "implementation_commit": "a1a7410c929df313a5106c5ca3bb679b588cef1b",
+  "inner_result_rows": 5040,
+  "manifest_sha256": "5ef7d4e8dd5c8dbcd13cffc2c73ff23a2d15b1dd0c54494e6737c2380539685e",
+  "outer_fold_result_rows": 40,
+  "outer_prediction_rows": 65656,
+  "predictive_model_fitting_performed": true,
+  "registered_signal_specifications": 84,
+  "screening_model_family": "regularized_linear",
+  "selected_specification_rows": 40,
+  "status": "PASS"
+}
