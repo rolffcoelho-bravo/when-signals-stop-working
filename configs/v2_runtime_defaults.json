@@ -1,0 +1,17 @@
+{
+  "runtime_version": "2.0.0-dev.1",
+  "execution_scope": "DEVELOPMENT_ONLY_NO_MODEL_FITTING",
+  "registry": "configs/v2_experiment_registry.json",
+  "protocol_lock": "V2_PROTOCOL_LOCK.json",
+  "primary_data": {
+    "sol": "data/raw/sol_usdt_4h.csv",
+    "btc": "data/raw/btc_usdt_4h.csv"
+  },
+  "processed_root": "data/processed/v2/development",
+  "output_root": "outputs/v2/development",
+  "holdout_output_root": "outputs/v2/holdout",
+  "holdout_authorization_environment_variable": "SHOCKBRIDGE_V2_HOLDOUT_AUTHORIZED",
+  "holdout_authorization_required_value": "YES",
+  "model_fitting_enabled": false,
+  "holdout_performance_access_enabled": false
+}

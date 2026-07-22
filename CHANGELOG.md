@@ -37,3 +37,14 @@
 - robust structural-deterioration monitor;
 - vector-first evidence suite;
 - public references, citation metadata, and methodological roadmap.
+
+## 2.0.0.dev1 — Version 2 implementation checkpoint D0
+
+- added a separate governed Version 2 software namespace;
+- implemented frozen-registry validation and development/holdout partition controls;
+- implemented horizon-safe target construction and purged nested fold planning;
+- added complete confirmatory candidate and decision-policy inventories;
+- added development-only manifests and public verification scripts;
+- added explicit holdout authorization guards;
+- preserved all Version 1 evidence and all protocol-locked files;
+- performed no Version 2 model fitting and accessed no holdout performance.

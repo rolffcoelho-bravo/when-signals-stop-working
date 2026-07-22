@@ -1,0 +1,30 @@
+{
+  "checkpoint": "V2_IMPLEMENTATION_SCAFFOLD_D0",
+  "execution_scope": "DEVELOPMENT_ONLY_NO_MODEL_FITTING",
+  "lock_id": "v2-d0-0e1cca99b90e5a50",
+  "lock_version": "1.0.0",
+  "parent_protocol_commit": "3f4871e",
+  "parent_protocol_tag": "v2-protocol-freeze-20260722",
+  "protected_files": {
+    "RUN_V2_DEVELOPMENT_SCAFFOLD.ps1": "32e6d1eda38be86dd9d882818187668cd539afa7a6d7871e800a16b05d57c3e0",
+    "RUN_V2_DEVELOPMENT_SCAFFOLD.sh": "8499176def697d9eca8966ba0892a97d83ef1bb27a30be29cdfd87888c8624f6",
+    "V2_IMPLEMENTATION_CHECKPOINT.md": "b3b450ccc26c01d10a66ff8d8c375edcd328c2bee661616752e5596f32a57378",
+    "configs/v2_runtime_defaults.json": "6b4259f9db7d96ec3cbe16326db70ae7aafa1344937efec3a19ed22745c28746",
+    "docs/V2_DEVELOPMENT_EXECUTION_PLAN.md": "4151d669a6a1fbc1a5e3dec9b87807c952884c2faeda7d1149ddc7dd133b00a7",
+    "docs/V2_IMPLEMENTATION_ARCHITECTURE.md": "bfe028a664ecc61398bf61253dada151120639f842c745c32b997fa8b27a379a",
+    "scripts/build_v2_development_assets.py": "d8069a1169539852a9ef71a99c2a7593c5bc29ab99437c322eeda1bd69483de9",
+    "scripts/verify_v2_development_scaffold.py": "bfa41164d9e794082df592b0ec830640c29cec9408edf7016bee2b99cca433c4",
+    "src/shockbridge_signal_validity/v2/__init__.py": "e7362de7b550a2bb5b5a4a0d399b29faffd43d4a7f09c1693f9be287df8881d1",
+    "src/shockbridge_signal_validity/v2/contracts.py": "e7a3daf492ed4d79303bd38ea83ee8c86e88d5d0503675d198caff9b4328cc05",
+    "src/shockbridge_signal_validity/v2/inventory.py": "cafb8d3f6a8a92d921f12b0cfdf197e92795bb7bd0653c04ba37e75cf821a53d",
+    "src/shockbridge_signal_validity/v2/manifests.py": "5ddfde8163f9273934abb3f4f06bbe1f8860bf4eb3e9d5880b1381d5b48bc1b7",
+    "src/shockbridge_signal_validity/v2/partitions.py": "897cc8e0caa6b60bed56f568a172cfced991d04d0614ccc68f64511a2a2fa9f1",
+    "src/shockbridge_signal_validity/v2/registry.py": "61154b7f547d96abccb9abd577c29233dfb138a64ca730e6cc7f0db6cf948267",
+    "src/shockbridge_signal_validity/v2/signals.py": "aab241957f05786abb27d6b3f89a6caafe5b882680ec9594281298d3159f4827",
+    "src/shockbridge_signal_validity/v2/splits.py": "448113a0b5f59cec1d7aa42fa11e2f5c0a5405ed1162065329196cbd6110d31d",
+    "src/shockbridge_signal_validity/v2/targets.py": "4e523e01d192ebb4cfb075c243e7f14f85962155f852dff3c817dc339daef173",
+    "tests/test_v2_holdout_guard.py": "a704c1c5a52b52149a60f3993dc62af67ede578109e9c645b24c1295153074a0",
+    "tests/test_v2_implementation_scaffold.py": "080530ecb5804177257dc9918270470e717a78f38859582800ddbf939dead483"
+  },
+  "protocol_lock_id": "v2-protocol-068f03ca1452c5ef"
+}
