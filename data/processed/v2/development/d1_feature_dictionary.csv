@@ -1,0 +1,23 @@
+feature_family,feature_name,definition,information_rule,state_input,available_at_forecast_origin
+benchmark,sol_ret_1,One-candle SOL log return,trailing,True,True
+benchmark,sol_ret_3,Three-candle SOL log return,trailing,False,True
+benchmark,btc_ret_1,One-candle BTC log return,trailing,False,True
+benchmark,btc_ret_3,Three-candle BTC log return,trailing,False,True
+benchmark,trend_12,Twelve-candle SOL log trend divided by twelve,trailing,True,True
+benchmark,vol_20,Annualisation-free twenty-candle realised scale,trailing,True,True
+benchmark,range_12,Trailing twelve-candle high-low range,trailing,False,True
+benchmark,volume_z,Trailing thirty-candle log-volume standard score,trailing,False,True
+rsi,rsi_value,Registered RSI level,trailing,False,True
+rsi,rsi_slope_1,One-candle RSI slope,trailing,False,True
+rsi,rsi_distance_50,Signed RSI distance from fifty,trailing,False,True
+rsi,rsi_threshold_distance,Nearest registered threshold distance,trailing,False,True
+rsi,rsi_event_persistence,Six-candle causal decay after a threshold crossing,trailing,False,True
+bollinger,bb_percent_b,Registered Bollinger percent-B,trailing,False,True
+bollinger,bb_bandwidth,Registered Bollinger bandwidth,trailing,False,True
+bollinger,bb_distance_upper,Price distance from upper band in rolling-standard-deviation units,trailing,False,True
+bollinger,bb_distance_lower,Price distance from lower band in rolling-standard-deviation units,trailing,False,True
+bollinger,bb_bandwidth_change_1,One-candle bandwidth change,trailing,False,True
+bollinger,bb_event_persistence,Six-candle causal decay after a band crossing,trailing,False,True
+state,state_p_range,Forward-filtered range-state probability,fold_training_then_forward,False,True
+state,state_p_trend,Forward-filtered trend-state probability,fold_training_then_forward,False,True
+state,state_p_stress,Forward-filtered stress-state probability,fold_training_then_forward,False,True

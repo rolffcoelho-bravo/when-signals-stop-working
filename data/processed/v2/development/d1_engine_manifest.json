@@ -1,0 +1,59 @@
+{
+  "causal_feature_columns": [
+    "sol_ret_1",
+    "sol_ret_3",
+    "btc_ret_1",
+    "btc_ret_3",
+    "trend_12",
+    "vol_20",
+    "range_12",
+    "volume_z"
+  ],
+  "checkpoint": "V2_D1_CAUSAL_FEATURE_AND_FILTERED_STATE_ENGINE",
+  "created_at_utc": "2026-07-22T16:52:30.699855+00:00",
+  "d0_lock_id": "v2-d0-0e1cca99b90e5a50",
+  "d1_lock_id": "v2-d1-53c53a61a3011a65",
+  "development_rows": 9852,
+  "execution_scope": "DEVELOPMENT_ONLY_NO_PREDICTIVE_MODEL_FITTING",
+  "files": [
+    {
+      "bytes": 1906045,
+      "path": "data/processed/v2/development/d1_causal_base_features.csv",
+      "sha256": "3139ac18bc66b40f7cb1c7851536f4bb51aca88207cbe89d610544bbb2a2975c"
+    },
+    {
+      "bytes": 1939,
+      "path": "data/processed/v2/development/d1_feature_dictionary.csv",
+      "sha256": "024827c4afec70f903b691bd4cedfe1c14e54422b7b669753bc4e658e3e6e00e"
+    },
+    {
+      "bytes": 12088,
+      "path": "data/processed/v2/development/d1_registered_signal_feature_audit.csv",
+      "sha256": "ff1f8cd859263f6aacbbf487ee5155f0326b19d1404d23e8b498cabdc3ba86e7"
+    },
+    {
+      "bytes": 22380,
+      "path": "data/processed/v2/development/d1_fold_state_diagnostics.csv",
+      "sha256": "a754fe5bca6818bad17a5bb38786c385a758763f65a50859b98e84fc7477e284"
+    },
+    {
+      "bytes": 318913,
+      "path": "data/processed/v2/development/d1_fold_state_parameters.json",
+      "sha256": "446fad18dde69f39624801b1a4b5b6fe6448657d19a4642350ffa7b2a7ca0555"
+    },
+    {
+      "bytes": 3247118,
+      "path": "data/processed/v2/development/d1_outer_filtered_state_probabilities.csv",
+      "sha256": "5b1c49ef67f2cd7d75d7559164ee6b2ab663975c9ed3beb64b1ab924e77aa922"
+    }
+  ],
+  "holdout_performance_accessed": false,
+  "implementation_commit": "c26131624783eb6e4451542261425df6a4a5b7ba",
+  "nested_state_fits": 80,
+  "outer_probability_rows": 32840,
+  "predictive_model_fitting_performed": false,
+  "protocol_lock_id": "v2-protocol-068f03ca1452c5ef",
+  "registered_signal_specifications_audited": 84,
+  "registry_sha256": "c2d725faa5eed8e9a1e594d347b6aeb1c193e6f2fa4759a7b083673c45c5bea5",
+  "state_filter_fitting_performed": true
+}

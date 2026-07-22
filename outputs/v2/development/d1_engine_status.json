@@ -1,0 +1,16 @@
+{
+  "checkpoint": "V2_D1_CAUSAL_FEATURE_AND_FILTERED_STATE_ENGINE",
+  "d0_lock_id": "v2-d0-0e1cca99b90e5a50",
+  "d1_lock_id": "v2-d1-53c53a61a3011a65",
+  "development_rows": 9852,
+  "holdout_performance_accessed": false,
+  "implementation_commit": "c26131624783eb6e4451542261425df6a4a5b7ba",
+  "manifest_sha256": "150f02853ce4885039f146742bc659e8c18cc5163dbf33d4bce3b8afda46d6b8",
+  "nested_state_fits": 80,
+  "outer_probability_rows": 32840,
+  "predictive_model_fitting_performed": false,
+  "protocol_lock_id": "v2-protocol-068f03ca1452c5ef",
+  "registered_signal_specifications_audited": 84,
+  "state_filter_fitting_performed": true,
+  "status": "PASS"
+}
