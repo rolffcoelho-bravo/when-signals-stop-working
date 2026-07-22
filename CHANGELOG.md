@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased - Version 2 methodological design freeze
+
+- freezes the Version 2 confirmatory hypothesis family before implementation;
+- separates RSI and Bollinger directional claims from secondary targets and the combined model;
+- defines the development and methodology-locked evaluation segments;
+- predeclares horizons, signal grids, model classes, estimation windows, calibration, and abstention rules;
+- adds nested chronological selection, multiplicity control, economic gates, and concentration controls;
+- adds external-venue and cross-asset replication eligibility rules;
+- introduces a tamper-evident protocol lock and automated verification test;
+- preserves every Version 1 result and replication artifact unchanged.
+
 ## 1.2.0 - Institutional publication standard
 
 - replaces challenge-oriented language with institutional research and model-governance terminology;

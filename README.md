@@ -30,6 +30,25 @@ Under the frozen specification, none of the candidate models demonstrated suffic
 
 The complete determination is documented in [`RESULTS.md`](RESULTS.md) and the generated [`outputs/research_report.md`](outputs/research_report.md).
 
+
+## Version 2 governed development
+
+Version 2 is being developed on `research/v2-conditional-signal-validity` from the frozen `v1.2.0` release. The current branch-level checkpoint is a methodological design freeze; it does not revise the published Version 1 evidence.
+
+The Version 2 design predeclares:
+
+- separate confirmatory RSI and Bollinger directional hypotheses;
+- 4-, 8-, 12-, and 24-hour horizons selected only through nested development validation;
+- expected-return and large-move targets as secondary analyses;
+- contrarian, continuation, and soft regime-conditioned signal interpretations;
+- matched benchmark and candidate model classes;
+- expanding, one-year rolling, and two-year rolling estimation windows;
+- a methodology-locked evaluation segment;
+- Holm family-wise control for the two confirmatory hypotheses;
+- explicit predictive, economic, robustness, and external-replication gates.
+
+The frozen design is documented in [`V2_DESIGN_FREEZE.md`](V2_DESIGN_FREEZE.md). The machine-readable experiment space is defined in [`configs/v2_experiment_registry.json`](configs/v2_experiment_registry.json) and protected by [`V2_PROTOCOL_LOCK.json`](V2_PROTOCOL_LOCK.json).
+
 ## Institutional relevance
 
 The repository is designed for quantitative research, model validation, investment research governance, and reproducible methodological review. It demonstrates:
@@ -150,6 +169,9 @@ See [`ROADMAP.md`](ROADMAP.md).
 - Figure catalogue: [`docs/FIGURE_CATALOG.md`](docs/FIGURE_CATALOG.md)
 - References: [`docs/REFERENCES.md`](docs/REFERENCES.md)
 - Citation metadata: [`CITATION.cff`](CITATION.cff)
+- Version 2 design freeze: [`V2_DESIGN_FREEZE.md`](V2_DESIGN_FREEZE.md)
+- Version 2 research protocol: [`docs/V2_RESEARCH_PROTOCOL.md`](docs/V2_RESEARCH_PROTOCOL.md)
+- Version 2 validation gates: [`docs/V2_VALIDATION_GATES.md`](docs/V2_VALIDATION_GATES.md)
 
 ## Scope boundaries
 

@@ -33,6 +33,8 @@ Core elements:
 
 ## Phase II - Conditional validity and inference hardening
 
+**Status:** methodological design frozen; implementation not yet admitted to locked evaluation.
+
 Phase II determines whether the Version 1 instability reflects an absence of information or a conditional structure not represented by the parsimonious specification.
 
 ### Predeclared targets
@@ -78,7 +80,9 @@ All declared horizons will be reported. The final holdout will not be used for h
 - independent venue replication where comparable history is available;
 - BTC and ETH as secondary cross-asset validation cases.
 
-**Admission criterion for Phase III:** any reported improvement must survive the locked holdout and must not depend exclusively on one venue, one horizon, or one narrow parameter choice.
+**Protocol control:** the Phase II hypothesis family, data partition, candidate grids, validation architecture, multiplicity rules, holdout-access policy, and evidence gates are frozen in `V2_DESIGN_FREEZE.md`, `configs/v2_experiment_registry.json`, and `V2_PROTOCOL_LOCK.json`.
+
+**Admission criterion for Phase III:** any reported improvement must survive the locked evaluation and must not depend exclusively on one venue, one horizon, or one narrow parameter choice.
 
 ## Phase III - Dynamic coefficients and richer latent states
 

@@ -20,13 +20,17 @@ The framework is intentionally compact, but its design is grounded in establishe
 8. Hansen, P. R. (2005). “A Test for Superior Predictive Ability.” *Journal of Business & Economic Statistics*, 23(4), 365-380. https://doi.org/10.1198/073500105000000063
 9. scikit-learn. `TimeSeriesSplit` documentation. https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html
 10. scikit-learn. Probability calibration documentation. https://scikit-learn.org/stable/modules/calibration.html
+11. Holm, S. (1979). “A Simple Sequentially Rejective Multiple Test Procedure.” *Scandinavian Journal of Statistics*, 6(2), 65-70.
+12. Benjamini, Y., & Hochberg, Y. (1995). “Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing.” *Journal of the Royal Statistical Society: Series B*, 57(1), 289-300.
+13. White, H. (2000). “A Reality Check for Data Snooping.” *Econometrica*, 68(5), 1097-1126.
+14. Bergmeir, C., Hyndman, R. J., & Koo, B. (2018). “A Note on the Validity of Cross-Validation for Evaluating Autoregressive Time Series Prediction.” *Computational Statistics & Data Analysis*, 120, 70-83.
 
 ## Data access and implementation
 
-11. Binance. Public historical market-data repository and file organization. https://github.com/binance/binance-public-data
-12. Binance. Spot REST API and market-data-only endpoints. https://developers.binance.com/en/docs/products/spot/rest-api
-13. CCXT. Unified exchange API manual and public OHLCV documentation. https://github.com/ccxt/ccxt/wiki/manual
-14. scikit-learn. `LogisticRegression` documentation. https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+15. Binance. Public historical market-data repository and file organization. https://github.com/binance/binance-public-data
+16. Binance. Spot REST API and market-data-only endpoints. https://developers.binance.com/en/docs/products/spot/rest-api
+17. CCXT. Unified exchange API manual and public OHLCV documentation. https://github.com/ccxt/ccxt/wiki/manual
+18. scikit-learn. `LogisticRegression` documentation. https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
 
 ## Citation policy
 

@@ -1,0 +1,302 @@
+{
+  "registry_version": "2.0.0-design-freeze",
+  "freeze_status": "FROZEN_BEFORE_IMPLEMENTATION",
+  "freeze_date": "2026-07-22",
+  "parent_release": {
+    "tag": "v1.2.0",
+    "commit": "748d1720da9131ebd6eb7b0606913fd43fc6e5e8"
+  },
+  "development_branch": "research/v2-conditional-signal-validity",
+  "research_objective": "Determine whether RSI or Bollinger information has benchmark-relative value conditional on horizon, target, market state, signal interpretation, nonlinear response, estimation window, or calibrated selectivity.",
+  "confirmatory_hypotheses": [
+    {
+      "id": "H1_RSI_DIRECTION",
+      "signal_family": "rsi",
+      "target": "direction",
+      "comparison": "matched_non_indicator_benchmark",
+      "primary_metric": "incremental_log_loss",
+      "alternative": "candidate_better_than_benchmark"
+    },
+    {
+      "id": "H2_BOLLINGER_DIRECTION",
+      "signal_family": "bollinger",
+      "target": "direction",
+      "comparison": "matched_non_indicator_benchmark",
+      "primary_metric": "incremental_log_loss",
+      "alternative": "candidate_better_than_benchmark"
+    }
+  ],
+  "secondary_scope": {
+    "signal_families": [
+      "combined"
+    ],
+    "targets": [
+      "expected_return",
+      "large_move_probability"
+    ],
+    "analyses": [
+      "non_selected_horizons",
+      "cost_sensitivity",
+      "calibration_diagnostics",
+      "hard_regime_routing",
+      "external_venue_replication",
+      "cross_asset_replication"
+    ]
+  },
+  "data": {
+    "primary_asset": "SOL/USDT",
+    "market_context": "BTC/USDT",
+    "primary_venue": "Binance",
+    "frequency": "4h",
+    "snapshot_end_utc": "2026-07-22T08:00:00Z",
+    "development": {
+      "start_utc": "2021-01-01T00:00:00Z",
+      "end_utc": "2025-06-30T20:00:00Z"
+    },
+    "locked_evaluation": {
+      "start_utc": "2025-07-01T00:00:00Z",
+      "end_utc": "2026-07-22T08:00:00Z",
+      "classification": "methodology_locked_not_historically_unseen",
+      "access_policy": "docs/V2_HOLDOUT_GOVERNANCE.md"
+    },
+    "external_venue_priority": [
+      "Coinbase SOL/USD",
+      "Kraken SOL/USD",
+      "Kraken SOL/EUR"
+    ],
+    "cross_asset_cases": [
+      "BTC/USDT",
+      "ETH/USDT"
+    ]
+  },
+  "horizons_candles": [
+    1,
+    2,
+    3,
+    6
+  ],
+  "horizons_hours": [
+    4,
+    8,
+    12,
+    24
+  ],
+  "targets": {
+    "direction": "future_log_return_h > 0",
+    "expected_return": "future_log_return_h",
+    "large_move_probability": "abs(future_log_return_h) > training_only_q90"
+  },
+  "signal_grids": {
+    "rsi": {
+      "periods": [
+        7,
+        14,
+        21,
+        28
+      ],
+      "threshold_pairs": [
+        [
+          20,
+          80
+        ],
+        [
+          25,
+          75
+        ],
+        [
+          30,
+          70
+        ],
+        [
+          35,
+          65
+        ]
+      ],
+      "interpretations": [
+        "continuous",
+        "contrarian",
+        "continuation"
+      ]
+    },
+    "bollinger": {
+      "periods": [
+        10,
+        20,
+        30,
+        40
+      ],
+      "standard_deviations": [
+        1.5,
+        2.0,
+        2.5
+      ],
+      "interpretations": [
+        "continuous",
+        "contrarian",
+        "continuation"
+      ]
+    },
+    "combined": {
+      "construction": "combine_inner_selected_standalone_specifications_only",
+      "full_cartesian_grid_prohibited": true
+    }
+  },
+  "regime_conditioning": {
+    "states": [
+      "range",
+      "trend",
+      "stress"
+    ],
+    "primary": "soft_probability_interactions",
+    "secondary": "training_selected_hard_routing",
+    "future_smoothed_states_prohibited": true
+  },
+  "model_families": {
+    "regularized_linear": {
+      "classification_C": [
+        0.1,
+        1.0,
+        10.0
+      ],
+      "regression_alpha": [
+        0.1,
+        1.0,
+        10.0
+      ]
+    },
+    "spline_regularized": {
+      "degree": 3,
+      "n_knots": [
+        4,
+        6
+      ],
+      "classification_C": [
+        0.1,
+        1.0
+      ],
+      "regression_alpha": [
+        0.1,
+        1.0
+      ]
+    },
+    "shallow_hist_gradient_boosting": {
+      "learning_rate": [
+        0.05
+      ],
+      "max_leaf_nodes": [
+        7,
+        15
+      ],
+      "max_iter": [
+        100,
+        200
+      ],
+      "min_samples_leaf": [
+        100
+      ],
+      "l2_regularization": [
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "window_schemes": {
+    "expanding": null,
+    "rolling_one_year_observations": 2190,
+    "rolling_two_year_observations": 4380
+  },
+  "validation": {
+    "outer_development_folds": 5,
+    "inner_selection_folds": 3,
+    "shuffle": false,
+    "purge_gap": "equal_to_horizon_candles",
+    "training_only_preprocessing": true,
+    "minimum_positive_outer_folds": 3,
+    "maximum_single_fold_share_of_positive_gain": 0.6
+  },
+  "calibration": {
+    "confirmatory_candidates": [
+      "none",
+      "sigmoid"
+    ],
+    "diagnostic_only": [
+      "isotonic"
+    ],
+    "training_only": true
+  },
+  "abstention": {
+    "direction_probability_distance_thresholds": [
+      0.02,
+      0.05,
+      0.1
+    ],
+    "minimum_holdout_coverage": 0.1,
+    "minimum_holdout_nonzero_decisions": 100
+  },
+  "metrics": {
+    "direction": {
+      "primary": "log_loss",
+      "secondary": [
+        "brier_score",
+        "expected_calibration_error",
+        "roc_auc"
+      ]
+    },
+    "expected_return": {
+      "primary": "mean_squared_error",
+      "secondary": [
+        "mean_absolute_error",
+        "directional_accuracy"
+      ]
+    },
+    "large_move_probability": {
+      "primary": "log_loss",
+      "secondary": [
+        "brier_score",
+        "pr_auc"
+      ]
+    }
+  },
+  "economic_assumptions": {
+    "primary_one_way_cost_bps": 10,
+    "sensitivity_one_way_cost_bps": [
+      5,
+      20
+    ],
+    "primary_confidence_level": 0.95,
+    "uncertainty_method": "moving_block_bootstrap"
+  },
+  "multiple_testing": {
+    "confirmatory_method": "Holm",
+    "confirmatory_familywise_alpha": 0.05,
+    "secondary_method": "Benjamini-Hochberg",
+    "secondary_fdr_q": 0.1,
+    "development_family_diagnostic": "Superior Predictive Ability",
+    "holdout_predictive_comparison": "one_sided_Diebold_Mariano_style_with_overlap_aware_covariance"
+  },
+  "evidence_grades": [
+    "NO_INCREMENTAL_EVIDENCE",
+    "PREDICTIVE_EVIDENCE_ONLY",
+    "PRIMARY_CASE_ESTABLISHED",
+    "EXTERNALLY_REPLICATED",
+    "MONITORING_READY"
+  ],
+  "protected_v1_paths": [
+    "RESULTS.md",
+    "RESEARCH_SCOPE.md",
+    "outputs/research_report.md",
+    "outputs/final_verdicts.json",
+    "outputs/stage_1_event_study.csv",
+    "outputs/stage_2_fold_results.csv",
+    "outputs/stage_2_oos_predictions.csv",
+    "outputs/stage_3_regime_summary.csv",
+    "data/raw/sol_usdt_4h.csv",
+    "data/raw/btc_usdt_4h.csv"
+  ],
+  "v2_namespaces": [
+    "data/processed/v2",
+    "outputs/v2/development",
+    "outputs/v2/holdout",
+    "outputs/v2/external_replication"
+  ]
+}

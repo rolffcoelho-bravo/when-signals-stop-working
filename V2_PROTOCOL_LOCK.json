@@ -1,0 +1,20 @@
+{
+  "lock_id": "v2-protocol-068f03ca1452c5ef",
+  "status": "FROZEN_BEFORE_IMPLEMENTATION",
+  "freeze_date": "2026-07-22",
+  "parent_release": "v1.2.0",
+  "parent_commit": "748d1720da9131ebd6eb7b0606913fd43fc6e5e8",
+  "development_branch": "research/v2-conditional-signal-validity",
+  "hash_algorithm": "SHA-256",
+  "files": {
+    "V2_DESIGN_FREEZE.md": "be8003eb05f3f8b1d54a6cafe20ea2664bcbb47a51c3b5ae0a65772c6ec7c26e",
+    "configs/v2_experiment_registry.json": "c2d725faa5eed8e9a1e594d347b6aeb1c193e6f2fa4759a7b083673c45c5bea5",
+    "docs/V2_RESEARCH_PROTOCOL.md": "bec0da7dfc6f0631b4712878bdf50f48c8520facccedb1ec5e35265515f51a6d",
+    "docs/V2_MODEL_CONTRACT.md": "d09949f22345ccca66fdbfe3a0bc2cd5028a67c4485af2706b83d792b95a7e2c",
+    "docs/V2_VALIDATION_GATES.md": "7a953297735f20d1870f63e5fe7f2958afd03d06167f000e1f79e1fe71c79d11",
+    "docs/V2_MULTIPLE_TESTING_CONTROL.md": "ab6949ea6e0acba2c89c74b0dc16fbd8600579fa8cb0ae357f6e2da9ac88f676",
+    "docs/V2_DATA_AND_REPLICATION_PLAN.md": "7ac7920d6e666b7475272b6620518b024b8473061ddaf3498fb501060c748da8",
+    "docs/V2_HOLDOUT_GOVERNANCE.md": "2d2a7018d7ae3da4e9c56b37f0e83fd650ac4f4b011471ef4594e8b66d47983a"
+  },
+  "amendment_policy": "Any substantive change requires a new lock, commit, and disclosed protocol amendment before holdout access."
+}
