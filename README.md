@@ -215,3 +215,20 @@ ShockBridge-authored code and documentation are licensed under the MIT License. 
 ## Version 2 checkpoint D2A
 
 The active research branch now includes a development-only nested signal-specification screening stage. D2A evaluates all registered standalone RSI and Bollinger definitions with a fixed regularized-linear matched benchmark. It does not select the final model family, access the locked evaluation segment, or alter the frozen Version 1 determination.
+
+## Citation
+
+Pereira, Rodolfo. (2026). *When Signals Stop Working: Technical Signal Validity Framework*. ShockBridge Pulse Research. Python research software. https://github.com/rolffcoelho-bravo/when-signals-stop-working
+
+## BibTeX
+
+```bibtex
+@software{pereira2026whensignalsstopworking,
+  author = {Pereira, Rodolfo},
+  title = {When Signals Stop Working: Technical Signal Validity Framework},
+  year = {2026},
+  publisher = {ShockBridge Pulse Research},
+  type = {Python research software},
+  url = {https://github.com/rolffcoelho-bravo/when-signals-stop-working}
+}
+```
