@@ -146,6 +146,16 @@ On the Version 2 research branch, the D0 implementation checkpoint is executed w
 
 This command verifies the frozen protocol, creates development-only partition and fold assets, verifies that no holdout output exists, and runs the complete test suite. It does not fit predictive models.
 
+### Version 2 D1 causal engine
+
+After D0, execute:
+
+```powershell
+.\RUN_V2_D1_CAUSAL_ENGINE.ps1
+```
+
+D1 constructs prefix-invariant benchmark and signal features, fits fold-scoped filtered-state engines on development training partitions, and publishes forward-only state evidence. It does not fit predictive benchmark or candidate models and does not access locked-evaluation performance.
+
 ## Status governance
 
 - `NOT_ESTABLISHED` - stable incremental value was not demonstrated under the declared validation contract.
@@ -187,6 +197,9 @@ See [`ROADMAP.md`](ROADMAP.md).
 - Version 2 implementation checkpoint: [`V2_IMPLEMENTATION_CHECKPOINT.md`](V2_IMPLEMENTATION_CHECKPOINT.md)
 - Version 2 implementation architecture: [`docs/V2_IMPLEMENTATION_ARCHITECTURE.md`](docs/V2_IMPLEMENTATION_ARCHITECTURE.md)
 - Version 2 development execution plan: [`docs/V2_DEVELOPMENT_EXECUTION_PLAN.md`](docs/V2_DEVELOPMENT_EXECUTION_PLAN.md)
+- Version 2 D1 causal engine checkpoint: [`V2_D1_CAUSAL_ENGINE_CHECKPOINT.md`](V2_D1_CAUSAL_ENGINE_CHECKPOINT.md)
+- Version 2 causal feature specification: [`docs/V2_CAUSAL_FEATURE_SPECIFICATION.md`](docs/V2_CAUSAL_FEATURE_SPECIFICATION.md)
+- Version 2 filtered-state engine: [`docs/V2_FILTERED_STATE_ENGINE.md`](docs/V2_FILTERED_STATE_ENGINE.md)
 
 ## Scope boundaries
 

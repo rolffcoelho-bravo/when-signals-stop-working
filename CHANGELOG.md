@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0.dev2 - Version 2 D1 causal engine
+
+- added deterministic trailing benchmark features;
+- added registered RSI and Bollinger signal-feature construction and prefix-invariance audit;
+- added fold-scoped forward Gaussian Markov state filtering;
+- added state-parameter, chronology, normalization, and covariance evidence;
+- preserved the Version 1 release, Version 2 protocol freeze, D0 lock, and holdout prohibition.
+
 ## Unreleased - Version 2 methodological design freeze
 
 - freezes the Version 2 confirmatory hypothesis family before implementation;

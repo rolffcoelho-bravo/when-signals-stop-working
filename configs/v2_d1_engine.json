@@ -1,0 +1,37 @@
+{
+  "checkpoint": "V2_D1_CAUSAL_FEATURE_AND_FILTERED_STATE_ENGINE",
+  "execution_scope": "DEVELOPMENT_ONLY_NO_PREDICTIVE_MODEL_FITTING",
+  "benchmark_features": [
+    "sol_ret_1",
+    "sol_ret_3",
+    "btc_ret_1",
+    "btc_ret_3",
+    "trend_12",
+    "vol_20",
+    "range_12",
+    "volume_z"
+  ],
+  "state_inputs": [
+    "sol_ret_1",
+    "vol_20",
+    "trend_12"
+  ],
+  "state_engine": {
+    "states": 3,
+    "semantic_states": ["range", "trend", "stress"],
+    "random_state": 42,
+    "kmeans_n_init": 10,
+    "covariance_floor": 0.00001,
+    "transition_smoothing": 1.0,
+    "minimum_training_rows": 120,
+    "forward_filter_only": true,
+    "full_sample_smoothing_prohibited": true
+  },
+  "signal_feature_rules": {
+    "event_persistence_candles": 6,
+    "prefix_invariance_tolerance": 1e-12,
+    "registered_specifications_expected": 84
+  },
+  "predictive_model_fitting_enabled": false,
+  "holdout_performance_access_enabled": false
+}

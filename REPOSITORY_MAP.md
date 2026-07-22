@@ -104,3 +104,14 @@ when-signals-stop-working/
 7. `scripts/verify_v2_development_scaffold.py`
 8. `tests/test_v2_implementation_scaffold.py`
 9. `tests/test_v2_holdout_guard.py`
+
+
+## Version 2 D1 causal engine
+
+- `V2_D1_CAUSAL_ENGINE_CHECKPOINT.md` - D1 checkpoint scope and governance.
+- `configs/v2_d1_engine.json` - fixed D1 numerical and causal controls.
+- `src/shockbridge_signal_validity/v2/causal_features.py` - benchmark and registered signal features.
+- `src/shockbridge_signal_validity/v2/filtered_states.py` - fold-scoped forward state filter.
+- `scripts/build_v2_d1_assets.py` - development-only D1 asset builder.
+- `scripts/verify_v2_d1_assets.py` - generated-asset validation.
+- `V2_D1_ENGINE_LOCK.json` - tamper-evident D1 code lock.
