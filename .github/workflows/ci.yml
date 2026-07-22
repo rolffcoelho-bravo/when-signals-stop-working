@@ -33,6 +33,8 @@ jobs:
         run: python scripts/verify_v2_d2a_lock.py
       - name: Verify Version 2 D2B selection lock
         run: python scripts/verify_v2_d2b_lock.py
+      - name: Verify Version 2 D2C admission lock
+        run: python scripts/verify_v2_d2c_lock.py
       - name: Test
         env:
           MPLBACKEND: Agg

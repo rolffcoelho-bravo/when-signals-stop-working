@@ -187,6 +187,10 @@ ShockBridge-authored code and documentation are licensed under the MIT License. 
 
 The active research branch now includes full development-only nested selection across the frozen model families, hyperparameters, estimation windows, soft state conditioning, confirmatory calibration methods, and abstention thresholds. D2B uses only D2A-selected signal specifications, evaluates each selected pipeline once on its untouched outer development fold, and does not access or freeze the methodology-locked evaluation pipeline.
 
+## Version 2 checkpoint D2C
+
+The active research branch now includes development admission and family-level pipeline freezing. D2C applies the frozen predictive-stability, calibration, coverage, and fold-concentration controls to RSI and Bollinger horizons, records an explicit admission or rejection for each family, and assigns a canonical hash to every admitted pipeline. The final economic gate and methodology-locked evaluation remain unopened.
+
 ## Citation
 
 Pereira, Rodolfo. (2026). *When Signals Stop Working: Technical Signal Validity Framework*. ShockBridge Pulse Research. Python research software. https://github.com/rolffcoelho-bravo/when-signals-stop-working

@@ -79,6 +79,7 @@ RUN_V2_DEVELOPMENT_SCAFFOLD.*      D0 development partition and fold assets
 RUN_V2_D1_CAUSAL_ENGINE.*          D1 causal features and filtered states
 RUN_V2_D2A_SCREENING.*             D2A signal-specification screening
 RUN_V2_D2B_SELECTION.*             D2B full nested pipeline selection
+RUN_V2_D2C_ADMISSION.*             D2C development admission and pipeline freeze
 configs/v2_d2b_selection.json      D2B fixed execution controls
 src/.../v2/pipeline_selection.py   matched pipeline, calibration, and policy engine
 data/processed/v2/development/     governed D0-D2B development evidence
@@ -97,3 +98,15 @@ outputs/v2/development/            checkpoint status records
 8. `data/processed/v2/development/d2b_outer_fold_results.csv`
 9. `data/processed/v2/development/d2b_family_horizon_summary.csv`
 10. `V2_D2B_SELECTION_LOCK.json`
+
+## Version 2 D2C review sequence
+
+1. `V2_D2C_ADMISSION_CHECKPOINT.md`
+2. `docs/V2_D2C_DEVELOPMENT_ADMISSION.md`
+3. `configs/v2_d2c_admission.json`
+4. `src/shockbridge_signal_validity/v2/development_admission.py`
+5. `data/processed/v2/development/d2c_family_horizon_admission.csv`
+6. `data/processed/v2/development/d2c_family_decisions.csv`
+7. `data/processed/v2/development/d2c_frozen_pipeline_registry.json`
+8. `outputs/v2/development/d2c_holdout_authorization.json`
+9. `V2_D2C_ADMISSION_LOCK.json`

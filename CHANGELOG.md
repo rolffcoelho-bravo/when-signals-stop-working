@@ -6,6 +6,7 @@
 - adds the D1 causal feature and fold-scoped filtered-state engine;
 - completes D2A nested benchmark-relative screening for all registered RSI and Bollinger definitions;
 - adds D2B full nested model-family, window, calibration, state-conditioning, and abstention selection;
+- adds D2C development admission, explicit family rejection, and tamper-evident pipeline freezing;
 - keeps isotonic calibration diagnostic-only and preserves the locked-evaluation access boundary;
 - freezes the Version 2 confirmatory hypothesis family before implementation;
 - separates RSI and Bollinger directional claims from secondary targets and the combined model;

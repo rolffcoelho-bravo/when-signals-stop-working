@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "when-signals-stop-working"
-version = "2.0.0.dev4"
+version = "2.0.0.dev5"
 description = "Institutional benchmark-relative validation of technical-signal contribution, regime dependence, and structural deterioration."
 readme = "README.md"
 requires-python = ">=3.11"

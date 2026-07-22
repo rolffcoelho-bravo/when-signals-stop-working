@@ -1,0 +1,37 @@
+{
+  "checkpoint": "D2C_DEVELOPMENT_ADMISSION_AND_PIPELINE_FREEZE",
+  "execution_scope": "DEVELOPMENT_ONLY_ADMISSION_AND_FAMILY_LEVEL_PIPELINE_FREEZE",
+  "admission_gates": {
+    "required_outer_folds": 5,
+    "minimum_positive_outer_folds": 3,
+    "maximum_single_fold_share_of_positive_gain": 0.6,
+    "brier_tolerance": 0.0025,
+    "ece_tolerance": 0.01,
+    "minimum_mean_policy_coverage": 0.1,
+    "minimum_total_policy_decisions": 100,
+    "economic_net_edge_is_not_an_admission_gate": true
+  },
+  "final_component_selection": {
+    "required_pooled_inner_rows": 15,
+    "signal_specification_metric": "mean_incremental_log_loss",
+    "structural_pipeline_metric": "mean_incremental_log_loss",
+    "eligible_calibration_methods": ["none", "sigmoid"],
+    "diagnostic_only_calibration_methods": ["isotonic"],
+    "decision_policy_metric": "mean_net_edge_development_selection_only",
+    "family_horizon_tie_breakers": [
+      "positive_outer_folds_descending",
+      "fold_concentration_ascending",
+      "candidate_brier_ascending",
+      "horizon_ascending"
+    ]
+  },
+  "governance": {
+    "development_admission_evaluated": true,
+    "family_level_pipeline_freeze_completed": true,
+    "economic_gate_evaluated": false,
+    "holdout_authorization_enabled": false,
+    "holdout_performance_access_enabled": false,
+    "combined_signal_pipeline_frozen": false,
+    "next_checkpoint": "D3_METHODOLOGY_LOCKED_EVALUATION_AUTHORIZATION"
+  }
+}
