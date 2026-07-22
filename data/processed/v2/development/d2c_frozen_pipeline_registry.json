@@ -1,0 +1,89 @@
+{
+  "checkpoint": "V2_D2C_DEVELOPMENT_ADMISSION_AND_PIPELINE_FREEZE",
+  "created_at_utc": "2026-07-22T23:00:21.595536+00:00",
+  "economic_gate_evaluated": false,
+  "family_decisions": [
+    {
+      "family_decision": "NO_PIPELINE_ADMITTED",
+      "holdout_eligible": false,
+      "pipeline_admitted": false,
+      "rejection_reasons": "h1:POSITIVE_MEAN_INCREMENTAL_LOG_LOSS|FOLD_CONCENTRATION_CONTROL;h2:POSITIVE_MEAN_INCREMENTAL_LOG_LOSS;h3:POSITIVE_MEAN_INCREMENTAL_LOG_LOSS|FOLD_CONCENTRATION_CONTROL;h6:POSITIVE_MEAN_INCREMENTAL_LOG_LOSS|FOLD_CONCENTRATION_CONTROL",
+      "selected_horizon_candles": null,
+      "selected_horizon_hours": null,
+      "selected_mean_incremental_log_loss": null,
+      "selected_positive_outer_folds": null,
+      "signal_family": "rsi"
+    },
+    {
+      "family_decision": "PIPELINE_ADMITTED_FOR_METHODOLOGY_LOCKED_EVALUATION",
+      "holdout_eligible": true,
+      "pipeline_admitted": true,
+      "rejection_reasons": "",
+      "selected_horizon_candles": 1.0,
+      "selected_horizon_hours": 4.0,
+      "selected_mean_incremental_log_loss": 0.0014348485,
+      "selected_positive_outer_folds": 5.0,
+      "signal_family": "bollinger"
+    }
+  ],
+  "family_level_pipeline_freeze_completed": true,
+  "frozen_pipeline_count": 1,
+  "frozen_pipelines": [
+    {
+      "calibration_method": "none",
+      "decision_probability_distance_threshold": 0.05,
+      "development_selection_evidence": {
+        "calibration_mean_inner_incremental_log_loss": 0.00347862861348572,
+        "family_horizon_mean_incremental_log_loss": 0.0014348484900428798,
+        "family_horizon_positive_outer_folds": 5,
+        "policy_mean_inner_coverage": 0.25722878317776077,
+        "policy_mean_inner_net_edge_diagnostic": -0.0001690990416267267,
+        "policy_total_inner_decisions": 4449,
+        "signal_mean_inner_incremental_log_loss": -0.0006322326894520732,
+        "structural_mean_inner_incremental_log_loss": 0.0022872681877837402
+      },
+      "economic_gate_evaluated": false,
+      "holdout_performance_accessed": false,
+      "horizon_candles": 1,
+      "horizon_hours": 4,
+      "pipeline_hash": "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851",
+      "signal_family": "bollinger",
+      "signal_specification": {
+        "interpretation": "continuation",
+        "lower_threshold": null,
+        "period": 10,
+        "signal_family": "bollinger",
+        "signal_spec_id": "bollinger-p10-k2.5-continuation",
+        "standard_deviations": 2.5,
+        "upper_threshold": null
+      },
+      "structural_pipeline": {
+        "model_family": "shallow_hist_gradient_boosting",
+        "parameters": {
+          "l2_regularization": 0.0,
+          "learning_rate": 0.05,
+          "max_iter": 100,
+          "max_leaf_nodes": 15,
+          "min_samples_leaf": 100
+        },
+        "pipeline_id": "shallow_hist_gradient_boosting-l2_regularization0p0-learning_rate0p05-max_iter100-max_leaf_nodes15-min_samples_leaf100-expanding-softstate",
+        "regime_conditioned": true,
+        "window_scheme": "expanding"
+      },
+      "target": "future_return_direction"
+    }
+  ],
+  "holdout_authorization_enabled": false,
+  "holdout_performance_accessed": false,
+  "implementation_commit": "f989e4ea7be0a17d7ad51db3aced4cd5a8585410",
+  "locks": {
+    "d0": "v2-d0-0e1cca99b90e5a50",
+    "d1": "v2-d1-53c53a61a3011a65",
+    "d2a": "v2-d2a-43b7dcb8379cc9c7",
+    "d2b": "v2-d2b-f88a98fce021cb1d",
+    "d2c": "v2-d2c-190392a1d97827b2",
+    "protocol": "v2-protocol-068f03ca1452c5ef"
+  },
+  "source_d2b_commit": "93ecb7e0e9dc5462830ff421ddb0c44e61ca05ae",
+  "source_d2b_tag": "v2-d2b-selection-20260722"
+}

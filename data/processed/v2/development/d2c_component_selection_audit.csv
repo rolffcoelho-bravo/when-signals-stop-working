@@ -1,0 +1,5 @@
+signal_family,horizon_candles,component,selected_id,mean_selection_metric,positive_evaluations,evaluation_rows
+bollinger,1,SIGNAL_SPECIFICATION,bollinger-p10-k2.5-continuation,-0.0006322326894520732,8,15
+bollinger,1,STRUCTURAL_PIPELINE,shallow_hist_gradient_boosting-l2_regularization0p0-learning_rate0p05-max_iter100-max_leaf_nodes15-min_samples_leaf100-expanding-softstate,0.0022872681877837402,11,15
+bollinger,1,CALIBRATION,none,0.00347862861348572,12,15
+bollinger,1,DECISION_POLICY,threshold_0.05,-0.0001690990416267267,5,15
