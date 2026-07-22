@@ -1,0 +1,14 @@
+{
+  "alternative_pipeline_executed": false,
+  "authorization_sha256": "778db53687fd45594a34b2821964ade5a31197354c310ec1496e613d4fab2e01",
+  "calibration_method": "none",
+  "d2c_lock_id": "v2-d2c-190392a1d97827b2",
+  "d3_lock_id": "v2-d3-e2d92bf8786bdb8f",
+  "decision_probability_distance_threshold": 0.05,
+  "horizon_candles": 1,
+  "pipeline_hash": "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851",
+  "pipeline_registry_sha256": "96e3eab948da75142e56774126ae5bfafdf007517f5356df3cba9a9c70eb2d80",
+  "pipeline_retuning_performed": false,
+  "rsi_reentry_performed": false,
+  "signal_family": "bollinger"
+}

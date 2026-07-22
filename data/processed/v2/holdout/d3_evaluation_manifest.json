@@ -1,0 +1,61 @@
+{
+  "authorization_commit": "ea09e84ba7f99f99f80f79137d485a0eec2589f7",
+  "checkpoint": "V2_D3_METHODOLOGY_LOCKED_EVALUATION",
+  "created_at_utc": "2026-07-22T23:38:36.018953+00:00",
+  "d2c_lock_id": "v2-d2c-190392a1d97827b2",
+  "d3_lock_id": "v2-d3-e2d92bf8786bdb8f",
+  "economic_gate_evaluated": false,
+  "execution_scope": "SINGLE_ACCESS_METHODOLOGY_LOCKED_EVALUATION",
+  "files": [
+    {
+      "bytes": 257650,
+      "path": "data/processed/v2/holdout/d3_locked_market_data.csv",
+      "sha256": "e8a960cc347a7d49e6e37df724f611c731c6938e570b760a4f2ccd69eb2128bd"
+    },
+    {
+      "bytes": 815805,
+      "path": "data/processed/v2/holdout/d3_locked_predictions.csv",
+      "sha256": "7f3975b3919e3247ab1b6a745b0ad76068739a8e4c934796830b32c4b4d58f06"
+    },
+    {
+      "bytes": 2894,
+      "path": "data/processed/v2/holdout/d3_state_parameters.json",
+      "sha256": "0c7b6a536b77937ccb9e9045159354e37270913eb26b9a07c1aba96350b1c742"
+    },
+    {
+      "bytes": 637,
+      "path": "outputs/v2/holdout/d3_pipeline_integrity.json",
+      "sha256": "c2309bd9415aa7e7627a0abb4a6cb74d142195f7a2cef2b6c1f277685649dd09"
+    },
+    {
+      "bytes": 2510,
+      "path": "outputs/v2/holdout/d3_raw_metric_summary.json",
+      "sha256": "44a7efe2d110c83d0dfa132503164b01d0119e8e93db6f075039568df7b771fe"
+    },
+    {
+      "bytes": 623,
+      "path": "outputs/v2/holdout/d3_authorization_consumption.json",
+      "sha256": "c0fe8791301cbd19447bd0e5d7b4a4db97cfa2152d8815a6a4bd611ea9041027"
+    }
+  ],
+  "holdout_end_utc": "2026-07-22T08:00:00+00:00",
+  "holdout_performance_accessed": true,
+  "holdout_start_utc": "2025-07-01T00:00:00+00:00",
+  "implementation_commit": "f49522e259f518a6a3560d98ff1f27334e76cc9e",
+  "market_rows": 2319,
+  "methodology_locked_evaluation_executed": true,
+  "multiplicity_adjustment_applied": false,
+  "pipeline_hash": "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851",
+  "pipeline_retuning_performed": false,
+  "prediction_rows": 2318,
+  "protocol_lock_id": "v2-protocol-068f03ca1452c5ef",
+  "robustness_gate_evaluated": false,
+  "rsi_reentry_performed": false,
+  "signal_family": "bollinger",
+  "statistical_gate_evaluated": false,
+  "subperiods": [
+    "P1",
+    "P2",
+    "P3"
+  ]
+}
