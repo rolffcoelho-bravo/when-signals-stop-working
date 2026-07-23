@@ -22,4 +22,7 @@ python -m pytest -q \
   tests/test_v3_spectral.py \
   tests/test_v3_spectral_runner.py
 
+echo "4. VERIFYING GATE V3-2 IMPLEMENTATION LOCK"
+python scripts/verify_v3_g2_spectral.py
+
 echo "Gate V3-2 multi-asset causal feature and spectral validation passed."
