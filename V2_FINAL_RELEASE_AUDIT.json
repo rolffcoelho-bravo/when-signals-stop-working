@@ -1,6 +1,6 @@
 {
   "audit_id": "v2-final-release-audit-20260723",
-  "created_at_utc": "2026-07-23T18:27:30.850637+00:00",
+  "created_at_utc": "2026-07-23T20:07:06.482208+00:00",
   "status": "PASS",
   "release_readiness": "READY_FOR_PULL_REQUEST",
   "release_version": "2.0.0",
@@ -17,6 +17,7 @@
   "pipeline_retuning_performed": false,
   "v2_1_extension_used": false,
   "d5_protected_files_changed": false,
+  "ci_erratum_commit": "139cfece76e3cfdbf485b70dc015d0debccf7638",
   "resolved_remediations": [
     "RELEASE_IDENTITY_EXTERNALIZED_FROM_D5_PROTECTED_PACKAGE_METADATA",
     "CITATION_METADATA_ALIGNED",
@@ -24,14 +25,18 @@
     "CI_D5_LOCK_ENABLED",
     "CI_D5_ASSET_VERIFICATION_ENABLED",
     "CI_FINAL_RELEASE_AUDIT_ENABLED",
+    "CI_CANONICAL_WINDOWS_LOCK_ENVIRONMENT",
+    "CI_FULL_HISTORY_AND_TAG_FETCH_ENABLED",
+    "CI_MATRIX_FAIL_FAST_DISABLED",
+    "CI_D3_AND_D4_ASSET_VERIFICATION_ENABLED",
     "WINDOWS_V1_REPLICATION_PRESERVES_V2",
     "UNIX_V1_REPLICATION_PRESERVES_V2"
   ],
   "files": [
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 1683,
-      "sha256": "3e38a9ba8a5c1e7ae1f43b3109e450792618a113206140f7f23dadf6e03466d8"
+      "bytes": 2153,
+      "sha256": "b8636aac52f2e8fb647d99e8652d6416201c330633747df39149296e246e60ae"
     },
     {
       "path": "CITATION.cff",
