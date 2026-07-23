@@ -37,6 +37,8 @@ jobs:
         run: python scripts/verify_v2_d2c_lock.py
       - name: Verify Version 2 D3 evaluation lock
         run: python scripts/verify_v2_d3_lock.py
+      - name: Verify Version 2 D4 inference lock
+        run: python scripts/verify_v2_d4_lock.py
       - name: Test
         env:
           MPLBACKEND: Agg

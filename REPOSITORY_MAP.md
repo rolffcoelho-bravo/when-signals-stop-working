@@ -127,3 +127,11 @@ outputs/v2/development/            checkpoint status records
 ## Version 2.1 extension scope
 
 `docs/V2_1_PANIC_STATE_EXTENSION_SCOPE.md` records the approved panic-consistent state diagnostic as a separate, non-confirmatory extension.
+
+## Version 2 D4 inference layer
+
+- `configs/v2_d4_confirmatory_inference.json` - frozen inference, multiplicity, bootstrap, calibration, and economic settings.
+- `src/shockbridge_signal_validity/v2/confirmatory_inference.py` - deterministic confirmatory and matched-economic methods.
+- `scripts/build_v2_d4_assets.py` - builds D4 evidence from immutable D3 predictions.
+- `scripts/verify_v2_d4_assets.py` - verifies D4 tables, gates, checksums, and evidence grade.
+- `docs/V2_D4_EXECUTION_EXCEPTION.md` - discloses late bootstrap block-length materialization.

@@ -33,7 +33,7 @@ Core elements:
 
 ## Phase II - Conditional validity and inference hardening
 
-**Status:** methodological design frozen; implementation not yet admitted to locked evaluation.
+**Status:** D3 locked evaluation completed; D4 confirmatory and economic inference implemented; robustness completion and external replication remain pending.
 
 Phase II determines whether the Version 1 instability reflects an absence of information or a conditional structure not represented by the parsimonious specification.
 

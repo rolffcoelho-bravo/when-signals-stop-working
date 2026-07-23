@@ -1,0 +1,61 @@
+
+{
+  "checkpoint": "D4_CONFIRMATORY_INFERENCE_AND_ECONOMIC_GATES",
+  "execution_scope": "POST_LOCKED_EVALUATION_INFERENCE_NO_RETUNING",
+  "expected_parent_commit": "d0872b9",
+  "expected_parent_tag": "v2-d3-locked-evaluation-20260723",
+  "expected_signal_family": "bollinger",
+  "expected_pipeline_hash": "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851",
+  "confirmatory_family": [
+    {"hypothesis_id": "H1_RSI_DIRECTION", "signal_family": "rsi", "holdout_status": "NO_PIPELINE_ADMITTED", "confirmatory_p_value": 1.0},
+    {"hypothesis_id": "H2_BOLLINGER_DIRECTION", "signal_family": "bollinger", "holdout_status": "EVALUATED", "confirmatory_p_value": null}
+  ],
+  "predictive_gate": {
+    "familywise_alpha": 0.05,
+    "multiplicity_method": "Holm",
+    "comparison": "benchmark_minus_candidate_observation_log_loss",
+    "one_sided_alternative": "candidate_loss_is_lower",
+    "hac_lag_rule": "max_horizon_candles_minus_one",
+    "minimum_positive_subperiods": 2,
+    "subperiod_count": 3,
+    "require_positive_mean": true,
+    "require_positive_primary_bootstrap_lower_bound": true
+  },
+  "calibration_gate": {
+    "maximum_candidate_minus_benchmark_brier": 0.001,
+    "maximum_candidate_minus_benchmark_ece": 0.01
+  },
+  "economic_gate": {
+    "primary_one_way_cost_bps": 10,
+    "sensitivity_one_way_cost_bps": [5, 20],
+    "minimum_candidate_coverage": 0.10,
+    "minimum_candidate_decisions": 100,
+    "confidence_level": 0.95,
+    "comparison": "candidate_minus_matched_benchmark_net_return",
+    "maximum_single_positive_month_share": 0.40
+  },
+  "bootstrap": {
+    "method": "moving_block_bootstrap",
+    "samples": 5000,
+    "random_seed": 42,
+    "primary_block_length": 21,
+    "sensitivity_block_lengths": [14, 28],
+    "development_only_materialization": {
+      "series": "squared_SOL_four_hour_log_returns",
+      "development_end_utc": "2025-06-30T20:00:00+00:00",
+      "rule": "first lag from 1 to 48 with absolute ACF at or below 0.10 for three consecutive lags",
+      "selected_lag": 21,
+      "status": "LATE_MATERIALIZATION_DISCLOSED",
+      "holdout_input_used": false
+    }
+  },
+  "governance": {
+    "pipeline_retuning_permitted": false,
+    "alternative_pipeline_execution_permitted": false,
+    "rsi_reentry_permitted": false,
+    "d3_predictions_mutable": false,
+    "panic_state_extension_in_confirmatory_verdict": false,
+    "robustness_gate_fully_evaluated": false,
+    "next_checkpoint": "D5_ROBUSTNESS_AND_CONCENTRATION_COMPLETION"
+  }
+}

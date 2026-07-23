@@ -210,7 +210,11 @@ The active research branch now includes development admission and family-level p
 
 ## Version 2 checkpoint D3
 
-D3 authorizes a single methodology-locked evaluation for the sole D2C-admitted Bollinger pipeline. The authorization record is committed before result access, RSI remains excluded, and the frozen pipeline cannot be retuned after the locked evidence is exposed. D3 records raw prediction-level evidence but defers statistical, economic, robustness, and operational verdicts to later gates.
+D3 authorizes a single methodology-locked evaluation for the sole D2C-admitted Bollinger pipeline. The authorization record is committed before result access, RSI remains excluded, and the frozen pipeline cannot be retuned after the locked evidence is exposed. D3 records raw prediction-level evidence for subsequent inference.
+
+## Version 2 checkpoint D4
+
+D4 applies the frozen confirmatory family, one-sided benchmark-relative loss comparison, Holm control, dependence-aware bootstrap intervals, locked-subperiod consistency checks, calibration controls, and matched economic evidence. It records the final predictive and economic determinations without altering the D3 pipeline or predictions. The complete parameter-neighbourhood and estimation-window robustness gate remains separate.
 
 ## Version 2.1 panic-state diagnostic
 
