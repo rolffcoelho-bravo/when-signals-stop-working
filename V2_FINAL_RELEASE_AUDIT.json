@@ -1,6 +1,6 @@
 {
   "audit_id": "v2-final-release-audit-20260723",
-  "created_at_utc": "2026-07-23T21:05:00+00:00",
+  "created_at_utc": "2026-07-23T21:12:00+00:00",
   "status": "PASS",
   "release_readiness": "READY_FOR_PULL_REQUEST",
   "release_version": "2.0.0",
@@ -17,7 +17,7 @@
   "pipeline_retuning_performed": false,
   "v2_1_extension_used": false,
   "d5_protected_files_changed": false,
-  "ci_erratum_commit": "38811a4ea5e2c9ef82bbe0dead5220874c52a72b",
+  "ci_erratum_commit": "5d760e70fa970576a1afaa3b72f9c59981213b10",
   "lock_verification_mode": "GIT_OBJECT_IDENTITY_ACROSS_ANNOTATED_CHECKPOINT_TAGS",
   "resolved_remediations": [
     "RELEASE_IDENTITY_EXTERNALIZED_FROM_D5_PROTECTED_PACKAGE_METADATA",
@@ -29,18 +29,18 @@
     "CI_MATRIX_FAIL_FAST_DISABLED",
     "CI_REPOSITORY_OBJECT_LOCK_AND_ASSET_VERIFICATION_ENABLED",
     "CI_NONPORTABLE_WORKTREE_HASH_CHECKS_REPLACED_BY_OBJECT_IDENTITY_AUDIT",
+    "CI_D3_D4_D5_SEMANTIC_ASSERTIONS_ENABLED",
     "CI_PORTABLE_FUNCTIONAL_AND_EVIDENCE_TEST_SUITE_ENABLED",
     "CI_V1_REPLICATION_OBJECT_VERIFICATION_ENABLED",
     "CI_PUBLIC_RELEASE_AUDIT_ENABLED",
-    "CI_EXACT_FAILURE_DIAGNOSTIC_ENABLED",
     "WINDOWS_V1_REPLICATION_PRESERVES_V2",
     "UNIX_V1_REPLICATION_PRESERVES_V2"
   ],
   "files": [
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 2401,
-      "sha256": "5b0b129b0116a3efadc97b8a9d285aeb0ff72964b68ce854a5f86123cde1454e"
+      "bytes": 1677,
+      "sha256": "a23a26e35ac46dcf366bbf7e4d119d1a324201155be1635a5bf335991e679321"
     },
     {
       "path": "CITATION.cff",
@@ -74,8 +74,8 @@
     },
     {
       "path": "scripts/verify_v2_final_audit.py",
-      "bytes": 16301,
-      "sha256": "18f32f2b715ffe73713337bd27318b47e31189bc6fa1b68e98f5f5b4cd935c7a"
+      "bytes": 19557,
+      "sha256": "88122ec4f22d1510549a2e5ba75445e46ed25b6169bcd5756177923ccbea74dc"
     },
     {
       "path": "tests/test_v2_final_audit.py",
