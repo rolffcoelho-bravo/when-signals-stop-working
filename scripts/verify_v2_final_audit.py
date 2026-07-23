@@ -268,9 +268,8 @@ def verify_ci_contract() -> None:
         "fetch-depth: 0",
         "fetch-tags: true",
         "python scripts/verify_v2_final_audit.py",
-        "python scripts/verify_v2_d3_assets.py",
-        "python scripts/verify_v2_d4_assets.py",
-        "python scripts/verify_v2_d5_assets.py",
+        "python scripts/verify_replication.py",
+        "python scripts/audit_public_release.py",
         "python -m pytest -q",
     )
     missing = [fragment for fragment in required if fragment not in workflow]
@@ -278,12 +277,13 @@ def verify_ci_contract() -> None:
         fail(f"CI release contract is incomplete: {missing}")
 
     prohibited = tuple(
-        f"python scripts/verify_v2_{stage}_lock.py"
+        f"python scripts/verify_v2_{stage}_{kind}.py"
         for stage in ("d0", "d1", "d2a", "d2b", "d2c", "d3", "d4", "d5")
+        for kind in ("lock", "assets")
     )
     active = [command for command in prohibited if command in workflow]
     if active:
-        fail(f"CI invokes non-portable working-tree lock checks: {active}")
+        fail(f"CI invokes non-portable working-tree hash checks: {active}")
 
 
 def verify_replication_preservation() -> None:
