@@ -32,4 +32,10 @@ if ($LASTEXITCODE -ne 0) {
     throw "Gate V3-2 tests failed."
 }
 
+Write-Host "4. VERIFYING GATE V3-2 IMPLEMENTATION LOCK"
+python scripts/verify_v3_g2_spectral.py
+if ($LASTEXITCODE -ne 0) {
+    throw "Gate V3-2 lock verification failed."
+}
+
 Write-Host "Gate V3-2 multi-asset causal feature and spectral validation passed."
