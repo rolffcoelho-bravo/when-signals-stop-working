@@ -1,0 +1,36 @@
+{
+  "gate": "V3-2",
+  "schema_version": "v3.market-structure.v1",
+  "baseline_release": "v2.0.0",
+  "baseline_commit": "5a07299367b80c3940e652e7bbdd208ce86ba5ef",
+  "branch": "research/v3-adaptive-signal-validity",
+  "parent_gate": "V3-1",
+  "parent_lock": "V3_G1_DATA_ADAPTER_LOCK.json",
+  "status": "IMPLEMENTATION_COMPLETE_AND_LOCKED",
+  "protected_files": {
+    "RUN_V3_G2_SPECTRAL_ENGINE.ps1": "6720512bb04199d38785f34c9a22167721947842",
+    "RUN_V3_G2_SPECTRAL_ENGINE.sh": "efa0cfe35e48a1b97b1da190d248ea297028f49e",
+    "configs/v3_spectral_example.json": "cc08e4d59a6af7773fb72af908d3f67b93e0f46a",
+    "docs/V3_SPECTRAL_ENGINE.md": "29418527e6d5f6bafbbc508779bbe57c44be5c72",
+    "scripts/run_v3_spectral_features.py": "fbeb8588e5abd0cbc84d45227484a302d1f300b6",
+    "scripts/verify_v3_g2_spectral.py": "a06a48e8c7bb741453a1cb9a3164efffb5569b65",
+    "src/shockbridge_signal_validity/v3/__init__.py": "a66ce2577a6cc7ac09f2329fe19a47d854fb865f",
+    "src/shockbridge_signal_validity/v3/spectral.py": "1108f68d639ac76679a0b80eddef6a23bd5771da",
+    "src/shockbridge_signal_validity/v3/spectral_runner.py": "32e130f71d82eeaa0fd0aae65af92f076bbe3f7c",
+    "tests/test_v3_spectral.py": "59ca127691f2ffea095527d4486cbcf92e89a95c",
+    "tests/test_v3_spectral_runner.py": "afc7df7a6d5b8ded91ff4c38e0ba0617180e870d"
+  },
+  "acceptance_evidence": {
+    "isolated_gate_tests_passed": 11,
+    "analytical_identity_fixture": true,
+    "analytical_common_mode_fixture": true,
+    "future_mutation_invariance": true,
+    "fixed_panel_enforcement": true,
+    "insufficient_coverage_fails_closed": true,
+    "sample_ewma_shrinkage_estimators": true,
+    "deterministic_manifest": true,
+    "runner_outputs_verified": true,
+    "automatic_panel_selection_performed": false,
+    "automatic_window_selection_performed": false
+  }
+}
