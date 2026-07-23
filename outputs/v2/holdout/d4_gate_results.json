@@ -1,0 +1,51 @@
+{
+  "checkpoint": "V2_D4_CONFIRMATORY_INFERENCE_AND_ECONOMIC_GATES",
+  "concentration_diagnostic": {
+    "maximum_contributing_month": "2025-10",
+    "maximum_single_positive_month_share": 0.19948532934586966,
+    "passed": true,
+    "threshold": 0.4
+  },
+  "confirmatory_family_size": 2,
+  "economic_gate": {
+    "candidate_coverage": 0.14667817083692838,
+    "candidate_nonzero_decisions": 340,
+    "checks": {
+      "minimum_candidate_coverage": true,
+      "minimum_candidate_decisions": true,
+      "positive_mean_incremental_net_return": true,
+      "positive_primary_bootstrap_lower_bound": false
+    },
+    "ci_95_lower": -9.701971847781328e-05,
+    "ci_95_upper": 0.0003396966841377336,
+    "mean_incremental_net_return": 0.00013019590915840315,
+    "passed": false,
+    "primary_one_way_cost_bps": 10
+  },
+  "panic_state_extension_used": false,
+  "pipeline_hash": "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851",
+  "pipeline_retuning_performed": false,
+  "predictive_gate": {
+    "calibration_pass": true,
+    "checks": {
+      "holm_adjusted_p_below_alpha": false,
+      "minimum_positive_subperiods": true,
+      "no_material_calibration_failure": true,
+      "positive_mean_incremental_log_loss": true,
+      "positive_primary_bootstrap_lower_bound": false
+    },
+    "dm_style_standard_error": 0.0011415144362004457,
+    "dm_style_statistic": 1.847482660113495,
+    "holm_adjusted_p_value": 0.06467721893385245,
+    "mean_incremental_log_loss": 0.002108928127149556,
+    "passed": false,
+    "positive_subperiods": 2,
+    "primary_bootstrap_ci_95_lower": -0.0003901574547515479,
+    "primary_bootstrap_ci_95_upper": 0.004334406022425379,
+    "raw_one_sided_p_value": 0.032338609466926224,
+    "required_positive_subperiods": 2
+  },
+  "robustness_gate_fully_evaluated": false,
+  "rsi_reentry_performed": false,
+  "signal_family": "bollinger"
+}

@@ -1,0 +1,12 @@
+{
+  "determination": "LOCKED_EVALUATION_PREDICTIVE_GATE_FAILED",
+  "evidence_grade": "NO_INCREMENTAL_EVIDENCE",
+  "external_replication_evaluated": false,
+  "interpretation": "The frozen Bollinger pipeline produced a positive mean benchmark-relative loss differential. The confirmatory predictive gate did not pass after multiplicity, dependence-aware bootstrap, chronological subperiod, and calibration controls. At the primary 10-bps cost, the matched mean incremental net return was positive, and the economic gate did not pass under the confidence, coverage, and decision-count requirements.",
+  "monitoring_ready": false,
+  "pipeline_hash": "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851",
+  "primary_case_established": false,
+  "robustness_gate_pending": true,
+  "rsi_status": "NO_PIPELINE_ADMITTED",
+  "signal_family": "bollinger"
+}

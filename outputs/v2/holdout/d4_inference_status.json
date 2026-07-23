@@ -1,0 +1,22 @@
+{
+  "checkpoint": "V2_D4_CONFIRMATORY_INFERENCE_AND_ECONOMIC_GATES",
+  "d4_lock_id": "v2-d4-ec8d9850edbcb622",
+  "economic_gate_evaluated": true,
+  "economic_gate_passed": false,
+  "evidence_grade": "NO_INCREMENTAL_EVIDENCE",
+  "gate_results_sha256": "68a9118b19c2096e50ae3855648a07af555837eb62db9231baeff53baeb0b802",
+  "implementation_commit": "ef83e95b9b764db378478eab1c6c03002b8aff45",
+  "manifest_sha256": "1fef8c77c5d028e67dc67c3b4492f4ccadf6571784a65bbc2e0b6337667322f7",
+  "multiplicity_adjustment_applied": true,
+  "panic_state_extension_used": false,
+  "pipeline_hash": "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851",
+  "pipeline_retuning_performed": false,
+  "prediction_rows": 2318,
+  "predictive_gate_passed": false,
+  "robustness_gate_fully_evaluated": false,
+  "rsi_reentry_performed": false,
+  "signal_family": "bollinger",
+  "statistical_gate_evaluated": true,
+  "status": "PASS",
+  "verdict_sha256": "7a5d85dd8c543881a43726c9de6964e68c603ec8e167f8ee73f2e895d1fc7d92"
+}

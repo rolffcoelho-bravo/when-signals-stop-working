@@ -1,0 +1,115 @@
+{
+  "block_length_materialization_status": "LATE_MATERIALIZATION_DISCLOSED",
+  "checkpoint": "V2_D4_CONFIRMATORY_INFERENCE_AND_ECONOMIC_GATES",
+  "confirmatory_family_size": 2,
+  "created_at_utc": "2026-07-23T00:36:42.205369+00:00",
+  "d3_evidence_commit": "d0872b9",
+  "d3_manifest_sha256": "e7194f11becd23c0258c6494c9bcbe0a1d887b389f84ba19eb79f62949d28fa5",
+  "d3_predictions_sha256": "7f3975b3919e3247ab1b6a745b0ad76068739a8e4c934796830b32c4b4d58f06",
+  "d4_lock_id": "v2-d4-ec8d9850edbcb622",
+  "development_selected_primary_block_length": 21,
+  "development_squared_return_acf_lags_1_to_48": [
+    0.19497514241717312,
+    0.16587486963011788,
+    0.18515923098670029,
+    0.12798598933227795,
+    0.18421458068609195,
+    0.18763308642222087,
+    0.11456839087437504,
+    0.1998473418224091,
+    0.15347811695125424,
+    0.12669529033471186,
+    0.11778999145513258,
+    0.12138726592286737,
+    0.09395893671963908,
+    0.10275937960924757,
+    0.09599394822505139,
+    0.10988990949729781,
+    0.09319130065742309,
+    0.10539850790762882,
+    0.09219675817547564,
+    0.1261628299487863,
+    0.09859305018223745,
+    0.0865415648486511,
+    0.09534473810741127,
+    0.061268248936438625,
+    0.09132901028510425,
+    0.09767603960813714,
+    0.0757314318221692,
+    0.07535143162597349,
+    0.07190567600021111,
+    0.10499495497821246,
+    0.08389064621155047,
+    0.06674651409479058,
+    0.06446673400339163,
+    0.06904320426800148,
+    0.07013075246463477,
+    0.0887566594335392,
+    0.06561900380455632,
+    0.0601040801970487,
+    0.06803563600934352,
+    0.05678475450293817,
+    0.06694230250168452,
+    0.051664616114233855,
+    0.05355151320193813,
+    0.05544172087188128,
+    0.04842080830748605,
+    0.05324823499263417,
+    0.027407132863580787,
+    0.041872975112753306
+  ],
+  "economic_gate_evaluated": true,
+  "evidence_grade": "NO_INCREMENTAL_EVIDENCE",
+  "files": [
+    {
+      "bytes": 405,
+      "path": "data/processed/v2/holdout/d4_predictive_inference.csv",
+      "sha256": "d0d43a063ab870a11b37bb0a30f46d112cb4c6dd2a61f46d5d95ba5e296970df"
+    },
+    {
+      "bytes": 390,
+      "path": "data/processed/v2/holdout/d4_subperiod_results.csv",
+      "sha256": "b5bec9f9c635fd49a05e60192855b1825e436a317641e96165ef0c8a1126d014"
+    },
+    {
+      "bytes": 1243,
+      "path": "data/processed/v2/holdout/d4_economic_cost_sensitivity.csv",
+      "sha256": "28bd4929575674ad756c936b056485c527d406b65dbf8ee8bbc64ac0db1cb326"
+    },
+    {
+      "bytes": 826,
+      "path": "data/processed/v2/holdout/d4_block_length_sensitivity.csv",
+      "sha256": "6659ca8d9cfc708ac4c9dcde2707fa0521d073cb5b9adb10d511983d6c58d087"
+    },
+    {
+      "bytes": 1049,
+      "path": "data/processed/v2/holdout/d4_monthly_contribution.csv",
+      "sha256": "b4ae61285f2aad5be4edf425deeff6e6f58fc8dd7d086acddd17d7aa5afb305a"
+    },
+    {
+      "bytes": 671,
+      "path": "data/processed/v2/holdout/d4_calibration_summary.csv",
+      "sha256": "477e156539620fa9aeb5f361038ad645dbcda50e592ae94dfbf10cd566ec62ba"
+    },
+    {
+      "bytes": 1927,
+      "path": "outputs/v2/holdout/d4_gate_results.json",
+      "sha256": "68a9118b19c2096e50ae3855648a07af555837eb62db9231baeff53baeb0b802"
+    },
+    {
+      "bytes": 871,
+      "path": "outputs/v2/holdout/d4_final_evidence_grade.json",
+      "sha256": "7a5d85dd8c543881a43726c9de6964e68c603ec8e167f8ee73f2e895d1fc7d92"
+    }
+  ],
+  "holm_adjustment_applied": true,
+  "implementation_commit": "ef83e95b9b764db378478eab1c6c03002b8aff45",
+  "panic_state_extension_used": false,
+  "pipeline_hash": "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851",
+  "pipeline_retuning_performed": false,
+  "prediction_rows": 2318,
+  "robustness_gate_fully_evaluated": false,
+  "rsi_reentry_performed": false,
+  "signal_family": "bollinger",
+  "statistical_gate_evaluated": true
+}
