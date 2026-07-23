@@ -351,9 +351,15 @@ def main() -> int:
         "monitoring_ready": False,
         "robustness_gate_pending": True,
         "interpretation": (
-            "The frozen Bollinger pipeline produced a small positive mean loss differential, "
-            "but it did not satisfy confirmatory multiplicity, bootstrap, and subperiod requirements. "
-            "Its matched economic contribution at the primary cost was also negative."
+            f"The frozen Bollinger pipeline produced a "
+            f"{'positive' if predictive.mean_loss_differential > 0.0 else 'non-positive'} "
+            f"mean benchmark-relative loss differential. The confirmatory predictive gate "
+            f"{'passed' if predictive_gate_pass else 'did not pass'} after multiplicity, "
+            f"dependence-aware bootstrap, chronological subperiod, and calibration controls. "
+            f"At the primary 10-bps cost, the matched mean incremental net return was "
+            f"{'positive' if primary_economic_interval.mean > 0.0 else 'non-positive'}, "
+            f"and the economic gate {'passed' if economic_gate_pass else 'did not pass'} "
+            f"under the confidence, coverage, and decision-count requirements."
         ),
     }
     verdict_path = args.output_root / "d4_final_evidence_grade.json"
