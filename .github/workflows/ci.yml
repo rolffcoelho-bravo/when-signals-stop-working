@@ -23,24 +23,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
-      - name: Verify frozen Version 2 protocol
-        run: python scripts/verify_v2_protocol_lock.py
-      - name: Verify Version 2 D0 implementation lock
-        run: python scripts/verify_v2_d0_lock.py
-      - name: Verify Version 2 D1 engine lock
-        run: python scripts/verify_v2_d1_lock.py
-      - name: Verify Version 2 D2A selection lock
-        run: python scripts/verify_v2_d2a_lock.py
-      - name: Verify Version 2 D2B selection lock
-        run: python scripts/verify_v2_d2b_lock.py
-      - name: Verify Version 2 D2C admission lock
-        run: python scripts/verify_v2_d2c_lock.py
-      - name: Verify Version 2 D3 evaluation lock
-        run: python scripts/verify_v2_d3_lock.py
-      - name: Verify Version 2 D4 inference lock
-        run: python scripts/verify_v2_d4_lock.py
-      - name: Verify Version 2 D5 robustness lock
-        run: python scripts/verify_v2_d5_lock.py
+      - name: Verify Version 2 repository-object locks and release audit
+        run: python scripts/verify_v2_final_audit.py
       - name: Install
         run: |
           python -m pip install --upgrade pip
@@ -51,9 +35,7 @@ jobs:
         run: python scripts/verify_v2_d4_assets.py
       - name: Verify Version 2 D5 publication assets
         run: python scripts/verify_v2_d5_assets.py
-      - name: Verify Version 2 final release audit
-        run: python scripts/verify_v2_final_audit.py
-      - name: Test
+      - name: Test portable functional and evidence suite
         env:
           MPLBACKEND: Agg
           PYTHONNOUSERSITE: "1"
@@ -61,4 +43,14 @@ jobs:
           OPENBLAS_NUM_THREADS: "1"
           MKL_NUM_THREADS: "1"
           NUMEXPR_NUM_THREADS: "1"
-        run: python -m pytest -q
+        run: >
+          python -m pytest -q
+          --ignore=tests/test_v2_d0_lock.py
+          --ignore=tests/test_v2_d1_lock.py
+          --ignore=tests/test_v2_d2a_lock.py
+          --ignore=tests/test_v2_d2b_lock.py
+          --ignore=tests/test_v2_d2c_lock.py
+          --ignore=tests/test_v2_d3_lock.py
+          --ignore=tests/test_v2_d4_lock.py
+          --ignore=tests/test_v2_d5_lock.py
+          -k "not test_v2_protocol_lock_hashes"
