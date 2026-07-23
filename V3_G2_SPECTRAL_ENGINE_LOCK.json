@@ -8,8 +8,8 @@
   "parent_lock": "V3_G1_DATA_ADAPTER_LOCK.json",
   "status": "IMPLEMENTATION_COMPLETE_AND_LOCKED",
   "protected_files": {
-    "RUN_V3_G2_SPECTRAL_ENGINE.ps1": "6720512bb04199d38785f34c9a22167721947842",
-    "RUN_V3_G2_SPECTRAL_ENGINE.sh": "efa0cfe35e48a1b97b1da190d248ea297028f49e",
+    "RUN_V3_G2_SPECTRAL_ENGINE.ps1": "200118278b49e28289daefc1e2c7cfb5aa7d4a60",
+    "RUN_V3_G2_SPECTRAL_ENGINE.sh": "c509dbaa002557e3ee561d10f09ce2650aa9e62d",
     "configs/v3_spectral_example.json": "cc08e4d59a6af7773fb72af908d3f67b93e0f46a",
     "docs/V3_SPECTRAL_ENGINE.md": "29418527e6d5f6bafbbc508779bbe57c44be5c72",
     "scripts/run_v3_spectral_features.py": "fbeb8588e5abd0cbc84d45227484a302d1f300b6",
