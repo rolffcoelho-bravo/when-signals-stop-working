@@ -9,6 +9,7 @@
 - adds D2C development admission, explicit family rejection, and tamper-evident pipeline freezing;
 - adds D3 single-access methodology-locked evaluation for the sole D2C-admitted Bollinger pipeline;
 - adds D4 confirmatory inference, Holm control, locked-subperiod checks, calibration evidence, and matched economic gates;
+- adds D5 robustness, concentration, influence, model-boundary, publication-figure, model-card, and final-verdict evidence;
 - records the approved V2.1 panic-state module as a non-interfering secondary diagnostic extension;
 - keeps isotonic calibration diagnostic-only and preserves the locked-evaluation access boundary;
 - freezes the Version 2 confirmatory hypothesis family before implementation;

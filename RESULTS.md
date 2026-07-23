@@ -48,3 +48,69 @@ The Version 1 evidence supports four conclusions:
 ## Next methodological phase
 
 Version 2 will assess whether useful information is conditional on forecast horizon, target definition, market regime, nonlinear response, or continuation-versus-reversal interpretation. The design is predeclared in [`ROADMAP.md`](ROADMAP.md) and requires nested chronological selection, a locked final holdout, and complete reporting of all declared candidates.
+
+# Version 2 Primary-Case Determination
+
+## Executive determination
+
+Version 2 expanded the research design without changing the Version 1 result
+post hoc. RSI did not pass the frozen development-admission gate. One
+Bollinger continuation pipeline passed development admission and was evaluated
+once on the methodology-locked period.
+
+The Bollinger pipeline produced favourable average evidence but failed the
+complete confirmatory standard.
+
+| Measure | Frozen result |
+|---|---:|
+| Mean incremental log loss | 0.002108928 |
+| Raw one-sided p-value | 0.032339 |
+| Holm-adjusted p-value | 0.064677 |
+| Primary predictive bootstrap lower bound | -0.000390157 |
+| Positive locked subperiods | 2 / 3 |
+| Mean incremental net return at 10 bps | 0.000130196 |
+| Economic 95% lower bound | -0.000097020 |
+| Maximum positive-month contribution share | 19.95% |
+| Final evidence grade | `NO_INCREMENTAL_EVIDENCE` |
+
+## Family determinations
+
+### RSI
+
+No RSI pipeline met the pre-holdout development stability and admission
+controls. RSI therefore remained `NO_PIPELINE_ADMITTED` and was not exposed to
+the methodology-locked evaluation.
+
+### Bollinger Bands
+
+The frozen Bollinger pipeline improved mean benchmark-relative probability
+loss and produced positive mean matched economic contribution. Those means did
+not survive the complete multiplicity-adjusted and dependence-aware confidence
+requirements. The exact signal parameterization was also diffuse across
+development folds, and predictive contribution became negative in the third
+locked subperiod.
+
+The final status is `NO_INCREMENTAL_EVIDENCE`.
+
+## Robustness interpretation
+
+The positive averages were not dominated by one calendar month and remained
+positive under leave-one-month-out and registered joint-tail-trimming
+diagnostics. Mean economic contribution remained positive under 5-, 10-, and
+20-basis-point assumptions.
+
+These favourable diagnostics do not reverse the confirmatory failure.
+Predictive and economic bootstrap lower bounds crossed zero under every
+registered block length, the Holm-adjusted p-value exceeded 0.05, and active
+confidence strata did not provide uniform economic contribution.
+
+## Final institutional conclusion
+
+> Stable incremental technical-signal value was not established in the
+> Version 2 Binance SOL/USDT four-hour primary case.
+
+The result supports governed suspension of the claim, not a universal claim
+that technical indicators can never contain information. The separate V2.1
+programme will study whether independently defined stress states can govern
+signal interpretation, degradation, suspension, or revalidation without
+changing Version 2.

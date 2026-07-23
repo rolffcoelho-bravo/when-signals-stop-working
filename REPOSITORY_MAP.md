@@ -135,3 +135,27 @@ outputs/v2/development/            checkpoint status records
 - `scripts/build_v2_d4_assets.py` - builds D4 evidence from immutable D3 predictions.
 - `scripts/verify_v2_d4_assets.py` - verifies D4 tables, gates, checksums, and evidence grade.
 - `docs/V2_D4_EXECUTION_EXCEPTION.md` - discloses late bootstrap block-length materialization.
+
+## Version 2 D5 robustness and publication layer
+
+- `RUN_V2_D5_ROBUSTNESS_PUBLICATION.*` - controlled D5 execution.
+- `configs/v2_d5_robustness_publication.json` - frozen diagnostic and governance controls.
+- `src/shockbridge_signal_validity/v2/robustness_publication.py` - deterministic robustness methods.
+- `data/processed/v2/publication/` - concentration, influence, state, confidence, and component-stability tables.
+- `outputs/v2/publication/` - final verdict, robustness record, model card, report, figures, and status.
+- `docs/V2_D5_ROBUSTNESS_AND_PUBLICATION.md` - methodological interpretation.
+- `docs/V2_FINAL_MODEL_BOUNDARIES.md` - permitted and prohibited claims.
+- `V2_D5_ROBUSTNESS_LOCK.json` - tamper-evident D5 implementation lock.
+
+## Version 2 D5 review sequence
+
+1. `V2_D5_ROBUSTNESS_CHECKPOINT.md`
+2. `docs/V2_D5_ROBUSTNESS_AND_PUBLICATION.md`
+3. `configs/v2_d5_robustness_publication.json`
+4. `data/processed/v2/publication/d5_robustness_matrix.csv`
+5. `outputs/v2/publication/d5_robustness_results.json`
+6. `outputs/v2/publication/v2_final_evidence_grade.json`
+7. `outputs/v2/publication/V2_FINAL_EVIDENCE_REPORT.md`
+8. `outputs/v2/publication/V2_FROZEN_BOLLINGER_MODEL_CARD.md`
+9. `outputs/v2/publication/figures/`
+10. `V2_D5_ROBUSTNESS_LOCK.json`
