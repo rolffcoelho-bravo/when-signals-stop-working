@@ -1,6 +1,6 @@
 {
   "audit_id": "v2-final-release-audit-20260723",
-  "created_at_utc": "2026-07-23T20:28:00+00:00",
+  "created_at_utc": "2026-07-23T20:38:00+00:00",
   "status": "PASS",
   "release_readiness": "READY_FOR_PULL_REQUEST",
   "release_version": "2.0.0",
@@ -17,7 +17,7 @@
   "pipeline_retuning_performed": false,
   "v2_1_extension_used": false,
   "d5_protected_files_changed": false,
-  "ci_erratum_commit": "0dd2c59022b3ee921c4a72079884c9c01c29e204",
+  "ci_erratum_commit": "e8f319cc0405bd0c7a5f3bf6368ae9b8860ae295",
   "lock_verification_mode": "GIT_OBJECT_IDENTITY_ACROSS_ANNOTATED_CHECKPOINT_TAGS",
   "resolved_remediations": [
     "RELEASE_IDENTITY_EXTERNALIZED_FROM_D5_PROTECTED_PACKAGE_METADATA",
@@ -31,15 +31,16 @@
     "CI_D3_AND_D4_ASSET_VERIFICATION_ENABLED",
     "CI_REPOSITORY_OBJECT_LOCK_VERIFICATION_ENABLED",
     "CI_NONPORTABLE_WORKTREE_HASH_TESTS_REPLACED_BY_OBJECT_IDENTITY_AUDIT",
-    "CI_AUDIT_DIAGNOSTIC_ARTIFACT_ENABLED",
+    "CI_V1_REPLICATION_VERIFICATION_ENABLED",
+    "CI_PUBLIC_RELEASE_AUDIT_ENABLED",
     "WINDOWS_V1_REPLICATION_PRESERVES_V2",
     "UNIX_V1_REPLICATION_PRESERVES_V2"
   ],
   "files": [
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 2524,
-      "sha256": "1203bad568ad4f6a7b8e7f08cb6e19ea95d0d6d8185d392f39a84a1d40168acd"
+      "bytes": 1961,
+      "sha256": "64c5cbfea119c93210c9385df83f924685d863f5994dd7307ff73220f6b577d7"
     },
     {
       "path": "CITATION.cff",
@@ -73,8 +74,8 @@
     },
     {
       "path": "scripts/verify_v2_final_audit.py",
-      "bytes": 15596,
-      "sha256": "3447de5ea45a4e36d5a074aba33197e821abba597f9146b02c5460943e0eefe6"
+      "bytes": 13948,
+      "sha256": "2e264f96032690941365d6d49f2b22fd0c6fb40addf3d4dfc03c5b3c283116bd"
     },
     {
       "path": "tests/test_v2_final_audit.py",
