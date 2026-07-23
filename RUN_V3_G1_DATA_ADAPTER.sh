@@ -5,12 +5,15 @@ CONFIG="${1:-configs/v3_adapter_example.json}"
 OUTPUT_DIRECTORY="${2:-outputs/v3/data_adapter}"
 export PYTHONNOUSERSITE=1
 
-echo "1. RUNNING VERSION 3 CANONICAL DATA ADAPTER"
+echo "1. VERIFYING GATE V3-1 IMPLEMENTATION LOCK"
+python scripts/verify_v3_g1_data_adapter.py
+
+echo "2. RUNNING VERSION 3 CANONICAL DATA ADAPTER"
 python scripts/run_v3_data_adapter.py \
   --config "$CONFIG" \
   --output-directory "$OUTPUT_DIRECTORY"
 
-echo "2. RUNNING GATE V3-1 CONFORMANCE TESTS"
+echo "3. RUNNING GATE V3-1 CONFORMANCE TESTS"
 python -m pytest -q \
   tests/test_v3_data_contract.py \
   tests/test_v3_adapters.py \
