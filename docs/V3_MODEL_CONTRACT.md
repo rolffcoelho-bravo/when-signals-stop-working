@@ -1,0 +1,361 @@
+# Version 3 Reusable Model Contract
+
+## 1. Contract purpose
+
+This contract defines the minimum technical and governance behaviour of the Version 3 package. The completed framework must accept conforming datasets without source-specific changes to model code and must produce reproducible forecast, validity, and decision outputs.
+
+## 2. Separation of responsibilities
+
+The system is divided into independently testable components:
+
+```text
+Source Adapter
+Canonical Validator
+Causal Feature Engine
+Spectral Regime Engine
+Panic-Consistent Engine
+Signal Engine
+Forecast Engine
+Validity/Failure Engine
+Economic Policy Engine
+Decision Governance Engine
+Evidence and Reporting Engine
+```
+
+No component may silently perform the responsibilities of another component.
+
+## 3. Adapter interface
+
+Every adapter must implement the conceptual interface:
+
+```python
+class MarketDataAdapter:
+    def load(self, config) -> CanonicalMarketFrame: ...
+    def source_manifest(self) -> SourceManifest: ...
+    def validate_source(self) -> ValidationReport: ...
+```
+
+Adapters must output the canonical schema. Model and feature modules may depend only on canonical fields and registered optional extensions.
+
+## 4. Canonical data behaviour
+
+The validator must:
+
+- sort deterministically by timestamp, asset, and venue;
+- reject duplicate keys;
+- enforce UTC or an explicit timezone conversion manifest;
+- reject non-positive OHLC prices;
+- verify `low <= open, close <= high` and `low <= high`;
+- identify interval gaps and panel-alignment gaps;
+- prohibit forward filling of prices, volume, liquidity, leverage, or liquidation fields unless a field-specific policy is registered;
+- record missingness by field, asset, venue, and period;
+- generate a content hash and schema version.
+
+Critical failures stop execution. Non-critical warnings remain visible in all downstream reports.
+
+## 5. Causal information boundary
+
+At forecast origin \(t\), every input must be measurable at or before \(t\).
+
+Prohibited operations include:
+
+- centred rolling windows;
+- future-filled observations;
+- full-sample standardisation, clipping, ranking, or winsorisation;
+- retrospective regime smoothing;
+- target-derived thresholds estimated outside the training partition;
+- panel membership selected using future performance;
+- calibration on validation, test, or locked-evaluation outcomes;
+- choosing a decision rule from locked-evaluation results.
+
+## 6. Regime-engine contract
+
+The regime engine must expose:
+
+```python
+fit(training_frame, panel_spec)
+predict_proba(causal_frame)
+transform(causal_frame)
+get_manifest()
+```
+
+Required outputs include:
+
+```text
+p_range
+p_trend
+p_stress
+p_panic_consistent
+dominant_eigenvalue_share
+eigenvalue_gap
+participation_ratio
+spectral_entropy
+average_correlation
+correlation_dispersion
+regime_transition_risk
+```
+
+The engine must report insufficient panel coverage rather than silently shrinking the panel or imputing unavailable assets.
+
+## 7. Signal-engine contract
+
+The signal engine must generate registered RSI and Bollinger features from canonical OHLCV data without target access.
+
+Every feature must have a stable identifier encoding:
+
+```text
+signal family
+parameter set
+orientation
+interpretation
+persistence rule
+normalisation rule
+```
+
+Signal generation must be identical across development, evaluation, replication, and production-like inference.
+
+## 8. Forecast-engine contract
+
+The forecast engine must support matched benchmark and candidate estimation.
+
+```text
+benchmark model = common information set
+candidate model = common information set + registered signal information
+```
+
+For a comparison to be valid, both models must use identical:
+
+- rows;
+- target;
+- horizon;
+- preprocessing;
+- model class;
+- hyperparameter-selection process;
+- calibration;
+- cost and decision assumptions;
+- chronological folds.
+
+Required forecast outputs include:
+
+```text
+benchmark_forecast
+candidate_forecast
+forecast_uncertainty
+realised_target
+benchmark_loss
+candidate_loss
+incremental_loss_contribution
+candidate_position
+benchmark_position
+gross_incremental_return
+net_incremental_return
+```
+
+## 9. Validity and failure-engine contract
+
+The validity engine is a meta-model. It may assess a forecast pipeline but may not modify the forecast after observing evaluation outcomes.
+
+Conceptual interface:
+
+```python
+class SignalValidityModel:
+    def fit(self, monitoring_history, failure_definition): ...
+    def predict_failure_probability(self, monitoring_frame, horizons): ...
+    def predict_state(self, monitoring_frame, policy): ...
+    def explain_boundaries(self, monitoring_frame): ...
+```
+
+Required outputs include:
+
+```text
+p_failure_24h
+p_failure_72h
+p_failure_7d
+p_failure_30d
+validity_state
+failure_reason_probabilities
+active_boundary_flags
+calibration_status
+last_revalidation_timestamp
+```
+
+## 10. Failure-label contract
+
+Failure labels must be generated by a versioned, prospectively registered definition.
+
+The label generator must record:
+
+- monitoring window;
+- persistence requirement;
+- predictive tolerance;
+- economic tolerance;
+- calibration tolerance;
+- minimum coverage;
+- structural-break threshold;
+- data-quality severity threshold;
+- recovery and revalidation rules.
+
+No label may be changed because a candidate model performs poorly against it.
+
+## 11. Decision-engine contract
+
+The decision engine consumes forecast and validity outputs. It must not infer hidden rules from model predictions.
+
+Conceptual rule:
+
+\[
+\text{permitted use}_{t,h}
+=
+\Pi\!\left(\widehat{Y}_{t,h}, U_{t,h}, q_{t,H}, G_t, C_t\right),
+\]
+
+where:
+
+- \(\widehat{Y}_{t,h}\) is the market forecast;
+- \(U_{t,h}\) is forecast uncertainty;
+- \(q_{t,H}\) is failure probability;
+- \(G_t\) is the vector of passed evidence gates;
+- \(C_t\) contains cost, liquidity, and coverage constraints.
+
+The decision engine must fail closed. Missing critical evidence cannot default to `VALID`.
+
+## 12. Economic-policy contract
+
+Every policy must declare:
+
+- entry and exit timing;
+- position direction and magnitude;
+- abstention rule;
+- transaction costs;
+- slippage assumption;
+- turnover calculation;
+- leverage boundary;
+- maximum exposure;
+- liquidity or capacity boundary where available.
+
+The framework reports both forecast quality and economic policy performance. Economic success cannot substitute for failed predictive validation, and predictive success cannot substitute for failed economic validation where use is claimed.
+
+## 13. Training and evaluation runners
+
+The package must expose equivalent programmatic and command-line runners:
+
+```text
+validate-data
+build-features
+fit-regime
+select-forecast-models
+fit-validity-model
+run-locked-evaluation
+run-external-replication
+run-monitoring-simulation
+score-new-data
+build-evidence-report
+```
+
+The final convenience command must orchestrate the approved sequence:
+
+```text
+run-v3-framework
+```
+
+It must accept a configuration file and dataset adapter, stop on failed gates, and write all outputs to a run-specific directory.
+
+## 14. Configuration contract
+
+No source paths, assets, venues, dates, horizons, thresholds, or costs may be hard-coded into model modules.
+
+A complete run configuration must identify:
+
+```text
+schema_version
+adapter
+source_locations
+assets
+venues
+interval
+timezone
+panel_definition
+development_period
+locked_evaluation_period
+replication_periods
+forecast_horizons
+failure_horizons
+signal_registry
+regime_registry
+model_registry
+cost_registry
+validation_gates
+output_directory
+random_seed
+```
+
+## 15. Reproducibility contract
+
+Every run must create:
+
+- run ID;
+- configuration hash;
+- source manifest;
+- data hash;
+- feature manifest;
+- fold plan;
+- selected pipeline definitions;
+- model serialization metadata;
+- dependency and environment record;
+- prediction outputs;
+- evidence-gate results;
+- model cards;
+- final decision report.
+
+Re-running with the same data, configuration, code commit, and environment must produce equivalent deterministic outputs within registered numerical tolerances.
+
+## 16. Output schema
+
+The minimum scoring output is:
+
+```text
+timestamp
+asset
+venue
+horizon
+benchmark_forecast
+candidate_forecast
+forecast_uncertainty
+regime_label
+regime_probabilities
+panic_consistent_probability
+signal_family
+signal_interpretation
+expected_net_contribution
+failure_probability
+validity_state
+permitted_action
+boundary_reasons
+pipeline_id
+run_id
+```
+
+## 17. Testing contract
+
+Tests must cover:
+
+- source-adapter conformance;
+- canonical-schema validation;
+- leakage prevention;
+- causal rolling calculations;
+- spectral-feature correctness;
+- panel-coverage behaviour;
+- signal-feature correctness;
+- matched benchmark/candidate identity;
+- chronological splitting and purging;
+- failure-label generation;
+- validity-state transitions;
+- decision-policy fail-closed behaviour;
+- configuration hashing;
+- serialization and reload equivalence;
+- end-to-end execution on a synthetic fixture;
+- external-replication isolation.
+
+## 18. User boundary
+
+The package may provide quantitative forecasts and governed decision states, but it must disclose model uncertainty, status, data-quality conditions, and model boundaries. It must not present outputs as guaranteed outcomes or conceal a suspended or invalid status behind a positive forecast.
