@@ -1,0 +1,21 @@
+{
+  "adapter_type": "file",
+  "adapter": {
+    "path": "data/input/market_data.csv",
+    "format": "csv",
+    "timezone": "UTC",
+    "column_map": {
+      "timestamp": "time",
+      "open": "open_price",
+      "high": "high_price",
+      "low": "low_price",
+      "close": "close_price",
+      "volume": "base_volume"
+    },
+    "constants": {
+      "asset": "SOL/USDT",
+      "venue": "example_venue"
+    },
+    "read_options": {}
+  }
+}
