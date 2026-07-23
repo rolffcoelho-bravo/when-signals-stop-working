@@ -11,7 +11,7 @@ Gate V3-1 establishes the source-independent data boundary required by the Versi
 - frozen baseline: `v2.0.0`;
 - baseline commit: `5a07299367b80c3940e652e7bbdd208ce86ba5ef`;
 - Version 3 branch: `research/v3-adaptive-signal-validity`;
-- Gate V3-1 checkpoint head: `7a7a5c55184aadfb436774ff1e497ce873a96b6e`;
+- locked implementation boundary: `7a7a5c55184aadfb436774ff1e497ce873a96b6e`;
 - Version 2 files modified: none;
 - Version 3 changes relative to the baseline: additive only.
 
