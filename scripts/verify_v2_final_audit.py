@@ -374,6 +374,87 @@ def verify_metadata() -> None:
             fail(f"Release notes are missing: {phrase}")
 
 
+def verify_stage_semantics() -> None:
+    expected_pipeline = (
+        "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851"
+    )
+
+    d3 = json.loads(
+        (ROOT / "outputs/v2/holdout/d3_locked_evaluation_status.json")
+        .read_text(encoding="utf-8")
+    )
+    d3_expected = {
+        "status": "PASS",
+        "signal_family": "bollinger",
+        "frozen_pipeline_count": 1,
+        "pipeline_hash": expected_pipeline,
+        "prediction_rows": 2318,
+        "methodology_locked_evaluation_executed": True,
+        "holdout_authorization_consumed": True,
+        "holdout_performance_accessed": True,
+        "pipeline_retuning_performed": False,
+        "rsi_reentry_performed": False,
+        "statistical_gate_evaluated": False,
+        "economic_gate_evaluated": False,
+        "robustness_gate_evaluated": False,
+        "multiplicity_adjustment_applied": False,
+    }
+    for field, expected in d3_expected.items():
+        if d3.get(field) != expected:
+            fail(f"D3 semantic field {field!r} is invalid.")
+
+    d4_grade = json.loads(
+        (ROOT / "outputs/v2/holdout/d4_final_evidence_grade.json")
+        .read_text(encoding="utf-8")
+    )
+    if d4_grade.get("evidence_grade") != "NO_INCREMENTAL_EVIDENCE":
+        fail("D4 evidence grade changed.")
+    if d4_grade.get("primary_case_established") is not False:
+        fail("D4 primary-case determination changed.")
+    if d4_grade.get("rsi_status") != "NO_PIPELINE_ADMITTED":
+        fail("D4 RSI decision changed.")
+    if d4_grade.get("pipeline_hash") != expected_pipeline:
+        fail("D4 pipeline hash changed.")
+
+    d4_gates = json.loads(
+        (ROOT / "outputs/v2/holdout/d4_gate_results.json")
+        .read_text(encoding="utf-8")
+    )
+    if d4_gates.get("pipeline_retuning_performed") is not False:
+        fail("D4 incorrectly reports pipeline retuning.")
+    if d4_gates.get("rsi_reentry_performed") is not False:
+        fail("D4 incorrectly reports RSI re-entry.")
+    if d4_gates.get("panic_state_extension_used") is not False:
+        fail("D4 incorrectly includes the V2.1 extension.")
+    if d4_gates.get("predictive_gate", {}).get("passed") is not False:
+        fail("D4 predictive gate changed.")
+    if d4_gates.get("economic_gate", {}).get("passed") is not False:
+        fail("D4 economic gate changed.")
+
+    d5 = json.loads(
+        (ROOT / "outputs/v2/publication/d5_publication_status.json")
+        .read_text(encoding="utf-8")
+    )
+    d5_expected = {
+        "status": "PASS",
+        "pipeline_hash": expected_pipeline,
+        "prediction_rows": 2318,
+        "robustness_diagnostics_completed": True,
+        "publication_evidence_completed": True,
+        "robustness_determination": "FAVOURABLE_MEANS_NOT_CONFIDENCE_ROBUST",
+        "fragility_class": "UNCERTAINTY_AND_PARAMETER_SPECIFICATION_SENSITIVE",
+        "final_evidence_grade": "NO_INCREMENTAL_EVIDENCE",
+        "primary_case_established": False,
+        "external_replication_triggered": False,
+        "pipeline_retuning_performed": False,
+        "rsi_reentry_performed": False,
+        "panic_state_extension_used": False,
+    }
+    for field, expected in d5_expected.items():
+        if d5.get(field) != expected:
+            fail(f"D5 semantic field {field!r} is invalid.")
+
+
 def verify_ci_contract() -> None:
     workflow = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
 
@@ -384,11 +465,9 @@ def verify_ci_contract() -> None:
         "fetch-tags: true",
         "python scripts/verify_v2_final_audit.py",
         "python scripts/audit_public_release.py",
-        "python scripts/verify_v2_d3_assets.py",
-        "python scripts/verify_v2_d4_assets.py",
-        "python scripts/verify_v2_d5_assets.py",
         "python -m pytest -q",
         "--ignore=tests/test_v2_d0_lock.py",
+        "--ignore=tests/test_v2_d3_assets.py",
         "-k \"not test_v2_protocol_lock_hashes\"",
     )
 
@@ -399,8 +478,9 @@ def verify_ci_contract() -> None:
     prohibited = [
         "python scripts/verify_replication.py",
         *[
-            f"python scripts/verify_v2_{stage}_lock.py"
+            f"python scripts/verify_v2_{stage}_{kind}.py"
             for stage in ("d0", "d1", "d2a", "d2b", "d2c", "d3", "d4", "d5")
+            for kind in ("lock", "assets")
         ],
     ]
     active = [command for command in prohibited if command in workflow]
@@ -474,6 +554,7 @@ def main() -> int:
     verify_release_diff()
     verify_audit_manifest(audit)
     verify_metadata()
+    verify_stage_semantics()
     verify_ci_contract()
     verify_replication_preservation()
     verify_verdict()
