@@ -1,0 +1,32 @@
+{
+  "gate": "V3-1",
+  "lock_id": "v3-g1-canonical-data-adapter-v1",
+  "status": "IMPLEMENTATION_LOCKED",
+  "frozen_baseline": "v2.0.0",
+  "branch": "research/v3-adaptive-signal-validity",
+  "schema_version": "v3.canonical-market.v1",
+  "protected_files": {
+    "src/shockbridge_signal_validity/v3/__init__.py": "2c0cf85ce2b44dbb869ac31c38db19aec9b472a4",
+    "src/shockbridge_signal_validity/v3/data_contract.py": "7689d17051615e19ae5c152c569a7f23d3718d11",
+    "src/shockbridge_signal_validity/v3/adapters.py": "0f5e2d29f339ba1bc9d02c16558e3e0eee4a9a5a",
+    "src/shockbridge_signal_validity/v3/data_runner.py": "753e08557ba0077a5a5e381be01c90f847c832b1",
+    "configs/v3_canonical_data_contract.json": "c394226bd4f6bf70664849a51d61551a568ceda6",
+    "tests/test_v3_data_contract.py": "0080033f0dc1585dd3ddf8b96024be1fd6ffc70f",
+    "tests/test_v3_adapters.py": "b02a9a897131cd42262f0fda2402eba5e081d876",
+    "tests/test_v3_exchange_and_parquet_adapters.py": "6f8b9fc39a5f5e78663d892d0c68a08d0891e160",
+    "tests/test_v3_data_runner.py": "3f0d82efc29b41d2f7fdf90932e5592f1fa245a8",
+    "scripts/run_v3_data_adapter.py": "4bdb1856d0eba09286ea4b161dd1243cb80ca4dd"
+  },
+  "acceptance_evidence": {
+    "isolated_conformance_tests": 12,
+    "independent_source_layouts": 2,
+    "supported_primary_adapters": [
+      "CSV",
+      "Parquet",
+      "CCXT_OHLCV"
+    ],
+    "optional_field_join": true,
+    "deterministic_data_hash": true,
+    "fail_closed_critical_validation": true
+  }
+}
