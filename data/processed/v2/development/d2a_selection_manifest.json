@@ -1,0 +1,50 @@
+{
+  "checkpoint": "V2_D2A_NESTED_LINEAR_SIGNAL_SCREENING",
+  "created_at_utc": "2026-07-22T18:31:12.275795+00:00",
+  "economic_gate_evaluated": false,
+  "execution_scope": "DEVELOPMENT_ONLY_PREDICTIVE_SCREENING",
+  "files": [
+    {
+      "bytes": 822483,
+      "path": "data/processed/v2/development/d2a_inner_screen_results.csv",
+      "sha256": "e2a00bb72d0c6f39da1035ae7e6a242e74cec860dabd18e12b9c3f97f59a9a32"
+    },
+    {
+      "bytes": 5066,
+      "path": "data/processed/v2/development/d2a_selected_signal_specifications.csv",
+      "sha256": "27e3b332cebbb639f55bf86305e35a2ad0f02f75dea1794ba82f1b650f5430da"
+    },
+    {
+      "bytes": 6374,
+      "path": "data/processed/v2/development/d2a_outer_fold_results.csv",
+      "sha256": "d850dc3c5ab4353c73f83cb4ba01d750c4d4345ca3b6ab333fcce4386582c405"
+    },
+    {
+      "bytes": 11180269,
+      "path": "data/processed/v2/development/d2a_outer_predictions.csv",
+      "sha256": "80d6812353dfe922a2373c2ff2d7865c29d945412d373de5fd9af1a9d2423b8b"
+    },
+    {
+      "bytes": 971,
+      "path": "data/processed/v2/development/d2a_family_horizon_summary.csv",
+      "sha256": "1ee65b64a798586a329c178e1159a166ed70f8b60c2e16bb3115519412c8a961"
+    }
+  ],
+  "final_pipeline_selection_performed": false,
+  "holdout_performance_accessed": false,
+  "implementation_commit": "a1a7410c929df313a5106c5ca3bb679b588cef1b",
+  "inner_result_rows": 5040,
+  "locks": {
+    "d0": "v2-d0-0e1cca99b90e5a50",
+    "d1": "v2-d1-53c53a61a3011a65",
+    "d2a": "v2-d2a-43b7dcb8379cc9c7",
+    "protocol": "v2-protocol-068f03ca1452c5ef"
+  },
+  "nonlinear_model_selection_performed": false,
+  "outer_fold_result_rows": 40,
+  "outer_prediction_rows": 65656,
+  "preliminary_screening_passes": 0,
+  "registered_signal_specifications": 84,
+  "registry_sha256": "c2d725faa5eed8e9a1e594d347b6aeb1c193e6f2fa4759a7b083673c45c5bea5",
+  "selected_specification_rows": 40
+}

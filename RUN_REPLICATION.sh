@@ -22,7 +22,15 @@ if [ ! -f data/raw/sol_usdt_4h.csv ] || [ ! -f data/raw/btc_usdt_4h.csv ]; then
 fi
 "$PYTHON" scripts/validate_market_data.py
 "$PYTHON" -m pytest -q
-find outputs -mindepth 1 ! -name .gitkeep ! -name README.md -delete 2>/dev/null || true
+
+if [ -d outputs ]; then
+  find outputs -mindepth 1 -maxdepth 1 \
+    ! -name .gitkeep \
+    ! -name README.md \
+    ! -name v2 \
+    -exec rm -rf -- {} +
+fi
+
 "$PYTHON" -m shockbridge_signal_validity \
   --sol-csv data/raw/sol_usdt_4h.csv \
   --btc-csv data/raw/btc_usdt_4h.csv \
@@ -36,7 +44,7 @@ find outputs -mindepth 1 ! -name .gitkeep ! -name README.md -delete 2>/dev/null 
 "$PYTHON" scripts/audit_public_release.py
 "$PYTHON" scripts/verify_replication.py
 
+echo "Institutional Version 1 replication completed successfully."
+echo "Version 2 evidence preserved: outputs/v2"
 echo "Report: outputs/research_report.md"
 echo "Figures: outputs/figures"
-
-echo "Institutional replication completed successfully."

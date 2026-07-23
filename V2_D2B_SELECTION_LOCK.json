@@ -1,0 +1,30 @@
+{
+  "checkpoint": "V2_D2B_FULL_NESTED_PIPELINE_SELECTION",
+  "d0_lock_id": "v2-d0-0e1cca99b90e5a50",
+  "d1_lock_id": "v2-d1-53c53a61a3011a65",
+  "d2a_lock_id": "v2-d2a-43b7dcb8379cc9c7",
+  "execution_scope": "DEVELOPMENT_ONLY_FULL_NESTED_PIPELINE_SELECTION",
+  "expected_parent_commit": "cb45ff4",
+  "lock_id": "v2-d2b-f88a98fce021cb1d",
+  "lock_version": "1.0.0",
+  "parent_d2a_commit": "81e2b8c",
+  "parent_d2a_tag": "v2-d2a-screening-20260722",
+  "protected_files": {
+    "RUN_V2_D2B_SELECTION.ps1": "c77cb6b8764c53a99af0b81e0e969950a8380b1b8feb118126ca1d07558e7666",
+    "RUN_V2_D2B_SELECTION.sh": "ade3e9c1d6de2da7d7787877a2afc94771f3190332878e89e2a4404f106851f9",
+    "V2_D2B_SELECTION_CHECKPOINT.md": "7c3a06da0c2f4dfd3eb37e11ee1eca39a3ffdb33219e87dcf1a2a9f457e2cd95",
+    "configs/v2_d2b_selection.json": "fb705f04211369173b5b2696c99814811723c1cddffd6175e65629f41177bc23",
+    "docs/V2_D2B_FULL_NESTED_SELECTION.md": "9872c13a0ed3a30e34b823290c4d5567ec4247cb1d2a6f9b30c623ef6a222e9c",
+    "scripts/build_v2_d2b_assets.py": "35520eee9e37be66da73e061f1440c7884630aba6022de275ca236eef9989795",
+    "scripts/verify_v2_d2b_assets.py": "8077620f7ab3694c2b5a5f5b06d45ec8c0e1b36c04460f93d0cb4f008862a219",
+    "scripts/verify_v2_d2b_lock.py": "765c09d2900c392c9a87a4415d5a9967766fae400ea3caede923d19749309ebf",
+    "src/shockbridge_signal_validity/v2/pipeline_selection.py": "ec81a17f54525f0bebcef7069d0d1f31b9dfaf17dc9404e63b81fccb227ef2ef",
+    "tests/test_v2_d2b_assets.py": "f38237c3ae3f7906aabb48698f8c86057815a7ac6be1f25f927685b316a16899",
+    "tests/test_v2_d2b_governance.py": "55df4b54d13c8a4fd2fd9b964081ea2c8934dbf7fc26b18cc2ab59ed4096cf8a",
+    "tests/test_v2_d2b_inventory.py": "b7702635716c9742e87e70abc311bb37b8c1c1b65b73303312f46068a7e2642c",
+    "tests/test_v2_d2b_lock.py": "a6d5b8d85af3e45fbea1077fa9a217681d25ce20bb174cac1bf59acc066009c2",
+    "tests/test_v2_d2b_matched_pipeline.py": "38b7e542058fe14754e6ff94e1ff4204004528389ab369a436e5326e8a190112",
+    "tests/test_v2_d2b_selection.py": "19d996af0efd71fa079161f5a5c28dfff1807fb6dd632e539ed53233570b2e53"
+  },
+  "protocol_lock_id": "v2-protocol-068f03ca1452c5ef"
+}

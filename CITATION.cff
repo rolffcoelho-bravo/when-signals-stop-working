@@ -1,7 +1,8 @@
 cff-version: 1.2.0
 message: "Please cite this research framework using the metadata below."
 title: "When Signals Stop Working: Technical Signal Validity and Structural Deterioration Framework"
-version: "1.2.0"
+version: "2.0.0"
+date-released: "2026-07-23"
 type: software
 authors:
   - family-names: "Pereira"
@@ -13,11 +14,16 @@ abstract: >-
   A governed, benchmark-relative framework for assessing whether RSI and
   Bollinger Band information contributes out-of-sample predictive and economic
   value, how that contribution varies across filtered market states, and when
-  structural deterioration warrants a change in operational status.
+  structural deterioration warrants a change in operational status. Version 2
+  adds nested development selection, methodology-locked evaluation,
+  multiplicity-adjusted inference, economic gates, robustness diagnostics, and
+  disciplined publication of negative findings.
 keywords:
   - technical signal validation
   - model governance
   - chronological validation
+  - nested validation
+  - locked evaluation
   - regime dependence
   - structural deterioration
   - cryptocurrency

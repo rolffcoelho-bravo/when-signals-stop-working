@@ -1,0 +1,8 @@
+{
+  "authorized": false,
+  "checkpoint": "D2C",
+  "frozen_pipeline_count": 1,
+  "holdout_performance_accessed": false,
+  "reason": "D2C freezes family-level decisions but does not authorize methodology-locked evaluation access.",
+  "required_next_checkpoint": "D3_METHODOLOGY_LOCKED_EVALUATION_AUTHORIZATION"
+}

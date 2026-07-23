@@ -1,0 +1,65 @@
+{
+  "economic_gate_evaluated": false,
+  "interpretation": "RAW_METHODOLOGY_LOCKED_EVALUATION_EVIDENCE_NO_VERDICT",
+  "multiplicity_adjustment_applied": false,
+  "overall": {
+    "benchmark_brier": 0.25135328177593136,
+    "benchmark_ece": 0.02863222771124573,
+    "benchmark_log_loss": 0.6958811886326851,
+    "candidate_brier": 0.25031004316352423,
+    "candidate_ece": 0.021763766551768468,
+    "candidate_log_loss": 0.6937722605055355,
+    "cumulative_net_return": -0.5105906271331412,
+    "decision_coverage": 0.14667817083692838,
+    "incremental_log_loss": 0.0021089281271495786,
+    "mean_net_edge_active": -0.0008193841974504157,
+    "nonzero_decisions": 340,
+    "rows": 2318
+  },
+  "robustness_gate_evaluated": false,
+  "statistical_gate_evaluated": false,
+  "subperiods": {
+    "P1": {
+      "benchmark_brier": 0.2529358338957829,
+      "benchmark_ece": 0.04894606739196275,
+      "benchmark_log_loss": 0.6990524689958122,
+      "candidate_brier": 0.24932838071538072,
+      "candidate_ece": 0.013084793442677423,
+      "candidate_log_loss": 0.6917929165107828,
+      "cumulative_net_return": -0.05986225079358669,
+      "decision_coverage": 0.20827943078913325,
+      "incremental_log_loss": 0.007259552485029408,
+      "mean_net_edge_active": 0.00022445806960505194,
+      "nonzero_decisions": 161,
+      "rows": 773
+    },
+    "P2": {
+      "benchmark_brier": 0.25128736138089225,
+      "benchmark_ece": 0.033119590356115836,
+      "benchmark_log_loss": 0.6957582376652149,
+      "candidate_brier": 0.2509985262500196,
+      "candidate_ece": 0.034865451623441804,
+      "candidate_log_loss": 0.6951593802797991,
+      "cumulative_net_return": -0.3023528922908187,
+      "decision_coverage": 0.11901681759379043,
+      "incremental_log_loss": 0.0005988573854158741,
+      "mean_net_edge_active": -0.0025473140466393336,
+      "nonzero_decisions": 92,
+      "rows": 773
+    },
+    "P3": {
+      "benchmark_brier": 0.24983468550225252,
+      "benchmark_ece": 0.03175780735506776,
+      "benchmark_log_loss": 0.6928289106238216,
+      "candidate_brier": 0.2506036022911849,
+      "candidate_ece": 0.03622029379893412,
+      "candidate_log_loss": 0.6943652518558443,
+      "cumulative_net_return": -0.14837548404873593,
+      "decision_coverage": 0.11269430051813471,
+      "incremental_log_loss": -0.001536341232022731,
+      "mean_net_edge_active": -0.0009238561384912172,
+      "nonzero_decisions": 87,
+      "rows": 772
+    }
+  }
+}

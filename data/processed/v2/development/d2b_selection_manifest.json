@@ -1,0 +1,84 @@
+{
+  "checkpoint": "V2_D2B_FULL_NESTED_PIPELINE_SELECTION",
+  "created_at_utc": "2026-07-22T20:01:41.000234+00:00",
+  "d2a_selected_specification_rows": 40,
+  "development_stability_passes": 1,
+  "economic_gate_evaluated": false,
+  "executed_structural_inventory_rows": 90,
+  "execution_scope": "DEVELOPMENT_ONLY_FULL_NESTED_PIPELINE_SELECTION",
+  "files": [
+    {
+      "bytes": 24537,
+      "path": "data/processed/v2/development/d2b_structural_pipeline_inventory.csv",
+      "sha256": "2b3465c191954bc6bdaadda89ee5025f67d9722ac4b14631a0f69614232592f4"
+    },
+    {
+      "bytes": 5234275,
+      "path": "data/processed/v2/development/d2b_inner_structural_results.csv",
+      "sha256": "0d59cb0364b248ff11d92f1ee374ef5c910f0c6109da800ac0aef7ee0253ab72"
+    },
+    {
+      "bytes": 16861,
+      "path": "data/processed/v2/development/d2b_selected_structural_pipelines.csv",
+      "sha256": "3c73dbb69ac1ddea38afc063b0904f955d6d7ccc294edfb51bb212abca5a877a"
+    },
+    {
+      "bytes": 137097,
+      "path": "data/processed/v2/development/d2b_inner_calibration_results.csv",
+      "sha256": "eb2fa4d3c091cfa2f6924aa97e398c9572eae2c04e36038ab5ebedeb1bc6cfb0"
+    },
+    {
+      "bytes": 10521,
+      "path": "data/processed/v2/development/d2b_selected_calibrations.csv",
+      "sha256": "5a535f92d1e6ecc8224f595249b1dfadd0cd169c4c5fabe78ae2c082e52db7f3"
+    },
+    {
+      "bytes": 126670,
+      "path": "data/processed/v2/development/d2b_inner_policy_results.csv",
+      "sha256": "4d9e4c2659a0a5ac7f7148336af8a0c3be37919ce126ed98cb574bce3a6b8f15"
+    },
+    {
+      "bytes": 11814,
+      "path": "data/processed/v2/development/d2b_selected_decision_policies.csv",
+      "sha256": "d041f99d08b2a59b0e5a9abd9bcfb5afb3d49efdcb5135e0a66e029a3cdb3d3c"
+    },
+    {
+      "bytes": 24657,
+      "path": "data/processed/v2/development/d2b_outer_fold_results.csv",
+      "sha256": "8fdc7dd28b957aceba904bc517cd91e7a634568fdb2521cd82bc9068f163b4e0"
+    },
+    {
+      "bytes": 23041536,
+      "path": "data/processed/v2/development/d2b_outer_predictions.csv",
+      "sha256": "744b177682b15ff42ad1792a98dd4a40e7dcf3406de99eb9d5132d0761923d50"
+    },
+    {
+      "bytes": 1384,
+      "path": "data/processed/v2/development/d2b_family_horizon_summary.csv",
+      "sha256": "19506db580b93d7331ee8584f1c1f437a562024e9db8a2ab27f67f5bcf4133b2"
+    }
+  ],
+  "holdout_performance_accessed": false,
+  "holdout_pipeline_freeze_performed": false,
+  "implementation_commit": "0750f913cd100afd209f8fa3813acb25a263c70f",
+  "inner_calibration_result_rows": 360,
+  "inner_policy_result_rows": 480,
+  "inner_structural_result_rows": 10800,
+  "isotonic_used_for_selection": false,
+  "locks": {
+    "d0": "v2-d0-0e1cca99b90e5a50",
+    "d1": "v2-d1-53c53a61a3011a65",
+    "d2a": "v2-d2a-43b7dcb8379cc9c7",
+    "d2b": "v2-d2b-f88a98fce021cb1d",
+    "protocol": "v2-protocol-068f03ca1452c5ef"
+  },
+  "nested_pipeline_selection_performed": true,
+  "outer_fold_result_rows": 40,
+  "outer_prediction_rows": 65656,
+  "production_structural_inventory_rows": 90,
+  "registry_sha256": "c2d725faa5eed8e9a1e594d347b6aeb1c193e6f2fa4759a7b083673c45c5bea5",
+  "selected_calibration_rows": 40,
+  "selected_policy_rows": 40,
+  "selected_structural_pipeline_rows": 40,
+  "validation_mode": false
+}

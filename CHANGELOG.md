@@ -1,5 +1,26 @@
 # Changelog
 
+## Unreleased - Version 2 methodological design freeze
+
+- establishes D0 development partitioning, target, fold, and candidate-inventory controls;
+- adds the D1 causal feature and fold-scoped filtered-state engine;
+- completes D2A nested benchmark-relative screening for all registered RSI and Bollinger definitions;
+- adds D2B full nested model-family, window, calibration, state-conditioning, and abstention selection;
+- adds D2C development admission, explicit family rejection, and tamper-evident pipeline freezing;
+- adds D3 single-access methodology-locked evaluation for the sole D2C-admitted Bollinger pipeline;
+- adds D4 confirmatory inference, Holm control, locked-subperiod checks, calibration evidence, and matched economic gates;
+- adds D5 robustness, concentration, influence, model-boundary, publication-figure, model-card, and final-verdict evidence;
+- records the approved V2.1 panic-state module as a non-interfering secondary diagnostic extension;
+- keeps isotonic calibration diagnostic-only and preserves the locked-evaluation access boundary;
+- freezes the Version 2 confirmatory hypothesis family before implementation;
+- separates RSI and Bollinger directional claims from secondary targets and the combined model;
+- defines the development and methodology-locked evaluation segments;
+- predeclares horizons, signal grids, model classes, estimation windows, calibration, and abstention rules;
+- adds nested chronological selection, multiplicity control, economic gates, and concentration controls;
+- adds external-venue and cross-asset replication eligibility rules;
+- introduces a tamper-evident protocol lock and automated verification test;
+- preserves every Version 1 result and replication artifact unchanged.
+
 ## 1.2.0 - Institutional publication standard
 
 - replaces challenge-oriented language with institutional research and model-governance terminology;

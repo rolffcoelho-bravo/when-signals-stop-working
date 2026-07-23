@@ -33,6 +33,8 @@ Core elements:
 
 ## Phase II - Conditional validity and inference hardening
 
+**Status:** primary-case programme completed through D5 robustness and publication evidence. The final primary-case grade is `NO_INCREMENTAL_EVIDENCE`.
+
 Phase II determines whether the Version 1 instability reflects an absence of information or a conditional structure not represented by the parsimonious specification.
 
 ### Predeclared targets
@@ -78,7 +80,23 @@ All declared horizons will be reported. The final holdout will not be used for h
 - independent venue replication where comparable history is available;
 - BTC and ETH as secondary cross-asset validation cases.
 
-**Admission criterion for Phase III:** any reported improvement must survive the locked holdout and must not depend exclusively on one venue, one horizon, or one narrow parameter choice.
+**Protocol control:** the Phase II hypothesis family, data partition, candidate grids, validation architecture, multiplicity rules, holdout-access policy, and evidence gates are frozen in `V2_DESIGN_FREEZE.md`, `configs/v2_experiment_registry.json`, and `V2_PROTOCOL_LOCK.json`.
+
+**Phase II final determination:** RSI was not admitted to the locked
+evaluation. The frozen Bollinger pipeline did not pass the multiplicity-adjusted
+predictive or economic confidence gates. External replication was therefore not
+triggered as a route to establishment; it may still support independent
+negative-result replication.
+
+**Release control:** complete the final audit, merge, and institutional Version
+2 release before beginning the V2.1 protocol.
+
+
+## Version 2.1 - Panic-consistent state diagnostics
+
+After the Version 2 confirmatory verdict is frozen, a separate V2.1 extension will evaluate panic-consistent market states using downside acceleration, volatility jumps, abnormal volume, dependence, liquidity, leverage, liquidation, and cross-venue stress evidence where available. The extension cannot modify the frozen RSI decision, Bollinger pipeline, D3 predictions, or Version 2 confirmatory gates.
+
+See `docs/V2_1_PANIC_STATE_EXTENSION_SCOPE.md`.
 
 ## Phase III - Dynamic coefficients and richer latent states
 

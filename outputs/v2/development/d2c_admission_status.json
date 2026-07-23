@@ -1,0 +1,20 @@
+{
+  "admitted_families": 1,
+  "checkpoint": "V2_D2C_DEVELOPMENT_ADMISSION_AND_PIPELINE_FREEZE",
+  "component_selection_rows": 4,
+  "d2c_lock_id": "v2-d2c-190392a1d97827b2",
+  "development_admission_evaluated": true,
+  "economic_gate_evaluated": false,
+  "family_decision_rows": 2,
+  "family_horizon_rows": 8,
+  "family_level_pipeline_freeze_completed": true,
+  "frozen_pipeline_count": 1,
+  "holdout_authorization_enabled": false,
+  "holdout_performance_accessed": false,
+  "implementation_commit": "f989e4ea7be0a17d7ad51db3aced4cd5a8585410",
+  "manifest_sha256": "ecc31f2ad88f79abf56999247575d9885d69a1b3e261854b15cc5db154baf23c",
+  "pipeline_registry_sha256": "96e3eab948da75142e56774126ae5bfafdf007517f5356df3cba9a9c70eb2d80",
+  "predictive_model_fitting_performed": false,
+  "rejected_families": 1,
+  "status": "PASS"
+}

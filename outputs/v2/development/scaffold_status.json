@@ -1,0 +1,12 @@
+{
+  "candidate_inventory_rows": 6048,
+  "checkpoint": "V2_IMPLEMENTATION_SCAFFOLD",
+  "development_rows": 9852,
+  "holdout_performance_accessed": false,
+  "implementation_commit": "617809bc79c097fa297934b490fd5273af51f2eb",
+  "manifest_sha256": "c16da27139142ceb16779d16243d28f998c84a9e373cffd3b8e6482d4c557eeb",
+  "model_fitting_performed": false,
+  "nested_fold_plan_rows": 80,
+  "protocol_lock_id": "v2-protocol-068f03ca1452c5ef",
+  "status": "PASS"
+}

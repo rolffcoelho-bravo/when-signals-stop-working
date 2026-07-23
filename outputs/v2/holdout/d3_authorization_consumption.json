@@ -1,0 +1,13 @@
+{
+  "authorization_commit": "ea09e84ba7f99f99f80f79137d485a0eec2589f7",
+  "authorization_sha256": "778db53687fd45594a34b2821964ade5a31197354c310ec1496e613d4fab2e01",
+  "consumed_at_utc": "2026-07-22T23:38:35.974424+00:00",
+  "holdout_end_utc": "2026-07-22T08:00:00+00:00",
+  "holdout_performance_accessed": true,
+  "holdout_start_utc": "2025-07-01T00:00:00+00:00",
+  "implementation_commit": "f49522e259f518a6a3560d98ff1f27334e76cc9e",
+  "pipeline_hash": "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851",
+  "signal_family": "bollinger",
+  "single_access": true,
+  "status": "CONSUMED_ONCE"
+}

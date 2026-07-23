@@ -1,0 +1,35 @@
+{
+  "checkpoint": "V2_D5_FINAL_PRIMARY_CASE_DETERMINATION",
+  "version": "2.0",
+  "primary_case": "BINANCE_SOL_USDT_4H",
+  "rsi": {
+    "status": "NO_PIPELINE_ADMITTED",
+    "holdout_evaluated": false,
+    "interpretation": "No RSI pipeline satisfied the frozen development-admission controls; RSI did not enter the methodology-locked evaluation."
+  },
+  "bollinger": {
+    "status": "NO_INCREMENTAL_EVIDENCE",
+    "pipeline_hash": "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851",
+    "holdout_evaluated": true,
+    "mean_incremental_log_loss": 0.002108928127149556,
+    "raw_one_sided_p_value": 0.032338609466926224,
+    "holm_adjusted_p_value": 0.06467721893385245,
+    "positive_locked_subperiods": 2,
+    "mean_incremental_net_return_10bps": 0.00013019590915840315,
+    "economic_ci_95_lower": -9.701971847781328e-05,
+    "predictive_gate_passed": false,
+    "economic_gate_passed": false,
+    "robustness_diagnostics_completed": true
+  },
+  "primary_case_established": false,
+  "evidence_grade": "NO_INCREMENTAL_EVIDENCE",
+  "determination": "Stable incremental value was not established for RSI or Bollinger under the frozen Version 2 primary-case protocol.",
+  "favourable_evidence_boundary": "The frozen Bollinger pipeline produced favourable average predictive and economic contributions in parts of the locked sample, but the evidence did not survive the complete multiplicity-adjusted and dependence-aware confidence requirements.",
+  "external_replication_status": "NOT_TRIGGERED_PRIMARY_CONFIRMATORY_GATE_FAILED",
+  "monitoring_ready": false,
+  "operational_deployment_supported": false,
+  "pipeline_retuning_performed": false,
+  "rsi_reentry_performed": false,
+  "panic_state_extension_used": false,
+  "v2_1_scope": "SEPARATE_PRE_SPECIFIED_SIGNAL_GOVERNANCE_STUDY_NO_EFFECT_ON_V2"
+}

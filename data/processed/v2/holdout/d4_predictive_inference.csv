@@ -1,0 +1,3 @@
+hypothesis_id,signal_family,holdout_status,mean_incremental_log_loss,dm_style_statistic,raw_one_sided_p_value,holm_adjusted_p_value,confirmatory_rejection,dm_style_standard_error,hac_lag
+H1_RSI_DIRECTION,rsi,NO_PIPELINE_ADMITTED,,,1.0,1.0,False,,
+H2_BOLLINGER_DIRECTION,bollinger,EVALUATED,0.002108928127149556,1.847482660113495,0.032338609466926224,0.06467721893385245,False,0.0011415144362004457,0.0

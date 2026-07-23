@@ -6,6 +6,8 @@ when-signals-stop-working/
 ├── RESULTS.md
 ├── ROADMAP.md
 ├── RESEARCH_SCOPE.md
+├── V2_DESIGN_FREEZE.md
+├── V2_PROTOCOL_LOCK.json
 ├── START_HERE.md
 ├── CITATION.cff
 ├── REPLICATION_MANIFEST.json
@@ -15,6 +17,8 @@ when-signals-stop-working/
 ├── RUN_REPLICATION.sh
 ├── PUBLISH_PUBLIC_REPLICATION.ps1
 ├── configs/
+│   ├── sol_4h_primary.json
+│   └── v2_experiment_registry.json
 ├── data/
 │   ├── README.md
 │   ├── raw/
@@ -24,8 +28,10 @@ when-signals-stop-working/
 │   ├── README.md
 │   └── figures/
 ├── scripts/
+│   └── verify_v2_protocol_lock.py
 ├── src/shockbridge_signal_validity/
 ├── tests/
+│   └── test_v2_design_freeze.py
 ├── docs/
 │   ├── STATUS_GOVERNANCE.md
 │   ├── REPLICATION_PACKAGE.md
@@ -33,12 +39,18 @@ when-signals-stop-working/
 │   ├── MODEL_CONTRACT.md
 │   ├── RESEARCH_PROTOCOL.md
 │   ├── EDITORIAL_STANDARD.md
+│   ├── V2_RESEARCH_PROTOCOL.md
+│   ├── V2_MODEL_CONTRACT.md
+│   ├── V2_VALIDATION_GATES.md
+│   ├── V2_MULTIPLE_TESTING_CONTROL.md
+│   ├── V2_DATA_AND_REPLICATION_PLAN.md
+│   ├── V2_HOLDOUT_GOVERNANCE.md
 │   ├── FIGURE_CATALOG.md
 │   └── REFERENCES.md
 └── .github/workflows/ci.yml
 ```
 
-## Recommended review sequence
+## Version 1 review sequence
 
 1. `README.md`
 2. `RESULTS.md`
@@ -46,5 +58,104 @@ when-signals-stop-working/
 4. `docs/MODEL_CONTRACT.md`
 5. `docs/STATUS_GOVERNANCE.md`
 6. `docs/REPLICATION_PACKAGE.md`
-7. `ROADMAP.md`
-8. `outputs/research_report.md`
+7. `outputs/research_report.md`
+
+## Version 2 design-freeze review sequence
+
+1. `V2_DESIGN_FREEZE.md`
+2. `configs/v2_experiment_registry.json`
+3. `docs/V2_RESEARCH_PROTOCOL.md`
+4. `docs/V2_MODEL_CONTRACT.md`
+5. `docs/V2_VALIDATION_GATES.md`
+6. `docs/V2_MULTIPLE_TESTING_CONTROL.md`
+7. `docs/V2_HOLDOUT_GOVERNANCE.md`
+8. `docs/V2_DATA_AND_REPLICATION_PLAN.md`
+9. `V2_PROTOCOL_LOCK.json`
+
+## Version 2 implementation checkpoints
+
+```text
+RUN_V2_DEVELOPMENT_SCAFFOLD.*      D0 development partition and fold assets
+RUN_V2_D1_CAUSAL_ENGINE.*          D1 causal features and filtered states
+RUN_V2_D2A_SCREENING.*             D2A signal-specification screening
+RUN_V2_D2B_SELECTION.*             D2B full nested pipeline selection
+RUN_V2_D2C_ADMISSION.*             D2C development admission and pipeline freeze
+RUN_V2_D3_LOCKED_EVALUATION.*       D3 single-access methodology-locked evaluation
+configs/v2_d2b_selection.json      D2B fixed execution controls
+src/.../v2/pipeline_selection.py   matched pipeline, calibration, and policy engine
+data/processed/v2/development/     governed D0-D2B development evidence
+outputs/v2/development/            checkpoint status records
+```
+
+## Version 2 D2B review sequence
+
+1. `V2_D2B_SELECTION_CHECKPOINT.md`
+2. `docs/V2_D2B_FULL_NESTED_SELECTION.md`
+3. `configs/v2_d2b_selection.json`
+4. `src/shockbridge_signal_validity/v2/pipeline_selection.py`
+5. `data/processed/v2/development/d2b_selected_structural_pipelines.csv`
+6. `data/processed/v2/development/d2b_selected_calibrations.csv`
+7. `data/processed/v2/development/d2b_selected_decision_policies.csv`
+8. `data/processed/v2/development/d2b_outer_fold_results.csv`
+9. `data/processed/v2/development/d2b_family_horizon_summary.csv`
+10. `V2_D2B_SELECTION_LOCK.json`
+
+## Version 2 D2C review sequence
+
+1. `V2_D2C_ADMISSION_CHECKPOINT.md`
+2. `docs/V2_D2C_DEVELOPMENT_ADMISSION.md`
+3. `configs/v2_d2c_admission.json`
+4. `src/shockbridge_signal_validity/v2/development_admission.py`
+5. `data/processed/v2/development/d2c_family_horizon_admission.csv`
+6. `data/processed/v2/development/d2c_family_decisions.csv`
+7. `data/processed/v2/development/d2c_frozen_pipeline_registry.json`
+8. `outputs/v2/development/d2c_holdout_authorization.json`
+9. `V2_D2C_ADMISSION_LOCK.json`
+
+## Version 2 D3 review sequence
+
+1. `V2_D3_EVALUATION_CHECKPOINT.md`
+2. `docs/V2_D3_METHODOLOGY_LOCKED_EVALUATION.md`
+3. `configs/v2_d3_locked_evaluation.json`
+4. `src/shockbridge_signal_validity/v2/locked_evaluation.py`
+5. `outputs/v2/development/d3_holdout_authorization.json`
+6. `data/processed/v2/holdout/d3_locked_predictions.csv`
+7. `outputs/v2/holdout/d3_raw_metric_summary.json`
+8. `outputs/v2/holdout/d3_locked_evaluation_status.json`
+9. `V2_D3_EVALUATION_LOCK.json`
+
+## Version 2.1 extension scope
+
+`docs/V2_1_PANIC_STATE_EXTENSION_SCOPE.md` records the approved panic-consistent state diagnostic as a separate, non-confirmatory extension.
+
+## Version 2 D4 inference layer
+
+- `configs/v2_d4_confirmatory_inference.json` - frozen inference, multiplicity, bootstrap, calibration, and economic settings.
+- `src/shockbridge_signal_validity/v2/confirmatory_inference.py` - deterministic confirmatory and matched-economic methods.
+- `scripts/build_v2_d4_assets.py` - builds D4 evidence from immutable D3 predictions.
+- `scripts/verify_v2_d4_assets.py` - verifies D4 tables, gates, checksums, and evidence grade.
+- `docs/V2_D4_EXECUTION_EXCEPTION.md` - discloses late bootstrap block-length materialization.
+
+## Version 2 D5 robustness and publication layer
+
+- `RUN_V2_D5_ROBUSTNESS_PUBLICATION.*` - controlled D5 execution.
+- `configs/v2_d5_robustness_publication.json` - frozen diagnostic and governance controls.
+- `src/shockbridge_signal_validity/v2/robustness_publication.py` - deterministic robustness methods.
+- `data/processed/v2/publication/` - concentration, influence, state, confidence, and component-stability tables.
+- `outputs/v2/publication/` - final verdict, robustness record, model card, report, figures, and status.
+- `docs/V2_D5_ROBUSTNESS_AND_PUBLICATION.md` - methodological interpretation.
+- `docs/V2_FINAL_MODEL_BOUNDARIES.md` - permitted and prohibited claims.
+- `V2_D5_ROBUSTNESS_LOCK.json` - tamper-evident D5 implementation lock.
+
+## Version 2 D5 review sequence
+
+1. `V2_D5_ROBUSTNESS_CHECKPOINT.md`
+2. `docs/V2_D5_ROBUSTNESS_AND_PUBLICATION.md`
+3. `configs/v2_d5_robustness_publication.json`
+4. `data/processed/v2/publication/d5_robustness_matrix.csv`
+5. `outputs/v2/publication/d5_robustness_results.json`
+6. `outputs/v2/publication/v2_final_evidence_grade.json`
+7. `outputs/v2/publication/V2_FINAL_EVIDENCE_REPORT.md`
+8. `outputs/v2/publication/V2_FROZEN_BOLLINGER_MODEL_CARD.md`
+9. `outputs/v2/publication/figures/`
+10. `V2_D5_ROBUSTNESS_LOCK.json`

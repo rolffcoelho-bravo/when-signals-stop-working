@@ -1,0 +1,86 @@
+{
+  "audit_id": "v2-final-release-audit-20260723",
+  "created_at_utc": "2026-07-23T21:12:00+00:00",
+  "status": "PASS",
+  "release_readiness": "READY_FOR_PULL_REQUEST",
+  "release_version": "2.0.0",
+  "release_date": "2026-07-23",
+  "preparation_commit": "3e600209e20cfa69c5de36e65c3187eb2aaaac94",
+  "source_d5_tag": "v2-d5-robustness-publication-20260723",
+  "source_d5_commit": "74866b920e2b19543686d84e0208f8b12b496090",
+  "source_d5_lock_id": "v2-d5-f9233e24526fa5b2",
+  "frozen_package_metadata_version": "2.0.0.dev8",
+  "final_evidence_grade": "NO_INCREMENTAL_EVIDENCE",
+  "rsi_status": "NO_PIPELINE_ADMITTED",
+  "bollinger_status": "NO_INCREMENTAL_EVIDENCE",
+  "primary_case_established": false,
+  "pipeline_retuning_performed": false,
+  "v2_1_extension_used": false,
+  "d5_protected_files_changed": false,
+  "ci_erratum_commit": "5d760e70fa970576a1afaa3b72f9c59981213b10",
+  "lock_verification_mode": "GIT_OBJECT_IDENTITY_ACROSS_ANNOTATED_CHECKPOINT_TAGS",
+  "resolved_remediations": [
+    "RELEASE_IDENTITY_EXTERNALIZED_FROM_D5_PROTECTED_PACKAGE_METADATA",
+    "CITATION_METADATA_ALIGNED",
+    "DEDICATED_RELEASE_NOTES_CREATED_WITHOUT_CHANGING_D5_CHANGELOG",
+    "CI_FINAL_RELEASE_AUDIT_ENABLED",
+    "CI_CANONICAL_WINDOWS_ENVIRONMENT",
+    "CI_FULL_HISTORY_AND_TAG_FETCH_ENABLED",
+    "CI_MATRIX_FAIL_FAST_DISABLED",
+    "CI_REPOSITORY_OBJECT_LOCK_AND_ASSET_VERIFICATION_ENABLED",
+    "CI_NONPORTABLE_WORKTREE_HASH_CHECKS_REPLACED_BY_OBJECT_IDENTITY_AUDIT",
+    "CI_D3_D4_D5_SEMANTIC_ASSERTIONS_ENABLED",
+    "CI_PORTABLE_FUNCTIONAL_AND_EVIDENCE_TEST_SUITE_ENABLED",
+    "CI_V1_REPLICATION_OBJECT_VERIFICATION_ENABLED",
+    "CI_PUBLIC_RELEASE_AUDIT_ENABLED",
+    "WINDOWS_V1_REPLICATION_PRESERVES_V2",
+    "UNIX_V1_REPLICATION_PRESERVES_V2"
+  ],
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 1677,
+      "sha256": "a23a26e35ac46dcf366bbf7e4d119d1a324201155be1635a5bf335991e679321"
+    },
+    {
+      "path": "CITATION.cff",
+      "bytes": 1232,
+      "sha256": "7cc90b2043f2447fc8db588916f42b73d520c94d2d830959bc2b2a9619fb80a7"
+    },
+    {
+      "path": "RELEASE_NOTES_V2_0_0.md",
+      "bytes": 2885,
+      "sha256": "88b0a166b434c5dfbe89a93ce48c22881de7e029ddc0772b8573aadbd0c182fa"
+    },
+    {
+      "path": "RUN_REPLICATION.ps1",
+      "bytes": 3496,
+      "sha256": "15fb745a1738f5698783446c5e34151943e3f5d075db26b46178c5fd62ee41c6"
+    },
+    {
+      "path": "RUN_REPLICATION.sh",
+      "bytes": 1444,
+      "sha256": "7bed34276b0e491c46287903403d792df2cd55fe5e54b16e34d1573052ab8fb1"
+    },
+    {
+      "path": "V2_FINAL_RELEASE_CHECKPOINT.md",
+      "bytes": 2038,
+      "sha256": "5f33f3360c83af666dab40a215f908959f957989f0cc3a0f776669a1d04eed5f"
+    },
+    {
+      "path": "V2_RELEASE_METADATA.json",
+      "bytes": 750,
+      "sha256": "a56a7175c6849b2975cccc171ec1031932692606221dbe1a30ca5d7e8376dd35"
+    },
+    {
+      "path": "scripts/verify_v2_final_audit.py",
+      "bytes": 19557,
+      "sha256": "88122ec4f22d1510549a2e5ba75445e46ed25b6169bcd5756177923ccbea74dc"
+    },
+    {
+      "path": "tests/test_v2_final_audit.py",
+      "bytes": 573,
+      "sha256": "17668eb92664a5fe10750849a825951552a2683aadd80298e56ddbea4f89433d"
+    }
+  ]
+}

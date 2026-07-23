@@ -1,0 +1,22 @@
+{
+  "checkpoint": "V2_D5_ROBUSTNESS_AND_PUBLICATION",
+  "signal_family": "bollinger",
+  "pipeline_hash": "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851",
+  "d4_evidence_grade_preserved": "NO_INCREMENTAL_EVIDENCE",
+  "robustness_determination": "FAVOURABLE_MEANS_NOT_CONFIDENCE_ROBUST",
+  "fragility_class": "UNCERTAINTY_AND_PARAMETER_SPECIFICATION_SENSITIVE",
+  "diagnostic_counts": {
+    "pass": 7,
+    "caution": 5,
+    "fail": 3
+  },
+  "positive_mean_not_sufficient_for_establishment": true,
+  "robustness_supports_primary_case_upgrade": false,
+  "external_replication_triggered": false,
+  "external_replication_status": "NOT_TRIGGERED_PRIMARY_CONFIRMATORY_GATE_FAILED",
+  "state_diagnostic_status": "DESCRIPTIVE_ONLY",
+  "panic_state_claim_permitted": false,
+  "pipeline_retuning_performed": false,
+  "rsi_reentry_performed": false,
+  "panic_state_extension_used": false
+}

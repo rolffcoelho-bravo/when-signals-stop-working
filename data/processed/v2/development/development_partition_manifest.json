@@ -1,0 +1,74 @@
+{
+  "asset_scope": {
+    "context": "BTC/USDT",
+    "frequency": "4h",
+    "primary": "SOL/USDT",
+    "venue": "Binance"
+  },
+  "candidate_inventory": {
+    "bollinger_rows": 2592,
+    "model_fitting_performed": false,
+    "rows": 6048,
+    "rsi_rows": 3456
+  },
+  "created_at_utc": "2026-07-22T16:20:05.345025+00:00",
+  "execution_scope": "DEVELOPMENT_ONLY_NO_MODEL_FITTING",
+  "files": [
+    {
+      "bytes": 1082504,
+      "path": "data/processed/v2/development/aligned_development_market_data.csv",
+      "sha256": "20d4d718f8c8b5197b902f06bc077301cb965b6b588b49d683b220f7670798fc"
+    },
+    {
+      "bytes": 2200860,
+      "path": "data/processed/v2/development/development_targets.csv",
+      "sha256": "cf8a832b685cc2d5a7b89bb4311a811da8293c6738cd257454cae5001b4af4b8"
+    },
+    {
+      "bytes": 10733,
+      "path": "data/processed/v2/development/nested_fold_plan.csv",
+      "sha256": "a36d2fe229a3e21c25b4918afffc9b9e8160e5950dc28e728360fb611300a1dd"
+    },
+    {
+      "bytes": 679297,
+      "path": "data/processed/v2/development/candidate_inventory.csv",
+      "sha256": "829a0f5d8d0c813d0155b1ec1031311b4ea806154d6272e5aa6dcca2df106718"
+    },
+    {
+      "bytes": 102,
+      "path": "data/processed/v2/development/decision_policy_inventory.csv",
+      "sha256": "d5d1120c575dc18ede66aab044a60456c04ceeec3e32d793d6ae89203658eef4"
+    }
+  ],
+  "folds": {
+    "horizons_candles": [
+      1,
+      2,
+      3,
+      6
+    ],
+    "inner": 3,
+    "outer": 5,
+    "plan_rows": 80
+  },
+  "holdout": {
+    "output_files_created": 0,
+    "performance_accessed": false
+  },
+  "implementation_commit": "617809bc79c097fa297934b490fd5273af51f2eb",
+  "partition": {
+    "aligned_frame_sha256": "95a01c286e7d16167730a5b306cbd6734dfc86e8a546f75a50d5c8b0f4f34143",
+    "development_rows": 9852,
+    "end_utc": "2025-06-30T20:00:00+00:00",
+    "locked_evaluation_start_utc": "2025-07-01T00:00:00+00:00",
+    "source_rows": 12171,
+    "start_utc": "2021-01-01T00:00:00+00:00",
+    "target_frame_sha256": "f157f6f737c5ebc7bc1c9fa0fd3da4bc801a795537fbbf88e4d42e5e4e2b3802"
+  },
+  "protocol_lock_id": "v2-protocol-068f03ca1452c5ef",
+  "registry": {
+    "path": "configs/v2_experiment_registry.json",
+    "sha256": "c2d725faa5eed8e9a1e594d347b6aeb1c193e6f2fa4759a7b083673c45c5bea5",
+    "version": "2.0.0-design-freeze"
+  }
+}

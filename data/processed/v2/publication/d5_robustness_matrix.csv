@@ -1,0 +1,16 @@
+diagnostic,diagnostic_status,observed_value,reference_value,interpretation,confirmatory_effect
+confirmatory_multiplicity,FAIL,0.06467721893385245,0.05,Holm-adjusted p-value remained above alpha.,NO_UPGRADE_OR_REVERSAL_PERMITTED
+predictive_bootstrap_lower_bounds,FAIL,-0.0004885992368988,0.0,All registered predictive block-length intervals must exclude zero.,NO_UPGRADE_OR_REVERSAL_PERMITTED
+economic_bootstrap_lower_bounds,FAIL,-0.0001076354299113,0.0,All registered economic block-length intervals must exclude zero.,NO_UPGRADE_OR_REVERSAL_PERMITTED
+cost_sensitivity_mean_sign,PASS,1.0,1.0,"Mean incremental net return sign across 5, 10 and 20 bps.",NO_UPGRADE_OR_REVERSAL_PERMITTED
+chronological_subperiod_sign,PASS,2.0,2.0,At least two of three locked subperiods were positive.,NO_UPGRADE_OR_REVERSAL_PERMITTED
+all_subperiods_positive,CAUTION,0.6666666666666666,1.0,One locked subperiod had non-positive predictive contribution.,NO_UPGRADE_OR_REVERSAL_PERMITTED
+overall_calibration_non_dominance,PASS,-0.0010432386124071,0.001,Overall Brier and calibration-error controls remained within bounds.,NO_UPGRADE_OR_REVERSAL_PERMITTED
+subperiod_calibration_consistency,CAUTION,0.0007689167889323,0.0,Candidate Brier performance was not uniformly better by subperiod.,NO_UPGRADE_OR_REVERSAL_PERMITTED
+monthly_positive_concentration,PASS,0.19948532934586966,0.4,No single positive month exceeded the frozen concentration threshold.,NO_UPGRADE_OR_REVERSAL_PERMITTED
+leave_one_month_out_mean_sign,PASS,9.827043645136815e-05,0.0,Favourable means persisted after excluding each calendar month.,NO_UPGRADE_OR_REVERSAL_PERMITTED
+joint_tail_trim_mean_sign,PASS,0.0013048811100667597,0.0,Favourable means persisted after registered joint tail trimming.,NO_UPGRADE_OR_REVERSAL_PERMITTED
+development_model_family_stability,PASS,1.0,0.8,Model-family selection stability across outer development folds.,NO_UPGRADE_OR_REVERSAL_PERMITTED
+development_exact_signal_specification_stability,CAUTION,0.4,0.8,Exact signal specification was diffuse across development folds.,NO_UPGRADE_OR_REVERSAL_PERMITTED
+stress_state_sample_sufficiency,CAUTION,37.0,100.0,Stress-state evidence is descriptive and too small for a panic claim.,NO_UPGRADE_OR_REVERSAL_PERMITTED
+active_confidence_economic_consistency,CAUTION,-0.0005471161091434762,0.0,Economic contribution was not positive across active-confidence strata.,NO_UPGRADE_OR_REVERSAL_PERMITTED

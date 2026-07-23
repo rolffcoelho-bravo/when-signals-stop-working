@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "checkpoint": "V2_D5_ROBUSTNESS_AND_PUBLICATION",
+  "implementation_commit": "42d6c8d8d0d23604b4126720091f00ddfa6a35c6",
+  "pipeline_hash": "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851",
+  "prediction_rows": 2318,
+  "robustness_diagnostics_completed": true,
+  "publication_evidence_completed": true,
+  "robustness_determination": "FAVOURABLE_MEANS_NOT_CONFIDENCE_ROBUST",
+  "fragility_class": "UNCERTAINTY_AND_PARAMETER_SPECIFICATION_SENSITIVE",
+  "final_evidence_grade": "NO_INCREMENTAL_EVIDENCE",
+  "primary_case_established": false,
+  "external_replication_triggered": false,
+  "pipeline_retuning_performed": false,
+  "rsi_reentry_performed": false,
+  "panic_state_extension_used": false,
+  "manifest_sha256": "be1ce08a0b70f83641699f0b2e1e8e9cfcf5a1888e6db9f2f5411646610ab1a6",
+  "robustness_results_sha256": "61dd3f7d3ddacd6be16083d17c483fa20bbd0c514fc8bb18e7bc6d0dc2ab2f16",
+  "final_verdict_sha256": "fcfbde72399d810031b780cbca16cedb7eb47e8273638b5352546876b62ca77a"
+}

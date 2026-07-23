@@ -1,0 +1,26 @@
+{
+  "checkpoint": "V2_D1_CAUSAL_FEATURE_AND_FILTERED_STATE_ENGINE",
+  "d0_lock_id": "v2-d0-0e1cca99b90e5a50",
+  "execution_scope": "DEVELOPMENT_ONLY_NO_PREDICTIVE_MODEL_FITTING",
+  "lock_id": "v2-d1-53c53a61a3011a65",
+  "lock_version": "1.0.0",
+  "parent_d0_commit": "e196282",
+  "parent_d0_tag": "v2-implementation-d0-20260722",
+  "protected_files": {
+    "RUN_V2_D1_CAUSAL_ENGINE.ps1": "11fe4480272f236403f9205912ce825288d95a92875141ef591f5627eedac2d8",
+    "RUN_V2_D1_CAUSAL_ENGINE.sh": "2ef182cb7a77b0be84612889c4ff13fb00a890e8a2b55669d1ec5f725a0f3d0d",
+    "V2_D1_CAUSAL_ENGINE_CHECKPOINT.md": "4eba85eab07f74f736c4cfbb70dc4d55f238b2267f4cbc692286a496be3c461b",
+    "configs/v2_d1_engine.json": "b943c5058a20d05a9be1d13282ffb6a1afd37479a5c3afa14a324d3c1e74e608",
+    "docs/V2_CAUSAL_FEATURE_SPECIFICATION.md": "be65cc1f14dbe40285c382dc66398a3462108e0478c3642acaf910964c382be5",
+    "docs/V2_FILTERED_STATE_ENGINE.md": "eddff837576cea6239f25c418c48e294dd99f16ef3a2bde8af594f7c6b9efdb8",
+    "scripts/build_v2_d1_assets.py": "1dea968e91aa579cdfcd8d0d3b665e12dbaeeec9ab0db1288f825a60b6e7249a",
+    "scripts/verify_v2_d1_assets.py": "045e3d652349ea0ca502c80158fd606147a58f197d331dd6e5620ad2ba651017",
+    "scripts/verify_v2_d1_lock.py": "94c5e1a0db982d2cd1e2e7db0bd2ef048dc4cf9eee1206f06e2e76accb15b4d2",
+    "src/shockbridge_signal_validity/v2/causal_features.py": "498897c5b3947e4ca9585fd7f8eaaddcb9f9a631b21c68f4fe7735b631b3415f",
+    "src/shockbridge_signal_validity/v2/filtered_states.py": "bb7edae9704f21a9280c31537afe354754a4af1d706636e6e44d0fc471e876bd",
+    "tests/test_v2_causal_features.py": "07e046ec486bc22a094c4951b8ff5c41ef43efc0369fb13be21784dc7a15bad7",
+    "tests/test_v2_d1_assets.py": "db6e5bbe61465a85c34c8a595ff117fefbd12d0356453a10b38c27c162d1a975",
+    "tests/test_v2_filtered_state_engine.py": "ffebb8848d046dbb8101e2336fa6f459aedee6219399bfaed05aacb4e5c29765"
+  },
+  "protocol_lock_id": "v2-protocol-068f03ca1452c5ef"
+}

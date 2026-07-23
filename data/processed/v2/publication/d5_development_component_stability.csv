@@ -1,0 +1,10 @@
+component,outer_development_rows,unique_values,modal_value,modal_count,modal_share,stability_classification,holdout_reexecution_performed
+model_family,5,1,shallow_hist_gradient_boosting,5,1.0,STABLE,False
+window_scheme,5,2,expanding,4,0.8,STABLE,False
+regime_conditioning,5,2,True,4,0.8,STABLE,False
+calibration_method,5,1,none,5,1.0,STABLE,False
+decision_threshold,5,2,0.02,3,0.6,MODERATELY_STABLE,False
+signal_specification,5,3,bollinger-p10-k1.5-continuation,2,0.4,DIFFUSE,False
+signal_period,5,2,10,3,0.6,MODERATELY_STABLE,False
+signal_width,5,2,1.5,4,0.8,STABLE,False
+signal_interpretation,5,1,continuation,5,1.0,STABLE,False
