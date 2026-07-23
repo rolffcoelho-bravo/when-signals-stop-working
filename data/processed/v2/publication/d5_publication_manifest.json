@@ -1,0 +1,98 @@
+{
+  "checkpoint": "V2_D5_ROBUSTNESS_AND_PUBLICATION",
+  "created_at_utc": "2026-07-23T03:44:50.079834+00:00",
+  "implementation_commit": "42d6c8d8d0d23604b4126720091f00ddfa6a35c6",
+  "source_d4_evidence_commit": "69f1c40",
+  "source_d4_tag": "v2-d4-confirmatory-inference-20260723",
+  "pipeline_hash": "2f85b54f8f178ec59c2bfb8a06cd8dedb3e053e2bec4da40cb446d380def2851",
+  "prediction_rows": 2318,
+  "d3_predictions_sha256": "7f3975b3919e3247ab1b6a745b0ad76068739a8e4c934796830b32c4b4d58f06",
+  "d4_status_sha256": "ad40e6404e7796c8830516bad0db75a8a140d7046e0cb21e90fbfd9e075340ae",
+  "d4_gate_results_sha256": "68a9118b19c2096e50ae3855648a07af555837eb62db9231baeff53baeb0b802",
+  "d4_verdict_sha256": "7a5d85dd8c543881a43726c9de6964e68c603ec8e167f8ee73f2e895d1fc7d92",
+  "robustness_diagnostics_completed": true,
+  "publication_evidence_completed": true,
+  "final_evidence_grade": "NO_INCREMENTAL_EVIDENCE",
+  "primary_case_established": false,
+  "external_replication_triggered": false,
+  "pipeline_retuning_performed": false,
+  "rsi_reentry_performed": false,
+  "panic_state_extension_used": false,
+  "files": [
+    {
+      "path": "data/processed/v2/publication/d5_leave_one_month_out.csv",
+      "bytes": 1028,
+      "sha256": "21e1e88c6c551a9c42a28e2f1680697dad5059c691ccdcc3a0ea826df6df483d"
+    },
+    {
+      "path": "data/processed/v2/publication/d5_influence_trim_sensitivity.csv",
+      "bytes": 484,
+      "sha256": "5176eaf6579fd788bd46b96ecf04b016df1f0276dd064be352ad2a68fe1088b6"
+    },
+    {
+      "path": "data/processed/v2/publication/d5_state_stratification.csv",
+      "bytes": 641,
+      "sha256": "3c23bcc9cea74d3260be0771a1759e6b287a2793a0d67b6b7044c34004e9e4da"
+    },
+    {
+      "path": "data/processed/v2/publication/d5_active_confidence_stratification.csv",
+      "bytes": 675,
+      "sha256": "0d476828ea43a53afca7c7696dfcea7bf0b58beacf5da27b7ff4ee4586eefb43"
+    },
+    {
+      "path": "data/processed/v2/publication/d5_development_component_stability.csv",
+      "bytes": 641,
+      "sha256": "71643a55336b4ce156a99d61f998f6db1c19482221c263eba86a2313661f4158"
+    },
+    {
+      "path": "data/processed/v2/publication/d5_robustness_matrix.csv",
+      "bytes": 2432,
+      "sha256": "c53ef2f553c9832aec4a076e64f840962fa3bece8aaa09dbdb78172a2d66c6af"
+    },
+    {
+      "path": "outputs/v2/publication/figures/d5_predictive_interval.svg",
+      "bytes": 28628,
+      "sha256": "139b3de8f7a3997b609dd4c43b2e7249009266dae6b6fde37402d436fce60c17"
+    },
+    {
+      "path": "outputs/v2/publication/figures/d5_cost_sensitivity.svg",
+      "bytes": 38292,
+      "sha256": "83ce10b99475a649c89b6720e275166b232f2bebaca332b861038e9011f38dda"
+    },
+    {
+      "path": "outputs/v2/publication/figures/d5_subperiod_predictive_contribution.svg",
+      "bytes": 30717,
+      "sha256": "2e98ea04d33b2de4c8ad380abccb0936e329bfd7b9a26be26906b66acac0e6b1"
+    },
+    {
+      "path": "outputs/v2/publication/figures/d5_monthly_economic_contribution.svg",
+      "bytes": 46196,
+      "sha256": "582bc6853a599f6013b8eb68afa7e95382df79ce0538ccb26913f15879366e3e"
+    },
+    {
+      "path": "outputs/v2/publication/figures/d5_development_component_stability.svg",
+      "bytes": 41940,
+      "sha256": "06a98c6f57b2b04db6b32da89bc4ffaaeceab91689e1a2bb95a51c35e617bdbb"
+    },
+    {
+      "path": "outputs/v2/publication/d5_robustness_results.json",
+      "bytes": 918,
+      "sha256": "61dd3f7d3ddacd6be16083d17c483fa20bbd0c514fc8bb18e7bc6d0dc2ab2f16"
+    },
+    {
+      "path": "outputs/v2/publication/v2_final_evidence_grade.json",
+      "bytes": 1851,
+      "sha256": "fcfbde72399d810031b780cbca16cedb7eb47e8273638b5352546876b62ca77a"
+    },
+    {
+      "path": "outputs/v2/publication/V2_FROZEN_BOLLINGER_MODEL_CARD.md",
+      "bytes": 1834,
+      "sha256": "bfa6a655a3961cdfcbdb6a2a652e6b17deebdd7d314d3cfe591265cc7436b28e"
+    },
+    {
+      "path": "outputs/v2/publication/V2_FINAL_EVIDENCE_REPORT.md",
+      "bytes": 2934,
+      "sha256": "bd3e126400b0fcc100c559082e92077dc706609a0ebde711526ddf08045d9b85"
+    }
+  ]
+}
