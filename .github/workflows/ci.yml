@@ -34,6 +34,12 @@ jobs:
         run: python scripts/verify_replication.py
       - name: Verify public release audit
         run: python scripts/audit_public_release.py
+      - name: Verify Version 2 D3 locked-evaluation assets
+        run: python scripts/verify_v2_d3_assets.py
+      - name: Verify Version 2 D4 confirmatory assets
+        run: python scripts/verify_v2_d4_assets.py
+      - name: Verify Version 2 D5 publication assets
+        run: python scripts/verify_v2_d5_assets.py
       - name: Test portable functional and evidence suite
         env:
           MPLBACKEND: Agg
