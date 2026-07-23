@@ -1,0 +1,78 @@
+{
+  "schema_version": "v3.canonical-market.v1",
+  "canonical_key": [
+    "timestamp",
+    "asset",
+    "venue"
+  ],
+  "required_fields": {
+    "timestamp": {
+      "type": "datetime64[ns, UTC]",
+      "nullable": false
+    },
+    "asset": {
+      "type": "string",
+      "nullable": false
+    },
+    "venue": {
+      "type": "string",
+      "nullable": false
+    },
+    "open": {
+      "type": "float64",
+      "nullable": false,
+      "minimum_exclusive": 0.0
+    },
+    "high": {
+      "type": "float64",
+      "nullable": false,
+      "minimum_exclusive": 0.0
+    },
+    "low": {
+      "type": "float64",
+      "nullable": false,
+      "minimum_exclusive": 0.0
+    },
+    "close": {
+      "type": "float64",
+      "nullable": false,
+      "minimum_exclusive": 0.0
+    },
+    "volume": {
+      "type": "float64",
+      "nullable": false,
+      "minimum_inclusive": 0.0
+    }
+  },
+  "optional_fields": [
+    "benchmark_asset_returns",
+    "funding_rate",
+    "open_interest",
+    "long_liquidations",
+    "short_liquidations",
+    "bid_ask_spread",
+    "order_book_depth",
+    "order_book_imbalance",
+    "exchange_inflows",
+    "exchange_outflows",
+    "stablecoin_flow",
+    "cross_venue_price_dispersion",
+    "realised_volatility"
+  ],
+  "validation_policies": {
+    "sort_order": [
+      "timestamp",
+      "asset",
+      "venue"
+    ],
+    "duplicate_key_policy": "REJECT",
+    "timezone_policy": "CONVERT_TO_UTC_WITH_EXPLICIT_SOURCE_TIMEZONE",
+    "price_forward_fill": "PROHIBITED",
+    "volume_forward_fill": "PROHIBITED",
+    "optional_field_forward_fill": "PROHIBITED_UNLESS_SEPARATELY_REGISTERED",
+    "ohlc_boundary_policy": "LOW_LE_OPEN_CLOSE_LE_HIGH",
+    "interval_gap_policy": "REPORT_WARNING",
+    "panel_alignment_policy": "REPORT_WARNING_AND_PRESERVE_MISSINGNESS",
+    "unregistered_field_policy": "DROP_WITH_WARNING"
+  }
+}
