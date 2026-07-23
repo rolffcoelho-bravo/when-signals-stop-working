@@ -1,0 +1,19 @@
+{
+  "release": "VERSION_2_INSTITUTIONAL_PRIMARY_CASE",
+  "release_version": "2.0.0",
+  "release_date": "2026-07-23",
+  "source_d5_tag": "v2-d5-robustness-publication-20260723",
+  "source_d5_commit": "74866b920e2b19543686d84e0208f8b12b496090",
+  "source_d5_lock_id": "v2-d5-f9233e24526fa5b2",
+  "package_metadata_version": "2.0.0.dev8",
+  "package_metadata_frozen_by_d5_lock": true,
+  "changelog_frozen_by_d5_lock": true,
+  "release_notes": "RELEASE_NOTES_V2_0_0.md",
+  "citation_version": "2.0.0",
+  "final_evidence_grade": "NO_INCREMENTAL_EVIDENCE",
+  "rsi_status": "NO_PIPELINE_ADMITTED",
+  "bollinger_status": "NO_INCREMENTAL_EVIDENCE",
+  "primary_case_established": false,
+  "pipeline_retuning_performed": false,
+  "v2_1_extension_used": false
+}

@@ -55,9 +55,11 @@ if ($RefreshData -or -not (Test-Path $SolData) -or -not (Test-Path $BtcData)) {
 Invoke-NativeStep -Label "4. Validating market data" -Executable $Python -Arguments @("scripts\validate_market_data.py")
 Invoke-NativeStep -Label "5. Running implementation tests" -Executable $Python -Arguments @("-m", "pytest", "-q")
 
-Write-Host "`n6. Clearing stale generated evidence"
+Write-Host "`n6. Clearing stale Version 1 generated evidence"
 if (Test-Path "outputs") {
-    Get-ChildItem "outputs" -Force | Where-Object { $_.Name -notin @(".gitkeep", "README.md") } | Remove-Item -Recurse -Force
+    Get-ChildItem "outputs" -Force |
+        Where-Object { $_.Name -notin @(".gitkeep", "README.md", "v2") } |
+        Remove-Item -Recurse -Force
 }
 New-Item -ItemType Directory -Force -Path "outputs" | Out-Null
 
@@ -77,7 +79,8 @@ Invoke-NativeStep -Label "9. Building the public replication assets" -Executable
 Invoke-NativeStep -Label "10. Auditing the public release" -Executable $Python -Arguments @("scripts\audit_public_release.py")
 Invoke-NativeStep -Label "11. Verifying replication checksums" -Executable $Python -Arguments @("scripts\verify_replication.py")
 
-Write-Host "`nInstitutional replication completed successfully."
+Write-Host "`nInstitutional Version 1 replication completed successfully."
+Write-Host "Version 2 evidence preserved: outputs\v2"
 Write-Host "Report: outputs\research_report.md"
 Write-Host "Figures: outputs\figures"
 Write-Host "Manifest: outputs\run_manifest.json"

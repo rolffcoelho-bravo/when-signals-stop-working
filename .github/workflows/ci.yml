@@ -39,6 +39,12 @@ jobs:
         run: python scripts/verify_v2_d3_lock.py
       - name: Verify Version 2 D4 inference lock
         run: python scripts/verify_v2_d4_lock.py
+      - name: Verify Version 2 D5 robustness lock
+        run: python scripts/verify_v2_d5_lock.py
+      - name: Verify Version 2 D5 publication assets
+        run: python scripts/verify_v2_d5_assets.py
+      - name: Verify Version 2 final release audit
+        run: python scripts/verify_v2_final_audit.py
       - name: Test
         env:
           MPLBACKEND: Agg
