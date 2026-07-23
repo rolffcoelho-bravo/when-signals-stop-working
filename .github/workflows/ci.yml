@@ -19,12 +19,34 @@ jobs:
         with:
           fetch-depth: 0
           fetch-tags: true
+          show-progress: false
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
-      - name: Verify Version 2 repository-object locks and release audit
-        run: python scripts/verify_v2_final_audit.py
+      - name: Diagnose Version 2 repository-object audit
+        id: audit
+        shell: pwsh
+        run: |
+          python scripts/verify_v2_final_audit.py *> v2-final-audit-ci.log
+          $auditExitCode = $LASTEXITCODE
+          Get-Content v2-final-audit-ci.log
+          "exit_code=$auditExitCode" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          exit 0
+      - name: Upload Version 2 audit diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-final-audit-${{ matrix.python-version }}
+          path: v2-final-audit-ci.log
+          if-no-files-found: error
+          retention-days: 3
+      - name: Enforce Version 2 repository-object audit
+        shell: pwsh
+        run: |
+          if ("${{ steps.audit.outputs.exit_code }}" -ne "0") {
+            throw "Version 2 repository-object audit failed."
+          }
       - name: Install
         run: |
           python -m pip install --upgrade pip
