@@ -11,42 +11,91 @@ import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
 AUDIT_PATH = ROOT / "V2_FINAL_RELEASE_AUDIT.json"
+
+V1_TAG = "v1.2.0"
+EXPECTED_V1_COMMIT = "748d1720da9131ebd6eb7b0606913fd43fc6e5e8"
+V1_CHECKSUMS = "REPLICATION_CHECKSUMS.sha256"
+
 D5_TAG = "v2-d5-robustness-publication-20260723"
 EXPECTED_D5_COMMIT = "74866b920e2b19543686d84e0208f8b12b496090"
 EXPECTED_D5_LOCK = "v2-d5-f9233e24526fa5b2"
 EXPECTED_RELEASE_VERSION = "2.0.0"
 EXPECTED_RELEASE_DATE = "2026-07-23"
 EXPECTED_FROZEN_PACKAGE_VERSION = "2.0.0.dev8"
-V1_TAG = "v1.2.0"
-EXPECTED_V1_COMMIT = "748d1720da9131ebd6eb7b0606913fd43fc6e5e8"
-V1_CHECKSUMS = "REPLICATION_CHECKSUMS.sha256"
 
 CHECKPOINTS = (
-    ("protocol", "v2-protocol-freeze-20260722", "3f4871e",
-     "V2_PROTOCOL_LOCK.json", "v2-protocol-068f03ca1452c5ef", "files"),
-    ("D0", "v2-implementation-d0-20260722", "e196282",
-     "V2_D0_IMPLEMENTATION_LOCK.json", "v2-d0-0e1cca99b90e5a50",
-     "protected_files"),
-    ("D1", "v2-d1-causal-engine-20260722", "50b5ef7",
-     "V2_D1_ENGINE_LOCK.json", "v2-d1-53c53a61a3011a65",
-     "protected_files"),
-    ("D2A", "v2-d2a-screening-20260722", "81e2b8c",
-     "V2_D2A_SELECTION_LOCK.json", "v2-d2a-43b7dcb8379cc9c7",
-     "protected_files"),
-    ("D2B", "v2-d2b-selection-20260722", "93ecb7e",
-     "V2_D2B_SELECTION_LOCK.json", "v2-d2b-f88a98fce021cb1d",
-     "protected_files"),
-    ("D2C", "v2-d2c-admission-20260722", "5153f2e",
-     "V2_D2C_ADMISSION_LOCK.json", "v2-d2c-190392a1d97827b2",
-     "protected_files"),
-    ("D3", "v2-d3-locked-evaluation-20260723", "d0872b9",
-     "V2_D3_EVALUATION_LOCK.json", "v2-d3-e2d92bf8786bdb8f",
-     "protected_files"),
-    ("D4", "v2-d4-confirmatory-inference-20260723", "69f1c40",
-     "V2_D4_INFERENCE_LOCK.json", "v2-d4-ec8d9850edbcb622",
-     "protected_files"),
-    ("D5", D5_TAG, "74866b9", "V2_D5_ROBUSTNESS_LOCK.json",
-     EXPECTED_D5_LOCK, "protected_files"),
+    (
+        "protocol",
+        "v2-protocol-freeze-20260722",
+        "3f4871e",
+        "V2_PROTOCOL_LOCK.json",
+        "v2-protocol-068f03ca1452c5ef",
+        "files",
+    ),
+    (
+        "D0",
+        "v2-implementation-d0-20260722",
+        "e196282",
+        "V2_D0_IMPLEMENTATION_LOCK.json",
+        "v2-d0-0e1cca99b90e5a50",
+        "protected_files",
+    ),
+    (
+        "D1",
+        "v2-d1-causal-engine-20260722",
+        "50b5ef7",
+        "V2_D1_ENGINE_LOCK.json",
+        "v2-d1-53c53a61a3011a65",
+        "protected_files",
+    ),
+    (
+        "D2A",
+        "v2-d2a-screening-20260722",
+        "81e2b8c",
+        "V2_D2A_SELECTION_LOCK.json",
+        "v2-d2a-43b7dcb8379cc9c7",
+        "protected_files",
+    ),
+    (
+        "D2B",
+        "v2-d2b-selection-20260722",
+        "93ecb7e",
+        "V2_D2B_SELECTION_LOCK.json",
+        "v2-d2b-f88a98fce021cb1d",
+        "protected_files",
+    ),
+    (
+        "D2C",
+        "v2-d2c-admission-20260722",
+        "5153f2e",
+        "V2_D2C_ADMISSION_LOCK.json",
+        "v2-d2c-190392a1d97827b2",
+        "protected_files",
+    ),
+    (
+        "D3",
+        "v2-d3-locked-evaluation-20260723",
+        "d0872b9",
+        "V2_D3_EVALUATION_LOCK.json",
+        "v2-d3-e2d92bf8786bdb8f",
+        "protected_files",
+    ),
+    (
+        "D4",
+        "v2-d4-confirmatory-inference-20260723",
+        "69f1c40",
+        "V2_D4_INFERENCE_LOCK.json",
+        "v2-d4-ec8d9850edbcb622",
+        "protected_files",
+    ),
+    (
+        "D5",
+        D5_TAG,
+        "74866b9",
+        "V2_D5_ROBUSTNESS_LOCK.json",
+        EXPECTED_D5_LOCK,
+        "protected_files",
+    ),
 )
 
 RELEASE_FILES = {
@@ -88,30 +137,86 @@ def file_bytes(reference: str, path: str) -> bytes:
     return git("show", f"{reference}:{path}", binary=True)
 
 
-def verify_checkpoint_objects() -> int:
+def verify_annotated_tag(
+    tag: str,
+    expected_commit: str,
+    *,
+    allow_prefix: bool = False,
+) -> str:
+    if str(git("cat-file", "-t", tag)) != "tag":
+        fail(f"Checkpoint is not an annotated tag: {tag}")
+
+    commit = str(git("rev-parse", f"{tag}^{{commit}}"))
+    matches = commit.startswith(expected_commit) if allow_prefix else commit == expected_commit
+    if not matches:
+        fail(f"Checkpoint tag moved: {tag} -> {commit}")
+
+    ancestor = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", commit, "HEAD"],
+        cwd=ROOT,
+        check=False,
+    )
+    if ancestor.returncode != 0:
+        fail(f"Checkpoint is not an ancestor of HEAD: {tag}")
+
+    return commit
+
+
+def verify_v1_replication_objects() -> int:
+    verify_annotated_tag(V1_TAG, EXPECTED_V1_COMMIT)
+
+    if object_id("HEAD", V1_CHECKSUMS) != object_id(V1_TAG, V1_CHECKSUMS):
+        fail("Version 1 checksum inventory changed.")
+
+    checksum_text = file_bytes(V1_TAG, V1_CHECKSUMS).decode("utf-8")
+    paths: list[str] = []
+
+    for line in checksum_text.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+
+        parts = line.split("  ", 1)
+        if len(parts) != 2 or not parts[1].strip():
+            fail(f"Invalid Version 1 checksum row: {line!r}")
+        paths.append(parts[1].strip())
+
+    if not paths:
+        fail("Version 1 replication inventory is empty.")
+
+    for path in paths:
+        try:
+            frozen = object_id(V1_TAG, path)
+            current = object_id("HEAD", path)
+        except subprocess.CalledProcessError as error:
+            raise RuntimeError(
+                f"Version 1 replication object is missing: {path}"
+            ) from error
+
+        if current != frozen:
+            fail(f"Version 1 replication object changed: {path}")
+
+    return len(paths)
+
+
+def verify_v2_checkpoint_objects() -> int:
     protected_count = 0
 
-    for name, tag, commit_prefix, lock_path, lock_id, protected_key in CHECKPOINTS:
-        if str(git("cat-file", "-t", tag)) != "tag":
-            fail(f"{name} checkpoint is not an annotated tag: {tag}")
-
-        tag_commit = str(git("rev-parse", f"{tag}^{{commit}}"))
-        if not tag_commit.startswith(commit_prefix):
-            fail(f"{name} checkpoint tag moved: {tag_commit}")
-
-        ancestor = subprocess.run(
-            ["git", "merge-base", "--is-ancestor", tag_commit, "HEAD"],
-            cwd=ROOT,
-            check=False,
-        )
-        if ancestor.returncode != 0:
-            fail(f"{name} checkpoint is not an ancestor of HEAD.")
+    for (
+        name,
+        tag,
+        commit_prefix,
+        lock_path,
+        expected_lock_id,
+        protected_key,
+    ) in CHECKPOINTS:
+        verify_annotated_tag(tag, commit_prefix, allow_prefix=True)
 
         if object_id("HEAD", lock_path) != object_id(tag, lock_path):
             fail(f"{name} lock object changed: {lock_path}")
 
         payload = json.loads(file_bytes(tag, lock_path).decode("utf-8"))
-        if payload.get("lock_id") != lock_id:
+        if payload.get("lock_id") != expected_lock_id:
             fail(f"{name} lock identifier is invalid.")
 
         protected = payload.get(protected_key)
@@ -136,57 +241,13 @@ def verify_checkpoint_objects() -> int:
     return protected_count
 
 
-def verify_v1_replication_objects() -> int:
-    if str(git("cat-file", "-t", V1_TAG)) != "tag":
-        fail("Version 1 release tag is not annotated.")
-
-    tag_commit = str(git("rev-parse", f"{V1_TAG}^{{commit}}"))
-    if tag_commit != EXPECTED_V1_COMMIT:
-        fail("Version 1 release tag moved.")
-
-    ancestor = subprocess.run(
-        ["git", "merge-base", "--is-ancestor", tag_commit, "HEAD"],
-        cwd=ROOT,
-        check=False,
-    )
-    if ancestor.returncode != 0:
-        fail("Version 1 release is not an ancestor of HEAD.")
-
-    if object_id("HEAD", V1_CHECKSUMS) != object_id(V1_TAG, V1_CHECKSUMS):
-        fail("Version 1 checksum inventory changed.")
-
-    checksum_text = file_bytes(V1_TAG, V1_CHECKSUMS).decode("utf-8")
-    protected_paths: list[str] = []
-    for line in checksum_text.splitlines():
-        if not line.strip() or line.lstrip().startswith("#"):
-            continue
-        _, relative = line.split("  ", 1)
-        protected_paths.append(relative)
-
-    if not protected_paths:
-        fail("Version 1 replication inventory is empty.")
-
-    for path in protected_paths:
-        try:
-            frozen = object_id(V1_TAG, path)
-            current = object_id("HEAD", path)
-        except subprocess.CalledProcessError as error:
-            raise RuntimeError(
-                f"Version 1 replication object is missing: {path}"
-            ) from error
-
-        if current != frozen:
-            fail(f"Version 1 replication object changed: {path}")
-
-    return len(protected_paths)
-
-
 def verify_release_diff() -> None:
     changed = {
         line
         for line in str(git("diff", "--name-only", f"{D5_TAG}..HEAD")).splitlines()
         if line
     }
+
     unexpected = changed - ALLOWED_POST_D5
     missing = RELEASE_FILES - changed
 
@@ -214,6 +275,7 @@ def verify_audit_manifest(audit: dict[str, object]) -> None:
         "lock_verification_mode":
             "GIT_OBJECT_IDENTITY_ACROSS_ANNOTATED_CHECKPOINT_TAGS",
     }
+
     for field, expected in expected_fields.items():
         if audit.get(field) != expected:
             fail(f"Final audit field {field!r} is invalid.")
@@ -222,12 +284,13 @@ def verify_audit_manifest(audit: dict[str, object]) -> None:
         value = str(audit.get(field, ""))
         if not re.fullmatch(r"[0-9a-f]{40}", value):
             fail(f"Final audit field {field!r} is not a full commit SHA.")
-        result = subprocess.run(
+
+        ancestor = subprocess.run(
             ["git", "merge-base", "--is-ancestor", value, "HEAD"],
             cwd=ROOT,
             check=False,
         )
-        if result.returncode != 0:
+        if ancestor.returncode != 0:
             fail(f"Final audit commit is not an ancestor of HEAD: {field}")
 
     records = audit.get("files")
@@ -235,6 +298,7 @@ def verify_audit_manifest(audit: dict[str, object]) -> None:
         fail("Final audit file inventory is missing.")
 
     observed: set[str] = set()
+
     for record in records:
         if not isinstance(record, dict):
             fail("Final audit contains an invalid file record.")
@@ -265,6 +329,7 @@ def verify_audit_manifest(audit: dict[str, object]) -> None:
 def verify_metadata() -> None:
     with (ROOT / "pyproject.toml").open("rb") as handle:
         project = tomllib.load(handle)
+
     if project["project"]["version"] != EXPECTED_FROZEN_PACKAGE_VERSION:
         fail("D5-protected package metadata version changed.")
 
@@ -293,6 +358,7 @@ def verify_metadata() -> None:
         "pipeline_retuning_performed": False,
         "v2_1_extension_used": False,
     }
+
     for field, value in expected.items():
         if metadata.get(field) != value:
             fail(f"Release metadata field {field!r} is invalid.")
@@ -310,6 +376,7 @@ def verify_metadata() -> None:
 
 def verify_ci_contract() -> None:
     workflow = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
+
     required = (
         "runs-on: windows-latest",
         "fail-fast: false",
@@ -317,17 +384,25 @@ def verify_ci_contract() -> None:
         "fetch-tags: true",
         "python scripts/verify_v2_final_audit.py",
         "python scripts/audit_public_release.py",
+        "python scripts/verify_v2_d3_assets.py",
+        "python scripts/verify_v2_d4_assets.py",
+        "python scripts/verify_v2_d5_assets.py",
         "python -m pytest -q",
+        "--ignore=tests/test_v2_d0_lock.py",
+        "-k \"not test_v2_protocol_lock_hashes\"",
     )
+
     missing = [fragment for fragment in required if fragment not in workflow]
     if missing:
         fail(f"CI release contract is incomplete: {missing}")
 
-    prohibited = tuple(
-        f"python scripts/verify_v2_{stage}_{kind}.py"
-        for stage in ("d0", "d1", "d2a", "d2b", "d2c", "d3", "d4", "d5")
-        for kind in ("lock", "assets")
-    )
+    prohibited = [
+        "python scripts/verify_replication.py",
+        *[
+            f"python scripts/verify_v2_{stage}_lock.py"
+            for stage in ("d0", "d1", "d2a", "d2b", "d2c", "d3", "d4", "d5")
+        ],
+    ]
     active = [command for command in prohibited if command in workflow]
     if active:
         fail(f"CI invokes non-portable working-tree hash checks: {active}")
@@ -350,6 +425,7 @@ def verify_verdict() -> None:
         (ROOT / "outputs/v2/publication/v2_final_evidence_grade.json")
         .read_text(encoding="utf-8")
     )
+
     if verdict["rsi"]["status"] != "NO_PIPELINE_ADMITTED":
         fail("Frozen RSI decision changed.")
     if verdict["bollinger"]["status"] != "NO_INCREMENTAL_EVIDENCE":
@@ -366,9 +442,11 @@ def verify_verdict() -> None:
 
 def verify_public_boundaries() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
     license_index = readme.find("## License and data notice")
     citation_index = readme.find("## Citation")
     bibtex_index = readme.find("## BibTeX")
+
     if not (0 <= license_index < citation_index < bibtex_index):
         fail("README citation placement changed.")
     if "not an indicator-rescue exercise" not in readme:
@@ -392,7 +470,7 @@ def main() -> int:
 
     audit = json.loads(AUDIT_PATH.read_text(encoding="utf-8"))
     v1_count = verify_v1_replication_objects()
-    protected_count = verify_checkpoint_objects()
+    v2_count = verify_v2_checkpoint_objects()
     verify_release_diff()
     verify_audit_manifest(audit)
     verify_metadata()
@@ -408,7 +486,7 @@ def main() -> int:
     print("Final evidence grade: NO_INCREMENTAL_EVIDENCE")
     print(f"Version 1 replication objects verified: {v1_count}")
     print(f"Annotated Version 2 checkpoint tags verified: {len(CHECKPOINTS)}")
-    print(f"Version 2 protected Git objects verified: {protected_count}")
+    print(f"Version 2 protected Git objects verified: {v2_count}")
     print("D5 protected files changed: False")
     print("V2.1 extension used: False")
     return 0
