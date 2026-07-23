@@ -17,6 +17,9 @@ EXPECTED_D5_LOCK = "v2-d5-f9233e24526fa5b2"
 EXPECTED_RELEASE_VERSION = "2.0.0"
 EXPECTED_RELEASE_DATE = "2026-07-23"
 EXPECTED_FROZEN_PACKAGE_VERSION = "2.0.0.dev8"
+V1_TAG = "v1.2.0"
+EXPECTED_V1_COMMIT = "748d1720da9131ebd6eb7b0606913fd43fc6e5e8"
+V1_CHECKSUMS = "REPLICATION_CHECKSUMS.sha256"
 
 CHECKPOINTS = (
     ("protocol", "v2-protocol-freeze-20260722", "3f4871e",
@@ -131,6 +134,51 @@ def verify_checkpoint_objects() -> int:
             protected_count += 1
 
     return protected_count
+
+
+def verify_v1_replication_objects() -> int:
+    if str(git("cat-file", "-t", V1_TAG)) != "tag":
+        fail("Version 1 release tag is not annotated.")
+
+    tag_commit = str(git("rev-parse", f"{V1_TAG}^{{commit}}"))
+    if tag_commit != EXPECTED_V1_COMMIT:
+        fail("Version 1 release tag moved.")
+
+    ancestor = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", tag_commit, "HEAD"],
+        cwd=ROOT,
+        check=False,
+    )
+    if ancestor.returncode != 0:
+        fail("Version 1 release is not an ancestor of HEAD.")
+
+    if object_id("HEAD", V1_CHECKSUMS) != object_id(V1_TAG, V1_CHECKSUMS):
+        fail("Version 1 checksum inventory changed.")
+
+    checksum_text = file_bytes(V1_TAG, V1_CHECKSUMS).decode("utf-8")
+    protected_paths: list[str] = []
+    for line in checksum_text.splitlines():
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        _, relative = line.split("  ", 1)
+        protected_paths.append(relative)
+
+    if not protected_paths:
+        fail("Version 1 replication inventory is empty.")
+
+    for path in protected_paths:
+        try:
+            frozen = object_id(V1_TAG, path)
+            current = object_id("HEAD", path)
+        except subprocess.CalledProcessError as error:
+            raise RuntimeError(
+                f"Version 1 replication object is missing: {path}"
+            ) from error
+
+        if current != frozen:
+            fail(f"Version 1 replication object changed: {path}")
+
+    return len(protected_paths)
 
 
 def verify_release_diff() -> None:
@@ -268,7 +316,6 @@ def verify_ci_contract() -> None:
         "fetch-depth: 0",
         "fetch-tags: true",
         "python scripts/verify_v2_final_audit.py",
-        "python scripts/verify_replication.py",
         "python scripts/audit_public_release.py",
         "python -m pytest -q",
     )
@@ -344,6 +391,7 @@ def main() -> int:
         fail("D5 checkpoint tag moved.")
 
     audit = json.loads(AUDIT_PATH.read_text(encoding="utf-8"))
+    v1_count = verify_v1_replication_objects()
     protected_count = verify_checkpoint_objects()
     verify_release_diff()
     verify_audit_manifest(audit)
@@ -358,8 +406,9 @@ def main() -> int:
     print("Frozen package metadata version: 2.0.0.dev8")
     print("Release readiness: READY_FOR_PULL_REQUEST")
     print("Final evidence grade: NO_INCREMENTAL_EVIDENCE")
-    print(f"Annotated checkpoint tags verified: {len(CHECKPOINTS)}")
-    print(f"Protected Git objects verified: {protected_count}")
+    print(f"Version 1 replication objects verified: {v1_count}")
+    print(f"Annotated Version 2 checkpoint tags verified: {len(CHECKPOINTS)}")
+    print(f"Version 2 protected Git objects verified: {protected_count}")
     print("D5 protected files changed: False")
     print("V2.1 extension used: False")
     return 0
