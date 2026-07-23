@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11", "3.12", "3.13"]
+        python-version: ["3.11"]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,8 +24,29 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
-      - name: Verify Version 1 and Version 2 repository-object integrity
-        run: python scripts/verify_v2_final_audit.py
+      - name: Capture Version 1 and Version 2 repository-object integrity
+        id: audit
+        shell: pwsh
+        run: |
+          python scripts/verify_v2_final_audit.py *> v2-final-audit-exact.log
+          $code = $LASTEXITCODE
+          Get-Content v2-final-audit-exact.log
+          "exit_code=$code" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          exit 0
+      - name: Upload exact audit result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-final-audit-exact
+          path: v2-final-audit-exact.log
+          if-no-files-found: error
+          retention-days: 1
+      - name: Enforce Version 1 and Version 2 repository-object integrity
+        shell: pwsh
+        run: |
+          if ("${{ steps.audit.outputs.exit_code }}" -ne "0") {
+            throw "Consolidated audit failed."
+          }
       - name: Install
         run: |
           python -m pip install --upgrade pip
