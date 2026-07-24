@@ -1,0 +1,39 @@
+{
+  "gate": "V3-2B",
+  "schema_version": "v3.market-structure-extension.v1",
+  "baseline_release": "v2.0.0",
+  "baseline_commit": "5a07299367b80c3940e652e7bbdd208ce86ba5ef",
+  "branch": "research/v3-adaptive-signal-validity",
+  "parent_gate": "V3-2",
+  "parent_lock": "V3_G2_SPECTRAL_ENGINE_LOCK.json",
+  "parent_lock_blob_sha": "8e61ed40aa132802e9f743c1117ff27ec0150386",
+  "status": "IMPLEMENTATION_COMPLETE_AND_LOCKED",
+  "protected_files": {
+    "RUN_V3_G2B_MARKET_STRUCTURE.ps1": "2b9c03f687fc612dce59475e2f05cbcd7341b0d0",
+    "RUN_V3_G2B_MARKET_STRUCTURE.sh": "9c560aadd051d37286270cf5bfbc652f535f2d24",
+    "configs/v3_market_structure_example.json": "5b86eb95fcf591e11e3cf85cb2afde4a1631be3a",
+    "docs/V3_MARKET_STRUCTURE_EXTENSION.md": "9280c2938799ec2a15c77775e39bbc64a247b161",
+    "scripts/run_v3_market_structure.py": "1cdcd4fe229c9418d849e400964673367d617b87",
+    "scripts/verify_v3_g2b_market_structure.py": "444eb05f425a43602dbb5dd47a45ea3f7d409116",
+    "src/shockbridge_signal_validity/v3/market_structure.py": "c9b0d0bf63b75fecd57de2682db67048218a9872",
+    "src/shockbridge_signal_validity/v3/market_structure_runner.py": "0404cf69a40bdc2e5d0421ed70e6452b330afcd0",
+    "tests/test_v3_market_structure.py": "14c22f114759875f16f9ca287b8aa7def08a1113",
+    "tests/test_v3_market_structure_runner.py": "1b7cf78e14acb901e3f35e51b38637aea3015cc6"
+  },
+  "acceptance_evidence": {
+    "isolated_extension_tests_passed": 10,
+    "identity_network_fixture": true,
+    "common_mode_network_fixture": true,
+    "block_community_fixture": true,
+    "deterministic_minimum_spanning_tree": true,
+    "future_mutation_invariance": true,
+    "insufficient_coverage_fails_closed": true,
+    "dynamic_feature_contract": true,
+    "deterministic_manifest": true,
+    "runner_outputs_verified": true,
+    "automatic_panel_selection_performed": false,
+    "automatic_window_selection_performed": false,
+    "automatic_network_threshold_selection_performed": false,
+    "full_repository_ci_deferred_to_audit_gate": true
+  }
+}
