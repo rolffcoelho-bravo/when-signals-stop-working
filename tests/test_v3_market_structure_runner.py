@@ -3,10 +3,35 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 from shockbridge_signal_validity.v3.market_structure_runner import run_market_structure
-from tests.test_v3_market_structure import synthetic_panel
+
+
+def synthetic_panel(periods: int = 60) -> pd.DataFrame:
+    timestamps = pd.date_range("2026-01-01", periods=periods, freq="4h", tz="UTC")
+    rows: list[dict[str, object]] = []
+    common = np.sin(np.linspace(0.0, 7.0, periods)) * 0.003
+    for index, asset in enumerate(("SOL", "BTC", "ETH", "BNB")):
+        returns = common + np.cos(
+            np.linspace(0.0, 4.0 + index, periods)
+        ) * (0.0005 + index * 0.0001)
+        closes = (100.0 + index * 10.0) * np.exp(np.cumsum(returns))
+        for timestamp, close in zip(timestamps, closes):
+            rows.append(
+                {
+                    "timestamp": timestamp,
+                    "asset": asset,
+                    "venue": "fixture",
+                    "open": close * 0.999,
+                    "high": close * 1.002,
+                    "low": close * 0.998,
+                    "close": close,
+                    "volume": 1000.0 + index,
+                }
+            )
+    return pd.DataFrame(rows)
 
 
 def test_runner_emits_complete_evidence_package(tmp_path: Path) -> None:
