@@ -1,0 +1,30 @@
+{
+  "input_path": "outputs/v3/data_adapter/canonical_market_data.csv",
+  "timezone": "UTC",
+  "panel": {
+    "members": [
+      "SOL/USDT@binance",
+      "BTC/USDT@binance",
+      "ETH/USDT@binance",
+      "BNB/USDT@binance"
+    ],
+    "dependence_windows": [30, 60, 120],
+    "minimum_complete_observations": 20,
+    "minimum_window_coverage": 0.8,
+    "estimator": "shrinkage",
+    "ewma_decay": 0.94,
+    "shrinkage_alpha": 0.1,
+    "network_threshold": 0.5
+  },
+  "causal_features": {
+    "volatility_windows": [6, 18, 42],
+    "stress_window": 42,
+    "volume_window": 42
+  },
+  "network": {
+    "threshold": 0.5,
+    "use_absolute_threshold": true,
+    "community_resolution": 1.0,
+    "dynamic_window": 5
+  }
+}
