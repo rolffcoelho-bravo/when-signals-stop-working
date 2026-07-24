@@ -396,7 +396,9 @@ def network_metrics_from_correlation(
 
     distance = correlation_distance(matrix)
     tree, tree_edges = minimum_spanning_tree(distance)
-    tree_binary = _binary_adjacency(tree)
+    tree_binary = np.zeros_like(tree, dtype=int)
+    for left, right, _ in tree_edges:
+        tree_binary[left, right] = tree_binary[right, left] = 1
     tree_degree = tree_binary.sum(axis=1).astype(float)
     tree_for_paths = np.where(tree_binary > 0, np.maximum(tree, 1e-12), 0.0)
     tree_shortest = _floyd_warshall(tree_for_paths)
