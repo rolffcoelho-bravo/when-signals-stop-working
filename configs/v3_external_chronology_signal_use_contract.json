@@ -1,0 +1,229 @@
+{
+  "schema_version": "v3.external-chronology-signal-use.v1",
+  "gate": "V3-4A",
+  "status": "INDEPENDENT_CHRONOLOGY_AND_SIGNAL_USE_CONTRACT_FROZEN",
+  "upstream_contract": {
+    "baseline_release": "v2.0.0",
+    "baseline_commit": "5a07299367b80c3940e652e7bbdd208ce86ba5ef",
+    "branch": "research/v3-adaptive-signal-validity",
+    "parent_gate": "V3-3",
+    "parent_lock": "V3_G3_PANIC_REGIME_LOCK.json",
+    "parent_lock_blob_sha": "0e35908c03e36d8caeb832a078ff0566ef4e2ea4",
+    "version_1_and_version_2_determinations_immutable": true,
+    "v3_3_models_thresholds_and_protected_objects_immutable": true,
+    "regime_outputs_may_not_be_retrained_or_relabelled": true
+  },
+  "scientific_question": {
+    "primary": "Do pre-existing panic-consistent regime probabilities and causal state transitions align with independently documented market dislocations under a chronology compiled without access to model outputs?",
+    "secondary": "Does independently inferred market state change the admissible interpretation, reliability assessment, or permitted use of a technical signal without rescuing or revising its frozen unconditional verdict?",
+    "chronology_is_ground_truth_label": false,
+    "claim_boundary": "External chronology is independent validation evidence for temporal alignment and decision-use governance. It is not a complete census of panic, a supervised target for retraining, or proof that every model alert corresponds to an observed crisis.",
+    "prohibited_claims": [
+      "psychological panic observed directly",
+      "causal event attribution from temporal overlap alone",
+      "signal degradation when unconditional value was never established",
+      "RSI rescue through regime conditioning",
+      "Bollinger rescue through regime conditioning",
+      "model superiority selected from chronology alignment"
+    ]
+  },
+  "chronology_registry": {
+    "construction_order": "chronology_registry_locked_before_model_output_overlay",
+    "model_outputs_hidden_during_compilation": true,
+    "model_derived_events_prohibited": true,
+    "retrospective_event_deletion_prohibited": true,
+    "retrospective_event_boundary_tuning_prohibited": true,
+    "timezone": "UTC",
+    "required_event_fields": [
+      "event_id",
+      "event_type",
+      "start_timestamp",
+      "end_timestamp",
+      "source_id",
+      "source_type",
+      "source_locator",
+      "source_publication_timestamp",
+      "documentation_status",
+      "severity_class",
+      "timestamp_precision",
+      "boundary_uncertainty",
+      "notes"
+    ],
+    "allowed_source_types": [
+      "regulator_or_central_bank",
+      "exchange_or_venue_notice",
+      "clearing_or_settlement_notice",
+      "official_market_operator",
+      "peer_reviewed_or_institutional_research",
+      "reputable_time_stamped_news_archive"
+    ],
+    "event_taxonomy": [
+      "LIQUIDITY_DISLOCATION",
+      "FUNDING_STRESS",
+      "LIQUIDATION_CASCADE",
+      "VOLATILITY_SHOCK",
+      "DOWNSIDE_DISLOCATION",
+      "MARKET_STRUCTURE_BREAK",
+      "EXCHANGE_OR_VENUE_DISRUPTION",
+      "CROSS_MARKET_CONTAGION"
+    ],
+    "severity_classes": [
+      "DOCUMENTED",
+      "MAJOR",
+      "SYSTEMIC"
+    ],
+    "documentation_statuses": [
+      "CONFIRMED",
+      "BOUNDARY_UNCERTAIN",
+      "SOURCE_CONFLICT"
+    ],
+    "duplicate_resolution": "retain_one_canonical_event_with_all_source_ids_and_auditable_merge_log",
+    "source_conflict_policy": "retain_conflict_and_exclude_from_primary_timing_metric_until adjudicated without model access"
+  },
+  "event_alignment_evaluation": {
+    "registered_models": [
+      "MONOTONE_MECHANISM_SCORE_V1",
+      "CAUSAL_GAUSSIAN_HMM_V1"
+    ],
+    "transparent_challenger_reported_separately": true,
+    "central_operational_thresholds_inherited_from_v3_3": true,
+    "threshold_selection_against_chronology_prohibited": true,
+    "lead_horizons_observations": [
+      1,
+      3,
+      6,
+      12
+    ],
+    "decay_horizons_observations": [
+      1,
+      3,
+      6,
+      12
+    ],
+    "primary_metrics": [
+      "transition_capture_rate",
+      "event_overlap_fraction",
+      "lead_time_distribution",
+      "false_alert_burden",
+      "post_event_decay",
+      "event_probability_rank_shift",
+      "cross_model_disagreement_during_events"
+    ],
+    "chronology_completeness_adjustment_required": true,
+    "classification_metrics_prohibited_without_complete_event_registry": true,
+    "matched_control_design": {
+      "method": "calendar_blocked_non_event_windows",
+      "same_asset_venue_and_frequency_required": true,
+      "event_exclusion_buffer_observations": 12,
+      "model_probability_matching_prohibited": true,
+      "outcome_based_control_selection_prohibited": true
+    },
+    "causal_direction_claims_prohibited": true,
+    "model_ranking_or_selection_prohibited": true
+  },
+  "signal_use_eligibility": {
+    "entry_rule": "unconditional_incremental_value_must_be_established_under_a_frozen_pre_regime_contract_before_conditional_degradation_testing",
+    "eligibility_states": [
+      "ELIGIBLE_FOR_CONDITIONAL_RELIABILITY_TEST",
+      "INELIGIBLE_BASELINE_NOT_ESTABLISHED",
+      "DESCRIPTIVE_REGIME_SENSITIVITY_ONLY"
+    ],
+    "frozen_signal_statuses": {
+      "RSI": {
+        "version_2_status": "NO_PIPELINE_ADMITTED",
+        "eligibility": "INELIGIBLE_BASELINE_NOT_ESTABLISHED",
+        "permitted_scope": "DESCRIPTIVE_REGIME_SENSITIVITY_ONLY"
+      },
+      "BOLLINGER": {
+        "version_2_status": "NO_INCREMENTAL_EVIDENCE",
+        "eligibility": "INELIGIBLE_BASELINE_NOT_ESTABLISHED",
+        "permitted_scope": "DESCRIPTIVE_REGIME_SENSITIVITY_ONLY"
+      }
+    },
+    "conditional_performance_claim_requires_eligible_signal": true,
+    "permitted_use_states": [
+      "UNASSESSED",
+      "RESEARCH_DIAGNOSTIC_ONLY",
+      "NO_CHANGE_SUPPORTED",
+      "RESTRICTED_USE",
+      "SUSPEND_USE"
+    ],
+    "restricted_or_suspend_requires_established_baseline_and_predeclared_loss_of_reliability": true,
+    "regime_conditioning_cannot_promote_signal": true,
+    "regime_conditioning_cannot_change_frozen_unconditional_verdict": true
+  },
+  "conditional_diagnostic_design": {
+    "signal_parameters_frozen": true,
+    "signal_retraining_or_retuning_prohibited": true,
+    "regime_threshold_retuning_prohibited": true,
+    "primary_estimands": [
+      "benchmark_relative_loss_difference_by_predeclared_regime",
+      "calibration_change_by_predeclared_regime",
+      "economic_value_change_by_predeclared_regime",
+      "signal_concentration_change_by_predeclared_regime"
+    ],
+    "descriptive_only_for_current_rsi_and_bollinger": true,
+    "minimum_regime_observations": 50,
+    "minimum_regime_episodes": 5,
+    "insufficient_evidence_state": "INSUFFICIENT_CONDITIONAL_EVIDENCE",
+    "dependence_aware_inference_required": true,
+    "chronological_evaluation_required": true
+  },
+  "multiplicity_and_reporting": {
+    "primary_hypotheses_predeclared_before_overlay": true,
+    "familywise_method": "holm",
+    "dependence_aware_confidence_intervals_required": true,
+    "raw_and_adjusted_results_reported": true,
+    "all_registered_models_and_horizons_reported": true,
+    "favourable_subgroup_suppression_prohibited": true,
+    "negative_and_insufficient_results_retained": true
+  },
+  "required_outputs": [
+    "external_chronology.csv",
+    "chronology_manifest.json",
+    "chronology_provenance.json",
+    "chronology_merge_log.csv",
+    "event_alignment.csv",
+    "lead_lag_diagnostics.json",
+    "false_alert_burden.json",
+    "chronology_validation_report.json",
+    "signal_use_eligibility.json",
+    "conditional_signal_diagnostics.csv",
+    "v3_g4_decision_report.json"
+  ],
+  "subgate_sequence": [
+    {
+      "gate": "V3-4A",
+      "name": "Independent chronology and signal-use eligibility contract",
+      "may_access_model_outputs": false
+    },
+    {
+      "gate": "V3-4B",
+      "name": "Chronology compilation and provenance lock",
+      "may_access_model_outputs": false
+    },
+    {
+      "gate": "V3-4C",
+      "name": "Independent event-alignment evaluation",
+      "may_access_model_outputs": true
+    },
+    {
+      "gate": "V3-4D",
+      "name": "Conditional signal-use diagnostics and final decision lock",
+      "may_access_model_outputs": true
+    }
+  ],
+  "prohibitions": [
+    "modification of Version 1 or Version 2 determinations",
+    "modification of Gate V3-3 probabilities after chronology access",
+    "chronology-driven threshold selection",
+    "chronology-driven model selection",
+    "automatic model ensemble",
+    "consensus probability",
+    "retrospective event deletion after model overlay",
+    "retrospective event-boundary tuning after model overlay",
+    "RSI or Bollinger rescue",
+    "claiming signal failure when unconditional value was not established",
+    "using descriptive conditional results as predictive admission evidence"
+  ]
+}
