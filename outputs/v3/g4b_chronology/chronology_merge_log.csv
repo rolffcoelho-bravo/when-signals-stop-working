@@ -1,0 +1,28 @@
+candidate_event_id,canonical_event_id,source_id,action,rationale,model_outputs_consulted
+EVT-2021-05-19-C01,EVT-2021-05-19,SRC-001,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2021-09-07-C01,EVT-2021-09-07,SRC-002,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2021-12-04-C01,EVT-2021-12-04,SRC-003,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2022-05-TERRA-C01,EVT-2022-05-TERRA,SRC-004,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2022-05-TERRA-C02,EVT-2022-05-TERRA,SRC-005,MERGED_SUPPORTING_SOURCE,Same externally documented incident; retained as supporting provenance without changing canonical boundary,false
+EVT-2022-06-CREDIT-C01,EVT-2022-06-CREDIT,SRC-006,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2022-06-CREDIT-C02,EVT-2022-06-CREDIT,SRC-007,MERGED_SUPPORTING_SOURCE,Same externally documented incident; retained as supporting provenance without changing canonical boundary,false
+EVT-2022-11-FTX-C01,EVT-2022-11-FTX,SRC-008,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2022-11-FTX-C02,EVT-2022-11-FTX,SRC-009,MERGED_SUPPORTING_SOURCE,Same externally documented incident; retained as supporting provenance without changing canonical boundary,false
+EVT-2023-03-USDC-C01,EVT-2023-03-USDC,SRC-010,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2023-03-USDC-C02,EVT-2023-03-USDC,SRC-011,MERGED_SUPPORTING_SOURCE,Same externally documented incident; retained as supporting provenance without changing canonical boundary,false
+EVT-2023-08-17-C01,EVT-2023-08-17,SRC-012,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2023-08-17-C02,EVT-2023-08-17,SRC-013,MERGED_SUPPORTING_SOURCE,Same externally documented incident; retained as supporting provenance without changing canonical boundary,false
+EVT-2024-03-05-C01,EVT-2024-03-05,SRC-014,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2024-04-13-C01,EVT-2024-04-13,SRC-015,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2024-08-05-C01,EVT-2024-08-05,SRC-016,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2024-08-05-C02,EVT-2024-08-05,SRC-017,MERGED_SUPPORTING_SOURCE,Same externally documented incident; retained as supporting provenance without changing canonical boundary,false
+EVT-2024-12-05-C01,EVT-2024-12-05,SRC-018,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2025-02-03-C01,EVT-2025-02-03,SRC-019,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2025-02-03-C02,EVT-2025-02-03,SRC-020,MERGED_SUPPORTING_SOURCE,Same externally documented incident; retained as supporting provenance without changing canonical boundary,false
+EVT-2025-02-21-BYBIT-C01,EVT-2025-02-21-BYBIT,SRC-021,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2025-02-21-BYBIT-C02,EVT-2025-02-21-BYBIT,SRC-022,MERGED_SUPPORTING_SOURCE,Same externally documented incident; retained as supporting provenance without changing canonical boundary,false
+EVT-2025-10-10-C01,EVT-2025-10-10,SRC-023,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2026-02-BLOCKFILLS-C01,EVT-2026-02-BLOCKFILLS,SRC-027,RETAINED_AS_CANONICAL,Primary documentary record; boundary remains uncertain because pause start was reported retrospectively,false
+EVT-2026-02-RISKOFF-C01,EVT-2026-02-RISKOFF,SRC-024,RETAINED_AS_CANONICAL,Primary documentary record,false
+EVT-2026-02-RISKOFF-C02,EVT-2026-02-RISKOFF,SRC-025,MERGED_SUPPORTING_SOURCE,Same externally documented incident; retained as supporting provenance without changing canonical boundary,false
+EVT-2026-02-RISKOFF-C03,EVT-2026-02-RISKOFF,SRC-026,MERGED_SUPPORTING_SOURCE,Same externally documented incident; retained as supporting provenance without changing canonical boundary,false
