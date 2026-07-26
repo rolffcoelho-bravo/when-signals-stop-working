@@ -19,6 +19,23 @@ V3-3D applies four separate controls:
 
 Any lock modification after the governed finalization commit is rejected, including a later change followed by a reversion. This does not weaken historical locks. It distinguishes pre-freeze finalization from post-freeze tampering.
 
+## External chronology contract
+
+V3-3C records external chronology through two frozen fields:
+
+```text
+external_chronology_validation_complete = false
+external_chronology_deferred_to_later_robustness = true
+```
+
+The absence of an `external_chronology_used` field is not evidence of use. V3-3D therefore requires the two frozen fields above and additionally rejects any explicit `external_chronology_used = true` value. Missing completion or deferral fields fail closed.
+
+This preserves the scientific distinction between:
+
+- chronology validation not yet executed;
+- chronology validation deliberately deferred;
+- external chronology actually used in estimation, selection, or interpretation.
+
 ## Integrated acceptance suite
 
 The runner executes:
@@ -28,15 +45,16 @@ tests/test_v3_panic_regime_contract.py
 tests/test_v3_panic_regime.py
 tests/test_v3_panic_regime_diagnostics.py
 tests/test_v3_lock_lineage.py
+tests/test_v3_g3_final_acceptance.py
 ```
 
 Expected total:
 
 ```text
-41 passed
+46 passed
 ```
 
-The lineage suite now verifies:
+The lineage and final-acceptance suites verify:
 
 - intentional latest-owner supersession;
 - draft lock finalization before child freeze;
@@ -44,14 +62,18 @@ The lineage suite now verifies:
 - rejection of current protected-object mismatch;
 - rejection of modification to the latest unreferenced lock;
 - ASCII-safe Windows PowerShell execution;
-- successful audit of the actual repository V3-1 through V3-3C lock chain.
+- successful audit of the actual repository V3-1 through V3-3C lock chain;
+- acceptance of the exact frozen deferred-chronology contract;
+- rejection of completed, non-deferred, missing, or explicitly used chronology states.
 
 It then executes the V3-3A, V3-3B, and V3-3C portable lock verifiers and confirms:
 
 - no automatic model selection;
 - no automatic ensemble;
 - no consensus probability;
-- no external chronology use;
+- external chronology validation remains incomplete;
+- external chronology remains explicitly deferred;
+- external chronology was not used;
 - the eight required V3-3 outputs remain frozen;
 - Version 1 and Version 2 determinations remain unchanged.
 
@@ -63,7 +85,7 @@ The runner writes:
 outputs/v3/g3_final_acceptance/final_acceptance_report.json
 ```
 
-The report records creation commits, governed finalization commits, authoritative lock blobs, and the source of each finalization anchor.
+The report records creation commits, governed finalization commits, authoritative lock blobs, the source of each finalization anchor, and the three chronology-governance fields.
 
 The final files:
 
