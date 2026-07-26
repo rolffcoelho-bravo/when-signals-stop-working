@@ -22,7 +22,7 @@ VERIFIERS = (
     "scripts/verify_v3_g3b_probabilistic_engine.py",
     "scripts/verify_v3_g3c_governance.py",
 )
-EXPECTED_TEST_COUNT = 37
+EXPECTED_TEST_COUNT = 38
 EXPECTED_BRANCH = "research/v3-adaptive-signal-validity"
 
 
