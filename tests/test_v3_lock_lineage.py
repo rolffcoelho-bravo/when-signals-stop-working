@@ -12,6 +12,9 @@ from shockbridge_signal_validity.v3.lock_lineage import (
 )
 
 
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+
+
 def _git(root: Path, *args: str) -> str:
     return subprocess.run(
         ["git", *args],
@@ -106,3 +109,12 @@ def test_lineage_rejects_modified_lock_file(tmp_path: Path) -> None:
 
     with pytest.raises(LockLineageError, match="modified after creation"):
         audit_lock_lineage(root, ("L1.json",))
+
+
+def test_final_acceptance_powershell_wrapper_is_ascii_safe() -> None:
+    path = REPOSITORY_ROOT / "RUN_V3_G3_FINAL_ACCEPTANCE.ps1"
+    raw = path.read_bytes()
+    text = raw.decode("ascii")
+    assert "python scripts/run_v3_g3_final_acceptance.py --report $Report" in text
+    assert "GATE V3-3D - FINAL ACCEPTANCE AND LOCK AUTHORIZATION" in text
+    assert text.count('"') % 2 == 0
