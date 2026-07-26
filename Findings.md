@@ -226,12 +226,32 @@ The portable V3-3A, V3-3B, and V3-3C lock verifiers all passed under the integra
 
 ---
 
+## Version 3 Gate V3-4A — Independent chronology and signal-use eligibility contract
+
+### Methodological contribution V3-G4A-M1
+
+The external chronology must be compiled and locked before model-output overlay. Model-derived event inclusion, chronology-driven threshold selection, chronology-driven model selection, retrospective event deletion, and retrospective event-boundary tuning are prohibited. This creates an independent validation layer rather than an event list reconstructed around model peaks.
+
+### Methodological contribution V3-G4A-M2
+
+Conditional signal degradation is admissible only when unconditional incremental value was established under a frozen pre-regime contract. Because RSI received `NO_PIPELINE_ADMITTED` and Bollinger received `NO_INCREMENTAL_EVIDENCE`, both remain `INELIGIBLE_BASELINE_NOT_ESTABLISHED` and may enter only descriptive regime-sensitivity analysis. Regime conditioning cannot promote either signal or revise either frozen verdict.
+
+### Methodological contribution V3-G4A-M3
+
+The event-alignment protocol separates temporal validation from supervised classification. External chronology is treated as incomplete evidence rather than complete ground truth, and the registered metrics focus on transition capture, overlap, lead time, false-alert burden, post-event decay, probability-rank shift, and cross-model disagreement. Classification metrics remain prohibited unless chronology completeness is established in a later gate.
+
+### Validation finding V3-G4A-V1
+
+The isolated contract suite completed with `14 passed`. Exact Git blob matching confirmed that the tested contract, validator, and test objects are the objects committed to the repository. Mutation tests fail closed when the parent lock changes, model outputs become visible during chronology compilation, chronology-driven threshold selection is permitted, regime conditioning can promote a signal, or signal retuning is allowed.
+
+---
+
 ## Findings pending later gates
 
 The following are approved development directions but are not yet findings:
 
 - external event-chronology validation;
-- conditional RSI and Bollinger validity under the inferred regimes;
+- conditional RSI and Bollinger descriptive diagnostics under the inferred regimes;
 - empirical real-market regime probabilities and episode interpretation;
 - cross-asset and cross-venue transportability of the regime engine.
 
