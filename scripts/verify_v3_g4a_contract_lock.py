@@ -63,10 +63,11 @@ def main() -> int:
         fail("Gate V3-4A acceptance evidence is missing.")
 
     expected_values = {
-        "isolated_contract_tests_passed": 14,
+        "isolated_contract_tests_passed": 15,
         "tested_contract_blob_matches_repository": True,
         "tested_validator_blob_matches_repository": True,
         "tested_test_blob_matches_repository": True,
+        "launcher_user_site_compatibility_verified": True,
         "parent_v3_3_lock_verified": True,
         "model_outputs_accessed": False,
         "chronology_compiled": False,
@@ -92,7 +93,8 @@ def main() -> int:
     print("Gate V3-4A chronology and signal-use contract lock verification passed.")
     print("Status: INDEPENDENT_CHRONOLOGY_AND_SIGNAL_USE_CONTRACT_COMPLETE_AND_LOCKED")
     print(f"Protected files verified: {len(protected)}")
-    print("Isolated contract tests: 14 passed")
+    print("Isolated contract tests: 15 passed")
+    print("Launcher user-site compatibility verified: True")
     print("Model outputs accessed: False")
     print("Chronology compiled: False")
     print("RSI rescue permitted: False")
