@@ -1,0 +1,218 @@
+[
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2021-05-19-C01",
+    "canonical_event_id": "EVT-2021-05-19",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-001"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2021-09-07-C01",
+    "canonical_event_id": "EVT-2021-09-07",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-002"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2021-12-04-C01",
+    "canonical_event_id": "EVT-2021-12-04",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-003"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2022-05-TERRA-C01",
+    "canonical_event_id": "EVT-2022-05-TERRA",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-004"
+  },
+  {
+    "action": "MERGED_SUPPORTING_SOURCE",
+    "candidate_event_id": "EVT-2022-05-TERRA-C02",
+    "canonical_event_id": "EVT-2022-05-TERRA",
+    "model_outputs_consulted": "false",
+    "rationale": "Same externally documented incident; retained as supporting provenance without changing canonical boundary",
+    "source_id": "SRC-005"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2022-06-CREDIT-C01",
+    "canonical_event_id": "EVT-2022-06-CREDIT",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-006"
+  },
+  {
+    "action": "MERGED_SUPPORTING_SOURCE",
+    "candidate_event_id": "EVT-2022-06-CREDIT-C02",
+    "canonical_event_id": "EVT-2022-06-CREDIT",
+    "model_outputs_consulted": "false",
+    "rationale": "Same externally documented incident; retained as supporting provenance without changing canonical boundary",
+    "source_id": "SRC-007"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2022-11-FTX-C01",
+    "canonical_event_id": "EVT-2022-11-FTX",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-008"
+  },
+  {
+    "action": "MERGED_SUPPORTING_SOURCE",
+    "candidate_event_id": "EVT-2022-11-FTX-C02",
+    "canonical_event_id": "EVT-2022-11-FTX",
+    "model_outputs_consulted": "false",
+    "rationale": "Same externally documented incident; retained as supporting provenance without changing canonical boundary",
+    "source_id": "SRC-009"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2023-03-USDC-C01",
+    "canonical_event_id": "EVT-2023-03-USDC",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-010"
+  },
+  {
+    "action": "MERGED_SUPPORTING_SOURCE",
+    "candidate_event_id": "EVT-2023-03-USDC-C02",
+    "canonical_event_id": "EVT-2023-03-USDC",
+    "model_outputs_consulted": "false",
+    "rationale": "Same externally documented incident; retained as supporting provenance without changing canonical boundary",
+    "source_id": "SRC-011"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2023-08-17-C01",
+    "canonical_event_id": "EVT-2023-08-17",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-012"
+  },
+  {
+    "action": "MERGED_SUPPORTING_SOURCE",
+    "candidate_event_id": "EVT-2023-08-17-C02",
+    "canonical_event_id": "EVT-2023-08-17",
+    "model_outputs_consulted": "false",
+    "rationale": "Same externally documented incident; retained as supporting provenance without changing canonical boundary",
+    "source_id": "SRC-013"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2024-03-05-C01",
+    "canonical_event_id": "EVT-2024-03-05",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-014"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2024-04-13-C01",
+    "canonical_event_id": "EVT-2024-04-13",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-015"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2024-08-05-C01",
+    "canonical_event_id": "EVT-2024-08-05",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-016"
+  },
+  {
+    "action": "MERGED_SUPPORTING_SOURCE",
+    "candidate_event_id": "EVT-2024-08-05-C02",
+    "canonical_event_id": "EVT-2024-08-05",
+    "model_outputs_consulted": "false",
+    "rationale": "Same externally documented incident; retained as supporting provenance without changing canonical boundary",
+    "source_id": "SRC-017"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2024-12-05-C01",
+    "canonical_event_id": "EVT-2024-12-05",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-018"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2025-02-03-C01",
+    "canonical_event_id": "EVT-2025-02-03",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-019"
+  },
+  {
+    "action": "MERGED_SUPPORTING_SOURCE",
+    "candidate_event_id": "EVT-2025-02-03-C02",
+    "canonical_event_id": "EVT-2025-02-03",
+    "model_outputs_consulted": "false",
+    "rationale": "Same externally documented incident; retained as supporting provenance without changing canonical boundary",
+    "source_id": "SRC-020"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2025-02-21-BYBIT-C01",
+    "canonical_event_id": "EVT-2025-02-21-BYBIT",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-021"
+  },
+  {
+    "action": "MERGED_SUPPORTING_SOURCE",
+    "candidate_event_id": "EVT-2025-02-21-BYBIT-C02",
+    "canonical_event_id": "EVT-2025-02-21-BYBIT",
+    "model_outputs_consulted": "false",
+    "rationale": "Same externally documented incident; retained as supporting provenance without changing canonical boundary",
+    "source_id": "SRC-022"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2025-10-10-C01",
+    "canonical_event_id": "EVT-2025-10-10",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-023"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2026-02-BLOCKFILLS-C01",
+    "canonical_event_id": "EVT-2026-02-BLOCKFILLS",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record; boundary remains uncertain because pause start was reported retrospectively",
+    "source_id": "SRC-027"
+  },
+  {
+    "action": "RETAINED_AS_CANONICAL",
+    "candidate_event_id": "EVT-2026-02-RISKOFF-C01",
+    "canonical_event_id": "EVT-2026-02-RISKOFF",
+    "model_outputs_consulted": "false",
+    "rationale": "Primary documentary record",
+    "source_id": "SRC-024"
+  },
+  {
+    "action": "MERGED_SUPPORTING_SOURCE",
+    "candidate_event_id": "EVT-2026-02-RISKOFF-C02",
+    "canonical_event_id": "EVT-2026-02-RISKOFF",
+    "model_outputs_consulted": "false",
+    "rationale": "Same externally documented incident; retained as supporting provenance without changing canonical boundary",
+    "source_id": "SRC-025"
+  },
+  {
+    "action": "MERGED_SUPPORTING_SOURCE",
+    "candidate_event_id": "EVT-2026-02-RISKOFF-C03",
+    "canonical_event_id": "EVT-2026-02-RISKOFF",
+    "model_outputs_consulted": "false",
+    "rationale": "Same externally documented incident; retained as supporting provenance without changing canonical boundary",
+    "source_id": "SRC-026"
+  }
+]
