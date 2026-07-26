@@ -206,11 +206,30 @@ All sensitivity alternatives are reported without model selection. External mark
 
 ---
 
+## Version 3 Gate V3-3D — Final acceptance and protected-object lock
+
+### Governance contribution V3-G3D-M1
+
+The final acceptance architecture distinguishes a lock's creation commit from its governed finalization commit. Parent locks are anchored to the exact `parent_lock_blob_sha` recorded by the next gate when that reference exists, while the latest unreferenced lock remains anchored to its creation blob. This permits legitimate pre-freeze finalization without treating it as corruption and still rejects every modification after the governed finalization boundary.
+
+### Validation finding V3-G3D-V1
+
+The integrated Gate V3-3 acceptance suite completed with `46 passed`. The audit verified 59 historical protected objects at their governed finalization points, 58 current objects against their latest owning locks, and one intentional supersession of `src/shockbridge_signal_validity/v3/__init__.py` from V3-1 to V3-2.
+
+### Governance contribution V3-G3D-M2
+
+The final gate preserves an explicit three-state chronology contract: external chronology validation is incomplete, deliberately deferred to the later robustness gate, and not used in estimation, selection, or interpretation. Missing or contradictory chronology fields fail closed.
+
+### Reproducibility finding V3-G3D-V2
+
+The portable V3-3A, V3-3B, and V3-3C lock verifiers all passed under the integrated runner. Automatic model selection, automatic ensembles, and consensus probability remained prohibited, and the frozen Version 1 and Version 2 determinations were not modified.
+
+---
+
 ## Findings pending later gates
 
 The following are approved development directions but are not yet findings:
 
-- final integrated V3-3 protected-object acceptance and lock;
 - external event-chronology validation;
 - conditional RSI and Bollinger validity under the inferred regimes;
 - empirical real-market regime probabilities and episode interpretation;
