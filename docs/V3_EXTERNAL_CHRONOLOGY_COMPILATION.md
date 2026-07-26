@@ -127,7 +127,7 @@ The cross-gate audit separately verifies:
 2. every V3-4A protected object at the V3-4A finalization-preparation commit;
 3. exact authoritative lock blobs and the parent-lock chain;
 4. every current object against its latest owning lock;
-5. governed supersession of `Findings.md` from V3-3 to V3-4A.
+5. governed supersession of `Findings.md` from V3-3 to V3-4A and then V3-4B.
 
 The frozen V3-3 lock and verifier are not rewritten.
 
