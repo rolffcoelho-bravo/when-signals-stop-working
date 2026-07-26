@@ -1,0 +1,236 @@
+{
+  "schema_version": "v3.panic-regime-identification.v1",
+  "gate": "V3-3A",
+  "status": "IDENTIFICATION_CONTRACT_FROZEN",
+  "scientific_target": {
+    "estimand": "P(R_t = PANIC_CONSISTENT_REGIME | F_t)",
+    "latent_state": true,
+    "information_set": "all observations measurable at or before timestamp t",
+    "claim_boundary": "The output is a model-implied probability that contemporaneous market evidence is consistent with a broad panic-transmission mechanism. It is not a direct observation of investor psychology, a crash forecast, or an externally calibrated event frequency unless an external label registry is separately approved.",
+    "prohibited_claims": [
+      "direct observation of investor panic",
+      "probability of a future crash",
+      "probability of a crisis declaration",
+      "volatility-only panic classification",
+      "drawdown-only panic classification",
+      "causal psychological attribution"
+    ]
+  },
+  "upstream_contract": {
+    "baseline_release": "v2.0.0",
+    "baseline_commit": "5a07299367b80c3940e652e7bbdd208ce86ba5ef",
+    "branch": "research/v3-adaptive-signal-validity",
+    "parent_gate": "V3-2B",
+    "parent_lock": "V3_G2B_MARKET_STRUCTURE_LOCK.json",
+    "parent_lock_blob_sha": "1aa5e990c9d352d50b1d8da265811a16bca00bac",
+    "v3_2_and_v3_2b_protected_objects_immutable": true,
+    "version_1_and_version_2_determinations_immutable": true,
+    "indicator_outcomes_may_not_identify_regime": true
+  },
+  "mechanism_families": [
+    {
+      "id": "spectral",
+      "symbol": "S_t",
+      "source_gates": ["V3-2", "V3-2B"],
+      "features": [
+        {"name": "dominant_eigenvalue_share", "panic_direction": 1},
+        {"name": "normalized_eigenvalue_gap", "panic_direction": 1},
+        {"name": "participation_ratio", "panic_direction": -1},
+        {"name": "spectral_entropy", "panic_direction": -1},
+        {"name": "first_eigenvector_concentration", "panic_direction": 1},
+        {"name": "spectral_instability", "panic_direction": 1}
+      ],
+      "aggregation": "median_of_available_directional_scores"
+    },
+    {
+      "id": "network",
+      "symbol": "N_t",
+      "source_gates": ["V3-2B"],
+      "features": [
+        {"name": "network_density", "panic_direction": 1},
+        {"name": "network_average_clustering", "panic_direction": 1},
+        {"name": "network_modularity", "panic_direction": -1},
+        {"name": "network_connectivity_share", "panic_direction": 1},
+        {"name": "contagion_radius", "panic_direction": 1},
+        {"name": "betweenness_centrality_concentration", "panic_direction": 1},
+        {"name": "eigenvector_centrality_concentration", "panic_direction": 1},
+        {"name": "mst_total_distance", "panic_direction": -1}
+      ],
+      "aggregation": "median_of_available_directional_scores",
+      "direction_resolution_rule": "Only canonical V3-2B variables or predeclared monotone transformations may be used. Ambiguous raw topology measures fail closed."
+    },
+    {
+      "id": "liquidity",
+      "symbol": "L_t",
+      "source_gates": ["V3-1", "V3-2"],
+      "features": [
+        {"name": "bid_ask_spread_stress", "panic_direction": 1},
+        {"name": "order_book_depth_stress", "panic_direction": 1},
+        {"name": "order_book_imbalance_magnitude", "panic_direction": 1},
+        {"name": "cross_venue_price_dispersion", "panic_direction": 1}
+      ],
+      "aggregation": "median_of_available_directional_scores",
+      "raw_level_rule": "Depth must be transformed so larger values represent greater stress."
+    },
+    {
+      "id": "funding",
+      "symbol": "F_t",
+      "source_gates": ["V3-1", "V3-2"],
+      "features": [
+        {"name": "funding_rate_stress", "panic_direction": 1},
+        {"name": "open_interest_dislocation", "panic_direction": 1},
+        {"name": "liquidation_intensity", "panic_direction": 1},
+        {"name": "net_liquidation_pressure_magnitude", "panic_direction": 1}
+      ],
+      "aggregation": "median_of_available_directional_scores",
+      "raw_level_rule": "Raw funding, leverage, open-interest, or liquidation levels are prohibited unless converted to a registered directional stress measure."
+    },
+    {
+      "id": "volatility",
+      "symbol": "V_t",
+      "source_gates": ["V3-2"],
+      "features": [
+        {"name": "realised_volatility", "panic_direction": 1},
+        {"name": "downside_semivariance", "panic_direction": 1},
+        {"name": "volatility_jump_intensity", "panic_direction": 1},
+        {"name": "abnormal_volume_score", "panic_direction": 1}
+      ],
+      "aggregation": "median_of_available_directional_scores"
+    },
+    {
+      "id": "downside",
+      "symbol": "D_t",
+      "source_gates": ["V3-2"],
+      "features": [
+        {"name": "drawdown_magnitude", "panic_direction": 1},
+        {"name": "drawdown_velocity", "panic_direction": 1},
+        {"name": "downside_return_acceleration", "panic_direction": 1}
+      ],
+      "aggregation": "median_of_available_directional_scores"
+    }
+  ],
+  "causal_scaling": {
+    "method": "expanding_robust_median_mad",
+    "reference_information": "strictly_prior_observations_only",
+    "formula": "z_jt = d_j * (x_jt - median(x_j,<t)) / (1.4826 * MAD(x_j,<t) + epsilon)",
+    "minimum_prior_observations": 250,
+    "winsorized_z_bounds": [-5.0, 5.0],
+    "feature_score_map": "logistic(z_jt)",
+    "zero_scale_policy": "FEATURE_UNAVAILABLE",
+    "future_revisions_prohibited": true,
+    "prefix_invariance_required": true
+  },
+  "evidence_sufficiency": {
+    "minimum_available_mechanism_families": 4,
+    "minimum_valid_feature_fraction_within_family": 0.5,
+    "required_blocks": [
+      {"one_of": ["spectral", "network"], "purpose": "structural market evidence"},
+      {"one_of": ["liquidity", "funding"], "purpose": "market-plumbing evidence"},
+      {"one_of": ["volatility", "downside"], "purpose": "price-risk evidence"}
+    ],
+    "failure_state": "INSUFFICIENT_MECHANISM_EVIDENCE",
+    "equal_weight_renormalization_only_after_sufficiency": true,
+    "single_family_dominance_prohibited": true
+  },
+  "probability_and_reporting": {
+    "continuous_probability_required": true,
+    "uncertainty_interval_required": true,
+    "all_enabled_models_reported": true,
+    "automatic_model_selection": false,
+    "automatic_ensemble": false,
+    "champion_challenger_promotion": false,
+    "cross_model_disagreement_is_diagnostic": true,
+    "consensus_probability_prohibited": true
+  },
+  "operational_interpretation": {
+    "override_state": "INSUFFICIENT_MECHANISM_EVIDENCE",
+    "central_thresholds": {
+      "LOW_PANIC_CONSISTENCY": [0.0, 0.25],
+      "STRESS_BUILDING": [0.25, 0.5],
+      "TRANSMISSION_ESCALATION": [0.5, 0.75],
+      "PANIC_CONSISTENT_REGIME": [0.75, 1.0]
+    },
+    "interval_convention": "left_closed_right_open_except_final",
+    "mandatory_threshold_sensitivity": [
+      [0.2, 0.45, 0.7],
+      [0.25, 0.5, 0.75],
+      [0.3, 0.55, 0.8]
+    ],
+    "thresholds_cannot_select_models": true,
+    "thresholds_cannot_change_underlying_probability": true
+  },
+  "temporal_filtering": {
+    "causal_only": true,
+    "full_sample_smoothing_prohibited": true,
+    "retrospective_hmm_smoothing_prohibited": true,
+    "monotone_score_ewma_alpha": 0.35,
+    "mandatory_alpha_sensitivity": [0.2, 0.35, 0.5],
+    "hmm_published_output": "forward_filtered_probability"
+  },
+  "occupancy_and_duration": {
+    "minimum_latent_state_occupancy_fraction": 0.05,
+    "minimum_latent_state_occupancy_count": 20,
+    "minimum_operational_episode_observations": 2,
+    "entry_confirmation_observations": 2,
+    "exit_confirmation_observations": 2,
+    "causal_confirmation_only": true,
+    "retroactive_backfill_prohibited": true,
+    "collapsed_state_policy": "MODEL_INVALID"
+  },
+  "label_switching_control": {
+    "required": true,
+    "panic_state_anchor": "The panic-consistent state has the highest mean composite mechanism pressure and directionally higher pressure in at least four of six mechanism families.",
+    "permutation_map_must_be_persisted": true,
+    "anchor_statistics_must_be_persisted": true,
+    "failed_anchor_policy": "MODEL_INVALID"
+  },
+  "uncertainty": {
+    "coverage": 0.95,
+    "method": "prefix_respecting_moving_block_bootstrap",
+    "replications": 250,
+    "minimum_valid_replications": 200,
+    "seed": 1729,
+    "block_length_rule": "max(2, ceil(1.5 * n_valid^(1/3)))",
+    "invalid_interval_policy": "INSUFFICIENT_MECHANISM_EVIDENCE"
+  },
+  "transition_governance": {
+    "transition_rows_sum_to_one": true,
+    "one_step_ahead_transition_probability_required": true,
+    "hmm_transition_estimation": "causal_expanding_refit",
+    "score_model_transition_estimation": "prefix_empirical_with_dirichlet_smoothing",
+    "transition_uncertainty_required": true
+  },
+  "determinism": {
+    "canonical_json": true,
+    "fixed_random_seed": 1729,
+    "unordered_iteration_prohibited": true,
+    "identical_input_produces_identical_manifest": true,
+    "wall_clock_time_excluded_from_deterministic_identity": true
+  },
+  "required_final_gate_outputs": [
+    "panic_regime_probability.csv",
+    "transition_matrix.json",
+    "state_duration.csv",
+    "occupancy_statistics.json",
+    "mechanism_contributions.csv",
+    "probability_diagnostics.json",
+    "regime_manifest.json",
+    "regime_validation_report.json"
+  ],
+  "final_lock_after_v3_3d_only": [
+    "V3_G3_PANIC_REGIME_LOCK.json",
+    "V3_G3_PANIC_REGIME_CHECKPOINT.md"
+  ],
+  "prohibitions": [
+    "future observations changing earlier probabilities",
+    "full-sample retrospective state smoothing",
+    "automatic model selection",
+    "silent model failure",
+    "silent feature-direction assignment",
+    "supervised panic estimation without an external label registry",
+    "forced classification under insufficient mechanism evidence",
+    "modification of V3-2 or V3-2B protected objects",
+    "modification of Version 1 or Version 2 determinations",
+    "use of RSI or Bollinger outcomes to identify the regime"
+  ]
+}
