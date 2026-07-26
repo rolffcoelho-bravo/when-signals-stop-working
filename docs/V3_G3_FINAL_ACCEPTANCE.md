@@ -36,6 +36,14 @@ This preserves the scientific distinction between:
 - chronology validation deliberately deferred;
 - external chronology actually used in estimation, selection, or interpretation.
 
+## Active Python environment contract
+
+The acceptance wrappers must use the active Python interpreter together with the packages installed for that interpreter. They must not set `PYTHONNOUSERSITE=1`, because doing so can hide an explicitly installed user-scope `pytest` package while still invoking the system interpreter.
+
+The Windows wrapper temporarily removes `PYTHONNOUSERSITE` for the governed child process and restores the caller's prior process value afterward. The POSIX wrapper unsets the variable within its own process. Both wrappers continue to pin `PYTHONPATH` to the repository `src` directory and restrict numerical-library thread counts.
+
+This is an execution-environment correction only. It does not change model code, data, parameters, tests, or scientific determinations.
+
 ## Integrated acceptance suite
 
 The runner executes:
@@ -62,6 +70,7 @@ The lineage and final-acceptance suites verify:
 - rejection of current protected-object mismatch;
 - rejection of modification to the latest unreferenced lock;
 - ASCII-safe Windows PowerShell execution;
+- preservation of the active Python environment in both launchers;
 - successful audit of the actual repository V3-1 through V3-3C lock chain;
 - acceptance of the exact frozen deferred-chronology contract;
 - rejection of completed, non-deferred, missing, or explicitly used chronology states.
