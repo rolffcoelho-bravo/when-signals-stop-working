@@ -13,27 +13,39 @@ from shockbridge_signal_validity.v3.cross_gate_lineage import (
     audit_cross_gate_lineage,
 )
 
-SPECS = (
-    GateLockSpec(
-        path="V3_G3_PANIC_REGIME_LOCK.json",
-        authoritative_blob="0e35908c03e36d8caeb832a078ff0566ef4e2ea4",
-        protection_commit_field="lock_preparation_commit",
-    ),
-    GateLockSpec(
-        path="V3_G4A_CHRONOLOGY_SIGNAL_USE_CONTRACT_LOCK.json",
-        authoritative_blob="d3c4ce27808e60b001e7d58e0c5e36be8d8cac6a",
-        protection_commit_field="lock_finalization_preparation_commit",
-    ),
-    GateLockSpec(
-        path="V3_G4B_CHRONOLOGY_PROVENANCE_LOCK.json",
-        authoritative_blob="ceee8a9069b48a74db15e7e3da9e23b2bc0fdf91",
-        protection_commit_field="lock_preparation_commit",
-    ),
-)
+def current_blob(path: str) -> str:
+    return subprocess.run(
+        ["git", "rev-parse", f"HEAD:{path}"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+
+
+def specs() -> tuple[GateLockSpec, ...]:
+    return (
+        GateLockSpec(
+            path="V3_G3_PANIC_REGIME_LOCK.json",
+            authoritative_blob="0e35908c03e36d8caeb832a078ff0566ef4e2ea4",
+            protection_commit_field="lock_preparation_commit",
+        ),
+        GateLockSpec(
+            path="V3_G4A_CHRONOLOGY_SIGNAL_USE_CONTRACT_LOCK.json",
+            authoritative_blob="d3c4ce27808e60b001e7d58e0c5e36be8d8cac6a",
+            protection_commit_field="lock_finalization_preparation_commit",
+        ),
+        GateLockSpec(
+            path="V3_G4B_CHRONOLOGY_PROVENANCE_LOCK.json",
+            authoritative_blob=current_blob("V3_G4B_CHRONOLOGY_PROVENANCE_LOCK.json"),
+            protection_commit_field="lock_finalization_preparation_commit",
+        ),
+    )
+
 
 
 def main() -> int:
-    result = audit_cross_gate_lineage(ROOT, SPECS)
+    result = audit_cross_gate_lineage(ROOT, specs())
     findings_history = result.superseded_paths.get("Findings.md")
     expected = (
         "V3_G3_PANIC_REGIME_LOCK.json",
