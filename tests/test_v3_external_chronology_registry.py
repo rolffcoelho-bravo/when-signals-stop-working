@@ -6,6 +6,7 @@ import hashlib
 import io
 import json
 from pathlib import Path
+import subprocess
 
 import pytest
 
@@ -23,6 +24,16 @@ OUTPUT = ROOT / "outputs" / "v3" / "g4b_chronology"
 
 def registry_value() -> dict:
     return load_registry(REGISTRY)
+
+
+def head_blob(path: Path) -> bytes:
+    relative = path.relative_to(ROOT).as_posix()
+    return subprocess.run(
+        ["git", "show", f"HEAD:{relative}"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+    ).stdout
 
 
 def test_registry_validates_complete_independent_package() -> None:
@@ -51,7 +62,7 @@ def test_rendered_outputs_equal_tracked_evidence() -> None:
         "chronology_manifest.json",
     }
     for name, payload in rendered.items():
-        assert payload == (OUTPUT / name).read_bytes()
+        assert payload == head_blob(OUTPUT / name)
 
 
 def test_manifest_hashes_match_rendered_evidence() -> None:
