@@ -70,6 +70,7 @@ def _csv_bytes(rows: Sequence[Mapping[str, Any]], fields: Sequence[str]) -> byte
     return handle.getvalue().encode("utf-8")
 
 
+
 def load_registry(path: Path) -> dict[str, Any]:
     control = json.loads(path.read_text(encoding="utf-8"))
     component_files = control.pop("component_files", None)
