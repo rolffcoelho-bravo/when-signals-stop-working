@@ -129,7 +129,7 @@ The cross-gate audit separately verifies:
 4. every current object against its latest owning lock;
 5. governed supersession of `Findings.md` from V3-3 to V3-4A and then V3-4B.
 
-The frozen V3-3 lock and verifier are not rewritten.
+The frozen V3-3 lock and verifier are not rewritten. The cross-gate audit resolves historical and latest ownership, while `scripts/verify_v3_g4b_chronology_lock.py` separately binds the current V3-4B lock to its checkpoint and protected objects. This avoids a circular self-reference in which a verifier hard-codes the blob of the lock that protects the verifier.
 
 ## Validation suite
 
