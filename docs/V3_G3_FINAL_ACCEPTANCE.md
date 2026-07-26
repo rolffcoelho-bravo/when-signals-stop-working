@@ -8,12 +8,16 @@ Gate V3-3D is the final authorization boundary for the complete panic-consistent
 
 Earlier gate verifiers compare every historical protected path with the current working tree. That rule is invalid when a later gate deliberately becomes the new owner of a shared additive file. The package initializer is the concrete case: V3-1 protected the data-adapter export surface and V3-2 later protected an extended initializer containing spectral exports.
 
-V3-3D therefore applies two separate tests:
+A second distinction is required between lock creation and lock finalization. A lock can be created as a draft evidence object and then finalized before the next gate freezes its exact blob. The first commit containing a lock file is therefore not automatically the authoritative immutability boundary.
 
-1. every historical protected object must match its recorded Git blob at the commit that created its lock;
-2. every current protected path must match the latest lock in the declared gate sequence that owns that path.
+V3-3D applies four separate controls:
 
-This does not weaken historical locks. It prevents a valid later supersession from being misclassified as corruption while still rejecting lock-file tampering and ungoverned current changes.
+1. each parent lock is anchored to the exact `parent_lock_blob_sha` recorded by its child gate when that reference exists;
+2. a lock without a child blob reference is anchored to its creation blob;
+3. every historical protected object must match the lock at the governed finalization commit where the authoritative lock blob first appears;
+4. every current protected path must match the latest lock in the declared gate sequence that owns that path.
+
+Any lock modification after the governed finalization commit is rejected, including a later change followed by a reversion. This does not weaken historical locks. It distinguishes pre-freeze finalization from post-freeze tampering.
 
 ## Integrated acceptance suite
 
@@ -29,10 +33,18 @@ tests/test_v3_lock_lineage.py
 Expected total:
 
 ```text
-38 passed
+41 passed
 ```
 
-The additional regression assertion verifies that the Windows PowerShell wrapper is ASCII-only, contains the exact governed runner command, and has balanced double-quote delimiters. This prevents Windows PowerShell 5.1 from misreading UTF-8 smart punctuation as string delimiters.
+The lineage suite now verifies:
+
+- intentional latest-owner supersession;
+- draft lock finalization before child freeze;
+- rejection of modification after a child freezes the parent blob;
+- rejection of current protected-object mismatch;
+- rejection of modification to the latest unreferenced lock;
+- ASCII-safe Windows PowerShell execution;
+- successful audit of the actual repository V3-1 through V3-3C lock chain.
 
 It then executes the V3-3A, V3-3B, and V3-3C portable lock verifiers and confirms:
 
@@ -50,6 +62,8 @@ The runner writes:
 ```text
 outputs/v3/g3_final_acceptance/final_acceptance_report.json
 ```
+
+The report records creation commits, governed finalization commits, authoritative lock blobs, and the source of each finalization anchor.
 
 The final files:
 
