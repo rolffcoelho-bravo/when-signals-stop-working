@@ -246,11 +246,31 @@ The isolated contract suite completed with `15 passed`. Exact Git blob matching 
 
 ---
 
+## Version 3 Gate V3-4B — Independent chronology compilation and provenance
+
+### Methodological contribution V3-G4B-M1
+
+The chronology is represented as a source-driven control registry with separate event, source, event-source, and merge components and a deterministic compiler. Every canonical event requires a primary documentary source, while all supporting candidates remain auditable through the provenance map and merge log. Every retain-or-merge decision records that model outputs were not consulted.
+
+### Methodological contribution V3-G4B-M2
+
+Timestamp precision and boundary uncertainty are explicit research objects. `CONFIRMED` events are eligible for the later primary timing metrics, while `BOUNDARY_UNCERTAIN` and `SOURCE_CONFLICT` events remain visible but are excluded from primary timing. This prevents multi-day collapse, contagion, and retrospectively reported interruption windows from being converted into false point precision.
+
+### Reproducibility finding V3-G4B-V1
+
+The isolated chronology and cross-gate suite completed with `19 passed`. The deterministic compiler reproduced four byte-identical evidence outputs containing 17 canonical events supported by 27 provenance sources. Twelve events are confirmed and timing-eligible, five retain boundary uncertainty and are timing-excluded, and no source-conflict event was forced into the primary set. No Gate V3-3 model output was accessed and no event-alignment analysis was executed.
+
+### Governance contribution V3-G4B-M3
+
+A cross-gate latest-owner audit now separates historical integrity from current ownership. It verifies the V3-3 protected `Findings.md` object at the V3-3 preparation boundary and the V3-4A object at its finalization boundary, while recognizing V3-4A as the legitimate current owner. The frozen V3-3 lock and its point-in-time verifier remain unchanged.
+
+---
+
 ## Findings pending later gates
 
 The following are approved development directions but are not yet findings:
 
-- external event-chronology validation;
+- independent event-alignment validation;
 - conditional RSI and Bollinger descriptive diagnostics under the inferred regimes;
 - empirical real-market regime probabilities and episode interpretation;
 - cross-asset and cross-venue transportability of the regime engine.
