@@ -49,6 +49,12 @@ outputs/v3/g4b_chronology/chronology_manifest.json
 
 Identical registry input produces byte-identical output files and manifest hashes.
 
+### Checkout line-ending boundary
+
+Git may transform LF text blobs to CRLF working-tree files on Windows when `core.autocrlf` is enabled. That checkout transformation is not a change to the tracked evidence object and must not create a false reproducibility failure.
+
+The tracked-evidence test therefore compares compiler output with the immutable `HEAD:<path>` Git blob obtained through `git show`, rather than comparing with platform-transformed working-tree bytes. Manifest SHA-256 checks remain calculated from the canonical LF compiler output. A genuine tracked-object change still fails because the Git blob changes; a Windows-only checkout transformation does not.
+
 ## Chronology composition
 
 The compiled package contains:
@@ -137,7 +143,7 @@ The isolated Gate V3-4B suite contains 19 tests covering:
 
 - complete package validation;
 - authoritative V3-4A parent binding;
-- exact regeneration of all tracked outputs;
+- exact regeneration of all tracked Git evidence objects independent of checkout line-ending conversion;
 - manifest hash verification;
 - frozen sample boundaries;
 - exclusion of uncertain events from primary timing metrics;
