@@ -63,6 +63,7 @@ def main() -> int:
         "chronology_completeness_claimed": False,
         "event_alignment_executed": False,
         "cross_gate_lineage_verified": True,
+        "checkout_eol_invariance_verified": True,
     }
     for field, expected in expected_evidence.items():
         if evidence.get(field) != expected:
@@ -78,6 +79,7 @@ def main() -> int:
     print("Status: CHRONOLOGY_COMPILATION_AND_PROVENANCE_COMPLETE_AND_LOCKED")
     print(f"Protected files verified: {len(protected)}")
     print("Isolated tests: 19 passed")
+    print("Checkout EOL invariance verified: True")
     print("Canonical events: 17")
     print("Provenance sources: 27")
     print("Confirmed timing events: 12")
