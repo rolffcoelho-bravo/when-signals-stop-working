@@ -164,17 +164,56 @@ Shuffling market-level and asset-level input order produces identical ordered pr
 
 ---
 
+## Version 3 Gate V3-3C — Governance and diagnostics
+
+### Methodological contribution V3-G3C-M1
+
+The framework separates a computable point probability from a publishable probability. Panic-authorized point estimates receive deterministic, prefix-respecting moving-block intervals in logit-innovation space. Estimates with insufficient prior interval history remain visible but are explicitly nonpublishable.
+
+This prevents a functioning probability formula from being presented as complete uncertainty evidence.
+
+### Synthetic validation finding V3-G3C-V1
+
+The registered interval procedure produces bounded intervals containing the contemporaneous point probability, while future-append tests confirm that later observations cannot revise earlier intervals, publishability status, confirmed states, transition risks, or disagreement diagnostics.
+
+### Methodological contribution V3-G3C-M2
+
+Operational episodes and transitions use two-observation causal confirmation without retrospective backfill. An isolated threshold crossing cannot rewrite the first crossing date or create a completed episode retrospectively.
+
+### Methodological contribution V3-G3C-M3
+
+Transition evidence combines Dirichlet-smoothed operational-state matrices with a forward-filtered HMM posterior-implied binary transition diagnostic. Every estimated transition row is constrained to sum to one, and no retrospectively smoothed latent path is introduced.
+
+### Methodological contribution V3-G3C-M4
+
+The monotone mechanism model admits an exact family decomposition in logit space. The HMM receives a separate causal ridge-surrogate neutral-perturbation diagnostic that is explicitly labelled as approximate rather than presented as an exact likelihood decomposition.
+
+### Methodological contribution V3-G3C-M5
+
+Cross-model disagreement is formalized as the absolute difference between the monotone and HMM probabilities, with interval-overlap evidence and a `HIGH_MODEL_RISK_ESCALATION` class. The index remains diagnostic and cannot select a preferred model or create an ensemble.
+
+### Methodological contribution V3-G3C-M6
+
+The mechanism-coverage layer maps evidence by timestamp, market panel, `asset@venue`, feature, family, and evidence block. Missingness becomes an auditable data-investment map rather than an invisible preprocessing issue. The governed exclusion of `contagion_radius` remains visible in the coverage evidence.
+
+### Synthetic validation finding V3-G3C-V2
+
+The isolated governance suite establishes deterministic transition matrices, duration and occupancy outputs, exact monotone contribution accounting, causal HMM surrogate diagnostics, non-selective disagreement evidence, coverage-map determinism, and threshold, EWMA, scaling-refit, and HMM-refit sensitivity reporting.
+
+### Governance contribution V3-G3C-M7
+
+All sensitivity alternatives are reported without model selection. External market-dislocation chronology remains deferred and cannot train the current models, select thresholds, or redefine the latent regime after observing results.
+
+---
+
 ## Findings pending later gates
 
 The following are approved development directions but are not yet findings:
 
-- timestamp-level mechanism-contribution decomposition;
-- cross-model disagreement index;
-- probability uncertainty intervals;
-- transition-risk inference;
-- duration and occupancy evidence;
+- final integrated V3-3 protected-object acceptance and lock;
 - external event-chronology validation;
-- mechanism-coverage heatmaps;
-- conditional RSI and Bollinger validity under the inferred regimes.
+- conditional RSI and Bollinger validity under the inferred regimes;
+- empirical real-market regime probabilities and episode interpretation;
+- cross-asset and cross-venue transportability of the regime engine.
 
 They will be moved into the findings sections only after implementation and validation.
