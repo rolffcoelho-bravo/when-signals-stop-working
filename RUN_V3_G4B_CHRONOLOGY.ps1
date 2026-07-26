@@ -25,7 +25,11 @@ try {
     if ($LASTEXITCODE -ne 0) {
         throw "Gate V3-4B chronology compilation failed."
     }
-    Write-Host "Gate V3-4B chronology evidence passed."
+    python scripts/verify_v3_g4b_chronology_lock.py
+    if ($LASTEXITCODE -ne 0) {
+        throw "Gate V3-4B final lock verification failed."
+    }
+    Write-Host "Gate V3-4B chronology evidence and final lock passed."
 }
 finally {
     [Environment]::SetEnvironmentVariable(
