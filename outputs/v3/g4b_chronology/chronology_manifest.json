@@ -1,0 +1,54 @@
+{
+  "boundary_uncertain_event_count": 5,
+  "chronology_completeness_claimed": false,
+  "confirmed_event_count": 12,
+  "event_alignment_executed": false,
+  "event_count": 17,
+  "event_type_counts": {
+    "CROSS_MARKET_CONTAGION": 6,
+    "DOWNSIDE_DISLOCATION": 1,
+    "EXCHANGE_OR_VENUE_DISRUPTION": 2,
+    "FUNDING_STRESS": 1,
+    "LIQUIDATION_CASCADE": 5,
+    "MARKET_STRUCTURE_BREAK": 2
+  },
+  "files": {
+    "chronology_merge_log.csv": "93c64dc662f788eb4634921f6060402e71156ce81fbed033d5f38ba7bd153c44",
+    "chronology_provenance.json": "c7d23a74ccacae2be7bce5827205ee8285e547bac96553f1e23c144f1056c67f",
+    "external_chronology.csv": "7eb99d1e1492685bfc8efee04b0cec9dbd776f8f176358f5b6d5d89ba0e53f53"
+  },
+  "gate": "V3-4B",
+  "model_outputs_accessed": false,
+  "next_subgate": "V3-4C",
+  "parent_gate": "V3-4A",
+  "parent_lock": "V3_G4A_CHRONOLOGY_SIGNAL_USE_CONTRACT_LOCK.json",
+  "parent_lock_blob_sha": "d3c4ce27808e60b001e7d58e0c5e36be8d8cac6a",
+  "primary_timing_eligible_event_ids": [
+    "EVT-2021-05-19",
+    "EVT-2021-09-07",
+    "EVT-2021-12-04",
+    "EVT-2023-03-USDC",
+    "EVT-2023-08-17",
+    "EVT-2024-03-05",
+    "EVT-2024-04-13",
+    "EVT-2024-08-05",
+    "EVT-2024-12-05",
+    "EVT-2025-02-03",
+    "EVT-2025-02-21-BYBIT",
+    "EVT-2025-10-10"
+  ],
+  "primary_timing_excluded_event_ids": [
+    "EVT-2022-05-TERRA",
+    "EVT-2022-06-CREDIT",
+    "EVT-2022-11-FTX",
+    "EVT-2026-02-RISKOFF",
+    "EVT-2026-02-BLOCKFILLS"
+  ],
+  "sample_end": "2026-07-22T08:00:00Z",
+  "sample_start": "2021-01-01T00:00:00Z",
+  "schema_version": "v3.chronology-manifest.v1",
+  "source_conflict_event_count": 0,
+  "source_count": 27,
+  "status": "CHRONOLOGY_COMPILED_PROVENANCE_LOCK_READY",
+  "v3_4c_may_access_model_outputs_only_after_v3_4b_lock": true
+}
