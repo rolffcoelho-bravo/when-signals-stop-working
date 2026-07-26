@@ -1,0 +1,102 @@
+{
+  "schema_version": "v3.panic-regime-model-registry.v1",
+  "gate": "V3-3A",
+  "automatic_model_selection": false,
+  "automatic_ensemble": false,
+  "report_all_enabled_models": true,
+  "registered_models": [
+    {
+      "model_id": "V2_TRANSPARENT_STATE_CHALLENGER_V1",
+      "enabled": true,
+      "mandatory": true,
+      "role": "transparent_challenger",
+      "output_semantics": "range_trend_stress_probabilities_only",
+      "panic_probability_authorized": false,
+      "selection_eligible": false,
+      "rankable": false,
+      "non_interference": "Cannot alter or reinterpret any Version 2 determination."
+    },
+    {
+      "model_id": "MONOTONE_MECHANISM_SCORE_V1",
+      "enabled": true,
+      "mandatory": true,
+      "role": "primary_identification_baseline",
+      "output_semantics": "model_implied_mechanism_consistency_probability",
+      "inputs": ["S_t", "N_t", "L_t", "F_t", "V_t", "D_t"],
+      "estimation": {
+        "family_aggregation": "median",
+        "family_weights": "equal_and_predeclared",
+        "renormalization": "only_after_evidence_sufficiency",
+        "composite": "q_t = sum_g w_g M_g(t)",
+        "probability_map": "p_t = logistic(6 * (q_t - 0.5))",
+        "weight_fitting": false,
+        "label_fitting": false
+      },
+      "temporal_filter": "causal_ewma",
+      "uncertainty": "prefix_respecting_moving_block_bootstrap",
+      "selection_eligible": false,
+      "rankable": false
+    },
+    {
+      "model_id": "CAUSAL_GAUSSIAN_HMM_V1",
+      "enabled": true,
+      "mandatory": true,
+      "role": "latent_state_challenger",
+      "output_semantics": "forward_filtered_posterior_of_anchored_panic_consistent_state",
+      "inputs": ["S_t", "N_t", "L_t", "F_t", "V_t", "D_t"],
+      "estimation": {
+        "latent_states": 2,
+        "covariance": "diagonal_with_floor",
+        "initialization": "deterministic_lower_upper_composite_quantile_anchor",
+        "random_multistart": false,
+        "fit_policy": "expanding_prefix_only",
+        "minimum_history": 500,
+        "refit_interval_observations": 30,
+        "sticky_transition_prior": true
+      },
+      "inference": "forward_filter_only",
+      "label_control": "ordered_composite_pressure_anchor",
+      "uncertainty": "prefix_respecting_parametric_moving_block_bootstrap",
+      "selection_eligible": false,
+      "rankable": false
+    }
+  ],
+  "prohibited_without_external_label_registry": [
+    {
+      "model_id": "SUPERVISED_LOGISTIC_PANIC_V1",
+      "reason": "Panic is not directly observed and no external panic label registry, timing rule, source reliability assessment, calibration contract, or frozen development/evaluation split has been approved.",
+      "activation_requirements": [
+        "external_label_registry.json",
+        "label provenance",
+        "label timing rule",
+        "source reliability assessment",
+        "frozen development and evaluation split",
+        "calibration contract"
+      ]
+    }
+  ],
+  "future_unregistered_challengers": [
+    "BAYESIAN_DYNAMIC_FACTOR_V1",
+    "SWITCHING_STATE_SPACE_V1",
+    "PARTICLE_FILTER_ONLINE_V1",
+    "HIDDEN_SEMI_MARKOV_DURATION_V1"
+  ],
+  "reporting_policy": {
+    "format": "long",
+    "one_row_per_timestamp_model": true,
+    "required_columns": [
+      "timestamp",
+      "model_id",
+      "raw_probability",
+      "filtered_probability",
+      "lower_95",
+      "upper_95",
+      "operational_state",
+      "available_mechanism_count",
+      "evidence_sufficiency",
+      "model_validity"
+    ],
+    "consensus_probability_prohibited": true,
+    "cross_model_envelope_allowed_for_diagnostics_only": true
+  }
+}
