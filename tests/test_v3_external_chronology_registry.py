@@ -150,3 +150,4 @@ def test_portable_launchers_preserve_user_site_and_run_exact_gate() -> None:
         assert "tests/test_v3_cross_gate_lineage.py" in text
         assert "scripts/verify_v3_cross_gate_lineage.py" in text
         assert "scripts/run_v3_g4b_chronology.py" in text
+        assert "scripts/verify_v3_g4b_chronology_lock.py" in text
