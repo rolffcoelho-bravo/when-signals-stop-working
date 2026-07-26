@@ -36,6 +36,18 @@ def head_blob(path: Path) -> bytes:
     ).stdout
 
 
+def checkout_eol(path: Path) -> str:
+    relative = path.relative_to(ROOT).as_posix()
+    output = subprocess.run(
+        ["git", "check-attr", "eol", "--", relative],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    return output.rsplit(": ", 1)[-1]
+
+
 def test_registry_validates_complete_independent_package() -> None:
     result = validate_registry(registry_value())
     assert result == {
@@ -63,6 +75,8 @@ def test_rendered_outputs_equal_tracked_evidence() -> None:
     }
     for name, payload in rendered.items():
         assert payload == head_blob(OUTPUT / name)
+    for name in ("external_chronology.csv", "chronology_merge_log.csv"):
+        assert checkout_eol(OUTPUT / name) == "lf"
 
 
 def test_manifest_hashes_match_rendered_evidence() -> None:
