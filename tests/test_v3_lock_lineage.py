@@ -175,3 +175,13 @@ def test_final_acceptance_powershell_wrapper_is_ascii_safe() -> None:
     assert "python scripts/run_v3_g3_final_acceptance.py --report $Report" in text
     assert "GATE V3-3D - FINAL ACCEPTANCE AND LOCK AUTHORIZATION" in text
     assert text.count('"') % 2 == 0
+
+
+def test_repository_lock_lineage_passes_current_chain() -> None:
+    result = audit_lock_lineage(REPOSITORY_ROOT)
+    assert result.historical_objects_verified > 0
+    assert result.current_objects_verified > 0
+    assert result.lock_anchor_sources["V3_G2_SPECTRAL_ENGINE_LOCK.json"] == (
+        "child_parent_lock_blob_sha:V3_G2B_MARKET_STRUCTURE_LOCK.json"
+    )
+    assert result.lock_finalization_commits["V3_G2_SPECTRAL_ENGINE_LOCK.json"]
