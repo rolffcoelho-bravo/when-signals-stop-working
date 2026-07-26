@@ -242,7 +242,7 @@ The event-alignment protocol separates temporal validation from supervised class
 
 ### Validation finding V3-G4A-V1
 
-The isolated contract suite completed with `14 passed`. Exact Git blob matching confirmed that the tested contract, validator, and test objects are the objects committed to the repository. Mutation tests fail closed when the parent lock changes, model outputs become visible during chronology compilation, chronology-driven threshold selection is permitted, regime conditioning can promote a signal, or signal retuning is allowed.
+The isolated contract suite completed with `15 passed`. Exact Git blob matching confirmed that the tested contract, validator, test, and launcher objects are the objects committed to the repository. Mutation tests fail closed when the parent lock changes, model outputs become visible during chronology compilation, chronology-driven threshold selection is permitted, regime conditioning can promote a signal, signal retuning is allowed, or launcher environment settings hide user-site packages.
 
 ---
 
