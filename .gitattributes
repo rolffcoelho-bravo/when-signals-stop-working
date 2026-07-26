@@ -8,6 +8,7 @@
 *.cff text eol=lf
 *.sh text eol=lf
 *.ps1 text eol=crlf
+outputs/v3/g4b_chronology/*.csv text eol=lf
 *.svg text eol=lf
 *.pdf binary
 *.png binary
