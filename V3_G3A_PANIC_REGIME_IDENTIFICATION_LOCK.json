@@ -1,0 +1,39 @@
+{
+  "gate": "V3-3A",
+  "schema_version": "v3.panic-regime-identification-lock.v1",
+  "baseline_release": "v2.0.0",
+  "baseline_commit": "5a07299367b80c3940e652e7bbdd208ce86ba5ef",
+  "branch": "research/v3-adaptive-signal-validity",
+  "parent_gate": "V3-2B",
+  "parent_lock": "V3_G2B_MARKET_STRUCTURE_LOCK.json",
+  "parent_lock_blob_sha": "1aa5e990c9d352d50b1d8da265811a16bca00bac",
+  "identification_boundary_commit": "50e9cc433324281fc1270fae57aeea2656ba69fc",
+  "status": "IDENTIFICATION_CONTRACT_COMPLETE_AND_LOCKED",
+  "protected_files": {
+    "configs/v3_panic_regime_identification.json": "738ea6ce259d795a9d634003d74f9b1553dbcf06",
+    "configs/v3_panic_regime_model_registry.json": "19086c7493db9859274def505ac8c286ece0e86a",
+    "docs/V3_PANIC_REGIME_IDENTIFICATION.md": "318c00f3ca2e8c1c33842a75b96b072099ff2f88",
+    "scripts/verify_v3_g3a_identification.py": "989ae6212780c88cb36319bf8beefbef1ffa3dfb",
+    "tests/test_v3_panic_regime_contract.py": "af41bba4365f4c69fbdec6aa14d4ca1bcaeb6d7d"
+  },
+  "acceptance_evidence": {
+    "contract_tests_passed": 8,
+    "latent_claim_boundary_frozen": true,
+    "six_mechanism_families_registered": true,
+    "minimum_mechanism_breadth_frozen": true,
+    "causal_scaling_and_prefix_invariance_frozen": true,
+    "transparent_v2_challenger_registered": true,
+    "monotone_mechanism_score_registered": true,
+    "causal_hmm_registered": true,
+    "supervised_logistic_without_external_labels_prohibited": true,
+    "automatic_model_selection_performed": false,
+    "automatic_ensemble_performed": false,
+    "uncertainty_method_frozen": true,
+    "occupancy_and_duration_rules_frozen": true,
+    "label_switching_control_frozen": true,
+    "engine_implementation_started": false,
+    "final_v3_3_lock_permitted": false,
+    "full_repository_ci_deferred_to_audit_gate": true
+  },
+  "next_subgate": "V3-3B — Probabilistic Engine Implementation"
+}
