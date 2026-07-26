@@ -4,7 +4,7 @@
 
 > `INDEPENDENT_CHRONOLOGY_AND_SIGNAL_USE_CONTRACT_COMPLETE_AND_LOCKED`
 
-Gate V3-4A is implemented, validated, and locked. It freezes the scientific, chronological, statistical, and model-risk rules that must govern all later external-event validation and conditional signal-use analysis.
+Gate V3-4A is implemented, validated, and locked. It freezes the scientific, chronological, statistical, execution, and model-risk rules that govern all later external-event validation and conditional signal-use analysis.
 
 No external chronology was compiled, no Gate V3-3 probability was inspected, and no conditional RSI or Bollinger analysis was executed during this subgate.
 
@@ -16,11 +16,16 @@ No external chronology was compiled, no Gate V3-3 probability was inspected, and
 - parent gate: `V3-3`;
 - parent lock: `V3_G3_PANIC_REGIME_LOCK.json`;
 - parent lock blob: `0e35908c03e36d8caeb832a078ff0566ef4e2ea4`;
-- validated core commit: `b4f9f03a09b268eb6359265dd133df3eddeb5e0e`;
-- lock preparation commit: `e8e3833b0e6a8524a4c03e912d2c9ebd36e98b87`;
-- V3-4A lock commit: `c340f626a105b986584d561eb58f5f5d21d5510d`;
-- V3-4A lock: `V3_G4A_CHRONOLOGY_SIGNAL_USE_CONTRACT_LOCK.json`;
-- V3-4A lock blob: `736991b5425d603fc43a5f19c217307fa0f11b41`.
+- validated core commit: `d9673a77651c21f61d8d96bd775a80cda552f585`;
+- final lock preparation commit: `9c83d084b69c05450608ef21161174ab42b017d3`;
+- authoritative V3-4A lock commit: `dcbf5250eef5d911799e357dff7c97f247f74187`;
+- authoritative V3-4A lock: `V3_G4A_CHRONOLOGY_SIGNAL_USE_CONTRACT_LOCK.json`;
+- authoritative V3-4A lock blob: `d3c4ce27808e60b001e7d58e0c5e36be8d8cac6a`;
+- pre-finalization lock blob: `736991b5425d603fc43a5f19c217307fa0f11b41`;
+- pre-finalization issue: launchers did not yet prove user-site package visibility;
+- finalization result: PowerShell and POSIX launchers preserve active interpreter package access.
+
+The pre-finalization blob is historical evidence only. Gate V3-4B may use only the authoritative blob `d3c4ce27808e60b001e7d58e0c5e36be8d8cac6a` as its parent.
 
 ## Status distinctions
 
@@ -29,47 +34,55 @@ No external chronology was compiled, no Gate V3-3 probability was inspected, and
 | Gate V3-3 parent | Locked | Blob `0e35908c03e36d8caeb832a078ff0566ef4e2ea4` |
 | Gate V3-4A approval | Approved | User authorization for Gate V3-4 |
 | Contract design | Implemented | JSON contract and Python validator |
-| Isolated contract validation | Validated | 14 tests passed |
-| Tested object identity | Validated | Three tested blobs equal repository blobs |
+| Isolated contract validation | Validated | 15 tests passed |
+| Tested object identity | Validated | Contract, validator, test, and launcher blobs match repository objects |
+| Windows launcher compatibility | Validated | User-site package access preserved and environment restored |
+| POSIX launcher compatibility | Validated | `PYTHONNOUSERSITE` explicitly unset |
 | Chronology compilation | Not started | Model-output access remains prohibited |
 | Event alignment | Not started | Requires locked V3-4B chronology |
 | RSI/Bollinger conditional diagnostics | Not started | Descriptive-only eligibility remains frozen |
-| Gate V3-4A lock | Locked | Blob `736991b5425d603fc43a5f19c217307fa0f11b41` |
+| Gate V3-4A lock | Locked | Blob `d3c4ce27808e60b001e7d58e0c5e36be8d8cac6a` |
 | Next subgate | V3-4B | Chronology compilation and provenance lock |
 
 ## Implementation inventory
 
-Gate V3-4A adds:
+Gate V3-4A adds and protects:
 
 ```text
-configs/v3_external_chronology_signal_use_contract.json
-src/shockbridge_signal_validity/v3/chronology_signal_use_contract.py
-tests/test_v3_external_chronology_signal_use_contract.py
-scripts/validate_v3_g4a_contract.py
-scripts/verify_v3_g4a_contract_lock.py
+Findings.md
 RUN_V3_G4A_CONTRACT.ps1
 RUN_V3_G4A_CONTRACT.sh
+configs/v3_external_chronology_signal_use_contract.json
 docs/V3_EXTERNAL_CHRONOLOGY_SIGNAL_USE_CONTRACT.md
+scripts/validate_v3_g4a_contract.py
+scripts/verify_v3_g4a_contract_lock.py
+src/shockbridge_signal_validity/v3/chronology_signal_use_contract.py
+tests/test_v3_external_chronology_signal_use_contract.py
+```
+
+The gate-level governance objects are:
+
+```text
 V3_G4A_CHRONOLOGY_SIGNAL_USE_CONTRACT_LOCK.json
 V3_G4A_CHRONOLOGY_SIGNAL_USE_CONTRACT_CHECKPOINT.md
 ```
 
-`Findings.md` was updated with only the implemented and validated V3-4A methodological contributions.
-
 ## Execution and test evidence
 
-The isolated test suite executed against exact tested blobs:
+The final isolated test suite executed against exact repository blobs:
 
 ```text
 contract blob: 2d96c0d193343d2e7cb0cb4523cf8e3056b166fe
 validator blob: 4e91e8a8dc289bffd651ae68d5dce46eb3ae5d19
-test blob: f60a18a10383a7056f771e006db33f78ce8b7ce3
+test blob: 39356440c6d344181588e43d8b10031a7e637755
+PowerShell blob: 7ff83fb21ccb4a12f4ac7b3a07acd908ce3b6fdd
+POSIX blob: a12475435527d104a68fc582fbd4f4dbf48426b1
 ```
 
 Result:
 
 ```text
-14 passed in 0.04s
+15 passed in 0.06s
 ```
 
 The tests establish:
@@ -80,14 +93,15 @@ The tests establish:
 4. chronology compilation before model-output overlay;
 5. prohibition on model-derived event inclusion;
 6. prohibition on retrospective event deletion or boundary tuning;
-7. explicit recognition that chronology is incomplete validation evidence, not complete ground truth;
+7. chronology treated as incomplete validation evidence rather than complete ground truth;
 8. fixed registered models and 1, 3, 6, and 12 observation horizons;
 9. prohibition on chronology-driven threshold or model selection;
 10. RSI status preserved as `NO_PIPELINE_ADMITTED`;
 11. Bollinger status preserved as `NO_INCREMENTAL_EVIDENCE`;
 12. both signals remain ineligible for conditional degradation claims;
 13. Holm multiplicity control and negative-result retention;
-14. fail-closed mutation handling for core governance violations.
+14. fail-closed mutation handling for core governance violations;
+15. Windows and POSIX runners preserve user-site package access.
 
 ## Scientific contract
 
@@ -264,23 +278,24 @@ Incomplete chronology can support timing and burden diagnostics without being mi
 
 A signal cannot be declared degraded, restricted, or suspended when unconditional usefulness was never established. The same rule prevents a favourable regime subset from promoting an unestablished signal.
 
-### Result 4 — Decision-use policy becomes a separate scientific layer
+### Result 4 — Execution portability becomes part of gate governance
 
-Signal prediction, regime inference, event validation, and permitted use are distinct objects. This separation is central to the publication and institutional value of the framework.
+A scientifically correct contract is not accepted if the governed runner hides its own validated dependencies. Windows and POSIX launchers must preserve the active interpreter environment while retaining deterministic thread controls.
 
 ## Scientific assessment
 
-V3-4A substantially strengthens the research design because it closes the largest remaining pathway for retrospective bias: constructing external events and conditional signal claims after seeing the regime results.
+V3-4A closes the largest remaining pathway for retrospective bias: constructing external events and conditional signal claims after seeing the regime results.
 
-The design is more rigorous than a conventional crisis-event study because it combines:
+The design combines:
 
-1. an independently compiled chronology;
+1. independently compiled chronology;
 2. frozen regime models and thresholds;
 3. explicit chronology incompleteness;
 4. fixed event-alignment metrics;
 5. baseline signal eligibility;
 6. multiplicity control;
-7. a governed signal-use policy.
+7. governed signal-use policy;
+8. portable execution controls.
 
 ## Model-risk assessment
 
@@ -298,11 +313,15 @@ The monotone and HMM probabilities remain distinct. Event alignment cannot be us
 
 ### Subgroup risk
 
-Conditional signal results are particularly vulnerable to small samples, overlapping episodes, dependence, and favourable subgroup selection. The frozen sample and episode boundaries are therefore mandatory.
+Conditional signal results are vulnerable to small samples, overlapping episodes, dependence, and favourable subgroup selection. Frozen sample and episode boundaries are mandatory.
 
 ### Interpretation risk
 
 Descriptive regime sensitivity for RSI or Bollinger is not evidence of predictive value, degradation, or recovery.
+
+### Environment risk
+
+A runner that disables user-site packages can create false validation failures or non-reproducible behavior across installations. The final V3-4A launchers explicitly prevent this failure mode.
 
 ## Perceived-value and problem-solving opportunities
 
@@ -320,7 +339,7 @@ The required provenance and merge logs create a reusable event registry suitable
 
 ### Publication value
 
-The principal novelty is not merely conditioning indicators on regimes. It is the protected separation of unconditional signal establishment, independent regime inference, chronology validation, conditional diagnostics, and permitted-use decisions.
+The principal novelty is not merely conditioning indicators on regimes. It is the protected separation of unconditional signal establishment, independent regime inference, chronology validation, conditional diagnostics, permitted-use decisions, and reproducible execution.
 
 ## Final judgment
 
@@ -330,10 +349,10 @@ No empirical event-alignment result is claimed. No chronology was compiled. No m
 
 ## Next subgate
 
-Proceed to Gate V3-4B only from the lock blob:
+Proceed to Gate V3-4B only from the authoritative lock blob:
 
 ```text
-736991b5425d603fc43a5f19c217307fa0f11b41
+d3c4ce27808e60b001e7d58e0c5e36be8d8cac6a
 ```
 
 Gate V3-4B must compile and lock the external chronology and provenance package while model-output access remains prohibited.
