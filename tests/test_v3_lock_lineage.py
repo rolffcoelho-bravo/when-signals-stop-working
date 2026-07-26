@@ -168,13 +168,22 @@ def test_lineage_rejects_modified_latest_lock_file(tmp_path: Path) -> None:
         audit_lock_lineage(root, ("L1.json",))
 
 
-def test_final_acceptance_powershell_wrapper_is_ascii_safe() -> None:
-    path = REPOSITORY_ROOT / "RUN_V3_G3_FINAL_ACCEPTANCE.ps1"
-    raw = path.read_bytes()
-    text = raw.decode("ascii")
-    assert "python scripts/run_v3_g3_final_acceptance.py --report $Report" in text
-    assert "GATE V3-3D - FINAL ACCEPTANCE AND LOCK AUTHORIZATION" in text
-    assert text.count('"') % 2 == 0
+def test_final_acceptance_wrappers_preserve_active_python_environment() -> None:
+    powershell_path = REPOSITORY_ROOT / "RUN_V3_G3_FINAL_ACCEPTANCE.ps1"
+    powershell_raw = powershell_path.read_bytes()
+    powershell = powershell_raw.decode("ascii")
+    assert "python scripts/run_v3_g3_final_acceptance.py --report $Report" in powershell
+    assert "GATE V3-3D - FINAL ACCEPTANCE AND LOCK AUTHORIZATION" in powershell
+    assert 'SetEnvironmentVariable("PYTHONNOUSERSITE", $null, "Process")' in powershell
+    assert '$env:PYTHONNOUSERSITE = "1"' not in powershell
+    assert powershell.count('"') % 2 == 0
+
+    shell = (REPOSITORY_ROOT / "RUN_V3_G3_FINAL_ACCEPTANCE.sh").read_text(
+        encoding="ascii"
+    )
+    assert "unset PYTHONNOUSERSITE" in shell
+    assert "export PYTHONNOUSERSITE=1" not in shell
+    assert 'python scripts/run_v3_g3_final_acceptance.py --report "$REPORT"' in shell
 
 
 def test_repository_lock_lineage_passes_current_chain() -> None:
