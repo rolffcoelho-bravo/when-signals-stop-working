@@ -71,9 +71,26 @@ def make_repo(tmp_path: Path) -> tuple[Path, tuple[GateLockSpec, ...]]:
     write(root, "L2.json", json.dumps(lock2, sort_keys=True))
     commit(root, "lock g4a")
     lock2_blob = git(root, "rev-parse", "HEAD:L2.json")
+
+    write(root, "Findings.md", "g4b\n")
+    write(root, "g4b.py", "g4b\n")
+    preparation3 = commit(root, "prepare g4b")
+    lock3 = {
+        "parent_lock": "L2.json",
+        "parent_lock_blob_sha": lock2_blob,
+        "lock_preparation_commit": preparation3,
+        "protected_files": {
+            "Findings.md": git(root, "rev-parse", f"{preparation3}:Findings.md"),
+            "g4b.py": git(root, "rev-parse", f"{preparation3}:g4b.py"),
+        },
+    }
+    write(root, "L3.json", json.dumps(lock3, sort_keys=True))
+    commit(root, "lock g4b")
+    lock3_blob = git(root, "rev-parse", "HEAD:L3.json")
     specs = (
         GateLockSpec("L1.json", lock1_blob, "lock_preparation_commit"),
         GateLockSpec("L2.json", lock2_blob, "lock_finalization_preparation_commit"),
+        GateLockSpec("L3.json", lock3_blob, "lock_preparation_commit"),
     )
     return root, specs
 
@@ -81,9 +98,9 @@ def make_repo(tmp_path: Path) -> tuple[Path, tuple[GateLockSpec, ...]]:
 def test_cross_gate_audit_accepts_governed_findings_supersession(tmp_path: Path) -> None:
     root, specs = make_repo(tmp_path)
     result = audit_cross_gate_lineage(root, specs)
-    assert result.historical_objects_verified == 4
-    assert result.current_latest_owner_objects_verified == 3
-    assert result.superseded_paths["Findings.md"] == ("L1.json", "L2.json")
+    assert result.historical_objects_verified == 6
+    assert result.current_latest_owner_objects_verified == 4
+    assert result.superseded_paths["Findings.md"] == ("L1.json", "L2.json", "L3.json")
 
 
 def test_cross_gate_audit_rejects_current_latest_owner_change(tmp_path: Path) -> None:
@@ -96,10 +113,14 @@ def test_cross_gate_audit_rejects_current_latest_owner_change(tmp_path: Path) ->
 
 def test_cross_gate_audit_rejects_parent_blob_mismatch(tmp_path: Path) -> None:
     root, specs = make_repo(tmp_path)
-    payload = json.loads((root / "L2.json").read_text(encoding="utf-8"))
+    payload = json.loads((root / "L3.json").read_text(encoding="utf-8"))
     payload["parent_lock_blob_sha"] = "bad"
-    write(root, "L2.json", json.dumps(payload, sort_keys=True))
+    write(root, "L3.json", json.dumps(payload, sort_keys=True))
     commit(root, "tamper parent reference")
-    modified = (specs[0], GateLockSpec("L2.json", git(root, "rev-parse", "HEAD:L2.json"), "lock_finalization_preparation_commit"))
+    modified = (
+        specs[0],
+        specs[1],
+        GateLockSpec("L3.json", git(root, "rev-parse", "HEAD:L3.json"), "lock_preparation_commit"),
+    )
     with pytest.raises(CrossGateLineageError, match="Parent lock blob"):
         audit_cross_gate_lineage(root, modified)
