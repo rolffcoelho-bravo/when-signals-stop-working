@@ -4,9 +4,9 @@
 
 > `CHRONOLOGY_COMPILATION_AND_PROVENANCE_COMPLETE_AND_LOCKED`
 
-Gate V3-4B is implemented, validated, and locked. It compiles an independently documented, source-driven chronology of crypto-market dislocations across the frozen research sample without accessing Gate V3-3 probabilities, operational states, transitions, mechanism contributions, disagreement measures, or diagnostics.
+Gate V3-4B is implemented, validated, and authoritatively locked. It compiles an independently documented, source-driven chronology of crypto-market dislocations across the frozen research sample without accessing Gate V3-3 probabilities, operational states, transitions, mechanism contributions, disagreement measures, or diagnostics.
 
-The gate creates the chronology and provenance evidence required for the later Gate V3-4C event-alignment evaluation. It does not execute alignment and does not claim that the event registry is a complete census of crypto-market panic or stress.
+The gate creates the chronology and provenance evidence required for Gate V3-4C. It does not execute event alignment and does not claim that the registry is a complete census of panic, crisis, or market stress.
 
 ## Repository position
 
@@ -16,15 +16,18 @@ The gate creates the chronology and provenance evidence required for the later G
 - parent gate: `V3-4A`;
 - parent lock: `V3_G4A_CHRONOLOGY_SIGNAL_USE_CONTRACT_LOCK.json`;
 - authoritative parent lock blob: `d3c4ce27808e60b001e7d58e0c5e36be8d8cac6a`;
-- V3-4B lock preparation commit: `aed40dc8a7dbf8b4d48c011d54d283c060623a0c`;
-- V3-4B lock commit: `f83f9a3916aebf742df21a05eed03a01955e59f2`;
-- V3-4B lock: `V3_G4B_CHRONOLOGY_PROVENANCE_LOCK.json`;
-- V3-4B lock blob: `ceee8a9069b48a74db15e7e3da9e23b2bc0fdf91`;
+- V3-4B finalization-preparation commit: `9ef6c80c45628973bb9d9d66fda1944495f5b24d`;
+- authoritative V3-4B lock commit: `300ca7254876d6bfdc7adeb18f49d1375bdd1ed3`;
+- authoritative V3-4B lock: `V3_G4B_CHRONOLOGY_PROVENANCE_LOCK.json`;
+- authoritative V3-4B lock blob: `04ac09a177d2838e0e950c24f278a8e650d2e94a`;
+- pre-finalization lock blob: `ceee8a9069b48a74db15e7e3da9e23b2bc0fdf91`;
 - frozen sample start: `2021-01-01T00:00:00Z`;
 - frozen sample end: `2026-07-22T08:00:00Z`;
 - Version 1 and Version 2 determinations modified: none;
 - Gate V3-3 model outputs accessed during chronology compilation: no;
 - event-alignment evaluation executed: no.
+
+The pre-finalization lock blob is retained only as historical evidence. Gate V3-4C may use only the authoritative blob `04ac09a177d2838e0e950c24f278a8e650d2e94a` as its parent.
 
 ## Status distinctions
 
@@ -34,17 +37,20 @@ The gate creates the chronology and provenance evidence required for the later G
 | Parent V3-4A contract | Locked | Blob `d3c4ce27808e60b001e7d58e0c5e36be8d8cac6a` |
 | Source registry | Implemented | 27 documentary sources |
 | Canonical event registry | Implemented | 17 canonical events |
-| Provenance mapping | Implemented | Every source mapped to at least one event |
+| Provenance mapping | Implemented | Every source mapped to at least one canonical event |
 | Merge governance | Implemented | Every candidate retained or merged with model access recorded as false |
-| Chronology compilation | Validated | Four deterministic evidence outputs |
+| Chronology compilation | Validated | Four byte-identical deterministic outputs |
 | Isolated and lineage tests | Validated | 19 tests passed |
-| Cross-gate ownership | Validated | Historical V3-3 and latest V3-4A ownership separated |
+| Cross-gate historical objects | Validated | 38 objects verified |
+| Current latest-owner objects | Validated | 36 objects verified |
+| Governed superseded paths | Validated | One cumulative path, `Findings.md` |
 | Primary timing eligibility | Frozen | 12 confirmed events |
 | Primary timing exclusions | Frozen | 5 boundary-uncertain events |
-| Chronology completeness | Not claimed | Registry is documentary evidence, not complete ground truth |
+| Chronology completeness | Not claimed | Documentary registry, not complete ground truth |
 | Model-output access | Prohibited and not performed | V3-4A and V3-4B controls |
-| Event alignment | Not started | Requires this lock |
-| Gate V3-4B lock | Locked | Blob `ceee8a9069b48a74db15e7e3da9e23b2bc0fdf91` |
+| Event alignment | Not started | Requires authoritative V3-4B lock |
+| Final lock verification | Implemented | Checkpoint-bound verifier in both launchers |
+| Gate V3-4B lock | Locked | Blob `04ac09a177d2838e0e950c24f278a8e650d2e94a` |
 | Next subgate | V3-4C | Independent event-alignment evaluation |
 
 ## Implementation inventory
@@ -91,7 +97,29 @@ src/shockbridge_signal_validity/v3/cross_gate_lineage.py
 scripts/verify_v3_cross_gate_lineage.py
 ```
 
-This layer verifies historical protected objects at their gate-specific protection commits and current objects against their latest owning lock.
+The lineage layer verifies gate-specific historical protection boundaries and current latest ownership across:
+
+```text
+V3_G3_PANIC_REGIME_LOCK.json
+V3_G4A_CHRONOLOGY_SIGNAL_USE_CONTRACT_LOCK.json
+V3_G4B_CHRONOLOGY_PROVENANCE_LOCK.json
+```
+
+### Final lock verification
+
+```text
+scripts/verify_v3_g4b_chronology_lock.py
+```
+
+This verifier independently binds:
+
+- the authoritative parent lock;
+- all 20 protected objects;
+- chronology counts and output hashes;
+- the current lock blob;
+- this checkpoint.
+
+The lineage verifier reads the current V3-4B lock object rather than hard-coding the blob of the lock that protects the verifier. The separate final-lock verifier then binds the lock to the checkpoint. This prevents circular self-reference while preserving tamper detection.
 
 ### Validation and execution
 
@@ -100,9 +128,10 @@ tests/test_v3_external_chronology_registry.py
 tests/test_v3_cross_gate_lineage.py
 RUN_V3_G4B_CHRONOLOGY.ps1
 RUN_V3_G4B_CHRONOLOGY.sh
-scripts/verify_v3_g4b_chronology_lock.py
 docs/V3_EXTERNAL_CHRONOLOGY_COMPILATION.md
 ```
+
+Both launchers preserve active interpreter package visibility, run the complete 19-test suite, verify cross-gate lineage, regenerate the chronology package, and execute final-lock verification.
 
 ### Consolidated findings
 
@@ -170,7 +199,7 @@ EVT-2026-02-RISKOFF
 EVT-2026-02-BLOCKFILLS
 ```
 
-They may enter only later secondary robustness reporting under the frozen V3-4A contract. Their exclusion from primary timing is a protection against false precision, not a judgment that the episodes were unimportant.
+They may enter only secondary robustness reporting under the frozen V3-4A contract. Their exclusion from primary timing is protection against false precision, not a judgment that the episodes were unimportant.
 
 ## Source and provenance governance
 
@@ -226,8 +255,6 @@ No documentary candidate was deleted because it aligned poorly with a model, and
 
 ## Deterministic evidence hashes
 
-The four tracked evidence files have the following SHA-256 identities:
-
 ```text
 chronology_manifest.json
 3e968b1432cf9e95dd26984d1dd80297825b3c94e676c70982cb5c68ef357a00
@@ -246,10 +273,10 @@ Reversing the event, source, source-map, and merge-log input order produces the 
 
 ## Validation evidence
 
-The isolated chronology and cross-gate suite completed with:
+The final isolated chronology and cross-gate suite completed with:
 
 ```text
-19 passed in 0.32s
+19 passed in 0.47s
 ```
 
 The tests establish that:
@@ -269,26 +296,27 @@ The tests establish that:
 13. missing source provenance fails closed;
 14. model-informed merge decisions fail closed;
 15. shuffled registry input remains deterministic;
-16. governed `Findings.md` supersession is accepted;
+16. governed `Findings.md` supersession across V3-3, V3-4A, and V3-4B is accepted;
 17. ungoverned latest-owner changes are rejected;
 18. parent-lock lineage mismatch is rejected;
-19. Windows and POSIX launchers preserve active interpreter package visibility and execute the complete gate path.
+19. Windows and POSIX launchers preserve active interpreter package visibility and execute the complete gate path, including final-lock verification.
 
 ## Cross-gate ownership resolution
 
-The earlier standalone V3-3 final-lock verifier was designed as a point-in-time current-tree verifier. It therefore reports a mismatch after V3-4A legitimately updates `Findings.md`.
+The earlier standalone V3-3 final-lock verifier was designed as a point-in-time current-tree verifier. It therefore reports a mismatch after later gates legitimately update `Findings.md`.
 
 This does not indicate corruption of the V3-3 lock.
 
-The new cross-gate audit verifies simultaneously that:
+The authoritative cross-gate audit verifies simultaneously that:
 
 1. the V3-3 `Findings.md` blob remains exactly preserved at the V3-3 preparation commit;
-2. the V3-4A `Findings.md` blob remains exactly preserved at the V3-4A finalization preparation commit;
-3. V3-4A is the latest governed owner before V3-4B findings are recorded;
-4. every other protected object remains bound to its latest owning lock;
-5. the parent-lock chain and authoritative lock blobs remain unchanged.
+2. the V3-4A `Findings.md` blob remains exactly preserved at the V3-4A finalization-preparation commit;
+3. the V3-4B `Findings.md` blob remains exactly preserved at the V3-4B finalization-preparation commit;
+4. V3-4B is the current governed owner;
+5. every other protected object remains bound to its latest owning lock;
+6. the parent-lock chain and authoritative earlier lock blobs remain unchanged.
 
-The frozen V3-3 lock and its original verifier were not modified.
+The frozen V3-3 and V3-4A locks and their original verifiers were not modified.
 
 ## Results
 
@@ -302,7 +330,7 @@ The gate does not force complex multi-day collapses, contagion phases, or retros
 
 ### Result 3 — Provenance is reproducible rather than narrative
 
-The registry is not only a manually written event table. A deterministic compiler reconstructs the chronology, source provenance, candidate merge history, and evidence manifest from frozen machine-readable inputs.
+A deterministic compiler reconstructs the chronology, source provenance, candidate merge history, and evidence manifest from frozen machine-readable inputs.
 
 ### Result 4 — Negative and incomplete documentation remains visible
 
@@ -314,11 +342,11 @@ Cross-gate lineage verification prevents a later legitimate cumulative findings 
 
 ## Scientific assessment
 
-The scientific value of V3-4B lies in constructing an independent validation layer before seeing the regime results.
+The scientific value of V3-4B lies in constructing an independent validation layer before seeing regime results.
 
-The chronology can now support later tests of temporal correspondence, transition capture, lead time, overlap, decay, rank shifts, and false-alert burden without allowing those results to determine which events are retained.
+The chronology can support later tests of temporal correspondence, transition capture, lead time, overlap, decay, rank shifts, and false-alert burden without allowing those results to determine which events are retained.
 
-This design is stronger than a conventional retrospective crisis list because it preserves:
+The design preserves:
 
 1. documentary provenance;
 2. publication-time precision;
@@ -326,15 +354,16 @@ This design is stronger than a conventional retrospective crisis list because it
 4. candidate merge history;
 5. chronology incompleteness;
 6. separation from model output;
-7. deterministic regeneration.
+7. deterministic regeneration;
+8. cross-gate lock ownership.
 
-The gate does not establish that the V3-3 probabilities correspond to external dislocations. That is the scientific purpose of V3-4C and remains unopened.
+The gate does not establish that V3-3 probabilities correspond to external dislocations. That is the purpose of V3-4C and remains unopened.
 
 ## Model-risk assessment
 
 ### Incomplete-registry risk
 
-The chronology is not a complete census. A later apparent false alert may correspond to an undocumented dislocation rather than a model error. V3-4C must therefore report false-alert burden with the chronology-completeness limitation visible.
+The chronology is not a complete census. A later apparent false alert may correspond to an undocumented dislocation rather than a model error. V3-4C must report false-alert burden with this limitation visible.
 
 ### Boundary risk
 
@@ -342,23 +371,23 @@ A multi-day event can have several economically defensible start points. The pri
 
 ### Publication-delay risk
 
-Some documentary sources were published after event onset. Publication timestamp and event timestamp remain separate fields and must not be conflated.
+Some documentary sources were published after event onset. Publication timestamp and event timestamp remain separate fields.
 
 ### Source-dependence risk
 
-Several events use multiple sources. The event-source map and merge log preserve that dependence rather than representing every source as a separate independent event.
+Several events use multiple sources. The event-source map and merge log preserve that dependence rather than representing every source as a separate event.
 
 ### Taxonomy risk
 
-Event types are documentary classifications. They are not inferred latent states and must not be treated as supervised labels for retraining the V3-3 models.
+Event types are documentary classifications. They are not inferred latent states and must not be used as supervised labels to retrain V3-3 models.
 
 ### Coverage risk
 
-The registry has stronger coverage for large, publicly reported dislocations than for smaller liquidity or funding interruptions. This asymmetry must remain visible in V3-4C interpretation.
+The registry has stronger coverage for large publicly reported dislocations than for smaller liquidity or funding interruptions. This asymmetry must remain visible in V3-4C interpretation.
 
-### Current-tree verifier risk
+### Verification circularity risk
 
-A point-in-time lock verifier can fail after a later gate legitimately supersedes a cumulative file. Current integrity must be assessed through latest-owner lineage, while the original verifier remains valid for its historical boundary.
+A verifier cannot hard-code the blob of a lock that protects that verifier without creating a circular dependency. V3-4B resolves this through dynamic latest-lock lineage plus an independent checkpoint-bound final-lock verifier.
 
 ## Perceived-value and problem-solving opportunities
 
@@ -368,7 +397,7 @@ The chronology and provenance package can support an audit-ready service evaluat
 
 ### Event registry product
 
-The source, precision, uncertainty, and merge architecture can become a reusable, governed crypto-market dislocation registry rather than a static event list.
+The source, precision, uncertainty, and merge architecture can become a reusable governed crypto-market dislocation registry rather than a static event list.
 
 ### Model-risk dashboard
 
@@ -380,7 +409,7 @@ Once alignment and conditional diagnostics are complete, the architecture can se
 
 ### Publication value
 
-The chronology-before-overlay design, explicit uncertainty exclusions, and cross-gate ownership logic strengthen the methodological contribution beyond a conventional post hoc event study.
+The chronology-before-overlay design, explicit uncertainty exclusions, deterministic provenance, and cross-gate ownership logic strengthen the methodological contribution beyond a conventional post hoc event study.
 
 ## Scientific and publication boundaries
 
@@ -406,9 +435,9 @@ The next permitted subgate is:
 Gate V3-4C — Independent Event-Alignment Evaluation
 ```
 
-Gate V3-4C may access the frozen Gate V3-3 outputs only after this lock. It must:
+Gate V3-4C may access frozen Gate V3-3 outputs only after this authoritative lock. It must:
 
-- use the V3-4B lock blob `ceee8a9069b48a74db15e7e3da9e23b2bc0fdf91` as its parent;
+- use V3-4B lock blob `04ac09a177d2838e0e950c24f278a8e650d2e94a` as its parent;
 - retain all registered models and horizons;
 - use all 12 confirmed primary events;
 - keep the five uncertain events in secondary robustness only;
@@ -416,6 +445,6 @@ Gate V3-4C may access the frozen Gate V3-3 outputs only after this lock. It must
 - prohibit chronology-driven threshold selection;
 - prohibit model selection or ensemble creation;
 - retain negative and insufficient results;
-- refrain from executing conditional RSI or Bollinger diagnostics reserved for V3-4D.
+- refrain from conditional RSI or Bollinger diagnostics reserved for V3-4D.
 
 Gate V3-4C has not started and requires separate approval.
