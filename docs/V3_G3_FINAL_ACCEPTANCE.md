@@ -1,4 +1,4 @@
-# Gate V3-3D — Final Acceptance, Protected-Object Audit, and Lock
+# Gate V3-3D - Final Acceptance, Protected-Object Audit, and Lock
 
 ## Purpose
 
@@ -29,8 +29,10 @@ tests/test_v3_lock_lineage.py
 Expected total:
 
 ```text
-37 passed
+38 passed
 ```
+
+The additional regression assertion verifies that the Windows PowerShell wrapper is ASCII-only, contains the exact governed runner command, and has balanced double-quote delimiters. This prevents Windows PowerShell 5.1 from misreading UTF-8 smart punctuation as string delimiters.
 
 It then executes the V3-3A, V3-3B, and V3-3C portable lock verifiers and confirms:
 
