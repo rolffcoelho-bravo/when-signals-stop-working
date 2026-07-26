@@ -82,6 +82,63 @@ def test_lineage_accepts_intentional_latest_owner_supersession(
     assert result.historical_objects_verified == 4
     assert result.current_objects_verified == 3
     assert result.superseded_paths["shared.py"] == ("L1.json", "L2.json")
+    assert result.lock_anchor_sources["L1.json"] == (
+        "child_parent_lock_blob_sha:L2.json"
+    )
+
+
+def test_lineage_accepts_draft_lock_finalized_before_child_freeze(
+    tmp_path: Path,
+) -> None:
+    root = _init_repo(tmp_path)
+    _write(root, "a.py", "final\n")
+    draft = {"protected_files": {"a.py": "draft-placeholder"}}
+    _write(root, "L1.json", json.dumps(draft, sort_keys=True))
+    creation = _commit(root, "create draft lock")
+
+    finalized = {"protected_files": {"a.py": _blob(root, "a.py")}}
+    _write(root, "L1.json", json.dumps(finalized, sort_keys=True))
+    finalization = _commit(root, "finalize lock")
+
+    _write(root, "b.py", "b\n")
+    child = {
+        "parent_lock": "L1.json",
+        "parent_lock_blob_sha": _git(root, "rev-parse", "HEAD:L1.json"),
+        "protected_files": {"b.py": _blob(root, "b.py")},
+    }
+    _write(root, "L2.json", json.dumps(child, sort_keys=True))
+    _commit(root, "freeze finalized parent")
+
+    result = audit_lock_lineage(root, ("L1.json", "L2.json"))
+    assert result.lock_creation_commits["L1.json"] == creation
+    assert result.lock_finalization_commits["L1.json"] == finalization
+    assert result.authoritative_lock_blobs["L1.json"] == child[
+        "parent_lock_blob_sha"
+    ]
+
+
+def test_lineage_rejects_lock_modified_after_child_freeze(tmp_path: Path) -> None:
+    root = _init_repo(tmp_path)
+    _write(root, "a.py", "a\n")
+    parent = {"protected_files": {"a.py": _blob(root, "a.py")}}
+    _write(root, "L1.json", json.dumps(parent, sort_keys=True))
+    _commit(root, "parent lock")
+
+    _write(root, "b.py", "b\n")
+    child = {
+        "parent_lock": "L1.json",
+        "parent_lock_blob_sha": _git(root, "rev-parse", "HEAD:L1.json"),
+        "protected_files": {"b.py": _blob(root, "b.py")},
+    }
+    _write(root, "L2.json", json.dumps(child, sort_keys=True))
+    _commit(root, "child freezes parent")
+
+    parent["tampered_after_child"] = True
+    _write(root, "L1.json", json.dumps(parent, sort_keys=True))
+    _commit(root, "modify frozen parent")
+
+    with pytest.raises(LockLineageError, match="modified after finalization"):
+        audit_lock_lineage(root, ("L1.json", "L2.json"))
 
 
 def test_lineage_rejects_current_latest_owner_mismatch(tmp_path: Path) -> None:
@@ -97,7 +154,7 @@ def test_lineage_rejects_current_latest_owner_mismatch(tmp_path: Path) -> None:
         audit_lock_lineage(root, ("L1.json",))
 
 
-def test_lineage_rejects_modified_lock_file(tmp_path: Path) -> None:
+def test_lineage_rejects_modified_latest_lock_file(tmp_path: Path) -> None:
     root = _init_repo(tmp_path)
     _write(root, "x.py", "locked\n")
     lock = {"protected_files": {"x.py": _blob(root, "x.py")}}
@@ -107,7 +164,7 @@ def test_lineage_rejects_modified_lock_file(tmp_path: Path) -> None:
     _write(root, "L1.json", json.dumps(lock, sort_keys=True))
     _commit(root, "tamper")
 
-    with pytest.raises(LockLineageError, match="modified after creation"):
+    with pytest.raises(LockLineageError, match="modified after finalization"):
         audit_lock_lineage(root, ("L1.json",))
 
 
