@@ -22,7 +22,7 @@ VERIFIERS = (
     "scripts/verify_v3_g3b_probabilistic_engine.py",
     "scripts/verify_v3_g3c_governance.py",
 )
-EXPECTED_TEST_COUNT = 38
+EXPECTED_TEST_COUNT = 41
 EXPECTED_BRANCH = "research/v3-adaptive-signal-validity"
 
 
@@ -114,6 +114,7 @@ def main() -> int:
     print(f"Historical protected objects verified: {lineage.historical_objects_verified}")
     print(f"Current latest-owner objects verified: {lineage.current_objects_verified}")
     print(f"Governed superseded paths: {len(lineage.superseded_paths)}")
+    print("Lock finalization anchors verified: True")
 
     print("2. VERIFYING STATIC GOVERNANCE AND OUTPUT CONTRACTS")
     static = _verify_static_governance()
@@ -126,7 +127,7 @@ def main() -> int:
         _run([sys.executable, verifier])
 
     report = {
-        "schema_version": "v3.g3-final-acceptance-report.v1",
+        "schema_version": "v3.g3-final-acceptance-report.v2",
         "status": "FINAL_LOCK_AUTHORIZATION_EVIDENCE_COMPLETE",
         "branch": branch,
         "commit": _git("rev-parse", "HEAD"),
@@ -139,6 +140,10 @@ def main() -> int:
             path: list(locks) for path, locks in lineage.superseded_paths.items()
         },
         "lock_creation_commits": dict(lineage.lock_creation_commits),
+        "lock_finalization_commits": dict(lineage.lock_finalization_commits),
+        "authoritative_lock_blobs": dict(lineage.authoritative_lock_blobs),
+        "lock_anchor_sources": dict(lineage.lock_anchor_sources),
+        "lock_finalization_anchors_verified": True,
         **static,
         "version_1_and_version_2_determinations_modified": False,
         "final_lock_created_by_this_script": False,
