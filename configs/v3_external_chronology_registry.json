@@ -1,1 +1,41 @@
-PLACEHOLDER
+{
+  "baseline_commit": "5a07299367b80c3940e652e7bbdd208ce86ba5ef",
+  "branch": "research/v3-adaptive-signal-validity",
+  "chronology_completeness_claimed": false,
+  "compilation_method": "manual_source_driven_registry_without_model_output_access",
+  "compiled_timestamp": "2026-07-26T00:00:00Z",
+  "component_files": {
+    "event_source_map": "configs/v3_external_chronology_source_map.json",
+    "events": "configs/v3_external_chronology_events.json",
+    "merge_log": "configs/v3_external_chronology_merge_log.json",
+    "sources": "configs/v3_external_chronology_sources.json"
+  },
+  "gate": "V3-4B",
+  "limitations": [
+    "The registry is an independently documented event set, not a complete census of crypto-market stress.",
+    "BOUNDARY_UNCERTAIN and SOURCE_CONFLICT events are excluded from primary timing metrics.",
+    "Publication timestamps can follow event onset; event boundaries are source-derived and never model-derived.",
+    "No Gate V3-3 probability, state, transition, contribution, or diagnostic output was accessed during compilation."
+  ],
+  "model_outputs_accessed": false,
+  "parent_gate": "V3-4A",
+  "parent_lock": "V3_G4A_CHRONOLOGY_SIGNAL_USE_CONTRACT_LOCK.json",
+  "parent_lock_blob_sha": "d3c4ce27808e60b001e7d58e0c5e36be8d8cac6a",
+  "sample_end": "2026-07-22T08:00:00Z",
+  "sample_start": "2021-01-01T00:00:00Z",
+  "schema_version": "v3.external-chronology-registry-input.v1",
+  "source_policy": {
+    "allowed_source_types": [
+      "regulator_or_central_bank",
+      "exchange_or_venue_notice",
+      "clearing_or_settlement_notice",
+      "official_market_operator",
+      "peer_reviewed_or_institutional_research",
+      "reputable_time_stamped_news_archive"
+    ],
+    "publication_time_normalization": "UTC; DAY or HOUR precision is explicitly retained when exact publication seconds were unavailable",
+    "source_conflicts_retained": true
+  },
+  "status": "SOURCE_DRIVEN_CHRONOLOGY_INPUT_FROZEN_FOR_COMPILATION",
+  "timezone": "UTC"
+}
