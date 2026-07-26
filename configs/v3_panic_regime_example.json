@@ -1,0 +1,26 @@
+{
+  "schema_version": "v3.panic-regime-run.v1",
+  "market_structure_path": "outputs/v3/market_structure/market_structure_features.csv",
+  "causal_series_path": "outputs/v3/market_structure/causal_series_features.csv",
+  "engine": {
+    "dependence_window": 60,
+    "reference_series_id": "SOL/USDT@binance",
+    "minimum_prior_observations": 250,
+    "scaling_refit_interval": 30,
+    "minimum_available_mechanism_families": 4,
+    "minimum_valid_feature_fraction": 0.5,
+    "minimum_features_per_family": 2,
+    "monotone_logistic_slope": 6.0,
+    "monotone_ewma_alpha": 0.35,
+    "challenger_minimum_history": 250,
+    "hmm_minimum_history": 500,
+    "hmm_refit_interval": 30,
+    "hmm_max_iter": 20,
+    "hmm_tolerance": 1e-6,
+    "covariance_floor": 0.0001,
+    "transition_smoothing": 1.0,
+    "minimum_state_occupancy_fraction": 0.05,
+    "minimum_state_occupancy_count": 20,
+    "random_seed": 1729
+  }
+}
