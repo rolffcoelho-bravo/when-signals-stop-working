@@ -262,7 +262,7 @@ The isolated chronology and cross-gate suite completed with `19 passed`. The det
 
 ### Governance contribution V3-G4B-M3
 
-A cross-gate latest-owner audit now separates historical integrity from current ownership. It verifies the V3-3 protected `Findings.md` object at the V3-3 preparation boundary and the V3-4A object at its finalization boundary, while recognizing V3-4A as the legitimate current owner. The frozen V3-3 lock and its point-in-time verifier remain unchanged.
+A cross-gate latest-owner audit now separates historical integrity from current ownership. It verifies the V3-3 protected `Findings.md` object at the V3-3 preparation boundary, the V3-4A object at its finalization boundary, and the V3-4B object at its lock-preparation boundary, while recognizing V3-4B as the legitimate current owner. The frozen V3-3 and V3-4A locks and their point-in-time verifiers remain unchanged.
 
 ---
 
