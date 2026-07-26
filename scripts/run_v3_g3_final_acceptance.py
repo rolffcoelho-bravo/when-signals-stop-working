@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
-from typing import Any
+from typing import Any, Mapping
 
 from shockbridge_signal_validity.v3.lock_lineage import audit_lock_lineage
 
@@ -16,13 +16,14 @@ TEST_FILES = (
     "tests/test_v3_panic_regime.py",
     "tests/test_v3_panic_regime_diagnostics.py",
     "tests/test_v3_lock_lineage.py",
+    "tests/test_v3_g3_final_acceptance.py",
 )
 VERIFIERS = (
     "scripts/verify_v3_g3a_identification.py",
     "scripts/verify_v3_g3b_probabilistic_engine.py",
     "scripts/verify_v3_g3c_governance.py",
 )
-EXPECTED_TEST_COUNT = 41
+EXPECTED_TEST_COUNT = 46
 EXPECTED_BRANCH = "research/v3-adaptive-signal-validity"
 
 
@@ -47,6 +48,35 @@ def _load_json(path: str) -> dict[str, Any]:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
+def _verify_chronology_governance(
+    acceptance_evidence: Mapping[str, Any],
+) -> dict[str, Any]:
+    validation_complete = acceptance_evidence.get(
+        "external_chronology_validation_complete"
+    )
+    deferred = acceptance_evidence.get(
+        "external_chronology_deferred_to_later_robustness"
+    )
+    explicitly_used = acceptance_evidence.get("external_chronology_used", False)
+
+    if validation_complete is not False:
+        raise RuntimeError(
+            "External chronology validation must remain incomplete before the robustness gate."
+        )
+    if deferred is not True:
+        raise RuntimeError(
+            "External chronology must remain explicitly deferred to the later robustness gate."
+        )
+    if explicitly_used is not False:
+        raise RuntimeError("External chronology was used before the robustness gate.")
+
+    return {
+        "external_chronology_validation_complete": False,
+        "external_chronology_deferred_to_later_robustness": True,
+        "external_chronology_used": False,
+    }
+
+
 def _verify_static_governance() -> dict[str, Any]:
     registry = _load_json("configs/v3_panic_regime_model_registry.json")
     identification = _load_json("configs/v3_panic_regime_identification.json")
@@ -61,10 +91,13 @@ def _verify_static_governance() -> dict[str, Any]:
         raise RuntimeError("Consensus-probability prohibition is missing.")
     if g3b.get("acceptance_evidence", {}).get("automatic_model_selection_performed") is not False:
         raise RuntimeError("V3-3B lock records automatic model selection.")
-    if g3c.get("acceptance_evidence", {}).get("automatic_model_selection_performed") is not False:
+
+    g3c_evidence = g3c.get("acceptance_evidence")
+    if not isinstance(g3c_evidence, Mapping):
+        raise RuntimeError("V3-3C lock has no acceptance_evidence mapping.")
+    if g3c_evidence.get("automatic_model_selection_performed") is not False:
         raise RuntimeError("V3-3C lock records automatic model selection.")
-    if g3c.get("acceptance_evidence", {}).get("external_chronology_used") is not False:
-        raise RuntimeError("External chronology was used before the robustness gate.")
+    chronology = _verify_chronology_governance(g3c_evidence)
 
     required_outputs = set(identification.get("required_final_gate_outputs", []))
     expected_outputs = {
@@ -84,7 +117,7 @@ def _verify_static_governance() -> dict[str, Any]:
         "automatic_model_selection_performed": False,
         "automatic_ensemble_performed": False,
         "consensus_probability_produced": False,
-        "external_chronology_used": False,
+        **chronology,
         "required_output_contract_verified": True,
     }
 
@@ -127,7 +160,7 @@ def main() -> int:
         _run([sys.executable, verifier])
 
     report = {
-        "schema_version": "v3.g3-final-acceptance-report.v2",
+        "schema_version": "v3.g3-final-acceptance-report.v3",
         "status": "FINAL_LOCK_AUTHORIZATION_EVIDENCE_COMPLETE",
         "branch": branch,
         "commit": _git("rev-parse", "HEAD"),
@@ -161,6 +194,8 @@ def main() -> int:
     print("5. FINAL ACCEPTANCE EVIDENCE COMPLETE")
     print(f"Integrated tests passed: {EXPECTED_TEST_COUNT}")
     print("Automatic model selection performed: False")
+    print("External chronology validation complete: False")
+    print("External chronology deferred: True")
     print("External chronology used: False")
     print("Final lock created: False")
     print(f"Report: {report_path}")
