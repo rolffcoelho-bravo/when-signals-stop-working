@@ -24,6 +24,11 @@ SPECS = (
         authoritative_blob="d3c4ce27808e60b001e7d58e0c5e36be8d8cac6a",
         protection_commit_field="lock_finalization_preparation_commit",
     ),
+    GateLockSpec(
+        path="V3_G4B_CHRONOLOGY_PROVENANCE_LOCK.json",
+        authoritative_blob="ceee8a9069b48a74db15e7e3da9e23b2bc0fdf91",
+        protection_commit_field="lock_preparation_commit",
+    ),
 )
 
 
@@ -33,6 +38,7 @@ def main() -> int:
     expected = (
         "V3_G3_PANIC_REGIME_LOCK.json",
         "V3_G4A_CHRONOLOGY_SIGNAL_USE_CONTRACT_LOCK.json",
+        "V3_G4B_CHRONOLOGY_PROVENANCE_LOCK.json",
     )
     if findings_history != expected:
         raise CrossGateLineageError(
@@ -45,7 +51,7 @@ def main() -> int:
         f"{result.current_latest_owner_objects_verified}"
     )
     print(f"Governed superseded paths: {len(result.superseded_paths)}")
-    print("Findings.md latest owner: V3_G4A_CHRONOLOGY_SIGNAL_USE_CONTRACT_LOCK.json")
+    print("Findings.md latest owner: V3_G4B_CHRONOLOGY_PROVENANCE_LOCK.json")
     print("V3-3 historical Findings.md object preserved: True")
     return 0
 
