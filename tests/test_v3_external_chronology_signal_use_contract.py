@@ -112,3 +112,13 @@ def test_contract_mutations_fail_closed(mutation: tuple[str, str, object]) -> No
     value[section][field] = replacement
     with pytest.raises(ChronologySignalUseContractError):
         validate_contract(value)
+
+
+def test_runners_preserve_user_site_package_access() -> None:
+    powershell = (ROOT / "RUN_V3_G4A_CONTRACT.ps1").read_text(encoding="utf-8")
+    shell = (ROOT / "RUN_V3_G4A_CONTRACT.sh").read_text(encoding="utf-8")
+    assert 'SetEnvironmentVariable("PYTHONNOUSERSITE", $null, "Process")' in powershell
+    assert '$PreviousPythonNoUserSite' in powershell
+    assert 'unset PYTHONNOUSERSITE' in shell
+    assert 'PYTHONNOUSERSITE=1' not in powershell
+    assert 'PYTHONNOUSERSITE=1' not in shell
