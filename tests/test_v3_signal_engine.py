@@ -11,6 +11,7 @@ from shockbridge_signal_validity.v3.signal_engine import (
     SignalEngineError,
     compute_signal_feature_frame,
 )
+from shockbridge_signal_validity.v3.signal_math import wilder_rsi
 from shockbridge_signal_validity.v3.signal_registry import validate_registry
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,6 +62,42 @@ def test_engine_emits_every_registered_signal_for_every_source_row() -> None:
     assert result.validation_report["target_accessed"] is False
     assert result.validation_report["chronology_accessed"] is False
     assert result.validation_report["next_gate"] == "V3-5"
+
+    reference = pd.Series(
+        [
+            44.34,
+            44.09,
+            44.15,
+            43.61,
+            44.33,
+            44.83,
+            45.10,
+            45.42,
+            45.84,
+            46.08,
+            45.89,
+            46.03,
+            45.61,
+            46.28,
+            46.28,
+            46.00,
+            46.03,
+            46.41,
+            46.22,
+            45.64,
+            46.21,
+        ]
+    )
+    calculated = wilder_rsi(reference, 14)
+    initial_up = reference.diff().clip(lower=0.0).iloc[1:15].mean()
+    initial_down = (-reference.diff().clip(upper=0.0)).iloc[1:15].mean()
+    expected_initial = 100.0 - 100.0 / (1.0 + initial_up / initial_down)
+    assert calculated.iloc[:14].isna().all()
+    assert calculated.iloc[14] == pytest.approx(expected_initial)
+    recursive_up = (13.0 * initial_up + max(reference.iloc[15] - reference.iloc[14], 0.0)) / 14.0
+    recursive_down = (13.0 * initial_down + max(reference.iloc[14] - reference.iloc[15], 0.0)) / 14.0
+    expected_next = 100.0 - 100.0 / (1.0 + recursive_up / recursive_down)
+    assert calculated.iloc[15] == pytest.approx(expected_next)
 
 
 def test_engine_preserves_early_history_and_ineligible_templates() -> None:
