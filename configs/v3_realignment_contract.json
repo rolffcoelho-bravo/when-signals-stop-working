@@ -52,6 +52,8 @@
     "identifier_scheme": "v3sig:<feature_key>:<sha256(canonical_specification)>",
     "prior_development_suite_passed": 19,
     "exact_hardened_suite_passed": 19,
+    "final_hardening_applied_after_prior_suite": true,
+    "current_exact_suite_execution_pending": true,
     "canonical_input_materialization": "FROZEN_SOL_SNAPSHOT_VIA_LOCKED_V3_G1_ADAPTER",
     "canonical_source_path": "data/raw/sol_usdt_4h.csv",
     "canonical_adapter_config": "configs/v3_adapter_frozen_sol.json",
