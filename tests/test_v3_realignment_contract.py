@@ -31,17 +31,36 @@ def test_richard_question_and_frozen_answer_are_restored() -> None:
     assert frozen["modified_by_realignment"] is False
 
 
-def test_true_v3_g4_is_reopened_without_empirical_claims() -> None:
+def test_true_v3_g4_is_implemented_without_empirical_claims() -> None:
     gate = contract()["true_next_core_gate"]
     assert gate == {
         "gate": "V3-4",
         "title": "Unified RSI and Bollinger Interpretation Engine",
-        "status": "APPROVED_AND_REOPENED",
-        "implementation_started": False,
+        "status": "IMPLEMENTATION_COMPLETE_VALIDATION_PENDING",
+        "implementation_started": True,
+        "implementation_complete": True,
+        "authoritative_validation_complete": False,
+        "lock_created": False,
         "predictive_claims_permitted": False,
         "economic_claims_permitted": False,
         "failure_claims_permitted": False,
     }
+    evidence = contract()["v3_4_implementation"]
+    assert evidence["registered_signal_count"] == 48
+    assert evidence["base_signal_count"] == 44
+    assert evidence["interaction_signal_count"] == 4
+    assert evidence["adaptive_template_count"] == 2
+    assert evidence["development_tests_passed"] == 19
+    for field in (
+        "automatic_selection_performed",
+        "target_accessed",
+        "chronology_accessed",
+        "predictive_claims_produced",
+        "economic_claims_produced",
+        "deterioration_claims_produced",
+        "failure_claims_produced",
+    ):
+        assert evidence[field] is False
 
 
 def test_chronology_work_is_reclassified_without_rewriting_history() -> None:
@@ -76,9 +95,11 @@ def test_core_sequence_places_signal_establishment_before_failure_model() -> Non
     )
 
 
-def test_required_realignment_documents_exist_and_cross_reference() -> None:
+def test_required_documents_and_v3_g4_implementation_files_exist() -> None:
     payload = contract()
     for relative in payload["required_documents"]:
+        assert (ROOT / relative).is_file(), relative
+    for relative in payload["required_v3_4_files"]:
         assert (ROOT / relative).is_file(), relative
 
     richard = (ROOT / "RICHARD_QUESTION.md").read_text(encoding="utf-8")
@@ -90,15 +111,21 @@ def test_required_realignment_documents_exist_and_cross_reference() -> None:
     scope = (ROOT / "docs" / "V3_G4_SIGNAL_ENGINE_SCOPE.md").read_text(
         encoding="utf-8"
     )
+    implementation = (ROOT / "docs" / "V3_G4_SIGNAL_ENGINE.md").read_text(
+        encoding="utf-8"
+    )
 
     assert "When will RSI stop working?" in richard
     assert "NO_PIPELINE_ADMITTED" in richard
     assert "NO_INCREMENTAL_EVIDENCE" in richard
+    assert "ESTABLISHMENT" in direct
     assert "FAILURE_MODEL_INADMISSIBLE_BASELINE_NOT_ESTABLISHED" in direct
     assert "V3-RV3" in decision
     assert "V3-4_SIGNAL_INTERPRETATION" in gate_map
     assert "APPROVED_AND_REOPENED" in scope
-    assert "IMPLEMENTATION_NOT_STARTED" in scope
+    assert "IMPLEMENTATION_COMPLETE_VALIDATION_PENDING" in scope
+    assert "IMPLEMENTATION_COMPLETE" in implementation
+    assert "DEVELOPMENT_TESTS_19_PASSED" in implementation
 
 
 def test_governance_controls_fail_closed() -> None:
@@ -123,4 +150,9 @@ def test_realignment_verifier_passes() -> None:
     )
     assert completed.returncode == 0, completed.stderr
     assert "Richard question restored: True" in completed.stdout
-    assert "True V3-4 implementation started: False" in completed.stdout
+    assert "True V3-4 implementation started: True" in completed.stdout
+    assert (
+        "True V3-4 status: IMPLEMENTATION_COMPLETE_VALIDATION_PENDING"
+        in completed.stdout
+    )
+    assert "Registered signal specifications: 48" in completed.stdout
