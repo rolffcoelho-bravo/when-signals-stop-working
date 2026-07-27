@@ -7,6 +7,7 @@ APPROVED
 PARENT_V3_4_IMPLEMENTATION_VALIDATED_AND_LOCKED
 V3_5_CONTRACT_AUTHORITATIVELY_VALIDATED
 V3_5_FOUNDATION_AUTHORITATIVELY_VALIDATED
+VALIDATED_CONTRACT_AND_FOUNDATION_OBJECTS_PROTECTED
 REAL_DEVELOPMENT_MATERIALIZATION_IMPLEMENTED
 AUTHORITATIVE_EXECUTION_PENDING
 MODEL_FITTING_NOT_STARTED
@@ -39,6 +40,8 @@ V3_G5_CONTRACT_VALIDATION.json
 V3_G5_FOUNDATION_VALIDATION.json
 ```
 
+The materialization runner verifies the exact frozen contract blob and every validated foundation implementation/test object against those commits. Local and staged mutations to protected paths fail before execution.
+
 ## Real source boundary
 
 ```text
@@ -53,6 +56,18 @@ Frequency: 4 hours
 ```
 
 The SOL and BTC timestamps must align exactly. OHLCV imputation is prohibited.
+
+The generated source manifest binds SHA-256 hashes for:
+
+```text
+configs/v3_g5_forecast_contract.json
+data/raw/sol_usdt_4h.csv
+data/raw/btc_usdt_4h.csv
+outputs/v3/signal_engine/signal_features.csv
+evidence/v3/g4_signal_lock/signal_registry_manifest.json
+```
+
+The signal-table and registry hashes must equal their V3-4 lock records.
 
 ## Frozen development boundary
 
@@ -169,7 +184,7 @@ outputs/v3/forecast_foundation/source_manifest.json
 outputs/v3/forecast_foundation/materialization_manifest.json
 ```
 
-The directory is ignored because it is regenerable. Every compact output is bound by SHA-256 in `materialization_manifest.json`.
+The directory is ignored because it is regenerable. Every compact generated output is bound by SHA-256 in `materialization_manifest.json`.
 
 ## Implementation files
 
@@ -177,6 +192,7 @@ The directory is ignored because it is regenerable. Every compact output is boun
 src/shockbridge_signal_validity/v3/forecast_materialization.py
 scripts/run_v3_g5_materialization.py
 scripts/verify_v3_g5_materialization.py
+scripts/verify_v3_g5_validated_boundaries.py
 tests/test_v3_g5_materialization.py
 RUN_V3_G5_MATERIALIZATION.ps1
 RUN_V3_G5_MATERIALIZATION.sh
@@ -186,18 +202,21 @@ RUN_V3_G5_MATERIALIZATION.sh
 
 1. the five materialization tests pass;
 2. the final V3-4 lock and validated V3-5 contract remain valid;
-3. the sixteen-test V3-5 foundation remains valid;
-4. SOL and BTC histories align exactly;
-5. development rows equal 9852;
-6. target rows equal 59070;
-7. nested fold rows equal 120;
-8. candidates equal 57;
-9. candidate-horizon coverage rows equal 342;
-10. target timestamps never cross 2025-06-30T20:00:00Z;
-11. large-move labels remain deferred to fold-scoped training;
-12. model fitting and pipeline selection remain false;
-13. establishment and final-reserve access remain false;
-14. no tracked working-tree or staged-index mutation occurs.
+3. all protected V3-5 foundation objects equal the validated commit;
+4. protected local and staged mutations are absent;
+5. the sixteen-test V3-5 foundation remains valid;
+6. SOL and BTC histories align exactly;
+7. all five input objects are hash-bound;
+8. development rows equal 9852;
+9. target rows equal 59070;
+10. nested fold rows equal 120;
+11. candidates equal 57;
+12. candidate-horizon coverage rows equal 342;
+13. target timestamps never cross 2025-06-30T20:00:00Z;
+14. large-move labels remain deferred to fold-scoped training;
+15. model fitting and pipeline selection remain false;
+16. establishment and final-reserve access remain false;
+17. no tracked working-tree or staged-index mutation occurs.
 
 ## Required authoritative execution
 
