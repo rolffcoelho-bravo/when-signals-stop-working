@@ -262,7 +262,7 @@ The isolated chronology and cross-gate suite completed with `19 passed`. The det
 
 ### Governance contribution V3-G4B-M3
 
-A cross-gate latest-owner audit now separates historical integrity from current ownership. It verifies the V3-3 protected `Findings.md` object at the V3-3 preparation boundary, the V3-4A object at its finalization boundary, and the V3-4B object at its lock-preparation boundary, while recognizing V3-4B as the legitimate current owner. The frozen V3-3 and V3-4A locks and their point-in-time verifiers remain unchanged.
+A cross-gate latest-owner audit separates historical integrity from current ownership. It verifies historical protected objects at their governed boundaries while recognizing legitimate later ownership. Frozen prior locks and point-in-time verifiers remain unchanged.
 
 ---
 
@@ -276,9 +276,9 @@ The realignment restores Richard's practical question and the scientific priorit
 
 Historical chronology work is preserved without renaming or rewriting its lock objects and is scientifically reclassified as `V3-RV1` and `V3-RV2`. Proposed event alignment is reclassified as `V3-RV3`, paused, and not started. The true Gate V3-4 is restored as the Unified RSI and Bollinger Interpretation Engine.
 
-### Remediation finding V3-RL-V1
+### Validation finding V3-RL-V1
 
-The first Windows realignment run completed six tests and exposed one exact-token verifier mismatch: `DIRECT_ANSWER_LOGIC.md` expressed establishment logic but lacked the exact uppercase `ESTABLISHMENT` token required by the standalone verifier. The document was corrected without weakening the verifier. Authoritative rerun evidence remains pending.
+The corrected repository realignment suite completed with `7 passed`. It verifies Richard's question, frozen Version 1 and Version 2 determinations, chronology reclassification, the establishment-before-failure sequence, final V3-4 lock, active V3-5 contract boundary, and fail-closed protection of the V3-9 final-framework reserve.
 
 ---
 
@@ -298,11 +298,47 @@ Adaptive candidates are not silently estimated by the engine. They remain visibl
 
 The engine emits every registered specification for every canonical source row in deterministic long format. Missing context remains visible as `INELIGIBLE_CONTEXT_UNAVAILABLE`; early-history and undefined values remain explicit; no sparse or unpromising candidate is deleted. Four registered interactions preserve `base_signal_value`, `context_value`, and their product separately.
 
-### Development validation evidence V3-G4-DV1
+### Authoritative validation finding V3-G4-V1
 
-A controlled isolated development suite completed with `19 passed`, covering registry bounds, identifier round-trip, required interpretation coverage, future-append invariance, source-row-order invariance, adaptive-parameter fail-closed behavior, preserved interaction components, required-field and duplicate-key rejection, deterministic evidence outputs, LF CSV bytes, and prohibition of predictive, economic, deterioration, and failure claims.
+The authoritative Windows execution passed the corrected seven-test realignment suite and exact nineteen-test signal-engine suite. The frozen SOL source produced 12,171 canonical rows and 584,208 feature rows across 48 registered specifications, exactly satisfying `source rows × signal count`. Target access, chronology access, automatic selection, predictive claims, economic claims, deterioration claims, failure claims, and tracked working-tree mutation all remained false.
 
-This is implementation-development evidence only. Authoritative Windows execution on the real canonical dataset, output-manifest review, final object verification, and the Gate V3-4 lock remain pending. No empirical signal-establishment finding is available from this gate.
+### Reproducibility finding V3-G4-V2
+
+The validated implementation is frozen at commit `ff2e7ecba3fa69f22e0b109437d23b52d30fba2b`. Compact evidence was materialized at commit `705511de9e8ee22a9f8aff34506aebb6c26223e7`, and the final lock status is `IMPLEMENTATION_VALIDATED_AND_LOCKED`. The large 584,208-row feature table remains untracked and is bound by SHA-256; seven compact manifests are committed under `evidence/v3/g4_signal_lock/`.
+
+### Scientific boundary V3-G4-B1
+
+Gate V3-4 establishes only that the signal-information engine is reproducible, causal, bounded, and locked. It does not establish predictive or economic value for RSI or Bollinger and does not make deterioration or failure modelling admissible.
+
+---
+
+## Version 3 Gate V3-5 — Matched benchmark-versus-signal forecast selection
+
+### Methodological contribution V3-G5-M1
+
+The Gate V3-5 contract freezes the matched comparison before target access:
+
+```text
+candidate = benchmark information + registered signal information
+```
+
+Benchmark and candidate must otherwise share model class, rows, preprocessing, hyperparameter selection, calibration, target, horizon, decision policy, and transaction-cost treatment. Candidate-specific missingness is handled through a matched row intersection, preventing raw metric comparisons across unequal samples.
+
+### Methodological contribution V3-G5-M2
+
+The contract preserves Version 2 continuity at 4, 8, 12, and 24 hours and adds the declared Version 3 horizons of 48 and 72 hours. Direction remains confirmatory; expected return and training-defined large-move probability remain secondary. Confirmatory RSI and Bollinger families use Holm control at five percent, while secondary analyses use Benjamini–Hochberg control at `q = 0.10`.
+
+### Methodological contribution V3-G5-M3
+
+The frozen data partition separates development selection through 30 June 2025, a signal-establishment segment from 1 July through 31 December 2025, and a final-framework reserve from 1 January through 22 July 2026. Gate V3-5 cannot access the 2026 reserve, which is reserved for Gate V3-9 evaluation of the complete forecast, failure-risk, and decision pipeline. Early access fails closed as `PROTOCOL_VIOLATION_FINAL_RESERVE_ACCESSED`.
+
+### Methodological contribution V3-G5-M4
+
+The candidate space accepts all 48 locked signal specifications, eight predeclared within-family blocks, and a secondary combined-family block while prohibiting unrestricted Cartesian combinations, deep neural networks, unbounded automated search, post-result model insertion, silent candidate deletion, and regime-based rescue tuning.
+
+### Current validation boundary V3-G5-B1
+
+Gate V3-5 implementation has started only at the contract-freeze stage. Target generation, chronological folds, benchmark assembly, model fitting, pipeline admission, establishment authorization, establishment-segment access, and empirical determination have not started. No predictive or economic finding is recorded for Gate V3-5 yet.
 
 ---
 
@@ -310,12 +346,13 @@ This is implementation-development evidence only. Authoritative Windows executio
 
 The following are approved development directions but are not yet findings:
 
-- authoritative Gate V3-4 real-data validation and lock;
-- Gate V3-5 matched benchmark-versus-signal establishment testing;
+- Gate V3-5 target, fold, benchmark, matched candidate, development selection, admission, establishment, and inference implementation;
+- any Gate V3-5 empirical signal-establishment determination;
 - prospective failure-event construction, only for an established signal;
 - signal-failure probability, only after an admissible failure definition;
+- Gate V3-9 final-framework evaluation using the protected 2026 reserve;
 - independent regime-event alignment under `V3-RV3`;
 - empirical real-market regime probabilities and episode interpretation;
 - cross-asset and cross-venue transportability.
 
-They will be moved into findings sections only after implementation and validation. Gate V3-4 does not establish predictive value, economic value, deterioration, or failure probability.
+They will be moved into findings sections only after implementation and validation. The frozen Version 1 and Version 2 determinations remain unchanged, and Gate V3-4 does not establish predictive value, economic value, deterioration, or failure probability.
