@@ -46,6 +46,21 @@ def test_true_v3_g4_is_implemented_without_empirical_claims() -> None:
         "economic_claims_permitted": False,
         "failure_claims_permitted": False,
     }
+
+    parent = payload["v3_1_parent_verification"]
+    assert parent == {
+        "historical_boundary_commit": "7a7a5c55184aadfb436774ff1e497ce873a96b6e",
+        "historical_lock_rewritten": False,
+        "historical_objects_verified_at_boundary": True,
+        "current_direct_objects_verified_as_git_objects": True,
+        "current_direct_worktree_mutations_fail_closed": True,
+        "shared_export_surface": "src/shockbridge_signal_validity/v3/__init__.py",
+        "shared_export_surface_may_have_later_owner": True,
+        "v3_1_export_compatibility_required": True,
+        "checkout_eol_invariant": True,
+        "authoritative_windows_rerun_pending": True,
+    }
+
     evidence = payload["v3_4_implementation"]
     assert evidence["registered_signal_count"] == 48
     assert evidence["base_signal_count"] == 44
@@ -55,8 +70,20 @@ def test_true_v3_g4_is_implemented_without_empirical_claims() -> None:
         "v3sig:<feature_key>:<sha256(canonical_specification)>"
     )
     assert evidence["prior_development_suite_passed"] == 19
+    assert evidence["exact_hardened_suite_passed"] == 19
     assert evidence["final_hardening_applied_after_prior_suite"] is True
     assert evidence["current_exact_suite_execution_pending"] is True
+    assert evidence["canonical_input_materialization"] == (
+        "FROZEN_SOL_SNAPSHOT_VIA_LOCKED_V3_G1_ADAPTER"
+    )
+    assert evidence["canonical_source_path"] == "data/raw/sol_usdt_4h.csv"
+    assert evidence["canonical_adapter_config"] == (
+        "configs/v3_adapter_frozen_sol.json"
+    )
+    assert evidence["canonical_output_path"] == (
+        "outputs/v3/data_adapter/canonical_market_data.csv"
+    )
+    assert evidence["real_data_execution_pending"] is True
     for field in (
         "automatic_selection_performed",
         "target_accessed",
@@ -177,6 +204,7 @@ def test_realignment_verifier_passes() -> None:
         "True V3-4 status: IMPLEMENTATION_COMPLETE_VALIDATION_PENDING"
         in completed.stdout
     )
+    assert "V3-1 historical-owner boundary preserved: True" in completed.stdout
     assert "Registered signal specifications: 48" in completed.stdout
     assert "Current hardened V3-4 suite execution pending: True" in completed.stdout
     assert (
