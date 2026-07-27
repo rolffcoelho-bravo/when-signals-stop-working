@@ -1,0 +1,156 @@
+{
+  "adaptive_parameters_require_training_only_supply": true,
+  "automatic_selection_performed": false,
+  "bounded_candidate_limit": 128,
+  "chronology_access_permitted": false,
+  "defaults": {
+    "BB_ADAPTIVE": {
+      "crossing_rule": "NONE",
+      "interpretation": "BB_PERCENT_B",
+      "lookback_or_window": 20,
+      "normalisation_rule": "BINARY",
+      "orientation": "NEUTRAL",
+      "parameter_policy": "TRAINING_ONLY_REQUIRED",
+      "persistence_rule": "NONE",
+      "regime_interaction_policy": "NONE",
+      "registry_version": "v1",
+      "signal_family": "BOLLINGER",
+      "threshold_or_band_parameter": {
+        "squeeze_quantile": 0.2,
+        "standard_deviations": 2.0
+      }
+    },
+    "BB_FIXED": {
+      "crossing_rule": "NONE",
+      "interpretation": "BB_PERCENT_B",
+      "lookback_or_window": 20,
+      "normalisation_rule": "BINARY",
+      "orientation": "NEUTRAL",
+      "parameter_policy": "FIXED",
+      "persistence_rule": "NONE",
+      "regime_interaction_policy": "NONE",
+      "registry_version": "v1",
+      "signal_family": "BOLLINGER",
+      "threshold_or_band_parameter": {
+        "squeeze_threshold": 0.08,
+        "standard_deviations": 2.0
+      }
+    },
+    "RSI_ADAPTIVE": {
+      "crossing_rule": "NONE",
+      "interpretation": "RSI_LEVEL",
+      "lookback_or_window": 14,
+      "normalisation_rule": "BINARY",
+      "orientation": "NEUTRAL",
+      "parameter_policy": "TRAINING_ONLY_REQUIRED",
+      "persistence_rule": "NONE",
+      "regime_interaction_policy": "NONE",
+      "registry_version": "v1",
+      "signal_family": "RSI",
+      "threshold_or_band_parameter": {
+        "divergence_window": 14,
+        "lower_quantile": 0.2,
+        "range_window": 6,
+        "upper_quantile": 0.8
+      }
+    },
+    "RSI_FIXED": {
+      "crossing_rule": "NONE",
+      "interpretation": "RSI_LEVEL",
+      "lookback_or_window": 14,
+      "normalisation_rule": "BINARY",
+      "orientation": "NEUTRAL",
+      "parameter_policy": "FIXED",
+      "persistence_rule": "NONE",
+      "regime_interaction_policy": "NONE",
+      "registry_version": "v1",
+      "signal_family": "RSI",
+      "threshold_or_band_parameter": {
+        "divergence_window": 14,
+        "lower": 30.0,
+        "range_window": 6,
+        "upper": 70.0
+      }
+    }
+  },
+  "deterioration_claims_permitted": false,
+  "economic_claims_permitted": false,
+  "failure_claims_permitted": false,
+  "fixed_candidates_remain_visible": true,
+  "frozen_v1_v2_determinations_modified": false,
+  "gate": "V3-4",
+  "interaction_components_preserved": true,
+  "interactions": [
+    {
+      "base_feature_key": "rsi_oversold_mr",
+      "context_feature": "p_range",
+      "feature_key": "rsi_oversold_mr_x_range"
+    },
+    {
+      "base_feature_key": "rsi_overbought_continuation",
+      "context_feature": "p_trend",
+      "feature_key": "rsi_overbought_continuation_x_trend"
+    },
+    {
+      "base_feature_key": "bb_lower_breakdown",
+      "context_feature": "p_panic_consistent",
+      "feature_key": "bb_lower_breakdown_x_panic"
+    },
+    {
+      "base_feature_key": "bb_post_squeeze_expansion",
+      "context_feature": "dominant_eigenvalue_share",
+      "feature_key": "bb_post_squeeze_x_market_mode"
+    }
+  ],
+  "predictive_claims_permitted": false,
+  "registry_version": "v1",
+  "schema_version": "v3.signal-interpretation-registry.v1",
+  "signals": [
+    {"crossing_rule":"NONE","feature_key":"rsi_level","interpretation":"RSI_LEVEL","normalisation_rule":"RAW_0_100","orientation":"NEUTRAL","persistence_rule":"NONE","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_centered","interpretation":"RSI_CENTERED_SCALED","normalisation_rule":"CENTERED_MINUS1_1","orientation":"NEUTRAL","persistence_rule":"NONE","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_slope","interpretation":"RSI_SLOPE","normalisation_rule":"RAW_DIFFERENCE","orientation":"NEUTRAL","persistence_rule":"NONE","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_acceleration","interpretation":"RSI_ACCELERATION","normalisation_rule":"RAW_SECOND_DIFFERENCE","orientation":"NEUTRAL","persistence_rule":"NONE","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_range","interpretation":"RSI_ROLLING_RANGE","normalisation_rule":"RAW_0_100","orientation":"NEUTRAL","persistence_rule":"TRAILING_6","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_bullish_divergence","interpretation":"RSI_BULLISH_DIVERGENCE","normalisation_rule":"BINARY","orientation":"BULLISH","persistence_rule":"TRAILING_14","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_bearish_divergence","interpretation":"RSI_BEARISH_DIVERGENCE","normalisation_rule":"BINARY","orientation":"BEARISH","persistence_rule":"TRAILING_14","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_oversold_mr","interpretation":"RSI_OVERSOLD_MEAN_REVERSION","normalisation_rule":"BINARY","orientation":"BULLISH","persistence_rule":"NONE","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_overbought_mr","interpretation":"RSI_OVERBOUGHT_MEAN_REVERSION","normalisation_rule":"BINARY","orientation":"BEARISH","persistence_rule":"NONE","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_two_sided_mr","interpretation":"RSI_TWO_SIDED_MEAN_REVERSION","normalisation_rule":"SIGNED_BINARY","orientation":"SIGNED","persistence_rule":"NONE","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_overbought_continuation","interpretation":"RSI_OVERBOUGHT_CONTINUATION","normalisation_rule":"BINARY","orientation":"BULLISH","persistence_rule":"NONE","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_oversold_continuation","interpretation":"RSI_OVERSOLD_CONTINUATION","normalisation_rule":"BINARY","orientation":"BEARISH","persistence_rule":"NONE","template":"RSI_FIXED"},
+    {"crossing_rule":"CROSS_OUTWARD","feature_key":"rsi_break_continuation","interpretation":"RSI_THRESHOLD_BREAK_CONTINUATION","normalisation_rule":"SIGNED_BINARY","orientation":"SIGNED","persistence_rule":"NONE","template":"RSI_FIXED"},
+    {"crossing_rule":"CROSS_UPPER_UP","feature_key":"rsi_cross_upper","interpretation":"RSI_CROSS_UPPER","normalisation_rule":"BINARY","orientation":"BULLISH","persistence_rule":"NONE","template":"RSI_FIXED"},
+    {"crossing_rule":"CROSS_LOWER_DOWN","feature_key":"rsi_cross_lower","interpretation":"RSI_CROSS_LOWER","normalisation_rule":"BINARY","orientation":"BEARISH","persistence_rule":"NONE","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_time_above","interpretation":"RSI_TIME_ABOVE_UPPER","normalisation_rule":"RUN_LENGTH","orientation":"BULLISH","persistence_rule":"CONSECUTIVE_ABOVE","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_time_below","interpretation":"RSI_TIME_BELOW_LOWER","normalisation_rule":"RUN_LENGTH","orientation":"BEARISH","persistence_rule":"CONSECUTIVE_BELOW","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_extreme_persistence","interpretation":"RSI_EXTREME_PERSISTENCE","normalisation_rule":"SIGNED_RUN_LENGTH","orientation":"SIGNED","persistence_rule":"SIGNED_CONSECUTIVE_EXTREME","template":"RSI_FIXED"},
+    {"crossing_rule":"ANY_REGISTERED_THRESHOLD_CROSS","feature_key":"rsi_time_since_cross","interpretation":"RSI_TIME_SINCE_CROSSING","normalisation_rule":"OBSERVATION_COUNT","orientation":"NEUTRAL","persistence_rule":"TIME_SINCE_EVENT","template":"RSI_FIXED"},
+    {"crossing_rule":"CROSS_INWARD","feature_key":"rsi_exit_extreme","interpretation":"RSI_EXIT_EXTREME","normalisation_rule":"SIGNED_BINARY","orientation":"SIGNED","persistence_rule":"NONE","template":"RSI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"rsi_two_sided_mr_adaptive","interpretation":"RSI_TWO_SIDED_MEAN_REVERSION","normalisation_rule":"SIGNED_BINARY","orientation":"SIGNED","persistence_rule":"NONE","template":"RSI_ADAPTIVE"},
+    {"crossing_rule":"NONE","feature_key":"bb_percent_b","interpretation":"BB_PERCENT_B","normalisation_rule":"RAW_PERCENT_B","orientation":"NEUTRAL","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"bb_middle_distance","interpretation":"BB_MIDDLE_DISTANCE","normalisation_rule":"BAND_HALF_WIDTH_UNITS","orientation":"SIGNED","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"bb_nearest_outer_distance","interpretation":"BB_NEAREST_OUTER_DISTANCE","normalisation_rule":"BAND_HALF_WIDTH_UNITS","orientation":"SIGNED","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"bb_distance_magnitude","interpretation":"BB_DISTANCE_MAGNITUDE","normalisation_rule":"ABS_BAND_HALF_WIDTH_UNITS","orientation":"NEUTRAL","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"bb_upper_mr","interpretation":"BB_UPPER_MEAN_REVERSION","normalisation_rule":"BINARY","orientation":"BEARISH","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"bb_lower_mr","interpretation":"BB_LOWER_MEAN_REVERSION","normalisation_rule":"BINARY","orientation":"BULLISH","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"OUTSIDE_TO_INSIDE","feature_key":"bb_reentry","interpretation":"BB_REENTRY_AFTER_OUTSIDE","normalisation_rule":"SIGNED_BINARY","orientation":"SIGNED","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"CROSS_UPPER_OUTWARD","feature_key":"bb_upper_breakout","interpretation":"BB_UPPER_BREAKOUT","normalisation_rule":"BINARY","orientation":"BULLISH","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"CROSS_LOWER_OUTWARD","feature_key":"bb_lower_breakdown","interpretation":"BB_LOWER_BREAKDOWN","normalisation_rule":"BINARY","orientation":"BEARISH","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"bb_outside_continuation","interpretation":"BB_OUTSIDE_CONTINUATION","normalisation_rule":"SIGNED_BINARY","orientation":"SIGNED","persistence_rule":"OUTSIDE_CURRENT","template":"BB_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"bb_bandwidth","interpretation":"BB_BANDWIDTH","normalisation_rule":"RELATIVE_WIDTH","orientation":"NEUTRAL","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"bb_bandwidth_change","interpretation":"BB_BANDWIDTH_CHANGE","normalisation_rule":"FIRST_DIFFERENCE","orientation":"NEUTRAL","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"bb_bandwidth_acceleration","interpretation":"BB_BANDWIDTH_ACCELERATION","normalisation_rule":"SECOND_DIFFERENCE","orientation":"NEUTRAL","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"bb_squeeze","interpretation":"BB_SQUEEZE","normalisation_rule":"BINARY","orientation":"NEUTRAL","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"SQUEEZE_RELEASE","feature_key":"bb_post_squeeze_expansion","interpretation":"BB_POST_SQUEEZE_EXPANSION","normalisation_rule":"BINARY","orientation":"BULLISH","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"bb_expansion_persistence","interpretation":"BB_EXPANSION_PERSISTENCE","normalisation_rule":"RUN_LENGTH","orientation":"NEUTRAL","persistence_rule":"CONSECUTIVE_POSITIVE_BANDWIDTH_CHANGE","template":"BB_FIXED"},
+    {"crossing_rule":"CROSS_UPPER_OUTWARD","feature_key":"bb_cross_upper","interpretation":"BB_CROSS_UPPER","normalisation_rule":"BINARY","orientation":"BULLISH","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"CROSS_LOWER_OUTWARD","feature_key":"bb_cross_lower","interpretation":"BB_CROSS_LOWER","normalisation_rule":"BINARY","orientation":"BEARISH","persistence_rule":"NONE","template":"BB_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"bb_time_outside","interpretation":"BB_TIME_OUTSIDE","normalisation_rule":"RUN_LENGTH","orientation":"NEUTRAL","persistence_rule":"CONSECUTIVE_OUTSIDE","template":"BB_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"bb_consecutive_outside","interpretation":"BB_CONSECUTIVE_OUTSIDE","normalisation_rule":"SIGNED_RUN_LENGTH","orientation":"SIGNED","persistence_rule":"SIGNED_CONSECUTIVE_OUTSIDE","template":"BB_FIXED"},
+    {"crossing_rule":"OUTSIDE_TO_INSIDE","feature_key":"bb_reentry_timing","interpretation":"BB_REENTRY_TIMING","normalisation_rule":"OBSERVATION_COUNT","orientation":"NEUTRAL","persistence_rule":"TIME_SINCE_EVENT","template":"BB_FIXED"},
+    {"crossing_rule":"SQUEEZE_RELEASE","feature_key":"bb_time_since_squeeze_release","interpretation":"BB_TIME_SINCE_SQUEEZE_RELEASE","normalisation_rule":"OBSERVATION_COUNT","orientation":"NEUTRAL","persistence_rule":"TIME_SINCE_EVENT","template":"BB_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"bb_squeeze_adaptive","interpretation":"BB_SQUEEZE","normalisation_rule":"BINARY","orientation":"NEUTRAL","persistence_rule":"NONE","template":"BB_ADAPTIVE"}
+  ],
+  "target_access_permitted": false,
+  "title": "Unified RSI and Bollinger Interpretation Engine"
+}
