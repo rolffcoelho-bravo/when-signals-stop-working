@@ -92,23 +92,21 @@ The controlling correction is recorded in [`V3_REALIGNMENT_DECISION.md`](V3_REAL
 | Core gate | Purpose | Status |
 |---|---|---|
 | V3-0 | Design and product freeze | Complete |
-| V3-1 | Canonical data and adapter layer | Complete |
-| V3-2 | Causal feature and spectral engine | Complete |
-| V3-2B | Network and market-structure extension | Complete |
-| V3-3 | Panic-consistent probabilistic regime engine | Complete |
-| **V3-4** | **Unified RSI and Bollinger interpretation engine** | **Implementation complete; exact hardened validation and lock pending** |
-| V3-5 | Matched benchmark-versus-signal forecast selection | Not started |
+| V3-1 | Canonical data and adapter layer | Complete and locked |
+| V3-2 | Causal feature and spectral engine | Complete and locked |
+| V3-2B | Network and market-structure extension | Complete and locked |
+| V3-3 | Panic-consistent probabilistic regime engine | Complete and locked |
+| **V3-4** | **Unified RSI and Bollinger interpretation engine** | **Authoritatively validated and locked** |
+| **V3-5** | **Matched benchmark-versus-signal forecast selection** | **Approved; implementation started; contract frozen; target access not started** |
 | V3-6 | Prospective failure-event definition | Not started |
 | V3-7 | Signal-validity and failure-probability model | Not started |
 | V3-8 | Economic and operational decision engine | Not started |
-| V3-9 | Methodology-locked evaluation | Not started |
+| V3-9 | Methodology-locked final-framework evaluation | Not started; 2026 reserve inaccessible to V3-5 |
 | V3-10 | External replication and transportability | Not started |
 | V3-11 | Reusable package and scoring workflow | Not started |
 | V3-12 | Final audit and institutional release | Not started |
 
-The true V3-4 scope is frozen in [`docs/V3_G4_SIGNAL_ENGINE_SCOPE.md`](docs/V3_G4_SIGNAL_ENGINE_SCOPE.md). Its implementation and scientific boundary are documented in [`docs/V3_G4_SIGNAL_ENGINE.md`](docs/V3_G4_SIGNAL_ENGINE.md).
-
-## Implemented Gate V3-4 signal-information layer
+## Completed Gate V3-4 signal-information layer
 
 The bounded registry expands deterministically to:
 
@@ -127,15 +125,73 @@ Signal rows use concise identifiers:
 v3sig:<feature_key>:<sha256(canonical_specification)>
 ```
 
-The complete canonical definitions are stored once in the registry manifest.
-
 The engine includes causal RSI and Bollinger levels, dynamics, crossings, persistence, mean-reversion and continuation interpretations, divergence, relative-band position, bandwidth and squeeze structure, and four explicit market-state interactions.
 
 Adaptive templates remain visible but ineligible until a training-only upstream process supplies parameters by readable feature key. Missing regime context also remains visible rather than causing an interaction candidate to disappear.
 
-Gate V3-4 produces no predictive, economic, deterioration, or failure claim. Its only role is to define the information set that Gate V3-5 will compare with matched non-signal benchmarks.
+### Authoritative V3-4 evidence
 
-A prior controlled development version completed with `19 passed`. Final hardening was subsequently applied to exact Wilder RSI initialization, input and parameter validation, row-count transparency, and scalable identifiers. The exact hardened current head has not yet been executed; authoritative Windows execution and the Gate V3-4 lock remain pending.
+```text
+Repository realignment tests: 7 passed
+Exact hardened signal-engine tests: 19 passed
+Canonical source rows: 12171
+Registered specifications: 48
+Expected feature rows: 584208
+Observed feature rows: 584208
+Row-count identity: verified
+Target accessed: false
+Chronology accessed: false
+Automatic selection: false
+Tracked mutation: false
+Validated implementation commit: ff2e7ecba3fa69f22e0b109437d23b52d30fba2b
+Evidence materialization commit: 705511de9e8ee22a9f8aff34506aebb6c26223e7
+Lock status: IMPLEMENTATION_VALIDATED_AND_LOCKED
+```
+
+The large feature table remains a regenerable local artifact and is bound by SHA-256. Compact manifests are committed under [`evidence/v3/g4_signal_lock`](evidence/v3/g4_signal_lock).
+
+Gate V3-4 produced no predictive, economic, deterioration, or failure claim. Its role was to define the information set that Gate V3-5 may test.
+
+## Active Gate V3-5 matched forecast contract
+
+Gate V3-5 is approved and active at its contract-freeze stage. No target or model fitting has started.
+
+The frozen comparison is:
+
+```text
+candidate = matched benchmark + registered signal information
+```
+
+Benchmark and candidate must share model class, rows, preprocessing, hyperparameter selection, calibration, target, horizon, transaction costs, and decision policy.
+
+### Frozen horizons and targets
+
+```text
+Confirmatory target: direction
+Secondary targets: expected return, large-move probability
+Horizons: 4h, 8h, 12h, 24h, 48h, 72h
+Outer development folds: 5
+Inner selection folds: 3
+Primary one-way cost: 10 bps
+Cost sensitivity: 5 bps and 20 bps
+```
+
+### Frozen Version 3 partition
+
+```text
+Development selection:
+2021-01-01T00:00:00Z to 2025-06-30T20:00:00Z
+
+Signal-establishment segment:
+2025-07-01T00:00:00Z to 2025-12-31T20:00:00Z
+
+V3-9 final-framework reserve:
+2026-01-01T00:00:00Z to 2026-07-22T08:00:00Z
+```
+
+The 2026 reserve is inaccessible to Gate V3-5. It is reserved for the later full forecast, failure-risk, and decision-pipeline evaluation.
+
+The controlling files are [`configs/v3_g5_forecast_contract.json`](configs/v3_g5_forecast_contract.json), [`docs/V3_G5_MATCHED_FORECAST_SCOPE.md`](docs/V3_G5_MATCHED_FORECAST_SCOPE.md), and [`V3_G5_MATCHED_FORECAST_CHECKPOINT.md`](V3_G5_MATCHED_FORECAST_CHECKPOINT.md).
 
 ## What the completed V3 infrastructure contributes
 
@@ -145,21 +201,13 @@ Source-specific layouts are mapped into one deterministic schema. Model modules 
 
 ### Spectral and eigenvalue structure
 
-The causal fixed-panel engine reports:
+The causal fixed-panel engine reports dominant-eigenvalue share, eigenvalue gap, participation ratio, effective dimension, spectral entropy, eigenvector concentration and stability, correlation concentration, and the complete eigenvalue spectrum.
 
-- dominant eigenvalue and dominant-eigenvalue share;
-- normalized eigenvalue gap;
-- participation ratio and effective dimension;
-- spectral entropy;
-- first-eigenvector concentration and stability;
-- average correlation and dispersion;
-- full eigenvalue spectrum.
-
-These measures describe whether market dependence is concentrating into a common mode. They do not establish RSI or Bollinger value by themselves.
+These measures describe market dependence. They do not establish RSI or Bollinger value by themselves.
 
 ### Network and market structure
 
-The extension adds threshold networks, deterministic communities, minimum spanning trees, centrality concentration, path descriptors, and causal dynamics.
+The extension adds threshold networks, deterministic communities, minimum spanning trees, centrality concentration, path descriptors, and causal topology dynamics.
 
 ### Panic-consistent regime probabilities
 
@@ -171,7 +219,7 @@ MONOTONE_MECHANISM_SCORE_V1
 CAUSAL_GAUSSIAN_HMM_V1
 ```
 
-These outputs may become candidate context variables in later signal evaluation. They cannot rescue the frozen Version 2 verdicts.
+These outputs may become candidate context variables in matched forecast evaluation. They cannot rescue the frozen Version 2 verdicts.
 
 ## Stop rule for the failure programme
 
@@ -212,13 +260,17 @@ Set-ExecutionPolicy -Scope Process Bypass
 .\RUN_V3_REALIGNMENT.ps1
 ```
 
-### Gate V3-4 implementation validation on Windows
+### Gate V3-4 lock verification
 
 ```powershell
-.\RUN_V3_G4_SIGNAL_ENGINE.ps1
+python scripts/verify_v3_g4_lock.py
 ```
 
-The V3-4 runner first verifies the realignment boundary, executes the exact hardened 19-test suite, and then generates the deterministic signal-information package from the V3-1 canonical market data.
+### Gate V3-5 contract verification
+
+```powershell
+.\RUN_V3_G5_CONTRACT.ps1
+```
 
 ## Status governance
 
@@ -237,12 +289,14 @@ The V3-4 runner first verifies the realignment boundary, executes the exact hard
 - Empirical determination: [`RESULTS.md`](RESULTS.md)
 - Version 2 evidence report: [`outputs/v2/publication/V2_FINAL_EVIDENCE_REPORT.md`](outputs/v2/publication/V2_FINAL_EVIDENCE_REPORT.md)
 - Version 3 design freeze: [`V3_DESIGN_FREEZE.md`](V3_DESIGN_FREEZE.md)
-- Original Version 3 implementation plan: [`docs/V3_IMPLEMENTATION_PLAN.md`](docs/V3_IMPLEMENTATION_PLAN.md)
+- Version 3 research protocol: [`docs/V3_RESEARCH_PROTOCOL.md`](docs/V3_RESEARCH_PROTOCOL.md)
 - Version 3 realignment decision: [`V3_REALIGNMENT_DECISION.md`](V3_REALIGNMENT_DECISION.md)
 - Realigned gate map: [`docs/V3_REALIGNED_GATE_MAP.md`](docs/V3_REALIGNED_GATE_MAP.md)
-- True V3-4 scope: [`docs/V3_G4_SIGNAL_ENGINE_SCOPE.md`](docs/V3_G4_SIGNAL_ENGINE_SCOPE.md)
 - V3-4 implementation: [`docs/V3_G4_SIGNAL_ENGINE.md`](docs/V3_G4_SIGNAL_ENGINE.md)
 - V3-4 checkpoint: [`V3_G4_SIGNAL_ENGINE_CHECKPOINT.md`](V3_G4_SIGNAL_ENGINE_CHECKPOINT.md)
+- V3-4 final lock: [`V3_G4_SIGNAL_ENGINE_LOCK.json`](V3_G4_SIGNAL_ENGINE_LOCK.json)
+- V3-5 scope: [`docs/V3_G5_MATCHED_FORECAST_SCOPE.md`](docs/V3_G5_MATCHED_FORECAST_SCOPE.md)
+- V3-5 checkpoint: [`V3_G5_MATCHED_FORECAST_CHECKPOINT.md`](V3_G5_MATCHED_FORECAST_CHECKPOINT.md)
 - Current roadmap: [`ROADMAP.md`](ROADMAP.md)
 - Status governance: [`docs/STATUS_GOVERNANCE.md`](docs/STATUS_GOVERNANCE.md)
 - References: [`docs/REFERENCES.md`](docs/REFERENCES.md)
