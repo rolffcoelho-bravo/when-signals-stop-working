@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 from pathlib import Path
 import sys
 
@@ -42,16 +43,17 @@ def parser() -> argparse.ArgumentParser:
 
 def main() -> int:
     arguments = parser().parse_args()
+    os.chdir(ROOT)
     foundation = materialize_real_development_foundation(
-        contract_path=ROOT / arguments.contract,
-        sol_path=ROOT / arguments.sol,
-        btc_path=ROOT / arguments.btc,
-        signal_features_path=ROOT / arguments.signal_features,
-        signal_registry_manifest_path=ROOT / arguments.signal_registry_manifest,
+        contract_path=arguments.contract,
+        sol_path=arguments.sol,
+        btc_path=arguments.btc,
+        signal_features_path=arguments.signal_features,
+        signal_registry_manifest_path=arguments.signal_registry_manifest,
     )
     manifest = write_materialized_foundation(
         foundation,
-        ROOT / arguments.output_dir,
+        arguments.output_dir,
     )
     print("Gate V3-5 real development foundation materialized.")
     print(f"Development rows: {manifest['development_rows']}")
