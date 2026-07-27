@@ -23,13 +23,19 @@ try {
         throw "Gate V3-4 lock candidate generation failed."
     }
 
-    Write-Host "2. VERIFYING LOCK CANDIDATE AND CURATED EVIDENCE"
+    Write-Host "2. NORMALIZING CURATED JSON EVIDENCE TO PORTABLE LF"
+    python scripts/normalize_v3_g4_lock_evidence.py
+    if ($LASTEXITCODE -ne 0) {
+        throw "Gate V3-4 lock-evidence normalization failed."
+    }
+
+    Write-Host "3. VERIFYING LOCK CANDIDATE AND CURATED EVIDENCE"
     python scripts/verify_v3_g4_lock.py
     if ($LASTEXITCODE -ne 0) {
         throw "Gate V3-4 lock candidate verification failed."
     }
 
-    Write-Host "3. VERIFYING PATCH INTEGRITY"
+    Write-Host "4. VERIFYING PATCH INTEGRITY"
     git diff --check
     if ($LASTEXITCODE -ne 0) {
         throw "Whitespace or patch-integrity defects were detected."
