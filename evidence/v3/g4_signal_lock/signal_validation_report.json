@@ -1,0 +1,42 @@
+{
+  "adaptive_parameters_estimated_by_engine": false,
+  "automatic_signal_selection_performed": false,
+  "automatic_threshold_selection_performed": false,
+  "chronology_accessed": false,
+  "context_columns_accessed": [],
+  "deterioration_claims_produced": false,
+  "economic_claims_produced": false,
+  "failure_claims_produced": false,
+  "future_information_accessed": false,
+  "gate": "V3-4",
+  "input_columns_accessed": [
+    "timestamp",
+    "asset",
+    "venue",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume"
+  ],
+  "interaction_components_preserved": true,
+  "next_gate": "V3-5",
+  "predictive_claims_produced": false,
+  "report_sha256": "e3c69f4c8c78d8adeebdacb592ac4f68534673235638ddd702b16949b69e0503",
+  "required_columns_verified": [
+    "timestamp",
+    "asset",
+    "venue",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume"
+  ],
+  "richard_question_advanced_by": "DEFINES_SIGNAL_INFORMATION_TO_BE_TESTED",
+  "row_count_identity_verified": true,
+  "schema_version": "v3.signal-validation.v1",
+  "target_accessed": false,
+  "target_columns_accessed": [],
+  "valid": true
+}

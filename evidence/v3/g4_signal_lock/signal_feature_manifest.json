@@ -1,0 +1,30 @@
+{
+  "assets": [
+    "SOL/USDT"
+  ],
+  "automatic_selection_performed": false,
+  "chronology_accessed": false,
+  "context_columns_available": [],
+  "deterioration_claims_produced": false,
+  "economic_claims_produced": false,
+  "expected_rows": 584208,
+  "failure_claims_produced": false,
+  "feature_schema_version": "v3.signal-features.v1",
+  "frozen_v1_v2_determinations_modified": false,
+  "input_sha256": "3c49bfcab5fdf3aba9ada614873fa424e97c1f66e2690b790204fc29fdb5109c",
+  "manifest_sha256": "85d7f0ef7acb3e751b29637247c1f6f21411d1bd1922faf614dbd71736cf3613",
+  "output_sha256": "ef7311319ae272cd3d1f4ef60614ba4644d4a58d195f2f12882fe03c285ff828",
+  "predictive_claims_produced": false,
+  "registry_sha256": "397c06e585f33cfb3a21333f14017c8830e609c871106974cd6c8b8cb5ab7ea5",
+  "row_count_identity_verified": true,
+  "rows": 584208,
+  "schema_version": "v3.signal-feature-manifest.v1",
+  "signal_count": 48,
+  "source_rows": 12171,
+  "target_accessed": false,
+  "timestamps": 12171,
+  "training_only_parameter_sets_supplied": 0,
+  "venues": [
+    "binance_spot"
+  ]
+}

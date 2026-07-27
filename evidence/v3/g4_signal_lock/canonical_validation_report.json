@@ -1,0 +1,29 @@
+{
+  "critical_count": 0,
+  "issues": [],
+  "metrics": {
+    "assets": 1,
+    "end_timestamp": "2026-07-22T08:00:00+00:00",
+    "inferred_intervals": {
+      "SOL/USDT@binance_spot": "0 days 04:00:00"
+    },
+    "interval_gap_count": 0,
+    "missingness": {
+      "asset": 0,
+      "close": 0,
+      "high": 0,
+      "low": 0,
+      "open": 0,
+      "timestamp": 0,
+      "venue": 0,
+      "volume": 0
+    },
+    "panel_alignment_gap_count": 0,
+    "rows": 12171,
+    "start_timestamp": "2021-01-01T00:00:00+00:00",
+    "venues": 1
+  },
+  "schema_version": "v3.canonical-market.v1",
+  "valid": true,
+  "warning_count": 0
+}

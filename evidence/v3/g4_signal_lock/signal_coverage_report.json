@@ -1,0 +1,675 @@
+{
+  "automatic_candidate_deletion_performed": false,
+  "report_sha256": "cffc3f2343a2ae9dbc8a348fa0da3294c2abdf1d7b71fa84e59c5a2dcb2009c7",
+  "schema_version": "v3.signal-coverage.v1",
+  "signal_count": 48,
+  "signals": {
+    "v3sig:bb_bandwidth:31b70985e8b012d31e104c533788105b4e88dde50bd267712d3fc67ddecdc44f": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_bandwidth",
+      "interpretation": "BB_BANDWIDTH",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_bandwidth_acceleration:01e988486d7673481e1719e447fc54d7f2f0408ca68939c9cd4a99d9f223c87b": {
+      "eligible_rows": 12150,
+      "eligible_share": 0.9982745871333497,
+      "feature_key": "bb_bandwidth_acceleration",
+      "interpretation": "BB_BANDWIDTH_ACCELERATION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12150,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 21
+      }
+    },
+    "v3sig:bb_bandwidth_change:a4d0634ca069a2fc49326f1069b2ecfda88d7b73bc394423b0074dce23da1ffc": {
+      "eligible_rows": 12151,
+      "eligible_share": 0.9983567496508093,
+      "feature_key": "bb_bandwidth_change",
+      "interpretation": "BB_BANDWIDTH_CHANGE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12151,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 20
+      }
+    },
+    "v3sig:bb_consecutive_outside:b1b5a590ccb0775ce0796daa5625639e68586efaea2264a8dfbe1707472ace86": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_consecutive_outside",
+      "interpretation": "BB_CONSECUTIVE_OUTSIDE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_cross_lower:7355ad7044d06e7e753b7f7ffb6bac39e2b61e0f6d0f3cc4daf878ebdbf5fe08": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_cross_lower",
+      "interpretation": "BB_CROSS_LOWER",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_cross_upper:776e96296bc8e1300fabb94b2511799d559d86e60d06af743ef7cbff3570c5c4": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_cross_upper",
+      "interpretation": "BB_CROSS_UPPER",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_distance_magnitude:53294693ff5176f7754b4f26e3a0a0f7f9334e40cc7b7b679a8877c8620918ba": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_distance_magnitude",
+      "interpretation": "BB_DISTANCE_MAGNITUDE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_expansion_persistence:89a6adc651407af553108d27318f75d2467b96aaeba694de975c747298647440": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_expansion_persistence",
+      "interpretation": "BB_EXPANSION_PERSISTENCE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_lower_breakdown:6b76446e71418241a816075e018f0e6d3dccc5f56bc258769ef8c0c46ab1fd59": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_lower_breakdown",
+      "interpretation": "BB_LOWER_BREAKDOWN",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_lower_breakdown_x_panic:c432eb27640676c2b4ebfe380c7ba873f695b7ac49f60bde89daa1f5f889f718": {
+      "eligible_rows": 0,
+      "eligible_share": 0.0,
+      "feature_key": "bb_lower_breakdown_x_panic",
+      "interpretation": "BB_LOWER_BREAKDOWN",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "MULTIPLY_CONTEXT_PRESERVE_COMPONENTS",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "INELIGIBLE_CONTEXT_UNAVAILABLE": 12171
+      }
+    },
+    "v3sig:bb_lower_mr:ef5ea2bf93756f3ede617d5f35d6f36f5d2706d9c4350e850223700116a61301": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_lower_mr",
+      "interpretation": "BB_LOWER_MEAN_REVERSION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_middle_distance:312ba2169ddc15ccfb83d2e8e014e98b587db965a4f8e78746ab7cb5a0c46fff": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_middle_distance",
+      "interpretation": "BB_MIDDLE_DISTANCE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_nearest_outer_distance:4b6fc545c6fd518f31ffbb4fbce35a2308ae0f9636ceb0d4c8b95bf0992f7cff": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_nearest_outer_distance",
+      "interpretation": "BB_NEAREST_OUTER_DISTANCE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_outside_continuation:9ee1b5041c778ec0eb0cfad087f0af5aa1c33fa4ce1ec9f65515b06075f1144c": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_outside_continuation",
+      "interpretation": "BB_OUTSIDE_CONTINUATION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_percent_b:6cebe28db07324e5a81bda7b0e37950b04fa8616027dc52edcc980fd1ea2764c": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_percent_b",
+      "interpretation": "BB_PERCENT_B",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_post_squeeze_expansion:6b6a1e7cd62a1c4f15432119e5b5833bdbee4c2f022f2dd6c8c0b09d4901f905": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_post_squeeze_expansion",
+      "interpretation": "BB_POST_SQUEEZE_EXPANSION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_post_squeeze_x_market_mode:c8d3290354f67e832d7bb94c182b1a68d7f72c5ccb19efb510c919a6f0d3b9a1": {
+      "eligible_rows": 0,
+      "eligible_share": 0.0,
+      "feature_key": "bb_post_squeeze_x_market_mode",
+      "interpretation": "BB_POST_SQUEEZE_EXPANSION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "MULTIPLY_CONTEXT_PRESERVE_COMPONENTS",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "INELIGIBLE_CONTEXT_UNAVAILABLE": 12171
+      }
+    },
+    "v3sig:bb_reentry:c2b7c70b86420f52aa02ae0f1e4d22eca26c604464776562b8845c82e3882958": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_reentry",
+      "interpretation": "BB_REENTRY_AFTER_OUTSIDE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_reentry_timing:b11ade624317199cb90ad35320a4a7177cf3718edcdf22a31843417c47a883f5": {
+      "eligible_rows": 12147,
+      "eligible_share": 0.9980280995809712,
+      "feature_key": "bb_reentry_timing",
+      "interpretation": "BB_REENTRY_TIMING",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12147,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 24
+      }
+    },
+    "v3sig:bb_squeeze:1493c68ffca4ab43313996d497db726f89630f7ecf574b2b7a4e3955a0233a1d": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_squeeze",
+      "interpretation": "BB_SQUEEZE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_squeeze_adaptive:655833adc11981a0a6f5ff09f2ecbe484932e96d7253d4d7a23ccdfb3171cb09": {
+      "eligible_rows": 0,
+      "eligible_share": 0.0,
+      "feature_key": "bb_squeeze_adaptive",
+      "interpretation": "BB_SQUEEZE",
+      "parameter_policy": "TRAINING_ONLY_REQUIRED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "INELIGIBLE_TRAINING_PARAMETER_REQUIRED": 12171
+      }
+    },
+    "v3sig:bb_time_outside:9a19474db033fc97f6697cd6685d5a9532a4ead5dbfe2ca32e81b93a049496cf": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_time_outside",
+      "interpretation": "BB_TIME_OUTSIDE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_time_since_squeeze_release:c3b065737eb8928b74cf9da23a964e7324e119bc077941af564d080a403f66df": {
+      "eligible_rows": 11994,
+      "eligible_share": 0.9854572344096623,
+      "feature_key": "bb_time_since_squeeze_release",
+      "interpretation": "BB_TIME_SINCE_SQUEEZE_RELEASE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 11994,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 177
+      }
+    },
+    "v3sig:bb_upper_breakout:12dc5289b68a628de03363caa1100e29b5ab62afce5d9b09e296d446adbb3e8d": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_upper_breakout",
+      "interpretation": "BB_UPPER_BREAKOUT",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:bb_upper_mr:31c0f2e4fe571a67592a3ff2592fcc1cbaa29291847d872c3ddd7ef6369cf365": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "bb_upper_mr",
+      "interpretation": "BB_UPPER_MEAN_REVERSION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "BOLLINGER",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:rsi_acceleration:b405d657d6e7036df45338cb30097f3fe592e5f7476a20b5ebdc10f994a945ea": {
+      "eligible_rows": 12155,
+      "eligible_share": 0.9986853997206474,
+      "feature_key": "rsi_acceleration",
+      "interpretation": "RSI_ACCELERATION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12155,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 16
+      }
+    },
+    "v3sig:rsi_bearish_divergence:998393c33b294558b66cdc5565f493c6a258801ad6fc250341c056a948cc4b7b": {
+      "eligible_rows": 12143,
+      "eligible_share": 0.997699449511133,
+      "feature_key": "rsi_bearish_divergence",
+      "interpretation": "RSI_BEARISH_DIVERGENCE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12143,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 28
+      }
+    },
+    "v3sig:rsi_break_continuation:589c0ba31f035a998d95aa9cd0057c5c1613606d8a9f397f8dd28c154629f69d": {
+      "eligible_rows": 12157,
+      "eligible_share": 0.9988497247555665,
+      "feature_key": "rsi_break_continuation",
+      "interpretation": "RSI_THRESHOLD_BREAK_CONTINUATION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12157,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 14
+      }
+    },
+    "v3sig:rsi_bullish_divergence:10c8689bc4f89e0711536b6a1a9cf505af7e43848891dd7334efa1036115720c": {
+      "eligible_rows": 12143,
+      "eligible_share": 0.997699449511133,
+      "feature_key": "rsi_bullish_divergence",
+      "interpretation": "RSI_BULLISH_DIVERGENCE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12143,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 28
+      }
+    },
+    "v3sig:rsi_centered:59a4d47d1e08b779383c78f8e33816483d9560bceee3fe61a4991ea022db3f58": {
+      "eligible_rows": 12157,
+      "eligible_share": 0.9988497247555665,
+      "feature_key": "rsi_centered",
+      "interpretation": "RSI_CENTERED_SCALED",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12157,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 14
+      }
+    },
+    "v3sig:rsi_cross_lower:ce7bd50589e25cc31f6a8d1ca3e8c19aa30261017849d17d91a6eaefed057933": {
+      "eligible_rows": 12157,
+      "eligible_share": 0.9988497247555665,
+      "feature_key": "rsi_cross_lower",
+      "interpretation": "RSI_CROSS_LOWER",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12157,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 14
+      }
+    },
+    "v3sig:rsi_cross_upper:d5e39be256be4298060924cbb357e43e459fa5fe59b82c55dae59f55ae9b08a7": {
+      "eligible_rows": 12157,
+      "eligible_share": 0.9988497247555665,
+      "feature_key": "rsi_cross_upper",
+      "interpretation": "RSI_CROSS_UPPER",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12157,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 14
+      }
+    },
+    "v3sig:rsi_exit_extreme:7bdc8feb122b3675e8a01f5776199e3d4e9c9794386bf6b24fdc7128ad995d86": {
+      "eligible_rows": 12157,
+      "eligible_share": 0.9988497247555665,
+      "feature_key": "rsi_exit_extreme",
+      "interpretation": "RSI_EXIT_EXTREME",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12157,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 14
+      }
+    },
+    "v3sig:rsi_extreme_persistence:7f26a8fc5275aa124a1abddc30ba2b08f9b7015fc437ba5552e52ddac3923a59": {
+      "eligible_rows": 12157,
+      "eligible_share": 0.9988497247555665,
+      "feature_key": "rsi_extreme_persistence",
+      "interpretation": "RSI_EXTREME_PERSISTENCE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12157,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 14
+      }
+    },
+    "v3sig:rsi_level:0548e429b8f5987ec760855a3b80209e887ed9c4b17ccbf06b1ac3b194357028": {
+      "eligible_rows": 12157,
+      "eligible_share": 0.9988497247555665,
+      "feature_key": "rsi_level",
+      "interpretation": "RSI_LEVEL",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12157,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 14
+      }
+    },
+    "v3sig:rsi_overbought_continuation:f985129bde999fff9286ab0ab28f1ed9dcbf9ea058e8153b18ff8d2221834716": {
+      "eligible_rows": 12157,
+      "eligible_share": 0.9988497247555665,
+      "feature_key": "rsi_overbought_continuation",
+      "interpretation": "RSI_OVERBOUGHT_CONTINUATION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12157,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 14
+      }
+    },
+    "v3sig:rsi_overbought_continuation_x_trend:188e19a8403def0bd35a2c6babf6816cb74983628dd98033bdccff12c39b458d": {
+      "eligible_rows": 0,
+      "eligible_share": 0.0,
+      "feature_key": "rsi_overbought_continuation_x_trend",
+      "interpretation": "RSI_OVERBOUGHT_CONTINUATION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "MULTIPLY_CONTEXT_PRESERVE_COMPONENTS",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "INELIGIBLE_CONTEXT_UNAVAILABLE": 12171
+      }
+    },
+    "v3sig:rsi_overbought_mr:5b6ae7a27716b3e64df2a2e78c3f3e01de89f6407f53091d7e7652b8091f9726": {
+      "eligible_rows": 12157,
+      "eligible_share": 0.9988497247555665,
+      "feature_key": "rsi_overbought_mr",
+      "interpretation": "RSI_OVERBOUGHT_MEAN_REVERSION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12157,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 14
+      }
+    },
+    "v3sig:rsi_oversold_continuation:70bf77db01c1be761fd042caaca0d0dc06d82fdb29d8d992b51a4a28dc269dbb": {
+      "eligible_rows": 12157,
+      "eligible_share": 0.9988497247555665,
+      "feature_key": "rsi_oversold_continuation",
+      "interpretation": "RSI_OVERSOLD_CONTINUATION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12157,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 14
+      }
+    },
+    "v3sig:rsi_oversold_mr:ba6a9058823f98e6d491d57ff2af3de7edef4018f7d715c101850685f1c53041": {
+      "eligible_rows": 12157,
+      "eligible_share": 0.9988497247555665,
+      "feature_key": "rsi_oversold_mr",
+      "interpretation": "RSI_OVERSOLD_MEAN_REVERSION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12157,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 14
+      }
+    },
+    "v3sig:rsi_oversold_mr_x_range:c2bd020a3c5cff992d11473a2cd3e0c91fb513737872f0be33418084aec2e4e4": {
+      "eligible_rows": 0,
+      "eligible_share": 0.0,
+      "feature_key": "rsi_oversold_mr_x_range",
+      "interpretation": "RSI_OVERSOLD_MEAN_REVERSION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "MULTIPLY_CONTEXT_PRESERVE_COMPONENTS",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "INELIGIBLE_CONTEXT_UNAVAILABLE": 12171
+      }
+    },
+    "v3sig:rsi_range:87203c6ff099fc0c9a45284db9acc7e140c64f061c04d0370893542017296b86": {
+      "eligible_rows": 12152,
+      "eligible_share": 0.9984389121682689,
+      "feature_key": "rsi_range",
+      "interpretation": "RSI_ROLLING_RANGE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12152,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 19
+      }
+    },
+    "v3sig:rsi_slope:d3e8b11bd6a320479633c237e3ebf9d2c4da2a2991895c38ef6ae230eac2665f": {
+      "eligible_rows": 12156,
+      "eligible_share": 0.9987675622381069,
+      "feature_key": "rsi_slope",
+      "interpretation": "RSI_SLOPE",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12156,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 15
+      }
+    },
+    "v3sig:rsi_time_above:0a485ddac4ae94ee2c50bbf43732cef3469dd2766193fe22b098ed09b6813ba4": {
+      "eligible_rows": 12157,
+      "eligible_share": 0.9988497247555665,
+      "feature_key": "rsi_time_above",
+      "interpretation": "RSI_TIME_ABOVE_UPPER",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12157,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 14
+      }
+    },
+    "v3sig:rsi_time_below:7e610944f6d4b42c0bbe29cc8653b9c83406217bf918ad13a761597fceb5c0e3": {
+      "eligible_rows": 12157,
+      "eligible_share": 0.9988497247555665,
+      "feature_key": "rsi_time_below",
+      "interpretation": "RSI_TIME_BELOW_LOWER",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12157,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 14
+      }
+    },
+    "v3sig:rsi_time_since_cross:1db32aecc405b6f41a849338bd1772f4550992adc767b0abb12548a94f69095e": {
+      "eligible_rows": 12156,
+      "eligible_share": 0.9987675622381069,
+      "feature_key": "rsi_time_since_cross",
+      "interpretation": "RSI_TIME_SINCE_CROSSING",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12156,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 15
+      }
+    },
+    "v3sig:rsi_two_sided_mr:80ba48f681d53fd9697099e4eef133b7872f735b3d2fd0bf2952b67fa71381f1": {
+      "eligible_rows": 12157,
+      "eligible_share": 0.9988497247555665,
+      "feature_key": "rsi_two_sided_mr",
+      "interpretation": "RSI_TWO_SIDED_MEAN_REVERSION",
+      "parameter_policy": "FIXED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "ELIGIBLE": 12157,
+        "INSUFFICIENT_HISTORY_OR_UNDEFINED": 14
+      }
+    },
+    "v3sig:rsi_two_sided_mr_adaptive:84683193931099d6ad1b393a91a7e76a268d958539e32b952d13d5238ebae1b4": {
+      "eligible_rows": 0,
+      "eligible_share": 0.0,
+      "feature_key": "rsi_two_sided_mr_adaptive",
+      "interpretation": "RSI_TWO_SIDED_MEAN_REVERSION",
+      "parameter_policy": "TRAINING_ONLY_REQUIRED",
+      "regime_interaction_policy": "NONE",
+      "rows": 12171,
+      "signal_family": "RSI",
+      "status_counts": {
+        "INELIGIBLE_TRAINING_PARAMETER_REQUIRED": 12171
+      }
+    }
+  },
+  "source_rows": 12171
+}

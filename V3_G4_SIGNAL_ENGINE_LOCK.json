@@ -1,0 +1,112 @@
+{
+  "acceptance_evidence": {
+    "automatic_selection_performed": false,
+    "canonical_data_sha256": "3c49bfcab5fdf3aba9ada614873fa424e97c1f66e2690b790204fc29fdb5109c",
+    "canonical_source_rows": 12171,
+    "chronology_accessed": false,
+    "deterioration_claims_produced": false,
+    "economic_claims_produced": false,
+    "exact_hardened_signal_tests_passed": 19,
+    "expected_feature_rows": 584208,
+    "failure_claims_produced": false,
+    "next_gate": "V3-5",
+    "observed_feature_rows": 584208,
+    "predictive_claims_produced": false,
+    "registered_signal_count": 48,
+    "registry_definition_count": 48,
+    "repository_realignment_tests_passed": 7,
+    "row_count_identity_verified": true,
+    "target_accessed": false,
+    "tracked_worktree_mutation": false
+  },
+  "baseline_commit": "5a07299367b80c3940e652e7bbdd208ce86ba5ef",
+  "baseline_release": "v2.0.0",
+  "branch": "research/v3-adaptive-signal-validity",
+  "curated_evidence_sha256": {
+    "evidence/v3/g4_signal_lock/canonical_source_manifest.json": "7e09acce5716bac2c1d84949f02a8884ac8edc3c51fdd8cbe27615ec380a4fdb",
+    "evidence/v3/g4_signal_lock/canonical_validation_report.json": "49f7a3a8b5d1ab610bb81b17522f18dc2282240108bce27434853c0478513e52",
+    "evidence/v3/g4_signal_lock/signal_canonical_validation_report.json": "49f7a3a8b5d1ab610bb81b17522f18dc2282240108bce27434853c0478513e52",
+    "evidence/v3/g4_signal_lock/signal_coverage_report.json": "5f2dd5a1298030315f26c49dc40cbd54adb30873e447bc04762f5d3a30eccd41",
+    "evidence/v3/g4_signal_lock/signal_feature_manifest.json": "db633bfcc88932afe0f5db8372d040c7802fcd6905b54dad34ce20af5daf9c07",
+    "evidence/v3/g4_signal_lock/signal_registry_manifest.json": "e5ae68f40b3d4c0a9a429ac5cccd7749c13b3354a24cde9a83b541cc7c8e7e33",
+    "evidence/v3/g4_signal_lock/signal_validation_report.json": "adea0c4a62a91f848a51c8b4c2d1b5ec15b17a51d02ce21a730d1ff0e54fa8ed"
+  },
+  "gate": "V3-4",
+  "large_runtime_artifact_policy": {
+    "signal_features_csv_bound_by_sha256": true,
+    "signal_features_csv_tracked": false,
+    "small_manifests_curated_for_repository_review": true
+  },
+  "lock_preparation_commit": "e6bed77f333625fd9779e144c0d09d399008375d",
+  "next_gate": {
+    "approval": "APPROVED",
+    "gate": "V3-5",
+    "implementation_started": false,
+    "may_start_after_final_lock_promotion": true,
+    "title": "Matched Benchmark-versus-Signal Forecast Selection"
+  },
+  "parent_gate": "V3-1",
+  "parent_historical_boundary_commit": "7a7a5c55184aadfb436774ff1e497ce873a96b6e",
+  "parent_lock": "V3_G1_DATA_ADAPTER_LOCK.json",
+  "protected_files": {
+    "RUN_V3_G4_SIGNAL_ENGINE.ps1": "054b46b3b1dabbf81f7f0dcf4a6bbbd5daad6297",
+    "RUN_V3_G4_SIGNAL_ENGINE.sh": "06748becf6267ee6c5397125ac4f822d5a2c17ea",
+    "configs/v3_adapter_frozen_sol.json": "948b8ec5aecc9fad968e3a2ed973bd532dd991bc",
+    "configs/v3_signal_engine_example.json": "06eb3a4fdc9723db708731d07a079bb88b717905",
+    "configs/v3_signal_interpretation_registry.json": "3c172265d0f1771c546314ad23cd312d7310166a",
+    "scripts/run_v3_signal_engine.py": "9a6e8d14488dde1970bb8955d91b00cb9d6fa38f",
+    "scripts/verify_v3_g1_data_adapter.py": "642a335eecda07027822b2cf45674937b496ebb6",
+    "scripts/verify_v3_g4_signal_outputs.py": "e5222ff177d5936efcec592e23be2e63fab49dd0",
+    "src/shockbridge_signal_validity/v3/signal_bollinger.py": "8cea61d88c8e2e3fc4d60d2b13ba34cb1ddb4e3b",
+    "src/shockbridge_signal_validity/v3/signal_engine.py": "f025a399decb5ce23a7724416dba82675d88450d",
+    "src/shockbridge_signal_validity/v3/signal_math.py": "929df28cfa34d13164d3bed1edda839929003f0f",
+    "src/shockbridge_signal_validity/v3/signal_registry.py": "c07593f1398f2f97aad80c8902248a1f5a32290f",
+    "src/shockbridge_signal_validity/v3/signal_reporting.py": "dd35fb3e2650810e139503d195b20090098cefe5",
+    "src/shockbridge_signal_validity/v3/signal_rsi.py": "1091589db9b855ebbf7ce26b29282e5536fedb15",
+    "src/shockbridge_signal_validity/v3/signal_runner.py": "235b6ac1602ad35dcb1b3ed7d494c315d7474ab4",
+    "tests/test_v3_signal_engine.py": "e26e3d9ef0e37f6185e7112991d205ea6819fdf1",
+    "tests/test_v3_signal_registry.py": "0157771b8682ed51314eea9a4e08f06dff8e8b45",
+    "tests/test_v3_signal_runner.py": "7900a5530f86b50a9ec23fd6e59f102b230295ea"
+  },
+  "runtime_evidence": {
+    "canonical_market_data": {
+      "path": "outputs/v3/data_adapter/canonical_market_data.csv",
+      "sha256": "b1661ca378e9e997cb7ec55706fd1e697a58358fa122120e1ae9fc9c569db638"
+    },
+    "canonical_source_manifest": {
+      "path": "outputs/v3/data_adapter/source_manifest.json",
+      "sha256": "457d6ecd1bc200d386e78c93aa3bab6df305ccfbcc402bdfbc6f81e22ad53458"
+    },
+    "canonical_validation_report": {
+      "path": "outputs/v3/data_adapter/validation_report.json",
+      "sha256": "05ddd705f2052f3ca092323cd3bd045dc808375d6bd27ce7c08a77a2b5171333"
+    },
+    "signal_canonical_validation_report": {
+      "path": "outputs/v3/signal_engine/canonical_validation_report.json",
+      "sha256": "49f7a3a8b5d1ab610bb81b17522f18dc2282240108bce27434853c0478513e52"
+    },
+    "signal_coverage_report": {
+      "path": "outputs/v3/signal_engine/signal_coverage_report.json",
+      "sha256": "5f2dd5a1298030315f26c49dc40cbd54adb30873e447bc04762f5d3a30eccd41"
+    },
+    "signal_feature_manifest": {
+      "path": "outputs/v3/signal_engine/signal_feature_manifest.json",
+      "sha256": "db633bfcc88932afe0f5db8372d040c7802fcd6905b54dad34ce20af5daf9c07"
+    },
+    "signal_features": {
+      "path": "outputs/v3/signal_engine/signal_features.csv",
+      "sha256": "03f160967b8dd182564c33c43df0c7a0820d4837974c96e51bbb4b6b8d13304f"
+    },
+    "signal_registry_manifest": {
+      "path": "outputs/v3/signal_engine/signal_registry_manifest.json",
+      "sha256": "e5ae68f40b3d4c0a9a429ac5cccd7749c13b3354a24cde9a83b541cc7c8e7e33"
+    },
+    "signal_validation_report": {
+      "path": "outputs/v3/signal_engine/signal_validation_report.json",
+      "sha256": "adea0c4a62a91f848a51c8b4c2d1b5ec15b17a51d02ce21a730d1ff0e54fa8ed"
+    }
+  },
+  "schema_version": "v3.signal-engine-lock.v1",
+  "status": "LOCK_CANDIDATE_AWAITING_REPOSITORY_REVIEW",
+  "validated_implementation_commit": "ff2e7ecba3fa69f22e0b109437d23b52d30fba2b"
+}

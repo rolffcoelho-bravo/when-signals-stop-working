@@ -1,0 +1,11 @@
+{
+  "adapter_id": "v3.file-market-data.v1",
+  "config_sha256": "7cc8795668c8b6fe8ecb16e2240611efe7608dec62a88fb566214bfd36d95f4a",
+  "data_sha256": "3c49bfcab5fdf3aba9ada614873fa424e97c1f66e2690b790204fc29fdb5109c",
+  "loaded_rows": 12171,
+  "manifest_sha256": "ec1f889a26edd907ec954c77bf9af70c66ae4774bbf9dd57c310bf09c5574d17",
+  "schema_version": "v3.canonical-market.v1",
+  "source_format": "csv",
+  "source_sha256": "1a35627e343f11dd40fe92a1a88f47339ce3225422153b0e1a58d9bb1ceeb565",
+  "source_uri": "file:///E:/Claude%20AI/ShockBridge_Pulse_when_signals_stop_working/data/raw/sol_usdt_4h.csv"
+}
