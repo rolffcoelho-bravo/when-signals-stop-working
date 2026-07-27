@@ -121,20 +121,20 @@ Implemented:
 
 # Repository realignment
 
-**Status:** correction implemented; authoritative rerun pending after the exact-token remediation and V3-4 status advancement.
+**Status:** complete and validated.
 
-A full repository review found that the implementation diverged after V3-3. The frozen plan defined V3-4 as the unified RSI and Bollinger signal engine, but chronology work occupied the historical V3-4A/B labels.
+A full repository review found that implementation diverged after V3-3. The frozen plan defined V3-4 as the unified RSI and Bollinger signal engine, but chronology work occupied the historical V3-4A/B labels.
 
 The realignment:
 
-- restores Richard's question at repository root;
-- restores the direct-answer logic;
-- preserves all historical chronology artifacts and locks;
-- reclassifies chronology as a separate regime-validation extension;
-- pauses event alignment;
-- restores the true V3-4 signal engine;
-- restores the establishment-before-failure sequence;
-- prevents supporting regime validation from displacing the core signal-establishment programme.
+- restored Richard's question at repository root;
+- restored the direct-answer logic;
+- preserved all historical chronology artifacts and locks;
+- reclassified chronology as a separate regime-validation extension;
+- paused event alignment;
+- restored and completed the true V3-4 signal engine;
+- restored the establishment-before-failure sequence;
+- prevented supporting regime validation from displacing the core signal-establishment programme.
 
 Authoritative documents:
 
@@ -143,8 +143,6 @@ RICHARD_QUESTION.md
 DIRECT_ANSWER_LOGIC.md
 V3_REALIGNMENT_DECISION.md
 docs/V3_REALIGNED_GATE_MAP.md
-docs/V3_G4_SIGNAL_ENGINE_SCOPE.md
-docs/V3_G4_SIGNAL_ENGINE.md
 configs/v3_realignment_contract.json
 ```
 
@@ -171,15 +169,15 @@ The package contains 17 canonical events supported by 27 documentary sources, in
 
 This extension may resume only at an appropriate external-validation point. It is not allowed to displace the signal-establishment sequence.
 
-# True V3-4 — Unified RSI and Bollinger Interpretation Engine
+# V3-4 — Unified RSI and Bollinger Interpretation Engine
 
-**Status:** implementation complete; prior controlled development suite `19 passed`; exact hardened Windows validation, real-data evidence review, and lock pending.
+**Status:** authoritatively validated and locked.
 
 ## Richard-question link
 
-V3-4 defines the exact RSI and Bollinger information that V3-5 will test against matched non-signal benchmarks. It does not establish signal value and does not answer whether a signal stopped working.
+V3-4 defines the exact RSI and Bollinger information that V3-5 tests against matched non-signal benchmarks. It does not establish signal value and does not answer whether a signal stopped working.
 
-## Implemented registry
+## Locked implementation and evidence
 
 ```text
 registered specifications: 48
@@ -188,6 +186,14 @@ explicit regime interactions: 4
 training-only adaptive templates: 2
 bounded maximum: 128
 automatic selection: false
+repository realignment tests: 7 passed
+signal-engine tests: 19 passed
+canonical source rows: 12171
+feature rows: 584208
+row-count identity: verified
+validated implementation commit: ff2e7ecba3fa69f22e0b109437d23b52d30fba2b
+evidence materialization commit: 705511de9e8ee22a9f8aff34506aebb6c26223e7
+lock status: IMPLEMENTATION_VALIDATED_AND_LOCKED
 ```
 
 ## RSI families
@@ -227,68 +233,162 @@ Bollinger post-squeeze expansion × dominant_eigenvalue_share
 
 Every interaction preserves the base signal and context component separately. Missing context and missing adaptive training parameters remain explicit ineligibility states rather than causing candidate deletion.
 
-## Output package
+## Locked claims boundary
 
-```text
-signal_features.csv
-signal_registry_manifest.json
-signal_feature_manifest.json
-signal_coverage_report.json
-signal_validation_report.json
-canonical_validation_report.json
-```
-
-## Acceptance boundary
-
-- exact feature reproducibility from identifiers;
-- causal calculations and future-append invariance;
-- source-row-order invariance;
-- bounded registry;
-- no target access;
-- no chronology access;
-- no automatic candidate or threshold selection;
-- fixed and adaptive candidates remain distinguishable;
-- no predictive, economic, conditional-validity, deterioration, or failure claim;
-- authoritative 19-test execution on the research environment;
-- complete real-data evidence package;
-- no tracked-file mutation;
-- final object review before lock.
+V3-4 produced no predictive, economic, conditional-validity, deterioration, or failure claim. Its large feature table remains regenerable and hash-bound; compact evidence is committed under `evidence/v3/g4_signal_lock/`.
 
 # V3-5 — Matched Benchmark-versus-Signal Forecast Selection
 
-**Status:** approved; implementation not started; blocked until V3-4 is authoritatively validated and locked.
-
-The approval is already recorded. No additional approval request is required after the V3-4 parent lock.
+**Status:** approved; implementation started; contract frozen; target access and model fitting not started.
 
 ## Objective
 
-Determine whether registered signal information adds incremental value beyond a matched benchmark.
+Determine whether registered signal information adds incremental predictive and economic value beyond a matched benchmark.
 
-## Required evidence
+For every comparison:
 
-- direction, expected-return, and large-move targets;
-- nested chronological development selection;
-- identical benchmark/candidate rows, preprocessing, model class, calibration, costs, and folds;
-- multiplicity, calibration, coverage, concentration, and complexity controls;
-- frozen admitted pipeline registry.
+```text
+candidate = benchmark information + registered signal information
+```
 
-## Parent-gate boundary
+Benchmark and candidate must otherwise use identical model class, training rows, test rows, preprocessing, hyperparameter selection, calibration, target, horizon, cost treatment, and decision policy.
 
-Before V3-4 is authoritatively validated and locked, V3-5 may not:
+## Frozen partition
 
-- access outcome targets for model fitting;
-- fit or rank forecasting pipelines;
-- select signal candidates;
-- establish predictive or economic value;
-- use chronology or regime evidence to rescue a signal;
-- claim that implementation has started.
+```text
+Development selection:
+2021-01-01T00:00:00Z to 2025-06-30T20:00:00Z
+
+Signal-establishment segment:
+2025-07-01T00:00:00Z to 2025-12-31T20:00:00Z
+
+V3-9 final-framework reserve:
+2026-01-01T00:00:00Z to 2026-07-22T08:00:00Z
+```
+
+The reserve is methodology-locked rather than historically unseen. Gate V3-5 may not access it.
+
+## Frozen targets and horizons
+
+```text
+Confirmatory target: direction
+Secondary targets: expected return and large-move probability
+Horizons: 4h, 8h, 12h, 24h, 48h, 72h
+```
+
+The 4/8/12/24-hour set preserves Version 2 continuity. The 48/72-hour set implements the additional Version 3 protocol horizon family.
+
+## Candidate architecture
+
+Gate V3-5 receives all 48 locked V3-4 specifications and may evaluate:
+
+- eligible single-feature augmentations;
+- eight predeclared family blocks;
+- a secondary combined RSI–Bollinger block.
+
+Full Cartesian signal combinations, post-result candidate insertion, automatic deletion of unfavourable candidates, and rescue tuning are prohibited.
+
+## Model families
+
+- regularized logistic and ridge continuity models;
+- degree-three spline-regularized challengers;
+- shallow histogram gradient boosting;
+- time-varying regularized generalized linear challenger;
+- state-space or Markov-switching response models only when identifiability and occupancy gates pass.
+
+Deep neural networks and unbounded automated search are prohibited before the first complete Version 3 evaluation.
+
+## Chronological validation
+
+```text
+5 outer development folds
+3 inner selection folds
+no random shuffle
+purge equal to target horizon
+embargo when overlapping panel information requires it
+training-only preprocessing
+training-only regime estimation
+training-only target thresholds
+training-only calibration
+```
+
+Window schemes:
+
+```text
+expanding
+rolling 2,190 observations
+rolling 4,380 observations
+```
+
+## Development admission
+
+A pipeline may receive establishment access only when it satisfies:
+
+1. positive mean benchmark-relative primary metric;
+2. positive contribution in at least three of five outer folds;
+3. no single fold provides more than 60 percent of positive gain;
+4. calibration is not materially worse than the benchmark;
+5. coverage and nonzero-decision requirements pass;
+6. mean economic contribution at ten basis points is positive;
+7. the one-standard-error rule prefers the least complex competitive model.
+
+Development admission is not final establishment.
+
+## Signal-establishment gate
+
+One frozen pipeline per confirmatory family may access the 2025 second-half establishment segment after the admission registry and access authorization are committed.
+
+Primary establishment requires all applicable predictive, economic, chronological, calibration, coverage, concentration, and Holm-adjusted multiplicity gates to pass.
+
+Economic assumptions:
+
+```text
+primary one-way cost: 10 bps
+sensitivity: 5 bps and 20 bps
+uncertainty: moving-block bootstrap
+```
+
+## Current implementation truth state
+
+```text
+contract frozen: true
+targets generated: false
+folds generated: false
+benchmark features assembled: false
+candidate registry assembled: false
+development models fitted: false
+development pipelines admitted: false
+establishment authorization created: false
+establishment segment accessed: false
+final-framework reserve accessed: false
+signal established: false
+failure modelling admissible: false
+```
+
+## Immediate implementation sequence
+
+1. validate the frozen V3-5 contract;
+2. implement target and partition engine;
+3. implement five outer and three inner chronological folds;
+4. assemble benchmark and matched candidate row contracts;
+5. implement restrained model pipelines;
+6. execute nested development selection;
+7. apply admission, calibration, coverage, concentration, and economic gates;
+8. freeze admitted pipelines;
+9. create establishment authorization before segment access;
+10. execute establishment inference and final determination.
 
 ## Establishment stop rule
 
-When no RSI or Bollinger pipeline passes the complete predictive and economic establishment standard:
+When no RSI or Bollinger pipeline passes the complete standard:
 
 ```text
-NO_ESTABLISHED_SIGNAL
+NO_PIPELINE_ADMITTED
+or
+NO_INCREMENTAL_EVIDENCE
+
+then
+
 FAILURE_MODEL_INADMISSIBLE_BASELINE_NOT_ESTABLISHED
 ```
 
@@ -350,11 +450,11 @@ REVALIDATE_BEFORE_REUSE
 DO_NOT_USE
 ```
 
-# V3-9 — Methodology-locked evaluation
+# V3-9 — Methodology-locked final-framework evaluation
 
-**Status:** not started.
+**Status:** not started; 2026 reserve protected.
 
-The complete frozen V3 forecast, validity, and decision pipeline receives one-time evaluation access. No post-result retuning is permitted.
+The complete frozen V3 forecast, validity, and decision pipeline receives one-time evaluation access to the 2026 reserve. No post-result retuning is permitted.
 
 # V3-10 — External replication and transportability
 
@@ -417,4 +517,5 @@ Every gate must preserve:
 - complete reporting of negative and positive results;
 - the non-rescue rule;
 - explicit separation between supporting regime evidence and signal establishment;
+- strict protection of the V3-9 final-framework reserve;
 - governance proportional to the scientific claim protected.
