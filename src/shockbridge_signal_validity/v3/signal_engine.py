@@ -112,16 +112,16 @@ def _validate_supplied_parameter_keys(
     specs: tuple[SignalSpec, ...],
     supplied: Mapping[str, Mapping[str, Any]],
 ) -> None:
-    adaptive_ids = {
-        spec.signal_id
+    adaptive_keys = {
+        spec.feature_key
         for spec in specs
         if spec.parameter_policy == "TRAINING_ONLY_REQUIRED"
         and spec.regime_interaction_policy == "NONE"
     }
-    unknown = sorted(set(supplied).difference(adaptive_ids))
+    unknown = sorted(set(supplied).difference(adaptive_keys))
     if unknown:
         raise SignalEngineError(
-            "Training-only parameters reference unregistered or non-adaptive signals"
+            "Training-only parameters reference unregistered or non-adaptive feature keys"
         )
 
 
@@ -132,7 +132,7 @@ def _parameters(
     fixed = dict(spec.threshold_or_band_parameter)
     if spec.parameter_policy == "FIXED":
         return fixed
-    extra = supplied.get(spec.signal_id)
+    extra = supplied.get(spec.feature_key)
     if not isinstance(extra, Mapping):
         return None
     value = {**fixed, **dict(extra)}
