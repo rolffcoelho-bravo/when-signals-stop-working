@@ -31,6 +31,7 @@
     "evidence/v3/g4_signal_lock/signal_registry_manifest.json": "e5ae68f40b3d4c0a9a429ac5cccd7749c13b3354a24cde9a83b541cc7c8e7e33",
     "evidence/v3/g4_signal_lock/signal_validation_report.json": "adea0c4a62a91f848a51c8b4c2d1b5ec15b17a51d02ce21a730d1ff0e54fa8ed"
   },
+  "evidence_materialization_commit": "705511de9e8ee22a9f8aff34506aebb6c26223e7",
   "gate": "V3-4",
   "large_runtime_artifact_policy": {
     "signal_features_csv_bound_by_sha256": true,
@@ -38,6 +39,7 @@
     "small_manifests_curated_for_repository_review": true
   },
   "lock_preparation_commit": "e6bed77f333625fd9779e144c0d09d399008375d",
+  "lock_review_completed": true,
   "next_gate": {
     "approval": "APPROVED",
     "gate": "V3-5",
@@ -107,6 +109,6 @@
     }
   },
   "schema_version": "v3.signal-engine-lock.v1",
-  "status": "LOCK_CANDIDATE_AWAITING_REPOSITORY_REVIEW",
+  "status": "IMPLEMENTATION_VALIDATED_AND_LOCKED",
   "validated_implementation_commit": "ff2e7ecba3fa69f22e0b109437d23b52d30fba2b"
 }
