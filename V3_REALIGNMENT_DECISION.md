@@ -49,7 +49,7 @@ Historical file names, lock blobs, checkpoints, tests, source registries, and ev
 
 ## True core sequence restored
 
-The controlling Version 3 sequence is restored as follows:
+The controlling Version 3 sequence is:
 
 ```text
 V3-0   Design and product freeze                         COMPLETE
@@ -57,7 +57,7 @@ V3-1   Canonical data and adapter layer                 COMPLETE
 V3-2   Causal feature and spectral engine               COMPLETE
 V3-2B  Market-structure extension                       COMPLETE
 V3-3   Panic-consistent probabilistic regime engine     COMPLETE
-V3-4   Unified RSI and Bollinger interpretation engine  REOPENED; NEXT CORE GATE
+V3-4   Unified RSI and Bollinger interpretation engine  IMPLEMENTED / VALIDATION PENDING
 V3-5   Matched benchmark-versus-signal forecast engine  NOT STARTED
 V3-6   Prospective failure-event and monitoring layer   NOT STARTED
 V3-7   Signal-validity and failure-probability model     NOT STARTED
@@ -68,7 +68,7 @@ V3-11  Reusable package and scoring workflow            NOT STARTED
 V3-12  Final audit and institutional release            NOT STARTED
 ```
 
-The regime-validation extension is supporting evidence and is no longer allowed to displace the core sequence:
+The regime-validation extension is supporting evidence and cannot displace the core sequence:
 
 ```text
 V3-RV1 Independent regime-validation contract           COMPLETE
@@ -76,37 +76,51 @@ V3-RV2 Independent chronology and provenance             COMPLETE / PORTABILITY 
 V3-RV3 Regime-event alignment                            PAUSED
 ```
 
-## True Gate V3-4 reopened
+## True Gate V3-4 implementation
 
-The next core execution gate is:
+The true V3-4 implementation now exists as a bounded, reproducible, target-blind signal-information engine.
 
-> Gate V3-4 — Unified RSI and Bollinger Interpretation Engine
-
-It must implement bounded, reproducible, target-blind signal families with stable identifiers.
+```text
+registered specifications: 48
+base specifications: 44
+explicit regime interactions: 4
+training-only adaptive templates: 2
+bounded maximum: 128
+controlled development tests: 19 passed
+authoritative Windows validation: pending
+lock: not created
+```
 
 ### RSI family
 
-- overbought mean reversion;
-- oversold mean reversion;
-- overbought continuation;
-- oversold continuation;
+- overbought and oversold mean reversion;
+- overbought and oversold continuation;
 - threshold crossings;
 - threshold duration and persistence;
-- slope and acceleration;
-- price-RSI divergence;
+- level, slope, acceleration, and rolling range;
+- causal price-RSI divergence;
 - training-only adaptive thresholds where predeclared.
 
 ### Bollinger family
 
-- upper-band mean reversion;
-- lower-band mean reversion;
-- upper-band breakout;
-- lower-band breakdown;
-- percentage-B position;
-- normalized band distance;
-- bandwidth level and expansion;
+- upper- and lower-band mean reversion;
+- upper breakout and lower breakdown;
+- percentage-B and normalized band distance;
+- bandwidth level, change, and acceleration;
 - squeeze and post-squeeze transition;
-- persistence outside the bands.
+- persistence outside the bands and re-entry timing;
+- training-only adaptive squeeze thresholds where predeclared.
+
+### Registered market-state interactions
+
+```text
+RSI oversold mean reversion × p_range
+RSI overbought continuation × p_trend
+Bollinger lower breakdown × p_panic_consistent
+Bollinger post-squeeze expansion × dominant_eigenvalue_share
+```
+
+Every interaction preserves its base signal and context values separately. Missing context and missing training-only adaptive parameters remain explicit ineligibility states.
 
 ### Gate boundary
 
@@ -123,13 +137,11 @@ Gate V3-4 generates signal information only. It may not:
 
 After Gate V3-5, if no Version 3 RSI or Bollinger pipeline passes the complete establishment standard, the signal-failure programme must stop for that family.
 
-The required result is then:
-
 ```text
 FAILURE_MODEL_INADMISSIBLE_BASELINE_NOT_ESTABLISHED
 ```
 
-The spectral, network, panic-consistent, and chronology components may continue as a separate market-regime research contribution, but they cannot be presented as an answer to when the rejected signal stopped working.
+The spectral, network, panic-consistent, and chronology components may continue as a separate market-regime research contribution, but they cannot be presented as an answer to when a rejected signal stopped working.
 
 ## Governance proportionality rule
 
@@ -142,10 +154,14 @@ RICHARD_QUESTION.md
 DIRECT_ANSWER_LOGIC.md
 docs/V3_REALIGNED_GATE_MAP.md
 docs/V3_G4_SIGNAL_ENGINE_SCOPE.md
+docs/V3_G4_SIGNAL_ENGINE.md
+V3_G4_SIGNAL_ENGINE_CHECKPOINT.md
 configs/v3_realignment_contract.json
 ROADMAP.md
 ```
 
-## Next action
+## Current action
 
-Complete and verify this realignment package, then execute the true Gate V3-4 signal-engine implementation. The paused `V3-RV3` event-alignment study may resume only after the core signal-establishment sequence reaches an appropriate external-validation boundary.
+Authoritatively validate the corrected realignment and the implemented V3-4 signal engine on the Windows research environment, review the real canonical-data manifests and tracked working-tree state, and then create the V3-4 lock only if all evidence passes.
+
+The paused `V3-RV3` event-alignment study may resume only after the core signal-establishment sequence reaches an appropriate external-validation boundary. Gate V3-5 remains not started and requires separate approval after V3-4 validation and lock.
