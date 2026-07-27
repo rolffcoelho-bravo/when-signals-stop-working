@@ -1,0 +1,39 @@
+{
+  "schema_version": "v3.g5-contract-validation.v1",
+  "gate": "V3-5",
+  "status": "CONTRACT_AUTHORITATIVELY_VALIDATED",
+  "branch": "research/v3-adaptive-signal-validity",
+  "validated_contract_commit": "013d91abc0c3c74a28784aed486edb4c95efc6d7",
+  "contract_path": "configs/v3_g5_forecast_contract.json",
+  "contract_blob_sha": "8bcefa962c0c631485351c51c71b19336219ce85",
+  "parent_lock": {
+    "path": "V3_G4_SIGNAL_ENGINE_LOCK.json",
+    "status": "IMPLEMENTATION_VALIDATED_AND_LOCKED",
+    "validated_implementation_commit": "ff2e7ecba3fa69f22e0b109437d23b52d30fba2b",
+    "verification_passed": true
+  },
+  "authoritative_environment": "Windows PowerShell research environment",
+  "validation_evidence": {
+    "repository_realignment_tests_passed": 7,
+    "v3_g5_contract_tests_passed": 7,
+    "standalone_contract_verifier_passed": true,
+    "patch_integrity_passed": true,
+    "tracked_worktree_clean": true,
+    "branch_up_to_date_with_origin": true
+  },
+  "access_state": {
+    "target_accessed": false,
+    "development_model_fitting_started": false,
+    "signal_establishment_segment_accessed": false,
+    "final_framework_reserve_accessed": false
+  },
+  "frozen_partition": {
+    "development_end_utc": "2025-06-30T20:00:00Z",
+    "signal_establishment_start_utc": "2025-07-01T00:00:00Z",
+    "signal_establishment_end_utc": "2025-12-31T20:00:00Z",
+    "final_framework_reserve_start_utc": "2026-01-01T00:00:00Z",
+    "final_framework_reserve_end_utc": "2026-07-22T08:00:00Z"
+  },
+  "next_implementation_slice": "TARGET_PARTITION_FOLD_BENCHMARK_CANDIDATE_FOUNDATION",
+  "empirical_claims_authorized": false
+}
