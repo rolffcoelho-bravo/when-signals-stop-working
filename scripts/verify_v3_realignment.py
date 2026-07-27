@@ -82,6 +82,22 @@ def main() -> int:
         if next_gate.get(field) is not False:
             fail(f"True V3-4 boundary changed: {field}")
 
+    parent = payload.get("v3_1_parent_verification", {})
+    expected_parent = {
+        "historical_boundary_commit": "7a7a5c55184aadfb436774ff1e497ce873a96b6e",
+        "historical_lock_rewritten": False,
+        "historical_objects_verified_at_boundary": True,
+        "current_direct_objects_verified_as_git_objects": True,
+        "current_direct_worktree_mutations_fail_closed": True,
+        "shared_export_surface": "src/shockbridge_signal_validity/v3/__init__.py",
+        "shared_export_surface_may_have_later_owner": True,
+        "v3_1_export_compatibility_required": True,
+        "checkout_eol_invariant": True,
+        "authoritative_windows_rerun_pending": True,
+    }
+    if parent != expected_parent:
+        fail("Gate V3-1 historical-owner verification boundary changed")
+
     implementation = payload.get("v3_4_implementation", {})
     expected_counts = {
         "registered_signal_count": 48,
@@ -89,6 +105,7 @@ def main() -> int:
         "interaction_signal_count": 4,
         "adaptive_template_count": 2,
         "prior_development_suite_passed": 19,
+        "exact_hardened_suite_passed": 19,
     }
     for field, expected in expected_counts.items():
         if implementation.get(field) != expected:
@@ -101,6 +118,22 @@ def main() -> int:
         fail("V3-4 final hardening boundary is not recorded")
     if implementation.get("current_exact_suite_execution_pending") is not True:
         fail("V3-4 current exact suite is claimed prematurely")
+    if implementation.get("canonical_input_materialization") != (
+        "FROZEN_SOL_SNAPSHOT_VIA_LOCKED_V3_G1_ADAPTER"
+    ):
+        fail("V3-4 canonical input materialization changed")
+    if implementation.get("canonical_source_path") != "data/raw/sol_usdt_4h.csv":
+        fail("V3-4 canonical source path changed")
+    if implementation.get("canonical_adapter_config") != (
+        "configs/v3_adapter_frozen_sol.json"
+    ):
+        fail("V3-4 canonical adapter configuration changed")
+    if implementation.get("canonical_output_path") != (
+        "outputs/v3/data_adapter/canonical_market_data.csv"
+    ):
+        fail("V3-4 canonical output path changed")
+    if implementation.get("real_data_execution_pending") is not True:
+        fail("V3-4 real-data execution is claimed prematurely")
     for field in (
         "automatic_selection_performed",
         "target_accessed",
@@ -239,6 +272,7 @@ def main() -> int:
     print("Current core gate: V3-4 — Unified RSI and Bollinger Interpretation Engine")
     print("True V3-4 implementation started: True")
     print("True V3-4 status: IMPLEMENTATION_COMPLETE_VALIDATION_PENDING")
+    print("V3-1 historical-owner boundary preserved: True")
     print("Registered signal specifications: 48")
     print("Current hardened V3-4 suite execution pending: True")
     print("Gate V3-5 approval: APPROVED_PENDING_V3_4_VALIDATION_AND_LOCK")
