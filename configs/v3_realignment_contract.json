@@ -1,0 +1,101 @@
+{
+  "schema_version": "v3.repository-realignment.v1",
+  "gate": "V3-REALIGNMENT",
+  "status": "RESEARCH_QUESTION_AND_GATE_SEQUENCE_REALIGNED",
+  "branch": "research/v3-adaptive-signal-validity",
+  "baseline_release": "v2.0.0",
+  "baseline_commit": "5a07299367b80c3940e652e7bbdd208ce86ba5ef",
+  "research_anchor": {
+    "original_question": "When will RSI stop working?",
+    "corrected_practical_indicator": "Bollinger Bands",
+    "formal_question": "Did RSI or Bollinger Bands establish incremental predictive and economic value, under which conditions, and only after establishment when is that contribution deteriorating or likely to fail?",
+    "establishment_precedes_deterioration": true,
+    "establishment_precedes_failure_probability": true
+  },
+  "frozen_determinations": {
+    "version_1": {
+      "rsi": "NOT_ESTABLISHED",
+      "bollinger": "NOT_ESTABLISHED",
+      "combined": "NOT_ESTABLISHED"
+    },
+    "version_2": {
+      "rsi": "NO_PIPELINE_ADMITTED",
+      "bollinger": "NO_INCREMENTAL_EVIDENCE",
+      "primary_case_established": false
+    },
+    "modified_by_realignment": false
+  },
+  "completed_core_gates": [
+    "V3-0",
+    "V3-1",
+    "V3-2",
+    "V3-2B",
+    "V3-3"
+  ],
+  "true_next_core_gate": {
+    "gate": "V3-4",
+    "title": "Unified RSI and Bollinger Interpretation Engine",
+    "status": "APPROVED_AND_REOPENED",
+    "implementation_started": false,
+    "predictive_claims_permitted": false,
+    "economic_claims_permitted": false,
+    "failure_claims_permitted": false
+  },
+  "regime_validation_reclassification": [
+    {
+      "historical_identifier": "V3-4A",
+      "realigned_identifier": "V3-RV1",
+      "title": "Independent Regime-Validation Contract",
+      "status": "COMPLETE_AND_HISTORICALLY_LOCKED",
+      "historical_files_renamed": false
+    },
+    {
+      "historical_identifier": "V3-4B",
+      "realigned_identifier": "V3-RV2",
+      "title": "Independent Chronology and Provenance",
+      "status": "COMPLETE_AND_HISTORICALLY_LOCKED_WITH_PORTABILITY_REVISION_OPEN",
+      "historical_files_renamed": false
+    },
+    {
+      "historical_identifier": "V3-4C",
+      "realigned_identifier": "V3-RV3",
+      "title": "Regime-Event Alignment",
+      "status": "PAUSED_NOT_STARTED",
+      "historical_files_renamed": false
+    }
+  ],
+  "core_sequence": [
+    "V3-4_SIGNAL_INTERPRETATION",
+    "V3-5_MATCHED_FORECAST_ESTABLISHMENT",
+    "V3-6_PROSPECTIVE_FAILURE_DEFINITION",
+    "V3-7_FAILURE_PROBABILITY",
+    "V3-8_DECISION_GOVERNANCE",
+    "V3-9_LOCKED_EVALUATION",
+    "V3-10_EXTERNAL_REPLICATION",
+    "V3-11_REUSABLE_SCORING_PACKAGE",
+    "V3-12_FINAL_RELEASE"
+  ],
+  "stop_rules": {
+    "no_established_signal": "FAILURE_MODEL_INADMISSIBLE_BASELINE_NOT_ESTABLISHED",
+    "no_sufficient_failure_labels": "FAILURE_PROBABILITY_NOT_ESTABLISHED",
+    "no_transportability_evidence": "GENERAL_CLAIM_NOT_AUTHORIZED"
+  },
+  "governance_controls": {
+    "historical_locks_rewritten": false,
+    "chronology_may_tune_signal_registry": false,
+    "panic_regime_may_rescue_v2_signal": false,
+    "automatic_signal_selection_in_v3_4": false,
+    "each_future_gate_must_state_richard_question_link": true,
+    "governance_must_be_proportional_to_scientific_gate": true
+  },
+  "required_documents": [
+    "RICHARD_QUESTION.md",
+    "DIRECT_ANSWER_LOGIC.md",
+    "V3_REALIGNMENT_DECISION.md",
+    "docs/V3_REALIGNED_GATE_MAP.md",
+    "docs/V3_G4_SIGNAL_ENGINE_SCOPE.md",
+    "ROADMAP.md",
+    "README.md"
+  ],
+  "next_action": "IMPLEMENT_AND_VALIDATE_TRUE_V3_4_SIGNAL_ENGINE"
+}
