@@ -7,13 +7,16 @@ IMPLEMENTATION_COMPLETE_VALIDATION_PENDING
 WINDOWS_REALIGNMENT_7_PASSED
 WINDOWS_SIGNAL_SUITE_19_PASSED
 REAL_DATA_INPUT_MATERIALIZATION_REMEDIATED
+V3_1_HISTORICAL_OWNER_REMEDIATION_IMPLEMENTED
 CURRENT_EXACT_ACCEPTANCE_RERUN_PENDING
 LOCK_NOT_CREATED
 ```
 
-Gate V3-4 has been implemented on `research/v3-adaptive-signal-validity`. The Windows research environment has now passed the corrected seven-test repository-realignment suite and the exact hardened nineteen-test signal-engine suite. The first real-data execution then stopped because `outputs/v3/data_adapter/canonical_market_data.csv` had not been materialized locally.
+Gate V3-4 has been implemented on `research/v3-adaptive-signal-validity`. The Windows research environment has passed the corrected seven-test repository-realignment suite and the exact hardened nineteen-test signal-engine suite.
 
-This was an execution-orchestration defect, not an RSI, Bollinger, registry, leakage, or forecasting failure. The runner now verifies the locked V3-1 adapter, regenerates the canonical SOL input from the frozen public raw snapshot, executes V3-4, verifies all output identities, and fails before downstream manifest access when any prerequisite fails.
+The first real-data execution stopped because `outputs/v3/data_adapter/canonical_market_data.csv` had not been materialized locally. The self-contained runner remediation then exposed a second parent-verification problem: the historical V3-1 verifier compared the current shared package initializer `src/shockbridge_signal_validity/v3/__init__.py` with its V3-1-era blob even though later gates legitimately extended that initializer with spectral exports.
+
+Neither stop was an RSI, Bollinger, registry, leakage, forecast, or empirical failure. The runner and parent verifier now distinguish historical lock integrity, current direct implementation integrity, and legitimate later ownership of a shared export surface.
 
 ## Research-question link
 
@@ -27,6 +30,9 @@ It does not answer whether any signal is established and cannot authorize deteri
 Frozen Version 2 baseline:
 5a07299367b80c3940e652e7bbdd208ce86ba5ef
 
+Historical V3-1 implementation boundary:
+7a7a5c55184aadfb436774ff1e497ce873a96b6e
+
 Repository realignment checkpoint:
 V3_REALIGNMENT_CHECKPOINT.md
 
@@ -36,6 +42,8 @@ scripts/verify_v3_realignment.py
 Locked canonical adapter verifier:
 scripts/verify_v3_g1_data_adapter.py
 ```
+
+The V3-1 lock file remains unchanged. Every protected object is verified at the historical V3-1 boundary. Current direct V3-1 implementation objects are separately checked as committed Git blobs, and uncommitted modifications to those direct paths fail closed. The shared `v3/__init__.py` may contain later-gate exports, but all required V3-1 public symbols must remain present.
 
 The chronology extension remains scientifically reclassified as `V3-RV1` and `V3-RV2`; `V3-RV3` event alignment remains paused.
 
@@ -53,6 +61,7 @@ src/shockbridge_signal_validity/v3/signal_reporting.py
 src/shockbridge_signal_validity/v3/signal_engine.py
 src/shockbridge_signal_validity/v3/signal_runner.py
 scripts/run_v3_signal_engine.py
+scripts/verify_v3_g1_data_adapter.py
 scripts/verify_v3_g4_signal_outputs.py
 tests/test_v3_signal_registry.py
 tests/test_v3_signal_engine.py
@@ -107,27 +116,49 @@ The required real-data identity is:
 feature rows = canonical source rows × 48
 ```
 
-The new output verifier also confirms that the physical CSV row count equals the manifest row count, the registry contains all 48 definitions, canonical validation passed, no prohibited action occurred, and the next gate is V3-5.
+The output verifier confirms that the physical CSV row count equals the manifest row count, the registry contains all 48 definitions, canonical validation passed, no prohibited action occurred, and the next gate is V3-5.
 
 ## Authoritative Windows evidence received
 
 ```text
 Repository realignment: 7 passed
 Exact hardened V3-4 tests: 19 passed
-Real-data execution: stopped before feature generation
-Immediate cause: canonical input path did not exist locally
+First real-data execution: stopped before feature generation
+First immediate cause: canonical input path did not exist locally
+Second self-contained rerun: stopped during V3-1 parent verification
+Second immediate cause: shared package initializer had legitimate later-gate exports
 ```
 
-No V3-4 output manifest existed after the stop. All later blank-manifest and false-condition messages were downstream cascade errors caused by manually continuing after the fail-fast runner had already terminated. They are not scientific or implementation findings.
+No V3-4 output manifest existed after either stop. Blank-manifest and false-condition messages produced by manually continuing after a runner failure are cascade errors, not scientific or implementation findings.
 
-## Remediation
+## Parent-verifier remediation
 
-The platform runners now perform the complete dependency chain in one command:
+The V3-1 verifier now applies three distinct checks:
+
+```text
+historical integrity
+    every protected V3-1 blob equals the lock at commit
+    7a7a5c55184aadfb436774ff1e497ce873a96b6e
+
+current direct implementation integrity
+    direct V3-1 committed objects still equal the locked blobs
+    uncommitted modifications to those paths fail closed
+
+shared export compatibility
+    the evolved v3/__init__.py may include later exports
+    every required V3-1 public symbol must remain available
+```
+
+Committed-object comparisons use Git object identities rather than checkout bytes, making the verifier invariant to Windows line-ending conversion. The existing V3-4 runner test now binds the historical-lock and current-export compatibility outputs without increasing the nineteen-test inventory.
+
+## Complete runner chain
+
+The platform runners perform the dependency chain in one command:
 
 ```text
 verify realignment
     ↓
-verify locked V3-1 adapter
+verify historical and current-compatible V3-1 parent
     ↓
 run exact 19-test V3-4 suite
     ↓
@@ -160,23 +191,25 @@ frozen V1/V2 modification: prohibited
 .\RUN_V3_G4_SIGNAL_ENGINE.ps1
 ```
 
-The runner itself now performs every acceptance check. Do not execute separate manifest commands unless this command completes successfully.
+The runner itself performs every acceptance check. Do not execute separate manifest commands unless this command completes successfully.
 
 ## Acceptance conditions before lock
 
 1. The updated standalone realignment verifier passes.
-2. The locked V3-1 adapter verifier passes.
-3. All 19 current V3-4 tests pass.
-4. The frozen SOL snapshot is converted into valid canonical data.
-5. Real canonical data generates the complete V3-4 output package.
-6. `signal_feature_manifest.json` records 48 signals and verifies `rows = source_rows × 48`.
-7. The physical long-format CSV row count matches the manifest.
-8. The registry manifest contains all 48 complete signal definitions.
-9. Adaptive templates and unavailable context remain explicit rather than dropped.
-10. No target, chronology, predictive, economic, deterioration, or failure claim is produced.
-11. No tracked file changes are caused by the runner.
-12. Output hashes and final committed object identities are reviewed.
-13. The checkpoint and contract are revised with authoritative real-data evidence before the lock is created.
+2. The historical V3-1 lock verifies at commit `7a7a5c55184aadfb436774ff1e497ce873a96b6e`.
+3. Current direct V3-1 implementation objects match their locked committed blobs and their working-tree paths are clean.
+4. The current shared Version 3 export surface preserves all V3-1 public symbols.
+5. All 19 current V3-4 tests pass.
+6. The frozen SOL snapshot is converted into valid canonical data.
+7. Real canonical data generates the complete V3-4 output package.
+8. `signal_feature_manifest.json` records 48 signals and verifies `rows = source_rows × 48`.
+9. The physical long-format CSV row count matches the manifest.
+10. The registry manifest contains all 48 complete signal definitions.
+11. Adaptive templates and unavailable context remain explicit rather than dropped.
+12. No target, chronology, predictive, economic, deterioration, or failure claim is produced.
+13. No tracked file changes are caused by the runner.
+14. Output hashes and final committed object identities are reviewed.
+15. The checkpoint and contract are revised with authoritative real-data evidence before the lock is created.
 
 ## Next gate boundary
 
