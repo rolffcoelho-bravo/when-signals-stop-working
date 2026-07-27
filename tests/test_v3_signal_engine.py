@@ -57,6 +57,7 @@ def test_engine_emits_every_registered_signal_for_every_source_row() -> None:
     result = compute_signal_feature_frame(source, registry_value())
     assert len(result.frame) == len(source) * len(specs)
     assert result.frame["signal_id"].nunique() == len(specs) == 48
+    assert result.frame["feature_key"].nunique() == 48
     assert result.feature_manifest["source_rows"] == len(source)
     assert result.feature_manifest["automatic_selection_performed"] is False
     assert result.validation_report["target_accessed"] is False
@@ -65,27 +66,9 @@ def test_engine_emits_every_registered_signal_for_every_source_row() -> None:
 
     reference = pd.Series(
         [
-            44.34,
-            44.09,
-            44.15,
-            43.61,
-            44.33,
-            44.83,
-            45.10,
-            45.42,
-            45.84,
-            46.08,
-            45.89,
-            46.03,
-            45.61,
-            46.28,
-            46.28,
-            46.00,
-            46.03,
-            46.41,
-            46.22,
-            45.64,
-            46.21,
+            44.34, 44.09, 44.15, 43.61, 44.33, 44.83, 45.10,
+            45.42, 45.84, 46.08, 45.89, 46.03, 45.61, 46.28,
+            46.28, 46.00, 46.03, 46.41, 46.22, 45.64, 46.21,
         ]
     )
     calculated = wilder_rsi(reference, 14)
@@ -94,8 +77,12 @@ def test_engine_emits_every_registered_signal_for_every_source_row() -> None:
     expected_initial = 100.0 - 100.0 / (1.0 + initial_up / initial_down)
     assert calculated.iloc[:14].isna().all()
     assert calculated.iloc[14] == pytest.approx(expected_initial)
-    recursive_up = (13.0 * initial_up + max(reference.iloc[15] - reference.iloc[14], 0.0)) / 14.0
-    recursive_down = (13.0 * initial_down + max(reference.iloc[14] - reference.iloc[15], 0.0)) / 14.0
+    recursive_up = (
+        13.0 * initial_up + max(reference.iloc[15] - reference.iloc[14], 0.0)
+    ) / 14.0
+    recursive_down = (
+        13.0 * initial_down + max(reference.iloc[14] - reference.iloc[15], 0.0)
+    ) / 14.0
     expected_next = 100.0 - 100.0 / (1.0 + recursive_up / recursive_down)
     assert calculated.iloc[15] == pytest.approx(expected_next)
 
@@ -171,6 +158,15 @@ def test_invalid_training_only_parameters_fail_closed() -> None:
                 rsi_adaptive.signal_id: {"lower": 80.0, "upper": 20.0}
             },
         )
+    with pytest.raises(
+        SignalEngineError,
+        match="unregistered or non-adaptive signals",
+    ):
+        compute_signal_feature_frame(
+            fixture(),
+            registry_value(),
+            training_only_parameters={"unknown": {"lower": 25.0, "upper": 75.0}},
+        )
 
 
 def test_registered_interactions_preserve_base_and_context_components() -> None:
@@ -197,6 +193,15 @@ def test_registered_interactions_preserve_base_and_context_components() -> None:
     )
     assert result.validation_report["interaction_components_preserved"] is True
 
+    invalid_context = context.copy()
+    invalid_context.loc[0, "p_range"] = 1.2
+    with pytest.raises(SignalEngineError, match=r"must be in \[0, 1\]"):
+        compute_signal_feature_frame(
+            source,
+            registry_value(),
+            context_frame=invalid_context,
+        )
+
 
 def test_missing_required_ohlcv_or_duplicate_keys_fail_closed() -> None:
     source = fixture()
@@ -205,6 +210,10 @@ def test_missing_required_ohlcv_or_duplicate_keys_fail_closed() -> None:
     duplicated = pd.concat([source, source.iloc[[0]]], ignore_index=True)
     with pytest.raises(SignalEngineError, match="Duplicate canonical keys"):
         compute_signal_feature_frame(duplicated, registry_value())
+    invalid_bounds = source.copy()
+    invalid_bounds.loc[0, "high"] = invalid_bounds.loc[0, "close"] - 1.0
+    with pytest.raises(SignalEngineError, match="violate low/high bounds"):
+        compute_signal_feature_frame(invalid_bounds, registry_value())
 
 
 def test_gate_produces_no_predictive_economic_deterioration_or_failure_claim() -> None:
