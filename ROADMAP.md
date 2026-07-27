@@ -54,15 +54,15 @@ Primary case:       NOT ESTABLISHED
 
 The frozen Bollinger pipeline produced favourable means but failed the complete multiplicity-adjusted, dependence-aware predictive and economic confidence standard.
 
-## Version 3 — Adaptive signal validity and failure-risk framework
+# Version 3 — Adaptive signal validity and failure-risk framework
 
-### V3-0 — Design and product freeze
+## V3-0 — Design and product freeze
 
 **Status:** complete.
 
 The decision problem, reusable product requirement, canonical data contract, validation architecture, non-rescue rule, failure-event principle, and final output schema are frozen.
 
-### V3-1 — Canonical data and adapter layer
+## V3-1 — Canonical data and adapter layer
 
 **Status:** complete and locked.
 
@@ -74,7 +74,7 @@ Implemented:
 - deterministic manifests;
 - data-quality and conformance controls.
 
-### V3-2 — Multi-asset causal feature and spectral engine
+## V3-2 — Multi-asset causal feature and spectral engine
 
 **Status:** complete and locked.
 
@@ -82,7 +82,7 @@ Implemented:
 
 - causal returns, downside, volatility, and volume features;
 - fixed-panel rolling dependence matrices;
-- dominant eigenvalue and share;
+- dominant eigenvalue and dominant-eigenvalue share;
 - eigenvalue gap;
 - participation ratio and effective dimension;
 - spectral entropy;
@@ -90,7 +90,7 @@ Implemented:
 - complete eigenvalue spectrum;
 - panel eligibility and sensitivity controls.
 
-### V3-2B — Market-structure extension
+## V3-2B — Market-structure extension
 
 **Status:** complete and locked.
 
@@ -103,7 +103,7 @@ Implemented:
 - path and topology descriptors;
 - causal velocity, acceleration, and rolling-volatility dynamics.
 
-### V3-3 — Panic-consistent probabilistic regime engine
+## V3-3 — Panic-consistent probabilistic regime engine
 
 **Status:** complete and locked.
 
@@ -119,11 +119,11 @@ Implemented:
 - disagreement and coverage maps;
 - no automatic model selection, ensemble, or consensus probability.
 
-## Repository realignment
+# Repository realignment
 
-**Status:** implementation package committed; local validation pending.
+**Status:** correction implemented; authoritative rerun pending after the exact-token remediation and V3-4 status advancement.
 
-A full repository review found that the implementation diverged after V3-3. The frozen plan defined V3-4 as the unified RSI and Bollinger signal engine, but chronology work occupied the V3-4A/B labels.
+A full repository review found that the implementation diverged after V3-3. The frozen plan defined V3-4 as the unified RSI and Bollinger signal engine, but chronology work occupied the historical V3-4A/B labels.
 
 The realignment:
 
@@ -132,8 +132,9 @@ The realignment:
 - preserves all historical chronology artifacts and locks;
 - reclassifies chronology as a separate regime-validation extension;
 - pauses event alignment;
-- reopens the true V3-4 signal engine;
-- restores the establishment-before-failure sequence.
+- restores the true V3-4 signal engine;
+- restores the establishment-before-failure sequence;
+- prevents supporting regime validation from displacing the core signal-establishment programme.
 
 Authoritative documents:
 
@@ -143,77 +144,125 @@ DIRECT_ANSWER_LOGIC.md
 V3_REALIGNMENT_DECISION.md
 docs/V3_REALIGNED_GATE_MAP.md
 docs/V3_G4_SIGNAL_ENGINE_SCOPE.md
+docs/V3_G4_SIGNAL_ENGINE.md
 configs/v3_realignment_contract.json
 ```
 
-## Regime-validation extension
+# Regime-validation extension
 
-### V3-RV1 — Independent regime-validation contract
+## V3-RV1 — Independent regime-validation contract
 
 **Historical identifier:** V3-4A  
 **Status:** complete and historically locked.
 
 The contract prevents model-derived events, chronology-driven model or threshold selection, retrospective event deletion, and retrospective event-boundary tuning.
 
-### V3-RV2 — Independent chronology and provenance
+## V3-RV2 — Independent chronology and provenance
 
 **Historical identifier:** V3-4B  
 **Status:** complete and historically locked; Windows checkout-portability revision remains open until revalidated.
 
 The package contains 17 canonical events supported by 27 documentary sources, including 12 confirmed timing-eligible events and five boundary-uncertain events excluded from primary timing.
 
-### V3-RV3 — Regime-event alignment
+## V3-RV3 — Regime-event alignment
 
 **Historical proposed identifier:** V3-4C  
 **Status:** paused and not started.
 
 This extension may resume only at an appropriate external-validation point. It is not allowed to displace the signal-establishment sequence.
 
-## True V3-4 — Unified RSI and Bollinger interpretation engine
+# True V3-4 — Unified RSI and Bollinger interpretation engine
 
-**Status:** approved and reopened; implementation not started.
+**Status:** implementation complete; controlled development suite `19 passed`; authoritative Windows validation, real-data evidence review, and lock pending.
 
-### Objective
+## Richard-question link
 
-Generate bounded, target-blind, reproducible signal-information families with stable identifiers.
+V3-4 defines the exact RSI and Bollinger information that V3-5 will test against matched non-signal benchmarks. It does not establish signal value and does not answer whether a signal stopped working.
 
-### RSI families
+## Implemented registry
 
+```text
+registered specifications: 48
+base specifications: 44
+explicit regime interactions: 4
+training-only adaptive templates: 2
+bounded maximum: 128
+automatic selection: false
+```
+
+## RSI families
+
+- level and centered level;
+- slope and acceleration;
+- rolling range;
+- causal bullish and bearish divergence;
 - mean reversion;
 - continuation;
 - threshold crossings;
 - persistence and duration;
-- slope and acceleration;
-- causal divergence;
+- time since crossing and exit from extremes;
 - training-only adaptive thresholds where registered.
 
-### Bollinger families
+## Bollinger families
 
-- mean reversion;
-- breakout and breakdown;
 - percentage-B and normalized distances;
+- distance magnitude;
+- upper and lower mean reversion;
+- breakout and breakdown;
+- outside-band continuation and re-entry;
 - bandwidth level, change, and acceleration;
 - squeeze and post-squeeze transition;
-- outside-band persistence and re-entry.
+- expansion persistence;
+- outside-band persistence and timing;
+- training-only adaptive squeeze thresholds where registered.
 
-### Acceptance
+## Registered market-state interactions
+
+```text
+RSI oversold mean reversion × p_range
+RSI overbought continuation × p_trend
+Bollinger lower breakdown × p_panic_consistent
+Bollinger post-squeeze expansion × dominant_eigenvalue_share
+```
+
+Every interaction preserves the base signal and context component separately. Missing context and missing adaptive training parameters remain explicit ineligibility states rather than causing candidate deletion.
+
+## Output package
+
+```text
+signal_features.csv
+signal_registry_manifest.json
+signal_feature_manifest.json
+signal_coverage_report.json
+signal_validation_report.json
+canonical_validation_report.json
+```
+
+## Acceptance boundary
 
 - exact feature reproducibility from identifiers;
 - causal calculations and future-append invariance;
+- source-row-order invariance;
 - bounded registry;
 - no target access;
-- no automatic candidate selection;
-- no predictive, economic, deterioration, or failure claim at this gate.
+- no chronology access;
+- no automatic candidate or threshold selection;
+- fixed and adaptive candidates remain distinguishable;
+- no predictive, economic, conditional-validity, deterioration, or failure claim;
+- authoritative 19-test execution on the research environment;
+- complete real-data evidence package;
+- no tracked-file mutation;
+- final object review before lock.
 
-## V3-5 — Matched benchmark-versus-signal forecast selection
+# V3-5 — Matched benchmark-versus-signal forecast selection
 
-**Status:** not started.
+**Status:** not started. Requires separate approval after V3-4 is authoritatively validated and locked.
 
-### Objective
+## Objective
 
 Determine whether registered signal information adds incremental value beyond a matched benchmark.
 
-### Required evidence
+## Required evidence
 
 - direction, expected-return, and large-move targets;
 - nested chronological development selection;
@@ -221,7 +270,7 @@ Determine whether registered signal information adds incremental value beyond a 
 - multiplicity, calibration, coverage, concentration, and complexity controls;
 - frozen admitted pipeline registry.
 
-### Establishment stop rule
+## Establishment stop rule
 
 When no RSI or Bollinger pipeline passes the complete predictive and economic establishment standard:
 
@@ -232,7 +281,7 @@ FAILURE_MODEL_INADMISSIBLE_BASELINE_NOT_ESTABLISHED
 
 The core failure programme stops for that family.
 
-## V3-6 — Prospective failure-event and monitoring layer
+# V3-6 — Prospective failure-event and monitoring layer
 
 **Status:** not started.
 
@@ -247,7 +296,7 @@ It must freeze:
 - persistence, recovery, and revalidation rules;
 - deterministic competing failure reasons.
 
-## V3-7 — Signal-validity and failure-probability model
+# V3-7 — Signal-validity and failure-probability model
 
 **Status:** not started.
 
@@ -262,7 +311,7 @@ The model must estimate chronologically calibrated probabilities for:
 
 It must report discrimination, calibration, warning lead time, false-alert burden, and decision utility against unconditional and persistence benchmarks.
 
-## V3-8 — Governed economic and operational decision engine
+# V3-8 — Governed economic and operational decision engine
 
 **Status:** not started.
 
@@ -288,13 +337,13 @@ REVALIDATE_BEFORE_REUSE
 DO_NOT_USE
 ```
 
-## V3-9 — Methodology-locked evaluation
+# V3-9 — Methodology-locked evaluation
 
 **Status:** not started.
 
 The complete frozen V3 forecast, validity, and decision pipeline receives one-time evaluation access. No post-result retuning is permitted.
 
-## V3-10 — External replication and transportability
+# V3-10 — External replication and transportability
 
 **Status:** not started.
 
@@ -308,7 +357,7 @@ Minimum cases:
 
 The V3-RV chronology may support regime validation here without becoming a supervised ground-truth label by assumption.
 
-## V3-11 — Reusable package and scoring workflow
+# V3-11 — Reusable package and scoring workflow
 
 **Status:** not started.
 
@@ -329,7 +378,7 @@ build-evidence-report
 run-v3-framework
 ```
 
-## V3-12 — Final audit and institutional release
+# V3-12 — Final audit and institutional release
 
 **Status:** not started.
 
@@ -344,7 +393,7 @@ Completion requires:
 - immutable release tag;
 - claims matching the evidence grade.
 
-## Programme controls
+# Programme controls
 
 Every gate must preserve:
 
