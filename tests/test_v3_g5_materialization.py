@@ -15,6 +15,7 @@ from shockbridge_signal_validity.v3.forecast_materialization import (
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT = ROOT / "configs" / "v3_g5_forecast_contract.json"
 REGISTRY = ROOT / "evidence" / "v3" / "g4_signal_lock" / "signal_registry_manifest.json"
+MATERIALIZATION_FIXTURE_ROWS = 800
 
 
 def _write_market(path: Path, index: pd.DatetimeIndex, scale: float) -> None:
@@ -62,7 +63,11 @@ def _write_signal_features(path: Path, index: pd.DatetimeIndex) -> str:
 
 
 def _foundation(tmp_path: Path):
-    index = pd.date_range("2021-01-01T00:00:00Z", periods=500, freq="4h")
+    index = pd.date_range(
+        "2021-01-01T00:00:00Z",
+        periods=MATERIALIZATION_FIXTURE_ROWS,
+        freq="4h",
+    )
     sol = tmp_path / "sol.csv"
     btc = tmp_path / "btc.csv"
     signals = tmp_path / "signals.csv"
@@ -92,13 +97,22 @@ def test_raw_ohlcv_reader_is_deterministic_and_strict(tmp_path: Path) -> None:
 
 def test_materialization_builds_all_registered_foundation_objects(tmp_path: Path) -> None:
     foundation, _ = _foundation(tmp_path)
-    assert len(foundation.targets) == 500 * 6 - sum((1, 2, 3, 6, 12, 18))
+    assert len(foundation.targets) == (
+        MATERIALIZATION_FIXTURE_ROWS * 6 - sum((1, 2, 3, 6, 12, 18))
+    )
     assert len(foundation.folds) == 120
-    assert len(foundation.benchmark) == 500
+    assert len(foundation.benchmark) == MATERIALIZATION_FIXTURE_ROWS
     assert len(foundation.candidates) == 57
     assert len(foundation.matched_coverage) == 342
     assert set(foundation.targets["segment"]) == {"DEVELOPMENT"}
     assert foundation.matched_coverage["model_fitting_performed"].eq(False).all()
+
+    longest_horizon = foundation.folds.loc[
+        foundation.folds["horizon_candles"] == 18
+    ]
+    assert len(longest_horizon) == 20
+    assert longest_horizon["train_rows"].gt(0).all()
+    assert longest_horizon["purge_rows"].eq(18).all()
 
 
 def test_unavailable_signal_remains_explicit_in_coverage(tmp_path: Path) -> None:
