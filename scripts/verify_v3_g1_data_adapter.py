@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from hashlib import sha1
 import json
 from pathlib import Path
 import subprocess
@@ -39,12 +38,6 @@ REQUIRED_V3_G1_EXPORTS = {
 }
 
 
-def git_blob_sha(path: Path) -> str:
-    data = path.read_bytes()
-    header = f"blob {len(data)}\0".encode("utf-8")
-    return sha1(header + data).hexdigest()
-
-
 def git_object_sha(commit: str, relative_path: str) -> str:
     completed = subprocess.run(
         ["git", "rev-parse", f"{commit}:{relative_path}"],
@@ -56,9 +49,20 @@ def git_object_sha(commit: str, relative_path: str) -> str:
     if completed.returncode != 0:
         detail = completed.stderr.strip() or completed.stdout.strip()
         raise RuntimeError(
-            f"Unable to resolve historical Gate V3-1 object {relative_path}: {detail}"
+            f"Unable to resolve Gate V3-1 object {relative_path} at {commit}: {detail}"
         )
     return completed.stdout.strip()
+
+
+def worktree_path_is_clean(relative_path: str) -> bool:
+    completed = subprocess.run(
+        ["git", "diff", "--quiet", "--", relative_path],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    return completed.returncode == 0
 
 
 def verify_historical_boundary() -> None:
@@ -106,12 +110,14 @@ def verify_current_direct_files(lock: dict[str, object]) -> None:
         if not path.is_file():
             failures.append(f"missing current direct implementation: {relative}")
             continue
-        actual_sha = git_blob_sha(path)
+        actual_sha = git_object_sha("HEAD", relative)
         if actual_sha != expected_sha:
             failures.append(
-                f"current direct hash mismatch: {relative} "
+                f"current committed direct hash mismatch: {relative} "
                 f"expected={expected_sha} actual={actual_sha}"
             )
+        if not worktree_path_is_clean(relative):
+            failures.append(f"uncommitted current direct modification: {relative}")
     if failures:
         raise RuntimeError(
             "Gate V3-1 current direct implementation verification failed:\n"
@@ -178,7 +184,8 @@ def main() -> int:
         "Gate V3-1 historical lock objects verified at "
         f"{HISTORICAL_BOUNDARY}."
     )
-    print("Gate V3-1 current direct implementation objects verified.")
+    print("Gate V3-1 current direct committed objects verified.")
+    print("Gate V3-1 current direct working-tree paths are clean.")
     print("Current shared Version 3 exports preserve Gate V3-1 compatibility.")
     print("Gate V3-1 canonical data and adapter lock verified.")
     return 0
