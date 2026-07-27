@@ -14,10 +14,13 @@ echo "GATE V3-4 - AUTHORITATIVE LOCK MATERIALIZATION"
 echo "1. GENERATING LOCK CANDIDATE FROM VALIDATED EVIDENCE"
 python scripts/finalize_v3_g4_lock.py
 
-echo "2. VERIFYING LOCK CANDIDATE AND CURATED EVIDENCE"
+echo "2. NORMALIZING CURATED JSON EVIDENCE TO PORTABLE LF"
+python scripts/normalize_v3_g4_lock_evidence.py
+
+echo "3. VERIFYING LOCK CANDIDATE AND CURATED EVIDENCE"
 python scripts/verify_v3_g4_lock.py
 
-echo "3. VERIFYING PATCH INTEGRITY"
+echo "4. VERIFYING PATCH INTEGRITY"
 git diff --check
 
 echo "Gate V3-4 lock candidate is ready for repository review."
