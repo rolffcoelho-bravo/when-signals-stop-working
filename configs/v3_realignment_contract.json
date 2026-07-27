@@ -44,6 +44,18 @@
     "economic_claims_permitted": false,
     "failure_claims_permitted": false
   },
+  "v3_1_parent_verification": {
+    "historical_boundary_commit": "7a7a5c55184aadfb436774ff1e497ce873a96b6e",
+    "historical_lock_rewritten": false,
+    "historical_objects_verified_at_boundary": true,
+    "current_direct_objects_verified_as_git_objects": true,
+    "current_direct_worktree_mutations_fail_closed": true,
+    "shared_export_surface": "src/shockbridge_signal_validity/v3/__init__.py",
+    "shared_export_surface_may_have_later_owner": true,
+    "v3_1_export_compatibility_required": true,
+    "checkout_eol_invariant": true,
+    "authoritative_windows_rerun_pending": true
+  },
   "v3_4_implementation": {
     "registered_signal_count": 48,
     "base_signal_count": 44,
@@ -148,6 +160,7 @@
     "src/shockbridge_signal_validity/v3/signal_engine.py",
     "src/shockbridge_signal_validity/v3/signal_runner.py",
     "scripts/run_v3_signal_engine.py",
+    "scripts/verify_v3_g1_data_adapter.py",
     "scripts/verify_v3_g4_signal_outputs.py",
     "tests/test_v3_signal_registry.py",
     "tests/test_v3_signal_engine.py",
