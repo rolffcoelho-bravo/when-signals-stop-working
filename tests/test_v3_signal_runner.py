@@ -119,6 +119,19 @@ def test_runner_manifest_and_validation_preserve_gate_boundaries(tmp_path: Path)
     )
     assert (ROOT / "data" / "raw" / "sol_usdt_4h.csv").is_file()
 
+    parent = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "verify_v3_g1_data_adapter.py")],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert parent.returncode == 0, parent.stderr
+    assert "Gate V3-1 historical lock objects verified" in parent.stdout
+    assert "Current shared Version 3 exports preserve Gate V3-1 compatibility" in (
+        parent.stdout
+    )
+
 
 def test_runner_uses_lf_for_deterministic_csv_evidence(tmp_path: Path) -> None:
     input_path = tmp_path / "canonical.csv"
