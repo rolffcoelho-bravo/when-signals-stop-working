@@ -6,9 +6,10 @@
 CORRECTION_IMPLEMENTED
 WINDOWS_REVALIDATION_PENDING
 V3_4_IMPLEMENTATION_COMPLETE_VALIDATION_PENDING
+CURRENT_HARDENED_V3_4_SUITE_PENDING
 ```
 
-The repository realignment package is committed. Its first authoritative Windows execution exposed one exact-token mismatch in the standalone verifier. That defect has been corrected, and the approved true V3-4 signal engine has subsequently been implemented. The realignment and V3-4 remain unlocked until the updated suites pass in the Windows research environment.
+The repository realignment package is committed. Its first authoritative Windows execution exposed one exact-token mismatch in the standalone verifier. That defect has been corrected, and the approved true V3-4 signal engine has subsequently been implemented and hardened. The realignment and V3-4 remain unlocked until the updated suites pass in the Windows research environment.
 
 ## Baseline and branch
 
@@ -45,7 +46,7 @@ The failing assertion was:
 Required phrase missing from DIRECT_ANSWER_LOGIC.md: ESTABLISHMENT
 ```
 
-The scientific logic was already present, but the standalone verifier required the exact uppercase governance token. `DIRECT_ANSWER_LOGIC.md` was corrected to include the explicit machine-readable hierarchy:
+The scientific logic was already present, but the standalone verifier required the exact uppercase governance token. `DIRECT_ANSWER_LOGIC.md` was corrected to include:
 
 ```text
 ESTABLISHMENT
@@ -59,7 +60,7 @@ The verifier was not weakened. The exact-token contract remains enforced.
 
 ## V3-4 advancement after approval
 
-The true Gate V3-4 has now advanced to:
+The true Gate V3-4 has advanced to:
 
 ```text
 IMPLEMENTATION_COMPLETE_VALIDATION_PENDING
@@ -72,7 +73,10 @@ registered specifications: 48
 base specifications: 44
 explicit regime interactions: 4
 training-only adaptive templates: 2
-development tests passed: 19
+identifier scheme: v3sig:<feature_key>:<sha256(canonical_specification)>
+prior controlled suite: 19 passed
+final hardening after prior suite: true
+current exact hardened suite: pending
 automatic selection performed: false
 target accessed: false
 chronology accessed: false
@@ -80,7 +84,7 @@ predictive/economic/deterioration/failure claims: false
 lock created: false
 ```
 
-The realignment contract and verifier now correctly require V3-4 implementation to be present while still rejecting any premature validation, lock, or empirical claim.
+The realignment contract and verifier require V3-4 implementation to be present while rejecting premature validation, lock, or empirical claims.
 
 ## Historical objects deliberately unchanged
 
@@ -124,6 +128,7 @@ Current core gate: V3-4 — Unified RSI and Bollinger Interpretation Engine
 True V3-4 implementation started: True
 True V3-4 status: IMPLEMENTATION_COMPLETE_VALIDATION_PENDING
 Registered signal specifications: 48
+Current hardened V3-4 suite execution pending: True
 ```
 
 Expected Gate V3-4 evidence:
@@ -145,9 +150,10 @@ No realignment or Gate V3-4 lock may be created until:
 
 - the updated seven-test realignment suite passes;
 - the standalone realignment verifier passes;
-- all 19 isolated V3-4 tests pass;
+- all 19 exact hardened V3-4 tests pass;
 - the real canonical data generates the complete Gate V3-4 output package;
 - feature rows equal canonical source rows multiplied by 48;
+- concise identifiers bind all complete registry definitions;
 - `git status` contains no tracked modification caused by either runner;
 - output hashes and final committed file identities are reviewed;
 - the realignment and V3-4 checkpoints are revised with authoritative validation evidence.
