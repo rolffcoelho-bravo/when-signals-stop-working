@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import numpy as np
 import pandas as pd
 
@@ -36,15 +37,30 @@ def time_since(event: pd.Series) -> pd.Series:
 
 
 def wilder_rsi(close: pd.Series, lookback: int) -> pd.Series:
-    delta = close.diff()
-    gains, losses = delta.clip(lower=0.0), -delta.clip(upper=0.0)
-    gain = gains.ewm(alpha=1.0/lookback, adjust=False, min_periods=lookback).mean()
-    loss = losses.ewm(alpha=1.0/lookback, adjust=False, min_periods=lookback).mean()
-    ratio = gain / loss.replace(0.0, np.nan)
+    if lookback < 2:
+        raise ValueError("RSI lookback must be at least 2")
+    values = close.astype(float)
+    delta = values.diff()
+    upward = delta.clip(lower=0.0)
+    downward = -delta.clip(upper=0.0)
+    avg_up = pd.Series(np.nan, index=values.index, dtype=float)
+    avg_down = pd.Series(np.nan, index=values.index, dtype=float)
+    if len(values) <= lookback:
+        return avg_up
+    avg_up.iloc[lookback] = float(upward.iloc[1 : lookback + 1].mean())
+    avg_down.iloc[lookback] = float(downward.iloc[1 : lookback + 1].mean())
+    for position in range(lookback + 1, len(values)):
+        avg_up.iloc[position] = (
+            (lookback - 1) * avg_up.iloc[position - 1] + upward.iloc[position]
+        ) / lookback
+        avg_down.iloc[position] = (
+            (lookback - 1) * avg_down.iloc[position - 1] + downward.iloc[position]
+        ) / lookback
+    ratio = avg_up / avg_down.replace(0.0, np.nan)
     rsi = 100.0 - 100.0 / (1.0 + ratio)
-    rsi = rsi.mask((loss == 0.0) & (gain > 0.0), 100.0)
-    rsi = rsi.mask((gain == 0.0) & (loss > 0.0), 0.0)
-    return rsi.mask((gain == 0.0) & (loss == 0.0), 50.0).astype(float)
+    rsi = rsi.mask((avg_down == 0.0) & (avg_up > 0.0), 100.0)
+    rsi = rsi.mask((avg_up == 0.0) & (avg_down > 0.0), 0.0)
+    return rsi.mask((avg_up == 0.0) & (avg_down == 0.0), 50.0).astype(float)
 
 
 def bollinger_frame(close: pd.Series, window: int, deviations: float) -> pd.DataFrame:
