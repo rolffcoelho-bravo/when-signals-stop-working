@@ -40,15 +40,17 @@ def test_registry_is_bounded_target_blind_and_nonselective() -> None:
     assert value["frozen_v1_v2_determinations_modified"] is False
 
 
-def test_every_signal_identifier_round_trips_complete_specification() -> None:
+def test_every_signal_identifier_binds_complete_specification() -> None:
     for spec in validate_registry(registry_value()):
         parsed = parse_signal_id(spec.signal_id)
-        assert parsed["family"] == spec.signal_family
-        assert parsed["window"] == spec.lookback_or_window
-        assert parsed["parameter"] == dict(spec.threshold_or_band_parameter)
-        assert parsed["interpretation"] == spec.interpretation
-        assert parsed["regime"] == spec.regime_interaction_policy
-        assert parsed["parameter_policy"] == spec.parameter_policy
+        assert parsed == {
+            "feature_key": spec.feature_key,
+            "spec_sha256": spec.spec_sha256,
+        }
+        assert spec.signal_id == (
+            f"v3sig:{spec.feature_key}:{spec.spec_sha256}"
+        )
+        assert len(spec.spec_sha256) == 64
 
 
 def test_registry_contains_required_families_interpretations_and_templates() -> None:
@@ -70,12 +72,16 @@ def test_registry_contains_required_families_interpretations_and_templates() -> 
     assert sum(spec.regime_interaction_policy != "NONE" for spec in specs) == 4
 
 
-def test_registry_manifest_records_no_selection_or_target_access() -> None:
+def test_registry_manifest_records_complete_definitions_and_no_selection() -> None:
     manifest = build_registry_manifest(registry_value())
     assert manifest["signal_count"] == 48
     assert manifest["base_signal_count"] == 44
     assert manifest["interaction_signal_count"] == 4
     assert manifest["adaptive_template_count"] == 2
+    assert len(manifest["signal_definitions"]) == 48
+    assert manifest["identifier_scheme"] == (
+        "v3sig:<feature_key>:<sha256(canonical_specification)>"
+    )
     assert manifest["automatic_selection_performed"] is False
     assert manifest["target_accessed"] is False
     assert manifest["chronology_accessed"] is False
