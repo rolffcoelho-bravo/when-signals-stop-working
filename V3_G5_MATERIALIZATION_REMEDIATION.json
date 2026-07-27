@@ -1,0 +1,51 @@
+{
+  "schema_version": "v3.g5-materialization-remediation.v1",
+  "gate": "V3-5",
+  "stage": "REAL_DEVELOPMENT_FOUNDATION_MATERIALIZATION",
+  "status": "TEST_FIXTURE_REMEDIATED_AUTHORITATIVE_RERUN_PENDING",
+  "failed_execution_branch_head": "29c409021d4928a6a8b3eef6dd3ebc1f130dfca7",
+  "authoritative_environment": "Windows PowerShell research environment",
+  "failed_execution_evidence": {
+    "parent_v3_4_lock_verified": true,
+    "validated_v3_5_boundaries_verified": true,
+    "v3_g5_contract_verified": true,
+    "foundation_tests_passed": 16,
+    "materialization_tests_passed": 1,
+    "materialization_tests_failed": 4,
+    "real_materialization_started": false,
+    "real_outputs_generated": false,
+    "tracked_worktree_clean_after_failure": true
+  },
+  "failure": {
+    "type": "SYNTHETIC_TEST_FIXTURE_CAPACITY",
+    "fixture_rows_before": 500,
+    "largest_horizon_candles": 18,
+    "outer_fold_one_training_rows_after_purge": 64,
+    "inner_folds_required": 3,
+    "inner_purge_gap_candles": 18,
+    "observed_error": "Insufficient observations for the fold plan.",
+    "production_fold_engine_failed_closed_correctly": true
+  },
+  "remediation": {
+    "commit": "3c82c59642d4e9c41a8d56903a08a2d1ade39ec6",
+    "changed_path": "tests/test_v3_g5_materialization.py",
+    "fixture_rows_after": 800,
+    "expected_materialization_test_count": 5,
+    "longest_horizon_fold_records_expected": 20,
+    "longest_horizon_purge_rows_expected": 18,
+    "validated_foundation_objects_modified": false,
+    "production_materialization_code_modified": false,
+    "forecast_contract_modified": false,
+    "v3_4_lock_modified": false
+  },
+  "scientific_state": {
+    "real_development_targets_materialized": false,
+    "development_model_fitting_started": false,
+    "development_pipeline_selection_performed": false,
+    "signal_establishment_segment_accessed": false,
+    "final_framework_reserve_accessed": false,
+    "predictive_claims_authorized": false,
+    "economic_claims_authorized": false
+  },
+  "next_required_action": "RERUN_RUN_V3_G5_MATERIALIZATION_PS1"
+}
