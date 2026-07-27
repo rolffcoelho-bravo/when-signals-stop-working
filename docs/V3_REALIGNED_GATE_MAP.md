@@ -37,7 +37,7 @@ Spectral, network, panic-consistent, and external-event evidence enter as suppor
 | V3-2 | Causal features and spectral structure | Complete | Supplies leakage-controlled market-structure context |
 | V3-2B | Network and market-structure extension | Complete | Adds topology, communities, MST, and dynamic descriptors |
 | V3-3 | Panic-consistent probabilistic regime engine | Complete | Supplies independent regime probabilities and uncertainty |
-| **V3-4** | **Unified RSI and Bollinger interpretation engine** | **Reopened; next core gate** | **Defines the signal information to be tested** |
+| **V3-4** | **Unified RSI and Bollinger interpretation engine** | **Implementation complete; authoritative validation and lock pending** | **Defines the signal information to be tested** |
 | V3-5 | Matched forecast selection | Not started | Determines whether signal information adds value |
 | V3-6 | Prospective failure-event definition | Not started | Defines what “stops working” means before modelling it |
 | V3-7 | Failure-probability model | Not started | Estimates future breach risk for an established signal |
@@ -60,6 +60,21 @@ V3-10_EXTERNAL_REPLICATION
 V3-11_REUSABLE_SCORING_PACKAGE
 V3-12_FINAL_RELEASE
 ```
+
+## Current V3-4 implementation boundary
+
+The bounded Gate V3-4 registry expands deterministically to:
+
+```text
+48 registered specifications
+44 base specifications
+4 explicit regime interactions
+2 training-only adaptive templates
+```
+
+The implementation completed a controlled `19 passed` development suite. The authoritative Windows research-environment run, real canonical-data output package, final object review, and lock remain pending.
+
+V3-4 produces signal information only. It does not produce predictive, economic, conditional-validity, deterioration, or failure-probability findings.
 
 ## Regime-validation extension
 
@@ -87,7 +102,7 @@ V3-4 does not depend on external chronology.
 
 ### V3-5 depends on
 
-- the completed and locked V3-4 signal registry and implementation;
+- the completed, authoritatively validated, and locked V3-4 signal registry and implementation;
 - matched benchmark and candidate identity;
 - nested chronological development selection;
 - predeclared targets, horizons, costs, and multiplicity rules.
@@ -104,7 +119,7 @@ V3-4 does not depend on external chronology.
 - a clear statement of which regime object is being validated;
 - no threshold, model, panel, event, or boundary tuning after overlay.
 
-V3-RV3 is not a prerequisite for constructing the V3-4 signal engine.
+V3-RV3 is not a prerequisite for constructing or validating the V3-4 signal engine.
 
 ## Stop rules
 
@@ -140,6 +155,15 @@ The following hierarchy applies to current development:
 3. `docs/V3_IMPLEMENTATION_PLAN.md` for the original core sequence;
 4. `V3_REALIGNMENT_DECISION.md` for the correction of post-V3-3 gate use;
 5. this map for current gate naming and dependencies;
-6. gate-specific contracts, tests, checkpoints, and locks.
+6. `configs/v3_realignment_contract.json` for machine-readable current status;
+7. gate-specific contracts, tests, checkpoints, and locks.
 
 No lower-level checkpoint may redefine a higher-level research question.
+
+## Immediate next action
+
+```text
+AUTHORITATIVELY_VALIDATE_AND_LOCK_TRUE_V3_4_SIGNAL_ENGINE
+```
+
+Gate V3-5 remains not started and requires later explicit approval after the V3-4 validation and lock boundary is complete.
