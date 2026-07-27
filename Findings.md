@@ -266,13 +266,56 @@ A cross-gate latest-owner audit now separates historical integrity from current 
 
 ---
 
+## Version 3 repository realignment
+
+### Governance contribution V3-RL-M1
+
+The realignment restores Richard's practical question and the scientific priority ordering `ESTABLISHMENT → CONDITIONAL_VALIDITY → DETERIORATION → FAILURE_PROBABILITY → OPERATIONAL_ACTION`. Supporting spectral, panic-consistent, chronology, portability, and lock layers may not substitute for this signal-establishment chain.
+
+### Governance contribution V3-RL-M2
+
+Historical chronology work is preserved without renaming or rewriting its lock objects and is scientifically reclassified as `V3-RV1` and `V3-RV2`. Proposed event alignment is reclassified as `V3-RV3`, paused, and not started. The true Gate V3-4 is restored as the Unified RSI and Bollinger Interpretation Engine.
+
+### Remediation finding V3-RL-V1
+
+The first Windows realignment run completed six tests and exposed one exact-token verifier mismatch: `DIRECT_ANSWER_LOGIC.md` expressed establishment logic but lacked the exact uppercase `ESTABLISHMENT` token required by the standalone verifier. The document was corrected without weakening the verifier. Authoritative rerun evidence remains pending.
+
+---
+
+## Version 3 Gate V3-4 — Unified RSI and Bollinger interpretation engine
+
+### Implementation contribution V3-G4-M1
+
+A compact, bounded, machine-readable registry expands deterministically to 48 stable signal specifications: 44 base specifications, four explicit market-state interactions, and two training-only adaptive templates. Every expanded identifier encodes family, window, parameters, orientation, interpretation, crossing, persistence, normalization, interaction policy, registry version, and parameter policy. Automatic candidate selection is prohibited.
+
+### Implementation contribution V3-G4-M2
+
+The engine implements target-blind causal RSI and Bollinger interpretation families. RSI includes level, centered level, slope, acceleration, range, divergence, mean-reversion, continuation, crossings, duration, persistence, and extreme-exit features. Bollinger includes percentage-B, normalized distances, mean-reversion, breakout and breakdown, re-entry, bandwidth dynamics, squeeze transitions, persistence, and event timing.
+
+Adaptive candidates are not silently estimated by the engine. They remain visible as `INELIGIBLE_TRAINING_PARAMETER_REQUIRED` until training-only parameters are supplied. Invalid supplied thresholds fail closed.
+
+### Implementation contribution V3-G4-M3
+
+The engine emits every registered specification for every canonical source row in deterministic long format. Missing context remains visible as `INELIGIBLE_CONTEXT_UNAVAILABLE`; early-history and undefined values remain explicit; no sparse or unpromising candidate is deleted. Four registered interactions preserve `base_signal_value`, `context_value`, and their product separately.
+
+### Development validation evidence V3-G4-DV1
+
+A controlled isolated development suite completed with `19 passed`, covering registry bounds, identifier round-trip, required interpretation coverage, future-append invariance, source-row-order invariance, adaptive-parameter fail-closed behavior, preserved interaction components, required-field and duplicate-key rejection, deterministic evidence outputs, LF CSV bytes, and prohibition of predictive, economic, deterioration, and failure claims.
+
+This is implementation-development evidence only. Authoritative Windows execution on the real canonical dataset, output-manifest review, final object verification, and the Gate V3-4 lock remain pending. No empirical signal-establishment finding is available from this gate.
+
+---
+
 ## Findings pending later gates
 
 The following are approved development directions but are not yet findings:
 
-- independent event-alignment validation;
-- conditional RSI and Bollinger descriptive diagnostics under the inferred regimes;
+- authoritative Gate V3-4 real-data validation and lock;
+- Gate V3-5 matched benchmark-versus-signal establishment testing;
+- prospective failure-event construction, only for an established signal;
+- signal-failure probability, only after an admissible failure definition;
+- independent regime-event alignment under `V3-RV3`;
 - empirical real-market regime probabilities and episode interpretation;
-- cross-asset and cross-venue transportability of the regime engine.
+- cross-asset and cross-venue transportability.
 
-They will be moved into the findings sections only after implementation and validation.
+They will be moved into findings sections only after implementation and validation. Gate V3-4 does not establish predictive value, economic value, deterioration, or failure probability.
