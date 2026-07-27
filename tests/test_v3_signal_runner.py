@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import subprocess
+import sys
 
 import numpy as np
 import pandas as pd
@@ -10,6 +12,8 @@ from shockbridge_signal_validity.v3.signal_runner import run_signal_engine
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "configs" / "v3_signal_interpretation_registry.json"
+FROZEN_ADAPTER = ROOT / "configs" / "v3_adapter_frozen_sol.json"
+PRODUCTION_CONFIG = ROOT / "configs" / "v3_signal_engine_example.json"
 
 
 def fixture(rows: int = 80) -> pd.DataFrame:
@@ -86,6 +90,34 @@ def test_runner_manifest_and_validation_preserve_gate_boundaries(tmp_path: Path)
     assert validation["richard_question_advanced_by"] == (
         "DEFINES_SIGNAL_INFORMATION_TO_BE_TESTED"
     )
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts" / "verify_v3_g4_signal_outputs.py"),
+            "--output-directory",
+            str(output),
+        ],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert "Gate V3-4 output evidence verified." in completed.stdout
+
+    adapter = json.loads(FROZEN_ADAPTER.read_text(encoding="utf-8"))
+    production = json.loads(PRODUCTION_CONFIG.read_text(encoding="utf-8"))
+    assert adapter["adapter"]["path"] == "data/raw/sol_usdt_4h.csv"
+    assert adapter["adapter"]["constants"] == {
+        "asset": "SOL/USDT",
+        "venue": "binance_spot",
+    }
+    assert adapter["adapter"]["column_map"]["timestamp"] == "Date"
+    assert production["input_path"] == (
+        "outputs/v3/data_adapter/canonical_market_data.csv"
+    )
+    assert (ROOT / "data" / "raw" / "sol_usdt_4h.csv").is_file()
 
 
 def test_runner_uses_lf_for_deterministic_csv_evidence(tmp_path: Path) -> None:
