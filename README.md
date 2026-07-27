@@ -96,7 +96,7 @@ The controlling correction is recorded in [`V3_REALIGNMENT_DECISION.md`](V3_REAL
 | V3-2 | Causal feature and spectral engine | Complete |
 | V3-2B | Network and market-structure extension | Complete |
 | V3-3 | Panic-consistent probabilistic regime engine | Complete |
-| **V3-4** | **Unified RSI and Bollinger interpretation engine** | **Implementation complete; authoritative validation and lock pending** |
+| **V3-4** | **Unified RSI and Bollinger interpretation engine** | **Implementation complete; exact hardened validation and lock pending** |
 | V3-5 | Matched benchmark-versus-signal forecast selection | Not started |
 | V3-6 | Prospective failure-event definition | Not started |
 | V3-7 | Signal-validity and failure-probability model | Not started |
@@ -121,13 +121,21 @@ bounded maximum: 128
 automatic selection: false
 ```
 
+Signal rows use concise identifiers:
+
+```text
+v3sig:<feature_key>:<sha256(canonical_specification)>
+```
+
+The complete canonical definitions are stored once in the registry manifest.
+
 The engine includes causal RSI and Bollinger levels, dynamics, crossings, persistence, mean-reversion and continuation interpretations, divergence, relative-band position, bandwidth and squeeze structure, and four explicit market-state interactions.
 
-Adaptive templates remain visible but ineligible until a training-only upstream process supplies parameters. Missing regime context also remains visible rather than causing an interaction candidate to disappear.
+Adaptive templates remain visible but ineligible until a training-only upstream process supplies parameters by readable feature key. Missing regime context also remains visible rather than causing an interaction candidate to disappear.
 
 Gate V3-4 produces no predictive, economic, deterioration, or failure claim. Its only role is to define the information set that Gate V3-5 will compare with matched non-signal benchmarks.
 
-A controlled development suite completed with `19 passed`. Authoritative execution on the repository's real canonical data and the Gate V3-4 lock remain pending.
+A prior controlled development version completed with `19 passed`. Final hardening was subsequently applied to exact Wilder RSI initialization, input and parameter validation, row-count transparency, and scalable identifiers. The exact hardened current head has not yet been executed; authoritative Windows execution and the Gate V3-4 lock remain pending.
 
 ## What the completed V3 infrastructure contributes
 
@@ -210,7 +218,7 @@ Set-ExecutionPolicy -Scope Process Bypass
 .\RUN_V3_G4_SIGNAL_ENGINE.ps1
 ```
 
-The V3-4 runner first verifies the realignment boundary, executes the isolated 19-test suite, and then generates the deterministic signal-information package from the V3-1 canonical market data.
+The V3-4 runner first verifies the realignment boundary, executes the exact hardened 19-test suite, and then generates the deterministic signal-information package from the V3-1 canonical market data.
 
 ## Status governance
 
