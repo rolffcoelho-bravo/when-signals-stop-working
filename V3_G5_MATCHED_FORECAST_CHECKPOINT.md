@@ -9,10 +9,13 @@ IMPLEMENTATION_STARTED
 CONTRACT_FROZEN
 CONTRACT_AUTHORITATIVELY_VALIDATED
 FOUNDATION_AUTHORITATIVELY_VALIDATED
-REAL_DEVELOPMENT_MATERIALIZATION_IMPLEMENTED
-MATERIALIZATION_AUTHORITATIVE_EXECUTION_PENDING
+MATERIALIZATION_AUTHORITATIVELY_VALIDATED
+MODEL_IMPLEMENTATION_CONTRACT_FROZEN
+FOLD_SCOPED_PREPROCESSING_IMPLEMENTED
+MATCHED_ESTIMATOR_FAMILIES_IMPLEMENTED
+MODEL_IMPLEMENTATION_AUTHORITATIVE_EXECUTION_PENDING
 TARGET_ACCESS_NOT_STARTED
-DEVELOPMENT_MODEL_FITTING_NOT_STARTED
+REAL_DEVELOPMENT_MODEL_FITTING_NOT_STARTED
 PIPELINE_ADMISSION_NOT_STARTED
 ESTABLISHMENT_AUTHORIZATION_NOT_CREATED
 ESTABLISHMENT_SEGMENT_NOT_ACCESSED
@@ -39,11 +42,12 @@ Version 2 Bollinger: NO_INCREMENTAL_EVIDENCE
 ```text
 V3-4 lock: IMPLEMENTATION_VALIDATED_AND_LOCKED
 V3-4 validated implementation: ff2e7ecba3fa69f22e0b109437d23b52d30fba2b
-V3-4 evidence materialization: 705511de9e8ee22a9f8aff34506aebb6c26223e7
 V3-5 contract validation commit: 013d91abc0c3c74a28784aed486edb4c95efc6d7
 V3-5 foundation validation commit: dd8a8ec5f34f0b8587c8f0cdaaf4f3c0891e944a
+V3-5 materialization validation commit: 91606edf50a2c0aee9bcb94a93350936ee53f81a
 V3-5 contract tests: 7 passed
 V3-5 foundation tests: 16 passed
+V3-5 materialization tests: 5 passed
 ```
 
 Machine-readable records:
@@ -51,6 +55,7 @@ Machine-readable records:
 ```text
 V3_G5_CONTRACT_VALIDATION.json
 V3_G5_FOUNDATION_VALIDATION.json
+V3_G5_MATERIALIZATION_VALIDATION.json
 ```
 
 ## Frozen partition
@@ -92,20 +97,9 @@ Benchmark and candidate must share model class, rows, preprocessing, hyperparame
 
 Candidate-specific missingness is handled through one complete matched-row intersection. Cross-candidate raw metric ranking on unequal rows is prohibited.
 
-## Validated implementation foundation
+## Validated foundation and real materialization
 
-The foundation includes:
-
-```text
-forecast_contract.py
-forecast_targets.py
-forecast_splits.py
-forecast_benchmark.py
-forecast_inventory.py
-forecast_matching.py
-```
-
-Validated identities:
+Validated foundation identities:
 
 ```text
 forecast horizons: 6
@@ -113,50 +107,89 @@ nested fold records: 120
 single-signal candidates: 48
 bounded candidates: 57
 matched benchmark/candidate rows identical: true
-model fitting performed: false
 ```
 
-## Real development materialization implementation
-
-The current implementation adds:
-
-```text
-forecast_materialization.py
-run_v3_g5_materialization.py
-verify_v3_g5_materialization.py
-test_v3_g5_materialization.py
-RUN_V3_G5_MATERIALIZATION.ps1
-RUN_V3_G5_MATERIALIZATION.sh
-V3_G5_MATERIALIZATION_CHECKPOINT.md
-```
-
-Expected real-data identities:
+Authoritative real materialization identities:
 
 ```text
 development rows: 9852
 target primitive rows: 59070
-nested fold rows: 120
+nested fold records: 120
 bounded candidates: 57
-candidate-horizon coverage rows: 342
+candidate-horizon records: 342
+matched rows available records: 276
+explicitly ineligible candidate-horizon records: 66
+input hashes bound: true
 ```
 
 Large-move labels are not globally materialized. Their q90 thresholds remain training-fold-only.
 
-Unavailable adaptive or context-dependent candidates remain explicit as ineligible coverage records rather than being deleted.
+## Implemented preprocessing and estimator boundary
+
+Frozen preprocessing policy:
+
+```text
+no imputation
+matched complete rows only
+training-fold clipping: 0.5% and 99.5% quantiles
+training-fold standardization
+population standard deviation
+zero-variance scale: 1.0
+future/test influence prohibited
+exact benchmark transformation reused in candidate
+```
+
+Executable model families:
+
+```text
+regularized_linear
+spline_regularized
+shallow_hist_gradient_boosting
+time_varying_regularized_glm
+```
+
+Eligibility-gated secondary family:
+
+```text
+state_space_or_markov_switching
+INELIGIBLE_IMPLEMENTATION_NOT_AUTHORIZED
+```
+
+Window schemes:
+
+```text
+EXPANDING
+ROLLING_ONE_YEAR: 2190 observations
+ROLLING_TWO_YEARS: 4380 observations
+```
+
+Bounded model identity:
+
+```text
+pipeline specifications: 162
+executable specifications: 153
+gated specifications: 9
+```
+
+No model family, specification, or candidate is selected automatically.
 
 ## Current truth state
 
 ```text
 contract validated: true
 foundation validated: true
-materialization implementation complete: true
-materialization authoritative execution: pending
-real development target primitives generated: false
-real fold manifest generated: false
-real continuity benchmark generated: false
-real candidate inventory generated: false
-real matched-row coverage generated: false
-development models fitted: false
+materialization validated: true
+development target primitives generated: true
+real fold manifest generated: true
+real continuity benchmark generated: true
+real candidate inventory generated: true
+real matched-row coverage generated: true
+fold-scoped large-move labels generated: false
+model implementation complete: true
+model implementation authoritative execution: pending
+model-selection target consumption started: false
+real development models fitted: false
+development pipelines ranked: false
 development pipelines admitted: false
 establishment authorization created: false
 establishment segment accessed: false
@@ -164,26 +197,27 @@ signal established: false
 failure modelling admissible: false
 ```
 
+The frozen exact token `TARGET_ACCESS_NOT_STARTED` is retained and means that target primitives have not been consumed by model-selection or model-fitting execution.
+
 ## Required authoritative execution
 
 ```powershell
-.\RUN_V3_G5_MATERIALIZATION.ps1
+.\RUN_V3_G5_MODEL_IMPLEMENTATION.ps1
 ```
 
 Expected runner stages:
 
 1. verify the final V3-4 lock;
-2. verify the frozen V3-5 contract;
-3. revalidate the sixteen-test foundation;
-4. run five materialization tests;
-5. regenerate V3-4 runtime evidence only when absent;
-6. materialize real development-only evidence;
-7. verify all row identities and hashes;
-8. verify no tracked or staged mutation.
+2. verify validated V3-5 contract and foundation objects;
+3. verify the authoritative materialization boundary;
+4. verify or regenerate the real development foundation;
+5. run 26 model-implementation tests;
+6. run the standalone implementation verifier using synthetic data only;
+7. verify no tracked or staged mutation.
 
 ## Next implementation after validation
 
-After the materialization passes, the next slice may implement fold-scoped preprocessing and matched estimator families. Actual model fitting remains a separate governed execution boundary.
+After this implementation passes, the next slice may implement chronological development execution, fold-scoped large-move thresholds, calibration, abstention, predictive/economic metrics, and multiplicity controls. Real-data model fitting remains a separate governed execution boundary.
 
 ## Claims boundary
 
