@@ -4,36 +4,69 @@ from dataclasses import dataclass
 from hashlib import sha256
 import json
 from pathlib import Path
+import re
 from typing import Any, Mapping
-from urllib.parse import quote, unquote
 
 REGISTRY_SCHEMA_VERSION = "v3.signal-interpretation-registry.v1"
 MAX_REGISTERED_SIGNALS = 128
+_FEATURE_KEY_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_]*$")
 _REQUIRED = (
-    "signal_family", "lookback_or_window", "threshold_or_band_parameter",
-    "orientation", "interpretation", "crossing_rule", "persistence_rule",
-    "normalisation_rule", "regime_interaction_policy", "registry_version",
+    "signal_family",
+    "lookback_or_window",
+    "threshold_or_band_parameter",
+    "orientation",
+    "interpretation",
+    "crossing_rule",
+    "persistence_rule",
+    "normalisation_rule",
+    "regime_interaction_policy",
+    "registry_version",
     "parameter_policy",
 )
 _RSI = {
-    "RSI_LEVEL", "RSI_CENTERED_SCALED", "RSI_SLOPE", "RSI_ACCELERATION",
-    "RSI_ROLLING_RANGE", "RSI_BULLISH_DIVERGENCE", "RSI_BEARISH_DIVERGENCE",
-    "RSI_OVERSOLD_MEAN_REVERSION", "RSI_OVERBOUGHT_MEAN_REVERSION",
-    "RSI_TWO_SIDED_MEAN_REVERSION", "RSI_OVERBOUGHT_CONTINUATION",
-    "RSI_OVERSOLD_CONTINUATION", "RSI_THRESHOLD_BREAK_CONTINUATION",
-    "RSI_CROSS_UPPER", "RSI_CROSS_LOWER", "RSI_TIME_ABOVE_UPPER",
-    "RSI_TIME_BELOW_LOWER", "RSI_EXTREME_PERSISTENCE",
-    "RSI_TIME_SINCE_CROSSING", "RSI_EXIT_EXTREME",
+    "RSI_LEVEL",
+    "RSI_CENTERED_SCALED",
+    "RSI_SLOPE",
+    "RSI_ACCELERATION",
+    "RSI_ROLLING_RANGE",
+    "RSI_BULLISH_DIVERGENCE",
+    "RSI_BEARISH_DIVERGENCE",
+    "RSI_OVERSOLD_MEAN_REVERSION",
+    "RSI_OVERBOUGHT_MEAN_REVERSION",
+    "RSI_TWO_SIDED_MEAN_REVERSION",
+    "RSI_OVERBOUGHT_CONTINUATION",
+    "RSI_OVERSOLD_CONTINUATION",
+    "RSI_THRESHOLD_BREAK_CONTINUATION",
+    "RSI_CROSS_UPPER",
+    "RSI_CROSS_LOWER",
+    "RSI_TIME_ABOVE_UPPER",
+    "RSI_TIME_BELOW_LOWER",
+    "RSI_EXTREME_PERSISTENCE",
+    "RSI_TIME_SINCE_CROSSING",
+    "RSI_EXIT_EXTREME",
 }
 _BB = {
-    "BB_PERCENT_B", "BB_MIDDLE_DISTANCE", "BB_NEAREST_OUTER_DISTANCE",
-    "BB_DISTANCE_MAGNITUDE", "BB_UPPER_MEAN_REVERSION",
-    "BB_LOWER_MEAN_REVERSION", "BB_REENTRY_AFTER_OUTSIDE",
-    "BB_UPPER_BREAKOUT", "BB_LOWER_BREAKDOWN", "BB_OUTSIDE_CONTINUATION",
-    "BB_BANDWIDTH", "BB_BANDWIDTH_CHANGE", "BB_BANDWIDTH_ACCELERATION",
-    "BB_SQUEEZE", "BB_POST_SQUEEZE_EXPANSION", "BB_EXPANSION_PERSISTENCE",
-    "BB_CROSS_UPPER", "BB_CROSS_LOWER", "BB_TIME_OUTSIDE",
-    "BB_CONSECUTIVE_OUTSIDE", "BB_REENTRY_TIMING",
+    "BB_PERCENT_B",
+    "BB_MIDDLE_DISTANCE",
+    "BB_NEAREST_OUTER_DISTANCE",
+    "BB_DISTANCE_MAGNITUDE",
+    "BB_UPPER_MEAN_REVERSION",
+    "BB_LOWER_MEAN_REVERSION",
+    "BB_REENTRY_AFTER_OUTSIDE",
+    "BB_UPPER_BREAKOUT",
+    "BB_LOWER_BREAKDOWN",
+    "BB_OUTSIDE_CONTINUATION",
+    "BB_BANDWIDTH",
+    "BB_BANDWIDTH_CHANGE",
+    "BB_BANDWIDTH_ACCELERATION",
+    "BB_SQUEEZE",
+    "BB_POST_SQUEEZE_EXPANSION",
+    "BB_EXPANSION_PERSISTENCE",
+    "BB_CROSS_UPPER",
+    "BB_CROSS_LOWER",
+    "BB_TIME_OUTSIDE",
+    "BB_CONSECUTIVE_OUTSIDE",
+    "BB_REENTRY_TIMING",
     "BB_TIME_SINCE_SQUEEZE_RELEASE",
 }
 
@@ -46,6 +79,7 @@ class SignalRegistryError(ValueError):
 class SignalSpec:
     signal_id: str
     feature_key: str
+    spec_sha256: str
     signal_family: str
     lookback_or_window: int
     threshold_or_band_parameter: Mapping[str, Any]
@@ -59,6 +93,28 @@ class SignalSpec:
     parameter_policy: str
     base_signal_id: str | None = None
     context_feature: str | None = None
+
+    def manifest_record(self) -> dict[str, Any]:
+        return {
+            "signal_id": self.signal_id,
+            "feature_key": self.feature_key,
+            "spec_sha256": self.spec_sha256,
+            "signal_family": self.signal_family,
+            "lookback_or_window": self.lookback_or_window,
+            "threshold_or_band_parameter": dict(
+                sorted(self.threshold_or_band_parameter.items())
+            ),
+            "orientation": self.orientation,
+            "interpretation": self.interpretation,
+            "crossing_rule": self.crossing_rule,
+            "persistence_rule": self.persistence_rule,
+            "normalisation_rule": self.normalisation_rule,
+            "regime_interaction_policy": self.regime_interaction_policy,
+            "registry_version": self.registry_version,
+            "parameter_policy": self.parameter_policy,
+            "base_signal_id": self.base_signal_id,
+            "context_feature": self.context_feature,
+        }
 
 
 def _canonical(raw: Mapping[str, Any]) -> dict[str, Any]:
@@ -85,26 +141,41 @@ def _canonical(raw: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _identifier_payload(raw: Mapping[str, Any]) -> dict[str, Any]:
+    feature_key = str(raw.get("feature_key", "")).strip()
+    if not _FEATURE_KEY_PATTERN.fullmatch(feature_key):
+        raise SignalRegistryError(
+            "Feature key must use lowercase alphanumeric snake_case"
+        )
+    return {"feature_key": feature_key, "specification": _canonical(raw)}
+
+
+def signal_spec_sha256(raw: Mapping[str, Any]) -> str:
+    payload = json.dumps(
+        _identifier_payload(raw),
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=True,
+    ).encode("utf-8")
+    return sha256(payload).hexdigest()
+
+
 def build_signal_id(raw: Mapping[str, Any]) -> str:
-    payload = json.dumps(_canonical(raw), sort_keys=True, separators=(",", ":"))
-    return "v3sig:" + quote(payload, safe="")
+    feature_key = str(raw.get("feature_key", "")).strip()
+    digest = signal_spec_sha256(raw)
+    return f"v3sig:{feature_key}:{digest}"
 
 
-def parse_signal_id(signal_id: str) -> dict[str, Any]:
-    if not str(signal_id).startswith("v3sig:"):
-        raise SignalRegistryError("Signal identifier has an unexpected prefix")
-    try:
-        value = json.loads(unquote(str(signal_id)[6:]))
-    except ValueError as error:
-        raise SignalRegistryError("Signal identifier is not decodable") from error
-    expected = {
-        "family", "window", "parameter", "orientation", "interpretation",
-        "crossing", "persistence", "normalisation", "regime", "version",
-        "parameter_policy", "base", "context",
-    }
-    if set(value) != expected:
-        raise SignalRegistryError("Signal identifier fields are incomplete")
-    return value
+def parse_signal_id(signal_id: str) -> dict[str, str]:
+    parts = str(signal_id).split(":")
+    if len(parts) != 3 or parts[0] != "v3sig":
+        raise SignalRegistryError("Signal identifier has an unexpected structure")
+    feature_key, digest = parts[1], parts[2]
+    if not _FEATURE_KEY_PATTERN.fullmatch(feature_key):
+        raise SignalRegistryError("Signal identifier feature key is invalid")
+    if not re.fullmatch(r"[0-9a-f]{64}", digest):
+        raise SignalRegistryError("Signal identifier digest is invalid")
+    return {"feature_key": feature_key, "spec_sha256": digest}
 
 
 def _expand(registry: Mapping[str, Any]) -> list[dict[str, Any]]:
@@ -119,8 +190,8 @@ def _expand(registry: Mapping[str, Any]) -> list[dict[str, Any]]:
             raise SignalRegistryError("Signal entry must be a mapping")
         key = str(entry.get("feature_key", "")).strip()
         template = str(entry.get("template", "")).strip()
-        if not key or key in by_key:
-            raise SignalRegistryError("Feature keys must be non-empty and unique")
+        if not _FEATURE_KEY_PATTERN.fullmatch(key) or key in by_key:
+            raise SignalRegistryError("Feature keys must be unique lowercase snake_case")
         base = defaults.get(template)
         if not isinstance(base, Mapping):
             raise SignalRegistryError(f"Unknown signal template: {template}")
@@ -143,7 +214,12 @@ def _expand(registry: Mapping[str, Any]) -> list[dict[str, Any]]:
         key = str(entry.get("feature_key", "")).strip()
         base_key = str(entry.get("base_feature_key", "")).strip()
         context = str(entry.get("context_feature", "")).strip()
-        if not key or key in by_key or base_key not in by_key or not context:
+        if (
+            not _FEATURE_KEY_PATTERN.fullmatch(key)
+            or key in by_key
+            or base_key not in by_key
+            or not context
+        ):
             raise SignalRegistryError("Interaction feature/base/context is invalid")
         base = by_key[base_key]
         raw = {
@@ -195,15 +271,21 @@ def _validate_parameters(value: Mapping[str, Any]) -> None:
     else:
         deviations = float(parameter.get("standard_deviations", float("nan")))
         if not deviations > 0.0:
-            raise SignalRegistryError("Bollinger standard-deviation parameter is invalid")
+            raise SignalRegistryError(
+                "Bollinger standard-deviation parameter is invalid"
+            )
         if policy == "FIXED":
             threshold = float(parameter.get("squeeze_threshold", float("nan")))
             if not threshold > 0.0:
-                raise SignalRegistryError("Fixed Bollinger squeeze threshold is invalid")
+                raise SignalRegistryError(
+                    "Fixed Bollinger squeeze threshold is invalid"
+                )
         else:
             quantile = float(parameter.get("squeeze_quantile", float("nan")))
             if not 0.0 < quantile < 1.0:
-                raise SignalRegistryError("Adaptive Bollinger squeeze quantile is invalid")
+                raise SignalRegistryError(
+                    "Adaptive Bollinger squeeze quantile is invalid"
+                )
 
 
 def _spec(raw: Mapping[str, Any]) -> SignalSpec:
@@ -223,24 +305,27 @@ def _spec(raw: Mapping[str, Any]) -> SignalSpec:
         raise SignalRegistryError("Unsupported interaction policy")
     _validate_parameters(value)
     signal_id = build_signal_id(raw)
-    if parse_signal_id(signal_id) != value:
-        raise SignalRegistryError("Signal identifier round-trip changed specification")
+    parsed = parse_signal_id(signal_id)
+    digest = signal_spec_sha256(raw)
+    if parsed != {"feature_key": str(raw["feature_key"]), "spec_sha256": digest}:
+        raise SignalRegistryError("Signal identifier binding changed specification")
     return SignalSpec(
-        signal_id,
-        str(raw["feature_key"]),
-        family,
-        value["window"],
-        value["parameter"],
-        value["orientation"],
-        interpretation,
-        value["crossing"],
-        value["persistence"],
-        value["normalisation"],
-        value["regime"],
-        value["version"],
-        value["parameter_policy"],
-        value["base"],
-        value["context"],
+        signal_id=signal_id,
+        feature_key=str(raw["feature_key"]),
+        spec_sha256=digest,
+        signal_family=family,
+        lookback_or_window=value["window"],
+        threshold_or_band_parameter=value["parameter"],
+        orientation=value["orientation"],
+        interpretation=interpretation,
+        crossing_rule=value["crossing"],
+        persistence_rule=value["persistence"],
+        normalisation_rule=value["normalisation"],
+        regime_interaction_policy=value["regime"],
+        registry_version=value["version"],
+        parameter_policy=value["parameter_policy"],
+        base_signal_id=value["base"],
+        context_feature=value["context"],
     )
 
 
@@ -269,8 +354,11 @@ def validate_registry(registry: Mapping[str, Any]) -> tuple[SignalSpec, ...]:
         raise SignalRegistryError("Signal registry exceeds bounded limit")
     specs = tuple(_spec(item) for item in raw)
     identifiers = [item.signal_id for item in specs]
+    feature_keys = [item.feature_key for item in specs]
     if len(identifiers) != len(set(identifiers)):
         raise SignalRegistryError("Signal identifiers must be unique")
+    if len(feature_keys) != len(set(feature_keys)):
+        raise SignalRegistryError("Expanded feature keys must be unique")
     by_id = {item.signal_id: item for item in specs}
     for item in specs:
         if item.regime_interaction_policy != "NONE":
@@ -303,8 +391,10 @@ def registry_sha256(registry: Mapping[str, Any]) -> str:
 
 def build_registry_manifest(registry: Mapping[str, Any]) -> dict[str, Any]:
     specs = validate_registry(registry)
+    definitions = [item.manifest_record() for item in specs]
     return {
         "schema_version": "v3.signal-registry-manifest.v1",
+        "identifier_scheme": "v3sig:<feature_key>:<sha256(canonical_specification)>",
         "registry_sha256": registry_sha256(registry),
         "signal_count": len(specs),
         "base_signal_count": sum(
@@ -316,6 +406,7 @@ def build_registry_manifest(registry: Mapping[str, Any]) -> dict[str, Any]:
         "adaptive_template_count": sum(
             item.parameter_policy == "TRAINING_ONLY_REQUIRED" for item in specs
         ),
+        "signal_definitions": definitions,
         "automatic_selection_performed": False,
         "target_accessed": False,
         "chronology_accessed": False,
