@@ -4,17 +4,17 @@
 
 ```text
 IMPLEMENTATION_COMPLETE
-PRIOR_DEVELOPMENT_SUITE_19_PASSED
-CURRENT_HARDENED_SUITE_EXECUTION_PENDING
-AUTHORITATIVE_REPOSITORY_VALIDATION_PENDING
-LOCK_NOT_CREATED
+AUTHORITATIVE_WINDOWS_VALIDATION_COMPLETE
+REAL_DATA_EXECUTION_COMPLETE
+IMPLEMENTATION_VALIDATED_AND_LOCKED
+GATE_COMPLETE
 ```
 
-The earlier controlled development suite passed before the final input hardening, exact Wilder initialization, fail-closed registry expansion, and scalable identifier redesign. The exact current branch head has not yet been executed in the authoritative Windows research environment.
+The exact hardened implementation passed the authoritative Windows research-environment run and is frozen at commit `ff2e7ecba3fa69f22e0b109437d23b52d30fba2b`. Compact evidence was materialized at commit `705511de9e8ee22a9f8aff34506aebb6c26223e7`, and the final lock is `V3_G4_SIGNAL_ENGINE_LOCK.json` with status `IMPLEMENTATION_VALIDATED_AND_LOCKED`.
 
 ## Richard-question link
 
-This gate advances Richard's question by defining exactly which RSI and Bollinger information will be tested against matched non-signal benchmarks in Gate V3-5.
+This gate advances Richard's question by defining exactly which RSI and Bollinger information Gate V3-5 may test against matched non-signal benchmarks.
 
 It does not determine whether any interpretation predicts returns, creates economic value, deteriorates, or is likely to fail.
 
@@ -209,6 +209,8 @@ Insufficient history and unavailable optional inputs remain explicit; candidates
 
 ## Evidence outputs
 
+Runtime outputs:
+
 ```text
 signal_features.csv
 signal_registry_manifest.json
@@ -218,28 +220,49 @@ signal_validation_report.json
 canonical_validation_report.json
 ```
 
+Committed evidence:
+
+```text
+V3_G4_SIGNAL_ENGINE_LOCK.json
+evidence/v3/g4_signal_lock/canonical_source_manifest.json
+evidence/v3/g4_signal_lock/canonical_validation_report.json
+evidence/v3/g4_signal_lock/signal_canonical_validation_report.json
+evidence/v3/g4_signal_lock/signal_coverage_report.json
+evidence/v3/g4_signal_lock/signal_feature_manifest.json
+evidence/v3/g4_signal_lock/signal_registry_manifest.json
+evidence/v3/g4_signal_lock/signal_validation_report.json
+```
+
 The manifests bind source input, registry, complete expanded definitions, output identity, row-count identity, available context columns, supplied training parameters, and every no-claim boundary. CSV evidence is LF-normalized.
 
-## Validation boundary
+## Authoritative validation evidence
 
-A prior controlled version of the isolated suite completed with `19 passed`. Final hardening was then applied to:
+```text
+repository realignment tests: 7 passed
+exact hardened signal-engine tests: 19 passed
+canonical source rows: 12171
+canonical data SHA-256: 3c49bfcab5fdf3aba9ada614873fa424e97c1f66e2690b790204fc29fdb5109c
+registered signal specifications: 48
+expected feature rows: 584208
+observed feature rows: 584208
+row-count identity verified: true
+automatic selection performed: false
+target accessed: false
+chronology accessed: false
+predictive claims produced: false
+economic claims produced: false
+deterioration claims produced: false
+failure claims produced: false
+tracked working-tree mutation: false
+```
 
-- use exact Wilder initialization and recursion;
-- validate fixed and adaptive registry parameters;
-- enforce every no-claim flag;
-- reject malformed OHLC relationships;
-- reject unregistered adaptive parameter keys;
-- validate probability context ranges;
-- add row-count and context transparency;
-- replace repeated URI specifications with concise cryptographic identifiers.
-
-The existing 19 tests were updated to bind these controls without increasing the test inventory. The exact hardened current head remains unexecuted pending the authoritative Windows run.
+The large `signal_features.csv` remains an untracked regenerable artifact and is bound by SHA-256 in the lock. Seven compact manifests are committed for repository review.
 
 ## Scientific boundary
 
-Gate V3-4 supports only:
+Gate V3-4 supports:
 
-> A bounded, target-blind, causal, reproducible RSI and Bollinger information family has been implemented for subsequent matched evaluation.
+> A bounded, target-blind, causal, reproducible RSI and Bollinger information family has been authoritatively validated and locked for subsequent matched evaluation.
 
 It does not support:
 
@@ -253,8 +276,8 @@ It does not support:
 
 ## Next gate
 
-After authoritative validation and lock, the next core gate is:
+The current core gate is:
 
 > Gate V3-5 — Matched Benchmark-versus-Signal Forecast Selection
 
-Gate V3-5 has not started and requires separate approval. It must retain every registered candidate, use nested chronological development selection, and compare candidates with matched benchmarks differing only by registered signal information.
+Gate V3-5 is approved and has started at its frozen-contract stage. Target access, development model fitting, establishment-segment access, and V3-9 final-framework-reserve access remain false.
