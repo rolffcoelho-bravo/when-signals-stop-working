@@ -1,0 +1,21 @@
+{
+  "adapter_type": "file",
+  "adapter": {
+    "path": "data/raw/sol_usdt_4h.csv",
+    "format": "csv",
+    "timezone": "UTC",
+    "column_map": {
+      "timestamp": "Date",
+      "open": "Open",
+      "high": "High",
+      "low": "Low",
+      "close": "Close",
+      "volume": "Volume"
+    },
+    "constants": {
+      "asset": "SOL/USDT",
+      "venue": "binance_spot"
+    },
+    "read_options": {}
+  }
+}
