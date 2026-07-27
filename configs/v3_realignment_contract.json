@@ -35,11 +35,28 @@
   "true_next_core_gate": {
     "gate": "V3-4",
     "title": "Unified RSI and Bollinger Interpretation Engine",
-    "status": "APPROVED_AND_REOPENED",
-    "implementation_started": false,
+    "status": "IMPLEMENTATION_COMPLETE_VALIDATION_PENDING",
+    "implementation_started": true,
+    "implementation_complete": true,
+    "authoritative_validation_complete": false,
+    "lock_created": false,
     "predictive_claims_permitted": false,
     "economic_claims_permitted": false,
     "failure_claims_permitted": false
+  },
+  "v3_4_implementation": {
+    "registered_signal_count": 48,
+    "base_signal_count": 44,
+    "interaction_signal_count": 4,
+    "adaptive_template_count": 2,
+    "development_tests_passed": 19,
+    "automatic_selection_performed": false,
+    "target_accessed": false,
+    "chronology_accessed": false,
+    "predictive_claims_produced": false,
+    "economic_claims_produced": false,
+    "deterioration_claims_produced": false,
+    "failure_claims_produced": false
   },
   "regime_validation_reclassification": [
     {
@@ -94,8 +111,27 @@
     "V3_REALIGNMENT_DECISION.md",
     "docs/V3_REALIGNED_GATE_MAP.md",
     "docs/V3_G4_SIGNAL_ENGINE_SCOPE.md",
+    "docs/V3_G4_SIGNAL_ENGINE.md",
+    "V3_G4_SIGNAL_ENGINE_CHECKPOINT.md",
     "ROADMAP.md",
     "README.md"
   ],
-  "next_action": "IMPLEMENT_AND_VALIDATE_TRUE_V3_4_SIGNAL_ENGINE"
+  "required_v3_4_files": [
+    "configs/v3_signal_interpretation_registry.json",
+    "configs/v3_signal_engine_example.json",
+    "src/shockbridge_signal_validity/v3/signal_registry.py",
+    "src/shockbridge_signal_validity/v3/signal_math.py",
+    "src/shockbridge_signal_validity/v3/signal_rsi.py",
+    "src/shockbridge_signal_validity/v3/signal_bollinger.py",
+    "src/shockbridge_signal_validity/v3/signal_reporting.py",
+    "src/shockbridge_signal_validity/v3/signal_engine.py",
+    "src/shockbridge_signal_validity/v3/signal_runner.py",
+    "scripts/run_v3_signal_engine.py",
+    "tests/test_v3_signal_registry.py",
+    "tests/test_v3_signal_engine.py",
+    "tests/test_v3_signal_runner.py",
+    "RUN_V3_G4_SIGNAL_ENGINE.ps1",
+    "RUN_V3_G4_SIGNAL_ENGINE.sh"
+  ],
+  "next_action": "AUTHORITATIVELY_VALIDATE_AND_LOCK_TRUE_V3_4_SIGNAL_ENGINE"
 }
