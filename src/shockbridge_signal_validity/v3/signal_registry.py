@@ -37,12 +37,12 @@ _BB = {
     "BB_TIME_SINCE_SQUEEZE_RELEASE",
 }
 
-class SignalRegistryError(ValueError):
-    pass
+class SignalRegistryError(ValueError): pass
 
 @dataclass(frozen=True)
 class SignalSpec:
     signal_id: str
+    feature_key: str
     signal_family: str
     lookback_or_window: int
     threshold_or_band_parameter: Mapping[str, Any]
@@ -60,11 +60,9 @@ class SignalSpec:
 
 def _canonical(raw: Mapping[str, Any]) -> dict[str, Any]:
     missing = [name for name in _REQUIRED if name not in raw]
-    if missing:
-        raise SignalRegistryError(f"Signal specification missing fields: {missing}")
+    if missing: raise SignalRegistryError(f"Signal specification missing fields: {missing}")
     parameter = raw["threshold_or_band_parameter"]
-    if not isinstance(parameter, Mapping):
-        raise SignalRegistryError("threshold_or_band_parameter must be a mapping")
+    if not isinstance(parameter, Mapping): raise SignalRegistryError("threshold_or_band_parameter must be a mapping")
     return {
         "family": str(raw["signal_family"]).strip().upper(),
         "window": int(raw["lookback_or_window"]),
@@ -88,97 +86,103 @@ def build_signal_id(raw: Mapping[str, Any]) -> str:
 
 
 def parse_signal_id(signal_id: str) -> dict[str, Any]:
-    if not str(signal_id).startswith("v3sig:"):
-        raise SignalRegistryError("Signal identifier has an unexpected prefix")
-    try:
-        value = json.loads(unquote(str(signal_id)[6:]))
-    except (ValueError, json.JSONDecodeError) as error:
-        raise SignalRegistryError("Signal identifier is not decodable") from error
-    if set(value) != {
-        "family", "window", "parameter", "orientation", "interpretation",
-        "crossing", "persistence", "normalisation", "regime", "version",
-        "parameter_policy", "base", "context",
-    }:
-        raise SignalRegistryError("Signal identifier fields are incomplete")
+    if not str(signal_id).startswith("v3sig:"): raise SignalRegistryError("Signal identifier has an unexpected prefix")
+    try: value = json.loads(unquote(str(signal_id)[6:]))
+    except (ValueError, json.JSONDecodeError) as error: raise SignalRegistryError("Signal identifier is not decodable") from error
+    expected = {"family", "window", "parameter", "orientation", "interpretation", "crossing",
+                "persistence", "normalisation", "regime", "version", "parameter_policy", "base", "context"}
+    if set(value) != expected: raise SignalRegistryError("Signal identifier fields are incomplete")
     return value
 
 
+def _expand(registry: Mapping[str, Any]) -> list[dict[str, Any]]:
+    defaults = registry.get("defaults")
+    entries = registry.get("signals")
+    if not isinstance(defaults, Mapping) or not isinstance(entries, list) or not entries:
+        raise SignalRegistryError("Compact registry requires defaults and signals")
+    expanded, by_key = [], {}
+    for entry in entries:
+        if not isinstance(entry, Mapping): raise SignalRegistryError("Signal entry must be a mapping")
+        key, template = str(entry.get("feature_key", "")).strip(), str(entry.get("template", "")).strip()
+        if not key or key in by_key: raise SignalRegistryError("Feature keys must be non-empty and unique")
+        base = defaults.get(template)
+        if not isinstance(base, Mapping): raise SignalRegistryError(f"Unknown signal template: {template}")
+        raw = {**dict(base), **{k: v for k, v in entry.items() if k not in {"feature_key", "template"}}}
+        raw.setdefault("regime_interaction_policy", "NONE")
+        raw.setdefault("base_signal_id", None); raw.setdefault("context_feature", None)
+        raw["feature_key"] = key; raw["signal_id"] = build_signal_id(raw)
+        expanded.append(raw); by_key[key] = raw
+    interactions = registry.get("interactions", [])
+    if not isinstance(interactions, list): raise SignalRegistryError("interactions must be a list")
+    for entry in interactions:
+        key, base_key = str(entry.get("feature_key", "")).strip(), str(entry.get("base_feature_key", "")).strip()
+        context = str(entry.get("context_feature", "")).strip()
+        if not key or key in by_key or base_key not in by_key or not context:
+            raise SignalRegistryError("Interaction feature/base/context is invalid")
+        base = by_key[base_key]
+        raw = {
+            "feature_key": key, "signal_family": base["signal_family"],
+            "lookback_or_window": base["lookback_or_window"],
+            "threshold_or_band_parameter": {"base_feature_key": base_key, "context_feature": context},
+            "orientation": base["orientation"], "interpretation": base["interpretation"],
+            "crossing_rule": base["crossing_rule"], "persistence_rule": base["persistence_rule"],
+            "normalisation_rule": "BASE_TIMES_CONTEXT",
+            "regime_interaction_policy": "MULTIPLY_CONTEXT_PRESERVE_COMPONENTS",
+            "registry_version": registry.get("registry_version", "v1"), "parameter_policy": "FIXED",
+            "base_signal_id": base["signal_id"], "context_feature": context,
+        }
+        raw["signal_id"] = build_signal_id(raw); expanded.append(raw); by_key[key] = raw
+    return expanded
+
+
 def _spec(raw: Mapping[str, Any]) -> SignalSpec:
-    value = _canonical(raw)
-    family, interpretation = value["family"], value["interpretation"]
-    if family not in {"RSI", "BOLLINGER"}:
-        raise SignalRegistryError(f"Unsupported signal family: {family}")
-    if value["window"] < 2:
-        raise SignalRegistryError("lookback_or_window must be at least 2")
-    if value["parameter_policy"] not in {"FIXED", "TRAINING_ONLY_REQUIRED"}:
-        raise SignalRegistryError("Unsupported parameter policy")
+    value = _canonical(raw); family, interpretation = value["family"], value["interpretation"]
+    if family not in {"RSI", "BOLLINGER"} or interpretation not in (_RSI if family == "RSI" else _BB):
+        raise SignalRegistryError(f"Unsupported family or interpretation: {family}/{interpretation}")
+    if value["window"] < 2 or value["parameter_policy"] not in {"FIXED", "TRAINING_ONLY_REQUIRED"}:
+        raise SignalRegistryError("Window or parameter policy is invalid")
     if value["regime"] not in {"NONE", "MULTIPLY_CONTEXT_PRESERVE_COMPONENTS"}:
         raise SignalRegistryError("Unsupported interaction policy")
-    if interpretation not in (_RSI if family == "RSI" else _BB):
-        raise SignalRegistryError(f"Unsupported interpretation: {interpretation}")
-    if raw.get("signal_id") != build_signal_id(raw):
-        raise SignalRegistryError("Signal identifier does not reproduce its specification")
-    if parse_signal_id(str(raw["signal_id"])) != value:
-        raise SignalRegistryError("Signal identifier round-trip changed specification")
-    if value["regime"] == "NONE" and (value["base"] or value["context"]):
-        raise SignalRegistryError("Base/context fields require an interaction")
-    if value["regime"] != "NONE" and not (value["base"] and value["context"]):
-        raise SignalRegistryError("Interactions require base and context fields")
-    return SignalSpec(str(raw["signal_id"]), family, value["window"], value["parameter"],
-                      value["orientation"], interpretation, value["crossing"],
-                      value["persistence"], value["normalisation"], value["regime"],
-                      value["version"], value["parameter_policy"], value["base"], value["context"])
+    signal_id = build_signal_id(raw)
+    if parse_signal_id(signal_id) != value: raise SignalRegistryError("Signal identifier round-trip changed specification")
+    return SignalSpec(signal_id, str(raw["feature_key"]), family, value["window"], value["parameter"],
+                      value["orientation"], interpretation, value["crossing"], value["persistence"],
+                      value["normalisation"], value["regime"], value["version"], value["parameter_policy"],
+                      value["base"], value["context"])
 
 
 def validate_registry(registry: Mapping[str, Any]) -> tuple[SignalSpec, ...]:
-    expected = {
-        "schema_version": REGISTRY_SCHEMA_VERSION, "gate": "V3-4",
-        "automatic_selection_performed": False, "target_access_permitted": False,
-        "chronology_access_permitted": False, "predictive_claims_permitted": False,
-        "failure_claims_permitted": False,
-    }
+    expected = {"schema_version": REGISTRY_SCHEMA_VERSION, "gate": "V3-4", "automatic_selection_performed": False,
+                "target_access_permitted": False, "chronology_access_permitted": False,
+                "predictive_claims_permitted": False, "failure_claims_permitted": False}
     for key, value in expected.items():
-        if registry.get(key) != value:
-            raise SignalRegistryError(f"Registry boundary changed: {key}")
-    raw = registry.get("signals")
-    if not isinstance(raw, list) or not raw or len(raw) > MAX_REGISTERED_SIGNALS:
-        raise SignalRegistryError("Signal registry is empty or unbounded")
+        if registry.get(key) != value: raise SignalRegistryError(f"Registry boundary changed: {key}")
+    raw = _expand(registry)
+    if len(raw) > MAX_REGISTERED_SIGNALS: raise SignalRegistryError("Signal registry exceeds bounded limit")
     specs = tuple(_spec(item) for item in raw)
     ids = [item.signal_id for item in specs]
-    if len(ids) != len(set(ids)):
-        raise SignalRegistryError("Signal identifiers must be unique")
+    if len(ids) != len(set(ids)): raise SignalRegistryError("Signal identifiers must be unique")
     by_id = {item.signal_id: item for item in specs}
     for item in specs:
         if item.regime_interaction_policy != "NONE":
             base = by_id.get(item.base_signal_id or "")
-            if base is None or base.signal_family != item.signal_family:
-                raise SignalRegistryError("Interaction base is missing or mismatched")
-            if base.regime_interaction_policy != "NONE":
-                raise SignalRegistryError("Nested interactions are prohibited")
+            if base is None or base.signal_family != item.signal_family or base.regime_interaction_policy != "NONE":
+                raise SignalRegistryError("Interaction base is missing, mismatched, or nested")
     return specs
 
 
 def load_registry(path: str | Path) -> dict[str, Any]:
-    value = json.loads(Path(path).read_text(encoding="utf-8"))
-    validate_registry(value)
-    return value
+    value = json.loads(Path(path).read_text(encoding="utf-8")); validate_registry(value); return value
 
 
 def registry_sha256(registry: Mapping[str, Any]) -> str:
-    payload = json.dumps(registry, sort_keys=True, separators=(",", ":")).encode()
-    return sha256(payload).hexdigest()
+    return sha256(json.dumps(registry, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
 def build_registry_manifest(registry: Mapping[str, Any]) -> dict[str, Any]:
     specs = validate_registry(registry)
-    return {
-        "schema_version": "v3.signal-registry-manifest.v1",
-        "registry_sha256": registry_sha256(registry),
-        "signal_count": len(specs),
-        "base_signal_count": sum(x.regime_interaction_policy == "NONE" for x in specs),
-        "interaction_signal_count": sum(x.regime_interaction_policy != "NONE" for x in specs),
-        "adaptive_template_count": sum(x.parameter_policy == "TRAINING_ONLY_REQUIRED" for x in specs),
-        "automatic_selection_performed": False,
-        "target_accessed": False,
-        "chronology_accessed": False,
-    }
+    return {"schema_version": "v3.signal-registry-manifest.v1", "registry_sha256": registry_sha256(registry),
+            "signal_count": len(specs), "base_signal_count": sum(x.regime_interaction_policy == "NONE" for x in specs),
+            "interaction_signal_count": sum(x.regime_interaction_policy != "NONE" for x in specs),
+            "adaptive_template_count": sum(x.parameter_policy == "TRAINING_ONLY_REQUIRED" for x in specs),
+            "automatic_selection_performed": False, "target_accessed": False, "chronology_accessed": False}
