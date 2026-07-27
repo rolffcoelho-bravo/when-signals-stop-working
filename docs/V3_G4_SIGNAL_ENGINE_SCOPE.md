@@ -4,15 +4,17 @@
 
 ```text
 APPROVED_AND_REOPENED
-IMPLEMENTATION_COMPLETE_VALIDATION_PENDING
-LOCK_NOT_CREATED
+IMPLEMENTATION_COMPLETE
+AUTHORITATIVE_VALIDATION_COMPLETE
+IMPLEMENTATION_VALIDATED_AND_LOCKED
+GATE_COMPLETE
 ```
 
 ## Objective
 
 Create a bounded, reproducible, target-blind signal-information engine for RSI and Bollinger Bands. The engine represents each indicator as a family of explicit interpretations rather than as one fixed trading rule.
 
-This gate does not estimate predictive value. It generates the signal information that Gate V3-5 will test against matched non-signal benchmarks.
+This gate does not estimate predictive value. It generates the signal information that Gate V3-5 tests against matched non-signal benchmarks.
 
 ## Parent boundary
 
@@ -27,7 +29,7 @@ The frozen Version 1 and Version 2 determinations remain unchanged.
 
 ## Required signal registry
 
-Every signal specification must have a stable identifier encoding at least:
+Every signal specification has a stable identifier encoding at least:
 
 ```text
 signal_family
@@ -87,11 +89,9 @@ Adaptive thresholds are permitted only when:
 - no locked-evaluation or chronology outcome influences the threshold;
 - fixed-threshold challengers remain visible.
 
-The Gate V3-4 implementation does not estimate adaptive thresholds. Training-only values must be supplied through the runner contract; otherwise the candidate remains visible as `INELIGIBLE_TRAINING_PARAMETER_REQUIRED`.
+The Gate V3-4 implementation does not estimate adaptive thresholds. Training-only values must be supplied through an upstream training contract; otherwise the candidate remains visible as `INELIGIBLE_TRAINING_PARAMETER_REQUIRED`.
 
 ## Bollinger interpretations
-
-The bounded registry includes predeclared candidates from the following groups.
 
 ### Mean reversion
 
@@ -131,9 +131,7 @@ The bounded registry includes predeclared candidates from the following groups.
 
 ## Regime interactions
 
-The engine may generate explicit signal-regime interaction features using registered V3-3 outputs. Every interaction must preserve both components separately.
-
-Registered examples:
+The engine generates four explicit signal-regime interaction candidates through registered interfaces while preserving both components separately:
 
 ```text
 rsi_oversold_mean_reversion × p_range
@@ -142,7 +140,7 @@ bollinger_lower_breakdown × p_panic_consistent
 bollinger_squeeze_release × dominant_eigenvalue_share
 ```
 
-These interactions are candidate information. Their existence does not establish conditional signal value. When context is unavailable, the interaction remains visible as `INELIGIBLE_CONTEXT_UNAVAILABLE`.
+Their existence does not establish conditional signal value. When context is unavailable, the interaction remains visible as `INELIGIBLE_CONTEXT_UNAVAILABLE`.
 
 ## Implemented modules
 
@@ -164,9 +162,10 @@ RUN_V3_G4_SIGNAL_ENGINE.ps1
 RUN_V3_G4_SIGNAL_ENGINE.sh
 docs/V3_G4_SIGNAL_ENGINE.md
 V3_G4_SIGNAL_ENGINE_CHECKPOINT.md
+V3_G4_SIGNAL_ENGINE_LOCK.json
 ```
 
-## Required outputs
+## Output contract
 
 ```text
 signal_features.csv
@@ -179,7 +178,7 @@ canonical_validation_report.json
 
 The output preserves stable identifiers and makes missing or ineligible features explicit.
 
-## Implemented registry boundary
+## Locked registry boundary
 
 ```text
 registered specifications: 48
@@ -190,44 +189,54 @@ bounded maximum: 128
 automatic selection: false
 ```
 
-## Acceptance criteria
+## Acceptance evidence
 
-1. Every registered feature is reproducible from its identifier.
-2. All calculations are causal and target-blind.
-3. Appending future observations cannot change earlier emitted features.
-4. Input row order cannot change ordered output identity.
-5. Missing required OHLCV data fails closed.
-6. No candidate is deleted because it appears unpromising.
-7. No signal, threshold, interpretation, or interaction is selected automatically.
-8. Fixed and adaptive candidates remain distinguishable.
-9. The registry is bounded and machine-readable.
-10. The same engine is used by later development, locked evaluation, replication, and scoring.
-11. Version 1 and Version 2 verdicts remain unchanged.
-12. No predictive, economic, deterioration, or failure claim is produced by this gate.
-13. The isolated 19-test suite passes in the authoritative research environment.
-14. The real canonical input generates all required outputs without tracked-file mutation.
+All acceptance criteria passed:
+
+1. every registered feature is reproducible from its identifier;
+2. calculations are causal and target-blind;
+3. future observations cannot change earlier emitted features;
+4. input row order cannot change ordered output identity;
+5. missing required OHLCV data fails closed;
+6. no candidate is deleted because it appears unpromising;
+7. no signal, threshold, interpretation, or interaction is selected automatically;
+8. fixed and adaptive candidates remain distinguishable;
+9. the registry is bounded and machine-readable;
+10. later gates reuse the locked engine;
+11. Version 1 and Version 2 verdicts remain unchanged;
+12. no predictive, economic, deterioration, or failure claim was produced;
+13. the exact nineteen-test suite passed in the authoritative research environment;
+14. real canonical input generated the complete package without tracked-file mutation.
+
+Authoritative totals:
+
+```text
+source rows: 12171
+registered signals: 48
+feature rows: 584208
+row-count identity: verified
+validated implementation commit: ff2e7ecba3fa69f22e0b109437d23b52d30fba2b
+evidence materialization commit: 705511de9e8ee22a9f8aff34506aebb6c26223e7
+lock status: IMPLEMENTATION_VALIDATED_AND_LOCKED
+```
 
 ## Prohibited actions
 
-Gate V3-4 may not:
+The final V3-4 boundary did not:
 
 - fit a target model;
 - inspect future returns during feature generation;
-- rank candidates by locked-evaluation performance;
+- rank candidates by evaluation performance;
 - use external chronology to tune signal definitions;
 - promote RSI or Bollinger to `VALID` or `CONDITIONALLY_VALID`;
 - declare that either signal stopped working;
 - estimate signal-failure probability;
 - remove negative or low-coverage candidates after seeing results.
 
-## Current validation boundary
-
-The implementation completed a controlled development suite with `19 passed`. Authoritative execution in the Windows research environment is pending. No Gate V3-4 lock has been created.
-
 ## Next gate
 
-After authoritative implementation validation and lock of this signal engine, the next core gate is:
+The current core gate is:
 
 > Gate V3-5 — Matched Benchmark-versus-Signal Forecast Selection
 
-That gate, not V3-4, determines whether any new Version 3 signal pipeline earns establishment.
+Gate V3-5 is approved and active at its contract-freeze stage. It, not V3-4, determines whether any new Version 3 signal pipeline earns establishment.
