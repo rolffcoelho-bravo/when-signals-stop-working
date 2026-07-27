@@ -113,6 +113,21 @@ def main() -> int:
         if implementation.get(field) is not False:
             fail(f"V3-4 prohibited action changed: {field}")
 
+    v3_5 = payload.get("v3_5_approval", {})
+    expected_v3_5 = {
+        "gate": "V3-5",
+        "title": "Matched Benchmark-versus-Signal Forecast Selection",
+        "status": "APPROVED_PENDING_V3_4_VALIDATION_AND_LOCK",
+        "implementation_started": False,
+        "parent_gate": "V3-4",
+        "parent_authoritative_validation_required": True,
+        "parent_lock_required": True,
+        "separate_approval_required_after_parent_lock": False,
+        "predictive_evaluation_permitted_before_parent_lock": False,
+    }
+    if v3_5 != expected_v3_5:
+        fail("Gate V3-5 approval or parent-gate boundary changed")
+
     mappings = payload.get("regime_validation_reclassification", [])
     expected = {
         "V3-4A": ("V3-RV1", "COMPLETE_AND_HISTORICALLY_LOCKED"),
@@ -195,6 +210,7 @@ def main() -> int:
         "V3_REALIGNMENT_DECISION.md": (
             "V3-RV3",
             "Unified RSI and Bollinger Interpretation Engine",
+            "APPROVED / BLOCKED BY V3-4 VALIDATION AND LOCK",
         ),
         "docs/V3_REALIGNED_GATE_MAP.md": (
             "V3-4_SIGNAL_INTERPRETATION",
@@ -225,6 +241,8 @@ def main() -> int:
     print("True V3-4 status: IMPLEMENTATION_COMPLETE_VALIDATION_PENDING")
     print("Registered signal specifications: 48")
     print("Current hardened V3-4 suite execution pending: True")
+    print("Gate V3-5 approval: APPROVED_PENDING_V3_4_VALIDATION_AND_LOCK")
+    print("Gate V3-5 implementation started: False")
     return 0
 
 
