@@ -9,6 +9,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "outputs" / "v3" / "forecast_foundation"
+PARENT_LOCK = ROOT / "V3_G4_SIGNAL_ENGINE_LOCK.json"
 
 
 class MaterializationVerificationError(RuntimeError):
@@ -40,6 +41,46 @@ def require_false(payload: dict, fields: tuple[str, ...], label: str) -> None:
     for field in fields:
         if payload.get(field) is not False:
             fail(f"{label} advanced prematurely: {field}")
+
+
+def verify_input_bindings(source: dict) -> None:
+    required = {
+        "forecast_contract": "configs/v3_g5_forecast_contract.json",
+        "sol_source": "data/raw/sol_usdt_4h.csv",
+        "btc_source": "data/raw/btc_usdt_4h.csv",
+        "signal_features_source": "outputs/v3/signal_engine/signal_features.csv",
+        "signal_registry_manifest": (
+            "evidence/v3/g4_signal_lock/signal_registry_manifest.json"
+        ),
+    }
+    hash_fields = {
+        "forecast_contract": "forecast_contract_sha256",
+        "sol_source": "sol_source_sha256",
+        "btc_source": "btc_source_sha256",
+        "signal_features_source": "signal_features_sha256",
+        "signal_registry_manifest": "signal_registry_manifest_sha256",
+    }
+    for field, expected_relative in required.items():
+        if source.get(field) != expected_relative:
+            fail(f"Materialization input path changed: {field}")
+        path = ROOT / expected_relative
+        if not path.is_file():
+            fail(f"Materialization input is missing: {expected_relative}")
+        expected_hash = source.get(hash_fields[field])
+        if not isinstance(expected_hash, str) or len(expected_hash) != 64:
+            fail(f"Materialization input hash is malformed: {field}")
+        if file_sha256(path) != expected_hash:
+            fail(f"Materialization input hash mismatch: {field}")
+
+    parent = read_json(PARENT_LOCK)
+    signal_record = parent.get("runtime_evidence", {}).get("signal_features", {})
+    if source.get("signal_features_sha256") != signal_record.get("sha256"):
+        fail("Materialization signal table is not the V3-4 locked runtime object.")
+    registry_expected = parent.get("curated_evidence_sha256", {}).get(
+        "evidence/v3/g4_signal_lock/signal_registry_manifest.json"
+    )
+    if source.get("signal_registry_manifest_sha256") != registry_expected:
+        fail("Materialization registry is not the V3-4 locked curated object.")
 
 
 def main() -> int:
@@ -83,6 +124,25 @@ def main() -> int:
         observed = file_sha256(path)
         if observed != expected_hash:
             fail(f"Output hash mismatch for {relative}")
+
+    source = read_json(OUTPUT / "source_manifest.json")
+    verify_input_bindings(source)
+    if int(source.get("raw_rows", -1)) != 12171:
+        fail("Materialization raw source row identity changed.")
+    if int(source.get("development_rows", -1)) != 9852:
+        fail("Materialization development source row identity changed.")
+    if int(source.get("signal_matrix_rows", -1)) != 9852:
+        fail("Materialization signal matrix row identity changed.")
+    if int(source.get("signal_matrix_columns", -1)) != 48:
+        fail("Materialization signal matrix column identity changed.")
+    require_false(
+        source,
+        (
+            "signal_establishment_segment_accessed",
+            "final_framework_reserve_accessed",
+        ),
+        "Source manifest",
+    )
 
     targets = pd.read_csv(OUTPUT / "development_targets.csv")
     folds = pd.read_csv(OUTPUT / "nested_fold_plan.csv")
@@ -161,6 +221,7 @@ def main() -> int:
     print("Candidate-horizon coverage rows: 342")
     print(f"Matched rows available: {len(available)}")
     print(f"Explicitly ineligible candidate-horizons: {len(coverage) - len(available)}")
+    print("Input object hashes bound: True")
     print("Large-move labels materialized: False")
     print("Model fitting performed: False")
     print("Signal-establishment segment accessed: False")
