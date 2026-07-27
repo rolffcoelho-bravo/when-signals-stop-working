@@ -4,31 +4,17 @@
 
 ```text
 IMPLEMENTATION_COMPLETE
-AUTHORITATIVE_VALIDATION_COMPLETE_LOCK_PENDING
+AUTHORITATIVE_VALIDATION_COMPLETE
 WINDOWS_REALIGNMENT_7_PASSED
 WINDOWS_SIGNAL_SUITE_19_PASSED
 REAL_DATA_EXECUTION_PASSED
 OUTPUT_IDENTITY_VERIFIED
 NO_TRACKED_MUTATION
-VALIDATED_IMPLEMENTATION_COMMIT_FROZEN
-LOCK_NOT_YET_PROMOTED
+IMPLEMENTATION_VALIDATED_AND_LOCKED
+GATE_COMPLETE
 ```
 
-Gate V3-4 has passed its authoritative Windows research-environment acceptance boundary. The validated implementation is frozen at:
-
-```text
-ff2e7ecba3fa69f22e0b109437d23b52d30fba2b
-```
-
-Later lock tooling may be added, but every protected V3-4 implementation object must remain identical to that validated commit.
-
-## Research-question link
-
-Gate V3-4 advances Richard's question by defining the complete bounded RSI and Bollinger information family that Gate V3-5 will compare with matched non-signal benchmarks.
-
-It does not establish predictive or economic value and cannot authorize deterioration or failure modelling.
-
-## Frozen parent and implementation boundaries
+## Final boundaries
 
 ```text
 Frozen Version 2 baseline:
@@ -39,9 +25,28 @@ Historical V3-1 implementation boundary:
 
 Authoritatively validated V3-4 implementation boundary:
 ff2e7ecba3fa69f22e0b109437d23b52d30fba2b
+
+Evidence materialization commit:
+705511de9e8ee22a9f8aff34506aebb6c26223e7
+
+Lock promotion commit:
+4150d73ff1e12d5b022e591f0a6ee700c29b5ce1
 ```
 
-The V3-1 lock remains unchanged. Its historical objects are verified at the original V3-1 boundary. Current direct V3-1 objects remain protected, and the shared `v3/__init__.py` is governed through backward-compatible V3-1 exports rather than an obsolete package-level blob comparison.
+The final lock is:
+
+```text
+V3_G4_SIGNAL_ENGINE_LOCK.json
+status: IMPLEMENTATION_VALIDATED_AND_LOCKED
+```
+
+Every protected V3-4 implementation object remains bound to the validated implementation commit. The compact curated evidence remains bound by SHA-256. The 584,208-row long-format table remains an untracked regenerable artifact and is bound by its recorded SHA-256.
+
+## Research-question link
+
+Gate V3-4 defines the complete bounded RSI and Bollinger information family that Gate V3-5 may compare with matched non-signal benchmarks.
+
+It does not establish predictive or economic value and cannot by itself authorize conditional validity, deterioration, failure modelling, or operational use.
 
 ## Authoritative Windows acceptance evidence
 
@@ -65,7 +70,7 @@ Tracked working-tree mutation: false
 Next gate reported: V3-5
 ```
 
-The complete runner finished successfully after verifying repository realignment, historical and current-compatible V3-1 ownership, the exact nineteen-test V3-4 suite, frozen SOL canonical-data materialization, real-data signal generation, output identities, and tracked-file cleanliness.
+The complete runner verified repository realignment, historical and current-compatible V3-1 ownership, the exact nineteen-test V3-4 suite, frozen SOL canonical-data materialization, real-data signal generation, output identities, and tracked-file cleanliness.
 
 ## Canonical input contract
 
@@ -78,7 +83,7 @@ venue: binance_spot
 rows: 12171
 ```
 
-BTC remains benchmark and market-context information for Gate V3-5. It is not silently converted into a second V3-4 target-signal family.
+BTC remains benchmark and market-context information for Gate V3-5. It is not a second V3-4 target-signal family.
 
 ## Registry evidence
 
@@ -93,7 +98,9 @@ identifier scheme: v3sig:<feature_key>:<sha256(canonical_specification)>
 
 No candidate was selected, ranked, promoted, or deleted by Gate V3-4.
 
-## Runtime output contract
+## Runtime and curated evidence
+
+Runtime outputs:
 
 ```text
 outputs/v3/signal_engine/signal_features.csv
@@ -104,63 +111,43 @@ outputs/v3/signal_engine/signal_validation_report.json
 outputs/v3/signal_engine/canonical_validation_report.json
 ```
 
-The large `signal_features.csv` contains 584,208 rows. It remains a regenerable runtime artifact and will not be committed. The final lock binds it by SHA-256. Compact manifests are copied into `evidence/v3/g4_signal_lock/` for repository review.
-
-## Lock materialization package
+Committed evidence:
 
 ```text
-scripts/finalize_v3_g4_lock.py
-scripts/verify_v3_g4_lock.py
-RUN_V3_G4_LOCK.ps1
-RUN_V3_G4_LOCK.sh
-V3_G4_SIGNAL_ENGINE_LOCK.json        generated locally
-evidence/v3/g4_signal_lock/*.json    generated locally
+V3_G4_SIGNAL_ENGINE_LOCK.json
+evidence/v3/g4_signal_lock/canonical_source_manifest.json
+evidence/v3/g4_signal_lock/canonical_validation_report.json
+evidence/v3/g4_signal_lock/signal_canonical_validation_report.json
+evidence/v3/g4_signal_lock/signal_coverage_report.json
+evidence/v3/g4_signal_lock/signal_feature_manifest.json
+evidence/v3/g4_signal_lock/signal_registry_manifest.json
+evidence/v3/g4_signal_lock/signal_validation_report.json
 ```
 
-The lock candidate generator:
-
-1. requires a clean tracked working tree;
-2. verifies that the validated V3-4 commit is an ancestor of the current branch;
-3. confirms that every protected implementation object still equals the validated commit;
-4. revalidates all runtime evidence;
-5. hashes the raw source, canonical input, long-format feature table, and all manifests;
-6. curates compact JSON evidence;
-7. emits a reviewable lock candidate.
-
-The final lock status remains pending until the generated candidate and curated manifests are committed, reviewed, and promoted from:
+## Locked claims boundary
 
 ```text
-LOCK_CANDIDATE_AWAITING_REPOSITORY_REVIEW
-```
-
-to:
-
-```text
-IMPLEMENTATION_VALIDATED_AND_LOCKED
-```
-
-## Claims prohibited at this checkpoint
-
-```text
-predictive claim: prohibited
-economic claim: prohibited
-conditional-validity claim: prohibited
-deterioration claim: prohibited
-failure-probability claim: prohibited
+predictive claim: not produced by V3-4
+economic claim: not produced by V3-4
+conditional-validity claim: not produced by V3-4
+deterioration claim: not produced by V3-4
+failure-probability claim: not produced by V3-4
 RSI/Bollinger rescue: prohibited
 frozen V1/V2 modification: prohibited
 ```
 
-## Next action
+## Next gate
 
-```powershell
-.\RUN_V3_G4_LOCK.ps1
+Gate V3-5 — Matched Benchmark-versus-Signal Forecast Selection — is approved and has started at its frozen contract boundary.
+
+Current V3-5 state:
+
+```text
+contract frozen: true
+target access: false
+development model fitting: false
+signal-establishment segment access: false
+V3-9 final-framework reserve access: false
 ```
 
-After the lock candidate is generated and verified, commit only the compact lock and curated evidence. The ignored runtime directories remain local and reproducible.
-
-## Next gate boundary
-
-Gate V3-5 — Matched Benchmark-versus-Signal Forecast Selection — is approved but has not started.
-
-Its parent validation requirement is complete. It may begin immediately after final V3-4 lock promotion, without another approval request. Gate V3-5, not V3-4, determines whether any Version 3 RSI or Bollinger pipeline earns establishment.
+Gate V3-5 must make the registered signals earn new evidence through matched chronological comparison. The V3-4 lock cannot be altered to improve a V3-5 result.
