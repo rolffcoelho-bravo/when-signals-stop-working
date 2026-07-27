@@ -6,6 +6,18 @@ This document prevents methodological sophistication from displacing the reposit
 
 ## Decision hierarchy
 
+```text
+ESTABLISHMENT
+    before
+CONDITIONAL_VALIDITY
+    before
+DETERIORATION
+    before
+FAILURE_PROBABILITY
+    before
+OPERATIONAL_ACTION
+```
+
 ### Stage 0 — Data and contract eligibility
 
 A signal claim is unavailable when the declared data, timestamps, target, benchmark, costs, or chronological split fail their registered contract.
