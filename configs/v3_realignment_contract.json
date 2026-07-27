@@ -61,6 +61,17 @@
     "deterioration_claims_produced": false,
     "failure_claims_produced": false
   },
+  "v3_5_approval": {
+    "gate": "V3-5",
+    "title": "Matched Benchmark-versus-Signal Forecast Selection",
+    "status": "APPROVED_PENDING_V3_4_VALIDATION_AND_LOCK",
+    "implementation_started": false,
+    "parent_gate": "V3-4",
+    "parent_authoritative_validation_required": true,
+    "parent_lock_required": true,
+    "separate_approval_required_after_parent_lock": false,
+    "predictive_evaluation_permitted_before_parent_lock": false
+  },
   "regime_validation_reclassification": [
     {
       "historical_identifier": "V3-4A",
@@ -136,5 +147,5 @@
     "RUN_V3_G4_SIGNAL_ENGINE.ps1",
     "RUN_V3_G4_SIGNAL_ENGINE.sh"
   ],
-  "next_action": "AUTHORITATIVELY_VALIDATE_AND_LOCK_TRUE_V3_4_SIGNAL_ENGINE"
+  "next_action": "AUTHORITATIVELY_VALIDATE_AND_LOCK_TRUE_V3_4_THEN_BEGIN_APPROVED_V3_5"
 }
