@@ -74,7 +74,11 @@ def main() -> int:
         fail("V3-4 validation is claimed prematurely")
     if next_gate.get("lock_created") is not False:
         fail("V3-4 lock is claimed prematurely")
-    for field in ("predictive_claims_permitted", "economic_claims_permitted", "failure_claims_permitted"):
+    for field in (
+        "predictive_claims_permitted",
+        "economic_claims_permitted",
+        "failure_claims_permitted",
+    ):
         if next_gate.get(field) is not False:
             fail(f"True V3-4 boundary changed: {field}")
 
@@ -84,15 +88,27 @@ def main() -> int:
         "base_signal_count": 44,
         "interaction_signal_count": 4,
         "adaptive_template_count": 2,
-        "development_tests_passed": 19,
+        "prior_development_suite_passed": 19,
     }
     for field, expected in expected_counts.items():
         if implementation.get(field) != expected:
             fail(f"V3-4 implementation evidence changed: {field}")
+    if implementation.get("identifier_scheme") != (
+        "v3sig:<feature_key>:<sha256(canonical_specification)>"
+    ):
+        fail("V3-4 identifier scheme changed")
+    if implementation.get("final_hardening_applied_after_prior_suite") is not True:
+        fail("V3-4 final hardening boundary is not recorded")
+    if implementation.get("current_exact_suite_execution_pending") is not True:
+        fail("V3-4 current exact suite is claimed prematurely")
     for field in (
-        "automatic_selection_performed", "target_accessed", "chronology_accessed",
-        "predictive_claims_produced", "economic_claims_produced",
-        "deterioration_claims_produced", "failure_claims_produced",
+        "automatic_selection_performed",
+        "target_accessed",
+        "chronology_accessed",
+        "predictive_claims_produced",
+        "economic_claims_produced",
+        "deterioration_claims_produced",
+        "failure_claims_produced",
     ):
         if implementation.get(field) is not False:
             fail(f"V3-4 prohibited action changed: {field}")
@@ -100,11 +116,17 @@ def main() -> int:
     mappings = payload.get("regime_validation_reclassification", [])
     expected = {
         "V3-4A": ("V3-RV1", "COMPLETE_AND_HISTORICALLY_LOCKED"),
-        "V3-4B": ("V3-RV2", "COMPLETE_AND_HISTORICALLY_LOCKED_WITH_PORTABILITY_REVISION_OPEN"),
+        "V3-4B": (
+            "V3-RV2",
+            "COMPLETE_AND_HISTORICALLY_LOCKED_WITH_PORTABILITY_REVISION_OPEN",
+        ),
         "V3-4C": ("V3-RV3", "PAUSED_NOT_STARTED"),
     }
     observed = {
-        item.get("historical_identifier"): (item.get("realigned_identifier"), item.get("status"))
+        item.get("historical_identifier"): (
+            item.get("realigned_identifier"),
+            item.get("status"),
+        )
         for item in mappings
     }
     if observed != expected:
@@ -114,8 +136,10 @@ def main() -> int:
 
     controls = payload.get("governance_controls", {})
     for field in (
-        "historical_locks_rewritten", "chronology_may_tune_signal_registry",
-        "panic_regime_may_rescue_v2_signal", "automatic_signal_selection_in_v3_4",
+        "historical_locks_rewritten",
+        "chronology_may_tune_signal_registry",
+        "panic_regime_may_rescue_v2_signal",
+        "automatic_signal_selection_in_v3_4",
     ):
         if controls.get(field) is not False:
             fail(f"Governance control changed: {field}")
@@ -129,26 +153,62 @@ def main() -> int:
     for relative in payload.get("required_v3_4_files", []):
         require_file(relative)
 
-    registry = json.loads(require_file("configs/v3_signal_interpretation_registry.json").read_text(encoding="utf-8"))
+    registry = json.loads(
+        require_file("configs/v3_signal_interpretation_registry.json").read_text(
+            encoding="utf-8"
+        )
+    )
     specs = validate_registry(registry)
     if len(specs) != 48:
         fail("Committed V3-4 registry does not expand to 48 specifications")
 
     texts = {
-        "RICHARD_QUESTION.md": require_file("RICHARD_QUESTION.md").read_text(encoding="utf-8"),
-        "DIRECT_ANSWER_LOGIC.md": require_file("DIRECT_ANSWER_LOGIC.md").read_text(encoding="utf-8"),
-        "V3_REALIGNMENT_DECISION.md": require_file("V3_REALIGNMENT_DECISION.md").read_text(encoding="utf-8"),
-        "docs/V3_REALIGNED_GATE_MAP.md": require_file("docs/V3_REALIGNED_GATE_MAP.md").read_text(encoding="utf-8"),
-        "docs/V3_G4_SIGNAL_ENGINE_SCOPE.md": require_file("docs/V3_G4_SIGNAL_ENGINE_SCOPE.md").read_text(encoding="utf-8"),
-        "docs/V3_G4_SIGNAL_ENGINE.md": require_file("docs/V3_G4_SIGNAL_ENGINE.md").read_text(encoding="utf-8"),
+        "RICHARD_QUESTION.md": require_file("RICHARD_QUESTION.md").read_text(
+            encoding="utf-8"
+        ),
+        "DIRECT_ANSWER_LOGIC.md": require_file("DIRECT_ANSWER_LOGIC.md").read_text(
+            encoding="utf-8"
+        ),
+        "V3_REALIGNMENT_DECISION.md": require_file(
+            "V3_REALIGNMENT_DECISION.md"
+        ).read_text(encoding="utf-8"),
+        "docs/V3_REALIGNED_GATE_MAP.md": require_file(
+            "docs/V3_REALIGNED_GATE_MAP.md"
+        ).read_text(encoding="utf-8"),
+        "docs/V3_G4_SIGNAL_ENGINE_SCOPE.md": require_file(
+            "docs/V3_G4_SIGNAL_ENGINE_SCOPE.md"
+        ).read_text(encoding="utf-8"),
+        "docs/V3_G4_SIGNAL_ENGINE.md": require_file(
+            "docs/V3_G4_SIGNAL_ENGINE.md"
+        ).read_text(encoding="utf-8"),
     }
     required_phrases = {
-        "RICHARD_QUESTION.md": ("When will RSI stop working?", "NO_PIPELINE_ADMITTED", "NO_INCREMENTAL_EVIDENCE"),
-        "DIRECT_ANSWER_LOGIC.md": ("ESTABLISHMENT", "FAILURE_MODEL_INADMISSIBLE_BASELINE_NOT_ESTABLISHED"),
-        "V3_REALIGNMENT_DECISION.md": ("V3-RV3", "Unified RSI and Bollinger Interpretation Engine"),
-        "docs/V3_REALIGNED_GATE_MAP.md": ("V3-4_SIGNAL_INTERPRETATION", "Regime-validation extension"),
-        "docs/V3_G4_SIGNAL_ENGINE_SCOPE.md": ("APPROVED_AND_REOPENED", "Gate V3-5"),
-        "docs/V3_G4_SIGNAL_ENGINE.md": ("IMPLEMENTATION_COMPLETE", "DEVELOPMENT_TESTS_19_PASSED", "Gate V3-5"),
+        "RICHARD_QUESTION.md": (
+            "When will RSI stop working?",
+            "NO_PIPELINE_ADMITTED",
+            "NO_INCREMENTAL_EVIDENCE",
+        ),
+        "DIRECT_ANSWER_LOGIC.md": (
+            "ESTABLISHMENT",
+            "FAILURE_MODEL_INADMISSIBLE_BASELINE_NOT_ESTABLISHED",
+        ),
+        "V3_REALIGNMENT_DECISION.md": (
+            "V3-RV3",
+            "Unified RSI and Bollinger Interpretation Engine",
+        ),
+        "docs/V3_REALIGNED_GATE_MAP.md": (
+            "V3-4_SIGNAL_INTERPRETATION",
+            "Regime-validation extension",
+        ),
+        "docs/V3_G4_SIGNAL_ENGINE_SCOPE.md": (
+            "APPROVED_AND_REOPENED",
+            "Gate V3-5",
+        ),
+        "docs/V3_G4_SIGNAL_ENGINE.md": (
+            "IMPLEMENTATION_COMPLETE",
+            "CURRENT_HARDENED_SUITE_EXECUTION_PENDING",
+            "Gate V3-5",
+        ),
     }
     for path, phrases in required_phrases.items():
         for phrase in phrases:
@@ -164,6 +224,7 @@ def main() -> int:
     print("True V3-4 implementation started: True")
     print("True V3-4 status: IMPLEMENTATION_COMPLETE_VALIDATION_PENDING")
     print("Registered signal specifications: 48")
+    print("Current hardened V3-4 suite execution pending: True")
     return 0
 
 
@@ -171,5 +232,8 @@ if __name__ == "__main__":
     try:
         raise SystemExit(main())
     except (OSError, ValueError, KeyError, RealignmentVerificationError) as error:
-        print(f"Version 3 repository realignment verification failed: {error}", file=sys.stderr)
+        print(
+            f"Version 3 repository realignment verification failed: {error}",
+            file=sys.stderr,
+        )
         raise SystemExit(1)
