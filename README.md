@@ -1,264 +1,219 @@
 # When Signals Stop Working
 
-## Technical Signal Validity, Regime Dependence, and Structural Deterioration Framework
+## Technical Signal Validity, Conditional Reliability, and Failure-Risk Framework
 
 [![CI](https://github.com/rolffcoelho-bravo/when-signals-stop-working/actions/workflows/ci.yml/badge.svg)](https://github.com/rolffcoelho-bravo/when-signals-stop-working/actions/workflows/ci.yml)
 
-## Executive overview
+## The question this repository must answer
 
-This repository provides a governed, fully reproducible framework for determining whether technical indicators contribute incremental predictive and economic information beyond a transparent market-state benchmark.
+Richard asked:
 
-The Version 1 assessment evaluates Relative Strength Index and Bollinger Band information on four-hour SOL/USDT data, with BTC/USDT included as broader market context. The framework separates descriptive indicator behaviour from benchmark-relative forecasting value, regime dependence, and structural deterioration.
+> When will RSI stop working?
 
-The central governance principle is explicit:
+He later clarified that the indicator used in practice was Bollinger Bands. The repository therefore evaluates RSI and Bollinger Bands separately and follows one non-negotiable rule:
 
-> A signal cannot be classified as deteriorated or suspended unless stable out-of-sample value was first established under a predeclared validation contract.
+> A signal cannot be classified as deteriorated, failed, reduced, or suspended unless stable incremental value was first established under a predeclared benchmark-relative and chronological validation contract.
 
-Where that establishment requirement is not met, the appropriate status is `NOT_ESTABLISHED`.
+The complete research anchor is documented in [`RICHARD_QUESTION.md`](RICHARD_QUESTION.md). The decision sequence is documented in [`DIRECT_ANSWER_LOGIC.md`](DIRECT_ANSWER_LOGIC.md).
 
-## Published Version 1 determination
+## Direct answer from the frozen evidence
+
+### Version 1
 
 The frozen Version 1 sample contains 12,171 aligned Binance spot observations from **1 January 2021, 00:00 UTC** through **22 July 2026, 08:00 UTC**.
 
-| Candidate model | Chronological folds with positive predictive contribution | Version 1 status |
+| Candidate model | Chronological folds with positive predictive contribution | Frozen status |
 |---|---:|---|
 | RSI | 1 of 5 | `NOT_ESTABLISHED` |
 | Bollinger Bands | 1 of 5 | `NOT_ESTABLISHED` |
 | Combined specification | 2 of 5 | `NOT_ESTABLISHED` |
 
-Under the frozen specification, none of the candidate models demonstrated sufficiently stable incremental value to pass the establishment gate. This determination does not imply that all historical indicator events were incorrect. It means that the incremental forecasting claim did not survive the declared benchmark-relative and chronological validation requirements.
+### Version 2
 
-The complete determination is documented in [`RESULTS.md`](RESULTS.md) and the generated [`outputs/research_report.md`](outputs/research_report.md).
+Version 2 tested broader horizons, continuation and mean-reversion interpretations, restrained nonlinear candidates, estimation windows, filtered-state conditioning, probability calibration, and selective abstention under nested chronological development and one methodology-locked evaluation.
 
-
-## Version 2 primary-case determination
-
-Version 2 tested whether broader horizons, continuation-versus-contrarian
-interpretations, nonlinear models, estimation windows, filtered state
-conditioning, calibration, and selective abstention could establish stable
-incremental value under a frozen nested-validation and methodology-locked
-evaluation design.
-
-| Confirmatory family | Development decision | Locked-evaluation decision | Final Version 2 status |
+| Confirmatory family | Development decision | Locked-evaluation decision | Frozen status |
 |---|---|---|---|
 | RSI | `NO_PIPELINE_ADMITTED` | Not evaluated | `NO_PIPELINE_ADMITTED` |
-| Bollinger Bands | One pipeline admitted and frozen | Predictive and economic gates failed | `NO_INCREMENTAL_EVIDENCE` |
+| Bollinger Bands | One continuation pipeline admitted | Complete predictive and economic gates failed | `NO_INCREMENTAL_EVIDENCE` |
 
-For the frozen Bollinger pipeline, the mean benchmark-relative log-loss
-contribution was positive (`0.002108928`) and two of three locked subperiods
-were positive. The raw one-sided p-value was `0.032339`, but the
-Holm-adjusted p-value was `0.064677`; dependence-aware predictive and economic
-lower confidence bounds also crossed zero. Stable incremental value was
-therefore not established.
+The frozen Bollinger pipeline produced a positive mean benchmark-relative log-loss contribution of `0.002108928`, and two of three locked subperiods were positive. The raw one-sided p-value was `0.032339`, but the Holm-adjusted value was `0.064677`; dependence-aware predictive and economic lower confidence bounds crossed zero.
 
-The complete Version 2 determination is documented in
-[`outputs/v2/publication/V2_FINAL_EVIDENCE_REPORT.md`](outputs/v2/publication/V2_FINAL_EVIDENCE_REPORT.md).
-The frozen pipeline boundaries are documented in
-[`outputs/v2/publication/V2_FROZEN_BOLLINGER_MODEL_CARD.md`](outputs/v2/publication/V2_FROZEN_BOLLINGER_MODEL_CARD.md).
+### Current answer to Richard
 
-> Favourable average contributions are not sufficient for establishment when
-> multiplicity-adjusted, dependence-aware, chronological, and economic
-> confidence requirements are not satisfied.
+> Under the tested SOL/USDT four-hour contracts, neither RSI nor Bollinger Bands can be said to have stopped working because stable incremental value was not established first. RSI failed Version 2 development admission. Bollinger Bands showed suggestive average evidence but failed the complete multiplicity-adjusted, dependence-aware, chronological, and economic establishment standard.
 
+This is specific to the declared venue, asset, frequency, sample, target, benchmark, cost policy, and validation design. It is not a universal claim that technical indicators can never contain information.
 
-## Version 2 governed development
+The complete Version 2 evidence is in [`outputs/v2/publication/V2_FINAL_EVIDENCE_REPORT.md`](outputs/v2/publication/V2_FINAL_EVIDENCE_REPORT.md).
 
-Version 2 was developed on `research/v2-conditional-signal-validity` from the frozen `v1.2.0` release. The primary-case design, development admission, single-access locked evaluation, confirmatory inference, and robustness publication layer are now complete on the research branch. Version 1 remains unchanged.
-
-The Version 2 design predeclares:
-
-- separate confirmatory RSI and Bollinger directional hypotheses;
-- 4-, 8-, 12-, and 24-hour horizons selected only through nested development validation;
-- expected-return and large-move targets as secondary analyses;
-- contrarian, continuation, and soft regime-conditioned signal interpretations;
-- matched benchmark and candidate model classes;
-- expanding, one-year rolling, and two-year rolling estimation windows;
-- a methodology-locked evaluation segment;
-- Holm family-wise control for the two confirmatory hypotheses;
-- explicit predictive, economic, robustness, and external-replication gates.
-
-The frozen design is documented in [`V2_DESIGN_FREEZE.md`](V2_DESIGN_FREEZE.md). The machine-readable experiment space is defined in [`configs/v2_experiment_registry.json`](configs/v2_experiment_registry.json) and protected by [`V2_PROTOCOL_LOCK.json`](V2_PROTOCOL_LOCK.json).
-
-## Institutional relevance
-
-The repository is designed for quantitative research, model validation, investment research governance, and reproducible methodological review. It demonstrates:
-
-- predeclared research assumptions;
-- common-benchmark model comparison;
-- chronological out-of-sample validation;
-- explicit separation of predictive and economic evidence;
-- regime-conditioned analysis;
-- sequential deterioration monitoring;
-- reproducible data, features, folds, predictions, figures, and manifests;
-- disciplined publication of negative findings.
-
-## Frozen Version 1 specification
-
-| Component | Specification |
-|---|---|
-| Research asset | SOL/USDT spot |
-| Market context | BTC/USDT spot |
-| Data venue | Binance |
-| Frequency | Four-hour observations |
-| Forecast horizon | Next four-hour return |
-| RSI specification | 14 periods; 30/70 threshold events |
-| Bollinger specification | 20 periods; 2 standard deviations |
-| Validation design | Five expanding chronological folds with a forecast-horizon gap |
-| Economic cost assumption | 10 basis points per one-way position change |
-| Market-state layer | Filtered range, trend, and stress probabilities |
-| Deterioration monitor | Robust one-sided CUSUM |
-
-These settings are fixed research assumptions. They are not presented as optimal trading parameters.
-
-## Evidence architecture
+## Evidence hierarchy
 
 ```text
-Indicator event description
+Indicator description
         ↓
-Common non-indicator benchmark
+Matched non-signal benchmark
         ↓
 Chronological out-of-sample comparison
         ↓
-Predictive and economic evidence
+Predictive and economic establishment
         ↓
-Filtered market-state assessment
+Conditional validity
         ↓
-Sequential deterioration monitoring
+Prospective deterioration definition
         ↓
-NOT_ESTABLISHED / ACTIVE / REDUCED / SUSPENDED
+Failure probability
+        ↓
+Governed permitted action
 ```
 
-## Reproducibility package
+Spectral, network, panic-consistent, liquidity, funding, volatility, downside, and external-event layers provide market context. They cannot substitute for signal establishment.
 
-The public repository contains the complete evidence chain required to reproduce Version 1:
+## Version 3 repository realignment
+
+A full branch review found that Version 3 correctly completed the canonical data, spectral, network, and panic-consistent regime layers, but the implementation sequence diverged after V3-3.
+
+The frozen plan defined V3-4 as the **Unified RSI and Bollinger Interpretation Engine**. Historical development instead used the V3-4A and V3-4B labels for external chronology work and proposed V3-4C for event alignment.
+
+The chronology work is preserved but reclassified as a separate regime-validation extension:
+
+| Historical identifier | Realigned identifier | Scientific role | Current status |
+|---|---|---|---|
+| V3-4A | V3-RV1 | Independent regime-validation contract | Complete and historically locked |
+| V3-4B | V3-RV2 | Independent chronology and provenance | Complete and historically locked; portability revision open |
+| Proposed V3-4C | V3-RV3 | Regime-event alignment | Paused and not started |
+
+Historical files and lock objects are not renamed or rewritten.
+
+The controlling correction is recorded in [`V3_REALIGNMENT_DECISION.md`](V3_REALIGNMENT_DECISION.md), with the current gate map in [`docs/V3_REALIGNED_GATE_MAP.md`](docs/V3_REALIGNED_GATE_MAP.md).
+
+## Current Version 3 status
+
+| Core gate | Purpose | Status |
+|---|---|---|
+| V3-0 | Design and product freeze | Complete |
+| V3-1 | Canonical data and adapter layer | Complete |
+| V3-2 | Causal feature and spectral engine | Complete |
+| V3-2B | Network and market-structure extension | Complete |
+| V3-3 | Panic-consistent probabilistic regime engine | Complete |
+| **V3-4** | **Unified RSI and Bollinger interpretation engine** | **Approved and reopened; implementation not started** |
+| V3-5 | Matched benchmark-versus-signal forecast selection | Not started |
+| V3-6 | Prospective failure-event definition | Not started |
+| V3-7 | Signal-validity and failure-probability model | Not started |
+| V3-8 | Economic and operational decision engine | Not started |
+| V3-9 | Methodology-locked evaluation | Not started |
+| V3-10 | External replication and transportability | Not started |
+| V3-11 | Reusable package and scoring workflow | Not started |
+| V3-12 | Final audit and institutional release | Not started |
+
+The true V3-4 scope is frozen in [`docs/V3_G4_SIGNAL_ENGINE_SCOPE.md`](docs/V3_G4_SIGNAL_ENGINE_SCOPE.md).
+
+## What the completed V3 infrastructure contributes
+
+### Canonical data and adapters
+
+Source-specific layouts are mapped into one deterministic schema. Model modules consume canonical fields rather than venue-specific names or paths.
+
+### Spectral and eigenvalue structure
+
+The causal fixed-panel engine reports:
+
+- dominant eigenvalue and dominant-eigenvalue share;
+- normalized eigenvalue gap;
+- participation ratio and effective dimension;
+- spectral entropy;
+- first-eigenvector concentration and stability;
+- average correlation and dispersion;
+- full eigenvalue spectrum.
+
+These measures describe whether market dependence is concentrating into a common mode. They do not establish RSI or Bollinger value by themselves.
+
+### Network and market structure
+
+The extension adds threshold networks, deterministic communities, minimum spanning trees, centrality concentration, path descriptors, and causal dynamics.
+
+### Panic-consistent regime probabilities
+
+The regime engine reports three registered models without automatic selection, ensemble, or consensus probability:
 
 ```text
-data/raw/                 frozen OHLCV snapshot, provenance, and validation
-data/processed/           aligned data, features, fold boundaries, assignments
-outputs/                  report, verdicts, predictions, summaries, SVG figures
-environment/              sanitized package-version record
-REPLICATION_MANIFEST.json public evidence map and snapshot definition
-REPLICATION_CHECKSUMS.sha256 file-integrity record
-PUBLIC_RELEASE_AUDIT.json sensitive-information audit
+V2_TRANSPARENT_STATE_CHALLENGER_V1
+MONOTONE_MECHANISM_SCORE_V1
+CAUSAL_GAUSSIAN_HMM_V1
 ```
 
-No private account data, credentials, or authenticated trading interfaces are required.
+These outputs may become candidate context variables in later signal evaluation. They cannot rescue the frozen Version 2 verdicts.
 
-## Execution
+## Stop rule for the failure programme
 
-### Windows
+Version 3 must first establish at least one RSI or Bollinger pipeline under the complete matched predictive and economic standard.
+
+When no signal pipeline passes establishment, the scientifically correct output is:
+
+```text
+FAILURE_MODEL_INADMISSIBLE_BASELINE_NOT_ESTABLISHED
+```
+
+The regime engine may still support a separate market-structure paper or product, but it cannot be presented as evidence that a non-established signal stopped working.
+
+## Reproducibility
+
+The public repository preserves the frozen Version 1 and Version 2 evidence chain:
+
+```text
+data/raw/                 frozen OHLCV snapshot and provenance
+data/processed/           aligned data, features, and fold boundaries
+outputs/                  verdicts, predictions, reports, and figures
+environment/              sanitized package-version record
+REPLICATION_MANIFEST.json public evidence map
+REPLICATION_CHECKSUMS.sha256 integrity record
+PUBLIC_RELEASE_AUDIT.json public-tree audit
+```
+
+### Version 1/2 replication on Windows
 
 ```powershell
 Set-ExecutionPolicy -Scope Process Bypass
 .\RUN_REPLICATION.ps1
 ```
 
-### macOS or Linux
+### Version 3 realignment verification on Windows
 
-```bash
-chmod +x RUN_REPLICATION.sh
-./RUN_REPLICATION.sh
+```powershell
+.\RUN_V3_REALIGNMENT.ps1
 ```
 
-The replication process validates the tracked data snapshot, executes the implementation tests, regenerates the analytical outputs and vector figures, rebuilds the replication assets, audits the public tree, and verifies the published checksums.
-
-For a governed replication followed by Git commit and push, use `PUBLISH_PUBLIC_REPLICATION.ps1`.
+The realignment runner temporarily restores Python user-site visibility for the process, executes the realignment contract tests, and verifies the corrected gate sequence.
 
 ## Status governance
 
-- `NOT_ESTABLISHED` - stable incremental value was not demonstrated under the declared validation contract.
-- `ACTIVE` - established value remains positive under the current evidence and monitoring rules.
-- `REDUCED` - historical value exists, but current evidence is uncertain, regime-concentrated, or deteriorating.
-- `SUSPENDED` - previously established value has crossed both the structural-deterioration and recent-performance gates.
+- `NOT_ESTABLISHED` — stable incremental value was not demonstrated.
+- `ACTIVE` — established value remains positive within registered boundaries.
+- `CONDITIONALLY_VALID` — established value is authorized only under approved conditions.
+- `DEGRADING` or `REDUCED` — historical establishment exists, but current evidence has weakened.
+- `SUSPENDED` — a previously established signal crossed prospectively defined failure boundaries.
+- `REVALIDATION_REQUIRED` — use cannot resume without a governed new validation.
+- `INVALID` — the required evidence standard is not met.
 
-The complete status logic is documented in [`docs/STATUS_GOVERNANCE.md`](docs/STATUS_GOVERNANCE.md).
+## Key documentation
 
-## Methodological development programme
-
-Version 1 is intentionally parsimonious. Later phases increase complexity only where it improves out-of-sample evidence, uncertainty quantification, or operational control.
-
-The approved programme covers:
-
-1. conditional validity across horizons, targets, regimes, and signal interpretations;
-2. dynamic coefficients and fully estimated latent-state models;
-3. online failure probabilities and Bayesian changepoint inference;
-4. cross-market transmission, liquidity, and production-governance layers.
-
-See [`ROADMAP.md`](ROADMAP.md).
-
-## Documentation
-
+- Richard question: [`RICHARD_QUESTION.md`](RICHARD_QUESTION.md)
+- Direct-answer logic: [`DIRECT_ANSWER_LOGIC.md`](DIRECT_ANSWER_LOGIC.md)
 - Empirical determination: [`RESULTS.md`](RESULTS.md)
-- Research scope: [`RESEARCH_SCOPE.md`](RESEARCH_SCOPE.md)
-- Replication guide: [`START_HERE.md`](START_HERE.md)
-- Model contract: [`docs/MODEL_CONTRACT.md`](docs/MODEL_CONTRACT.md)
-- Research protocol: [`docs/RESEARCH_PROTOCOL.md`](docs/RESEARCH_PROTOCOL.md)
+- Version 2 evidence report: [`outputs/v2/publication/V2_FINAL_EVIDENCE_REPORT.md`](outputs/v2/publication/V2_FINAL_EVIDENCE_REPORT.md)
+- Version 3 design freeze: [`V3_DESIGN_FREEZE.md`](V3_DESIGN_FREEZE.md)
+- Original Version 3 implementation plan: [`docs/V3_IMPLEMENTATION_PLAN.md`](docs/V3_IMPLEMENTATION_PLAN.md)
+- Version 3 realignment decision: [`V3_REALIGNMENT_DECISION.md`](V3_REALIGNMENT_DECISION.md)
+- Realigned gate map: [`docs/V3_REALIGNED_GATE_MAP.md`](docs/V3_REALIGNED_GATE_MAP.md)
+- True V3-4 scope: [`docs/V3_G4_SIGNAL_ENGINE_SCOPE.md`](docs/V3_G4_SIGNAL_ENGINE_SCOPE.md)
+- Current roadmap: [`ROADMAP.md`](ROADMAP.md)
 - Status governance: [`docs/STATUS_GOVERNANCE.md`](docs/STATUS_GOVERNANCE.md)
-- Replication package: [`docs/REPLICATION_PACKAGE.md`](docs/REPLICATION_PACKAGE.md)
-- Public release policy: [`docs/PUBLIC_RELEASE_POLICY.md`](docs/PUBLIC_RELEASE_POLICY.md)
-- Figure catalogue: [`docs/FIGURE_CATALOG.md`](docs/FIGURE_CATALOG.md)
 - References: [`docs/REFERENCES.md`](docs/REFERENCES.md)
-- Citation metadata: [`CITATION.cff`](CITATION.cff)
-- Version 2 design freeze: [`V2_DESIGN_FREEZE.md`](V2_DESIGN_FREEZE.md)
-- Version 2 research protocol: [`docs/V2_RESEARCH_PROTOCOL.md`](docs/V2_RESEARCH_PROTOCOL.md)
-- Version 2 validation gates: [`docs/V2_VALIDATION_GATES.md`](docs/V2_VALIDATION_GATES.md)
 
 ## Scope boundaries
 
-The findings are specific to the declared venue, instruments, frequency, sample, target, benchmark, validation design, and cost assumption. Version 1 does not include funding rates, open interest, liquidations, order-book depth, venue-specific slippage, market capacity, taxation, or live execution.
-
-The repository provides reproducible research evidence. It does not constitute investment advice, a trading recommendation, or a claim of universal indicator validity.
-
-## License and data notice
-
-ShockBridge-authored code and documentation are licensed under the MIT License. Third-party market data are included exclusively to support transparent replication and remain subject to the source venue's applicable terms and availability.
+The findings are specific to the declared instruments, venue, frequency, sample, target, benchmark, validation design, and cost assumptions. The repository provides reproducible research evidence; it does not constitute investment advice, a trading recommendation, or a guarantee of future performance.
 
 ## Citation
 
-Pereira, Rodolfo. (2026). *When Signals Stop Working: Technical Signal Validity Framework*. ShockBridge Pulse Research. Python research software. https://github.com/rolffcoelho-bravo/when-signals-stop-working
-
-## BibTeX
-
-```bibtex
-@software{pereira2026whensignalsstopworking,
-  author = {Pereira, Rodolfo},
-  title = {When Signals Stop Working: Technical Signal Validity Framework},
-  year = {2026},
-  publisher = {ShockBridge Pulse Research},
-  type = {Python research software},
-  url = {https://github.com/rolffcoelho-bravo/when-signals-stop-working}
-}
-```
-
-## Version 2 checkpoint D2B
-
-The active research branch now includes full development-only nested selection across the frozen model families, hyperparameters, estimation windows, soft state conditioning, confirmatory calibration methods, and abstention thresholds. D2B uses only D2A-selected signal specifications, evaluates each selected pipeline once on its untouched outer development fold, and does not access or freeze the methodology-locked evaluation pipeline.
-
-## Version 2 checkpoint D2C
-
-The active research branch now includes development admission and family-level pipeline freezing. D2C applies the frozen predictive-stability, calibration, coverage, and fold-concentration controls to RSI and Bollinger horizons, records an explicit admission or rejection for each family, and assigns a canonical hash to every admitted pipeline. The final economic gate and methodology-locked evaluation remain unopened.
-
-## Version 2 checkpoint D3
-
-D3 authorizes a single methodology-locked evaluation for the sole D2C-admitted Bollinger pipeline. The authorization record is committed before result access, RSI remains excluded, and the frozen pipeline cannot be retuned after the locked evidence is exposed. D3 records raw prediction-level evidence for subsequent inference.
-
-## Version 2 checkpoint D4
-
-D4 applies the frozen confirmatory family, one-sided benchmark-relative loss comparison, Holm control, dependence-aware bootstrap intervals, locked-subperiod consistency checks, calibration controls, and matched economic evidence. It records the final predictive and economic determinations without altering the D3 pipeline or predictions. The complete parameter-neighbourhood and estimation-window robustness gate remains separate.
-
-## Version 2 checkpoint D5
-
-D5 completes concentration, leave-one-month-out, influence, state,
-active-confidence, and development-component diagnostics; produces the final
-model card and publication figures; and freezes the primary-case evidence grade
-at `NO_INCREMENTAL_EVIDENCE`. D5 does not execute alternative pipelines on the
-locked period and cannot upgrade or reverse the D4 verdict.
-
-## Version 2.1 panic-state diagnostic
-
-A separate V2.1 extension is approved to build and validate a mechanism for
-determining when technical-signal interpretation, reliability, and permitted
-use should change under panic-consistent, liquidity-stress, or liquidation
-regimes. It is not an indicator-rescue exercise. It cannot alter the RSI
-rejection, the frozen Bollinger pipeline, D3 evidence, or the Version 2
-confirmatory verdict.
+Pereira, Rodolfo. (2026). *When Signals Stop Working: Technical Signal Validity Framework*. ShockBridge Pulse Research. Python research software.
