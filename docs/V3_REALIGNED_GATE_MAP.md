@@ -47,6 +47,20 @@ Spectral, network, panic-consistent, and external-event evidence enter as suppor
 | V3-11 | Reusable package and scoring workflow | Not started | Produces the model another user can operate |
 | V3-12 | Final audit and institutional release | Not started | Makes the complete framework reproducible and citable |
 
+Machine-readable core sequence identifiers:
+
+```text
+V3-4_SIGNAL_INTERPRETATION
+V3-5_MATCHED_FORECAST_ESTABLISHMENT
+V3-6_PROSPECTIVE_FAILURE_DEFINITION
+V3-7_FAILURE_PROBABILITY
+V3-8_DECISION_GOVERNANCE
+V3-9_LOCKED_EVALUATION
+V3-10_EXTERNAL_REPLICATION
+V3-11_REUSABLE_SCORING_PACKAGE
+V3-12_FINAL_RELEASE
+```
+
 ## Regime-validation extension
 
 The chronology work is retained under a distinct extension because its primary object is validation of regime outputs against independent documentary evidence.
