@@ -2,8 +2,9 @@
   "schema_version": "v3.g5-materialization-remediation.v1",
   "gate": "V3-5",
   "stage": "REAL_DEVELOPMENT_FOUNDATION_MATERIALIZATION",
-  "status": "TEST_FIXTURE_REMEDIATED_AUTHORITATIVE_RERUN_PENDING",
+  "status": "TEST_FIXTURE_REMEDIATION_VALIDATED_AND_CLOSED",
   "failed_execution_branch_head": "29c409021d4928a6a8b3eef6dd3ebc1f130dfca7",
+  "remediated_execution_branch_head": "91606edf50a2c0aee9bcb94a93350936ee53f81a",
   "authoritative_environment": "Windows PowerShell research environment",
   "failed_execution_evidence": {
     "parent_v3_4_lock_verified": true,
@@ -30,16 +31,30 @@
     "commit": "3c82c59642d4e9c41a8d56903a08a2d1ade39ec6",
     "changed_path": "tests/test_v3_g5_materialization.py",
     "fixture_rows_after": 800,
-    "expected_materialization_test_count": 5,
-    "longest_horizon_fold_records_expected": 20,
-    "longest_horizon_purge_rows_expected": 18,
+    "materialization_tests_passed_after": 5,
+    "materialization_tests_failed_after": 0,
+    "longest_horizon_fold_records_verified": 20,
+    "longest_horizon_purge_rows_verified": 18,
     "validated_foundation_objects_modified": false,
     "production_materialization_code_modified": false,
     "forecast_contract_modified": false,
     "v3_4_lock_modified": false
   },
+  "authoritative_rerun_evidence": {
+    "real_development_rows": 9852,
+    "target_primitive_rows": 59070,
+    "nested_fold_records": 120,
+    "bounded_candidates": 57,
+    "candidate_horizon_records": 342,
+    "matched_rows_available_records": 276,
+    "explicitly_ineligible_candidate_horizon_records": 66,
+    "input_object_hashes_bound": true,
+    "real_outputs_generated": true,
+    "tracked_worktree_clean": true
+  },
   "scientific_state": {
-    "real_development_targets_materialized": false,
+    "real_development_target_primitives_materialized": true,
+    "fold_scoped_large_move_labels_materialized": false,
     "development_model_fitting_started": false,
     "development_pipeline_selection_performed": false,
     "signal_establishment_segment_accessed": false,
@@ -47,5 +62,5 @@
     "predictive_claims_authorized": false,
     "economic_claims_authorized": false
   },
-  "next_required_action": "RERUN_RUN_V3_G5_MATERIALIZATION_PS1"
+  "next_required_action": "IMPLEMENT_FOLD_SCOPED_PREPROCESSING_AND_MATCHED_ESTIMATOR_FAMILIES"
 }
