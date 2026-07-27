@@ -50,7 +50,12 @@ def test_true_v3_g4_is_implemented_without_empirical_claims() -> None:
     assert evidence["base_signal_count"] == 44
     assert evidence["interaction_signal_count"] == 4
     assert evidence["adaptive_template_count"] == 2
-    assert evidence["development_tests_passed"] == 19
+    assert evidence["identifier_scheme"] == (
+        "v3sig:<feature_key>:<sha256(canonical_specification)>"
+    )
+    assert evidence["prior_development_suite_passed"] == 19
+    assert evidence["final_hardening_applied_after_prior_suite"] is True
+    assert evidence["current_exact_suite_execution_pending"] is True
     for field in (
         "automatic_selection_performed",
         "target_accessed",
@@ -125,7 +130,8 @@ def test_required_documents_and_v3_g4_implementation_files_exist() -> None:
     assert "APPROVED_AND_REOPENED" in scope
     assert "IMPLEMENTATION_COMPLETE_VALIDATION_PENDING" in scope
     assert "IMPLEMENTATION_COMPLETE" in implementation
-    assert "DEVELOPMENT_TESTS_19_PASSED" in implementation
+    assert "PRIOR_DEVELOPMENT_SUITE_19_PASSED" in implementation
+    assert "CURRENT_HARDENED_SUITE_EXECUTION_PENDING" in implementation
 
 
 def test_governance_controls_fail_closed() -> None:
@@ -156,3 +162,4 @@ def test_realignment_verifier_passes() -> None:
         in completed.stdout
     )
     assert "Registered signal specifications: 48" in completed.stdout
+    assert "Current hardened V3-4 suite execution pending: True" in completed.stdout
