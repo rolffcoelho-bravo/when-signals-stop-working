@@ -58,6 +58,31 @@ def git_object(commit: str, path: str) -> str:
     return git("rev-parse", f"{commit}:{path}")
 
 
+def require_clean_paths(paths: tuple[str, ...]) -> None:
+    for staged in (False, True):
+        arguments = ["diff", "--quiet"]
+        if staged:
+            arguments.append("--cached")
+        arguments.extend(["--", *paths])
+        completed = subprocess.run(
+            ["git", *arguments],
+            cwd=ROOT,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        if completed.returncode == 1:
+            location = "staged index" if staged else "working tree"
+            raise ValidatedBoundaryError(
+                f"Validated V3-5 foundation paths are modified in the {location}."
+            )
+        if completed.returncode not in {0, 1}:
+            detail = completed.stderr.strip() or completed.stdout.strip()
+            raise ValidatedBoundaryError(
+                f"Unable to verify protected path cleanliness: {detail}"
+            )
+
+
 def main() -> int:
     contract = read_json(CONTRACT_VALIDATION)
     foundation = read_json(FOUNDATION_VALIDATION)
@@ -96,12 +121,15 @@ def main() -> int:
             raise ValidatedBoundaryError(
                 f"Validated V3-5 foundation object drifted: {path}"
             )
+    require_clean_paths((contract_path, *PROTECTED_FOUNDATION_PATHS))
 
     print("Gate V3-5 validated boundaries verified.")
     print(f"Contract validation commit: {contract_commit}")
     print(f"Contract blob preserved: {contract_blob}")
     print(f"Foundation validation commit: {foundation_commit}")
     print(f"Protected foundation objects: {len(PROTECTED_FOUNDATION_PATHS)}")
+    print("Protected working-tree mutations: False")
+    print("Protected staged mutations: False")
     print("Validated foundation drift detected: False")
     return 0
 
