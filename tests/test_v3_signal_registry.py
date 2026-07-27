@@ -32,7 +32,12 @@ def test_registry_is_bounded_target_blind_and_nonselective() -> None:
     assert value["chronology_access_permitted"] is False
     assert value["predictive_claims_permitted"] is False
     assert value["economic_claims_permitted"] is False
+    assert value["deterioration_claims_permitted"] is False
     assert value["failure_claims_permitted"] is False
+    assert value["adaptive_parameters_require_training_only_supply"] is True
+    assert value["fixed_candidates_remain_visible"] is True
+    assert value["interaction_components_preserved"] is True
+    assert value["frozen_v1_v2_determinations_modified"] is False
 
 
 def test_every_signal_identifier_round_trips_complete_specification() -> None:
@@ -83,14 +88,33 @@ def test_registry_rejects_unsupported_interpretation() -> None:
         validate_registry(value)
 
 
-def test_registry_rejects_automatic_selection_or_chronology_access() -> None:
+def test_registry_rejects_boundary_or_parameter_tampering() -> None:
     value = copy.deepcopy(registry_value())
     value["automatic_selection_performed"] = True
     with pytest.raises(SignalRegistryError, match="automatic_selection_performed"):
         validate_registry(value)
+
     value = copy.deepcopy(registry_value())
     value["chronology_access_permitted"] = True
     with pytest.raises(SignalRegistryError, match="chronology_access_permitted"):
+        validate_registry(value)
+
+    value = copy.deepcopy(registry_value())
+    value["economic_claims_permitted"] = True
+    with pytest.raises(SignalRegistryError, match="economic_claims_permitted"):
+        validate_registry(value)
+
+    value = copy.deepcopy(registry_value())
+    value["defaults"]["RSI_FIXED"]["threshold_or_band_parameter"]["lower"] = 90.0
+    with pytest.raises(SignalRegistryError, match="Fixed RSI thresholds are invalid"):
+        validate_registry(value)
+
+    value = copy.deepcopy(registry_value())
+    value["defaults"]["BB_FIXED"]["threshold_or_band_parameter"]["standard_deviations"] = 0.0
+    with pytest.raises(
+        SignalRegistryError,
+        match="Bollinger standard-deviation parameter is invalid",
+    ):
         validate_registry(value)
 
 
