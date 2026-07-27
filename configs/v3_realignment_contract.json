@@ -51,8 +51,12 @@
     "adaptive_template_count": 2,
     "identifier_scheme": "v3sig:<feature_key>:<sha256(canonical_specification)>",
     "prior_development_suite_passed": 19,
-    "final_hardening_applied_after_prior_suite": true,
-    "current_exact_suite_execution_pending": true,
+    "exact_hardened_suite_passed": 19,
+    "canonical_input_materialization": "FROZEN_SOL_SNAPSHOT_VIA_LOCKED_V3_G1_ADAPTER",
+    "canonical_source_path": "data/raw/sol_usdt_4h.csv",
+    "canonical_adapter_config": "configs/v3_adapter_frozen_sol.json",
+    "canonical_output_path": "outputs/v3/data_adapter/canonical_market_data.csv",
+    "real_data_execution_pending": true,
     "automatic_selection_performed": false,
     "target_accessed": false,
     "chronology_accessed": false,
@@ -131,6 +135,7 @@
     "README.md"
   ],
   "required_v3_4_files": [
+    "configs/v3_adapter_frozen_sol.json",
     "configs/v3_signal_interpretation_registry.json",
     "configs/v3_signal_engine_example.json",
     "src/shockbridge_signal_validity/v3/signal_registry.py",
@@ -141,11 +146,12 @@
     "src/shockbridge_signal_validity/v3/signal_engine.py",
     "src/shockbridge_signal_validity/v3/signal_runner.py",
     "scripts/run_v3_signal_engine.py",
+    "scripts/verify_v3_g4_signal_outputs.py",
     "tests/test_v3_signal_registry.py",
     "tests/test_v3_signal_engine.py",
     "tests/test_v3_signal_runner.py",
     "RUN_V3_G4_SIGNAL_ENGINE.ps1",
     "RUN_V3_G4_SIGNAL_ENGINE.sh"
   ],
-  "next_action": "AUTHORITATIVELY_VALIDATE_AND_LOCK_TRUE_V3_4_THEN_BEGIN_APPROVED_V3_5"
+  "next_action": "AUTHORITATIVELY_EXECUTE_REAL_DATA_V3_4_AND_LOCK_THEN_BEGIN_APPROVED_V3_5"
 }
