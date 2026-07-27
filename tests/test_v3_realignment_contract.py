@@ -32,7 +32,8 @@ def test_richard_question_and_frozen_answer_are_restored() -> None:
 
 
 def test_true_v3_g4_is_implemented_without_empirical_claims() -> None:
-    gate = contract()["true_next_core_gate"]
+    payload = contract()
+    gate = payload["true_next_core_gate"]
     assert gate == {
         "gate": "V3-4",
         "title": "Unified RSI and Bollinger Interpretation Engine",
@@ -45,7 +46,7 @@ def test_true_v3_g4_is_implemented_without_empirical_claims() -> None:
         "economic_claims_permitted": False,
         "failure_claims_permitted": False,
     }
-    evidence = contract()["v3_4_implementation"]
+    evidence = payload["v3_4_implementation"]
     assert evidence["registered_signal_count"] == 48
     assert evidence["base_signal_count"] == 44
     assert evidence["interaction_signal_count"] == 4
@@ -66,6 +67,19 @@ def test_true_v3_g4_is_implemented_without_empirical_claims() -> None:
         "failure_claims_produced",
     ):
         assert evidence[field] is False
+
+    approval = payload["v3_5_approval"]
+    assert approval == {
+        "gate": "V3-5",
+        "title": "Matched Benchmark-versus-Signal Forecast Selection",
+        "status": "APPROVED_PENDING_V3_4_VALIDATION_AND_LOCK",
+        "implementation_started": False,
+        "parent_gate": "V3-4",
+        "parent_authoritative_validation_required": True,
+        "parent_lock_required": True,
+        "separate_approval_required_after_parent_lock": False,
+        "predictive_evaluation_permitted_before_parent_lock": False,
+    }
 
 
 def test_chronology_work_is_reclassified_without_rewriting_history() -> None:
@@ -126,6 +140,8 @@ def test_required_documents_and_v3_g4_implementation_files_exist() -> None:
     assert "ESTABLISHMENT" in direct
     assert "FAILURE_MODEL_INADMISSIBLE_BASELINE_NOT_ESTABLISHED" in direct
     assert "V3-RV3" in decision
+    assert "Unified RSI and Bollinger Interpretation Engine" in decision
+    assert "APPROVED / BLOCKED BY V3-4 VALIDATION AND LOCK" in decision
     assert "V3-4_SIGNAL_INTERPRETATION" in gate_map
     assert "APPROVED_AND_REOPENED" in scope
     assert "IMPLEMENTATION_COMPLETE_VALIDATION_PENDING" in scope
@@ -163,3 +179,8 @@ def test_realignment_verifier_passes() -> None:
     )
     assert "Registered signal specifications: 48" in completed.stdout
     assert "Current hardened V3-4 suite execution pending: True" in completed.stdout
+    assert (
+        "Gate V3-5 approval: APPROVED_PENDING_V3_4_VALIDATION_AND_LOCK"
+        in completed.stdout
+    )
+    assert "Gate V3-5 implementation started: False" in completed.stdout
