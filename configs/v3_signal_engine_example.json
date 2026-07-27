@@ -1,0 +1,8 @@
+{
+  "context_path": "",
+  "input_path": "outputs/v3/data_adapter/canonical_market_data.csv",
+  "registry_path": "configs/v3_signal_interpretation_registry.json",
+  "schema_version": "v3.signal-engine-run.v1",
+  "timezone": "UTC",
+  "training_only_parameters": {}
+}
