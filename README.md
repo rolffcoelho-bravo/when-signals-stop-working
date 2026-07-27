@@ -96,7 +96,7 @@ The controlling correction is recorded in [`V3_REALIGNMENT_DECISION.md`](V3_REAL
 | V3-2 | Causal feature and spectral engine | Complete |
 | V3-2B | Network and market-structure extension | Complete |
 | V3-3 | Panic-consistent probabilistic regime engine | Complete |
-| **V3-4** | **Unified RSI and Bollinger interpretation engine** | **Approved and reopened; implementation not started** |
+| **V3-4** | **Unified RSI and Bollinger interpretation engine** | **Implementation complete; authoritative validation and lock pending** |
 | V3-5 | Matched benchmark-versus-signal forecast selection | Not started |
 | V3-6 | Prospective failure-event definition | Not started |
 | V3-7 | Signal-validity and failure-probability model | Not started |
@@ -106,7 +106,28 @@ The controlling correction is recorded in [`V3_REALIGNMENT_DECISION.md`](V3_REAL
 | V3-11 | Reusable package and scoring workflow | Not started |
 | V3-12 | Final audit and institutional release | Not started |
 
-The true V3-4 scope is frozen in [`docs/V3_G4_SIGNAL_ENGINE_SCOPE.md`](docs/V3_G4_SIGNAL_ENGINE_SCOPE.md).
+The true V3-4 scope is frozen in [`docs/V3_G4_SIGNAL_ENGINE_SCOPE.md`](docs/V3_G4_SIGNAL_ENGINE_SCOPE.md). Its implementation and scientific boundary are documented in [`docs/V3_G4_SIGNAL_ENGINE.md`](docs/V3_G4_SIGNAL_ENGINE.md).
+
+## Implemented Gate V3-4 signal-information layer
+
+The bounded registry expands deterministically to:
+
+```text
+48 registered specifications
+44 base specifications
+4 explicit regime interactions
+2 training-only adaptive templates
+bounded maximum: 128
+automatic selection: false
+```
+
+The engine includes causal RSI and Bollinger levels, dynamics, crossings, persistence, mean-reversion and continuation interpretations, divergence, relative-band position, bandwidth and squeeze structure, and four explicit market-state interactions.
+
+Adaptive templates remain visible but ineligible until a training-only upstream process supplies parameters. Missing regime context also remains visible rather than causing an interaction candidate to disappear.
+
+Gate V3-4 produces no predictive, economic, deterioration, or failure claim. Its only role is to define the information set that Gate V3-5 will compare with matched non-signal benchmarks.
+
+A controlled development suite completed with `19 passed`. Authoritative execution on the repository's real canonical data and the Gate V3-4 lock remain pending.
 
 ## What the completed V3 infrastructure contributes
 
@@ -183,7 +204,13 @@ Set-ExecutionPolicy -Scope Process Bypass
 .\RUN_V3_REALIGNMENT.ps1
 ```
 
-The realignment runner temporarily restores Python user-site visibility for the process, executes the realignment contract tests, and verifies the corrected gate sequence.
+### Gate V3-4 implementation validation on Windows
+
+```powershell
+.\RUN_V3_G4_SIGNAL_ENGINE.ps1
+```
+
+The V3-4 runner first verifies the realignment boundary, executes the isolated 19-test suite, and then generates the deterministic signal-information package from the V3-1 canonical market data.
 
 ## Status governance
 
@@ -206,6 +233,8 @@ The realignment runner temporarily restores Python user-site visibility for the 
 - Version 3 realignment decision: [`V3_REALIGNMENT_DECISION.md`](V3_REALIGNMENT_DECISION.md)
 - Realigned gate map: [`docs/V3_REALIGNED_GATE_MAP.md`](docs/V3_REALIGNED_GATE_MAP.md)
 - True V3-4 scope: [`docs/V3_G4_SIGNAL_ENGINE_SCOPE.md`](docs/V3_G4_SIGNAL_ENGINE_SCOPE.md)
+- V3-4 implementation: [`docs/V3_G4_SIGNAL_ENGINE.md`](docs/V3_G4_SIGNAL_ENGINE.md)
+- V3-4 checkpoint: [`V3_G4_SIGNAL_ENGINE_CHECKPOINT.md`](V3_G4_SIGNAL_ENGINE_CHECKPOINT.md)
 - Current roadmap: [`ROADMAP.md`](ROADMAP.md)
 - Status governance: [`docs/STATUS_GOVERNANCE.md`](docs/STATUS_GOVERNANCE.md)
 - References: [`docs/REFERENCES.md`](docs/REFERENCES.md)
