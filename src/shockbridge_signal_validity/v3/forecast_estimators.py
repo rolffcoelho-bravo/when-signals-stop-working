@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from hashlib import sha256
 from typing import Any
 
 import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator, ClassifierMixin, RegressorMixin
-from sklearn.compose import TransformedTargetRegressor
 from sklearn.ensemble import HistGradientBoostingClassifier, HistGradientBoostingRegressor
 from sklearn.linear_model import LogisticRegression, Ridge
 from sklearn.pipeline import Pipeline
@@ -16,7 +16,7 @@ from .forecast_contract import ForecastProtocolViolation, require_utc_index
 from .forecast_model_registry import ForecastPipelineSpec
 
 
-class ExponentiallyWeightedGLMClassifier(BaseEstimator, ClassifierMixin):
+class ExponentiallyWeightedGLMClassifier(ClassifierMixin, BaseEstimator):
     def __init__(
         self,
         *,
@@ -78,7 +78,7 @@ class ExponentiallyWeightedGLMClassifier(BaseEstimator, ClassifierMixin):
         return self.model_.predict(np.asarray(X, dtype=float))
 
 
-class ExponentiallyWeightedGLMRegressor(BaseEstimator, RegressorMixin):
+class ExponentiallyWeightedGLMRegressor(RegressorMixin, BaseEstimator):
     def __init__(
         self,
         *,
@@ -119,6 +119,14 @@ class ExponentiallyWeightedGLMRegressor(BaseEstimator, RegressorMixin):
         return self.model_.predict(np.asarray(X, dtype=float))
 
 
+def estimator_signature(estimator: BaseEstimator) -> str:
+    material = (
+        f"{estimator.__class__.__module__}.{estimator.__class__.__qualname__}|"
+        f"{repr(estimator)}"
+    )
+    return sha256(material.encode("utf-8")).hexdigest()
+
+
 @dataclass(frozen=True)
 class MatchedEstimatorPair:
     pipeline_spec_id: str
@@ -131,8 +139,8 @@ class MatchedEstimatorPair:
     window_observations: int | None
 
     def manifest(self) -> dict[str, object]:
-        benchmark_parameters = self.benchmark_estimator.get_params(deep=True)
-        candidate_parameters = self.candidate_estimator.get_params(deep=True)
+        benchmark_signature = estimator_signature(self.benchmark_estimator)
+        candidate_signature = estimator_signature(self.candidate_estimator)
         return {
             "schema_version": "v3.g5-matched-estimator-pair.v1",
             "pipeline_spec_id": self.pipeline_spec_id,
@@ -141,9 +149,11 @@ class MatchedEstimatorPair:
             "model_family": self.model_family,
             "window_id": self.window_id,
             "window_observations": self.window_observations,
+            "benchmark_estimator_signature": benchmark_signature,
+            "candidate_estimator_signature": candidate_signature,
             "same_estimator_class": type(self.benchmark_estimator)
             is type(self.candidate_estimator),
-            "same_hyperparameters": benchmark_parameters == candidate_parameters,
+            "same_hyperparameters": benchmark_signature == candidate_signature,
             "real_development_model_fitting_performed": False,
         }
 
@@ -247,7 +257,7 @@ def build_matched_estimator_pair(
     candidate = build_estimator(spec, implementation_contract)
     if type(benchmark) is not type(candidate):
         raise ForecastProtocolViolation("Matched estimator classes differ.")
-    if benchmark.get_params(deep=True) != candidate.get_params(deep=True):
+    if estimator_signature(benchmark) != estimator_signature(candidate):
         raise ForecastProtocolViolation("Matched estimator hyperparameters differ.")
     return MatchedEstimatorPair(
         pipeline_spec_id=spec.pipeline_spec_id,
@@ -271,6 +281,10 @@ def select_training_window(
         raise ForecastProtocolViolation("Training feature and target rows differ.")
     if features.isna().any().any() or target.isna().any():
         raise ForecastProtocolViolation("Model training rows must be complete.")
+    if not np.isfinite(features.to_numpy(dtype=float)).all():
+        raise ForecastProtocolViolation("Model training features must be finite.")
+    if not np.isfinite(pd.to_numeric(target, errors="coerce").to_numpy(dtype=float)).all():
+        raise ForecastProtocolViolation("Model training targets must be finite.")
     if spec.window_id == "EXPANDING":
         return features.copy(), target.copy()
     if spec.window_observations is None or int(spec.window_observations) < 1:
