@@ -38,3 +38,4 @@ outputs/figures/*.png
 outputs/v3/data_adapter/
 outputs/v3/signal_engine/
 outputs/v3/g3_final_acceptance/
+outputs/v3/forecast_foundation/
