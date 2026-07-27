@@ -4,10 +4,13 @@
 
 ```text
 IMPLEMENTATION_COMPLETE
-DEVELOPMENT_TESTS_19_PASSED
+PRIOR_DEVELOPMENT_SUITE_19_PASSED
+CURRENT_HARDENED_SUITE_EXECUTION_PENDING
 AUTHORITATIVE_REPOSITORY_VALIDATION_PENDING
 LOCK_NOT_CREATED
 ```
+
+The earlier controlled development suite passed before the final input hardening, exact Wilder initialization, fail-closed registry expansion, and scalable identifier redesign. The exact current branch head has not yet been executed in the authoritative Windows research environment.
 
 ## Richard-question link
 
@@ -20,7 +23,7 @@ It does not determine whether any interpretation predicts returns, creates econo
 ```text
 compact bounded registry
     ↓
-stable expanded signal identifiers
+concise cryptographic signal identifiers
     ↓
 causal RSI and Bollinger primitives
     ↓
@@ -61,24 +64,21 @@ bounded maximum: 128
 automatic selection: false
 ```
 
-Every expanded identifier encodes:
+Each concise identifier is:
 
-- family;
-- lookback or window;
-- thresholds or band parameters;
-- orientation;
-- interpretation;
-- crossing rule;
-- persistence rule;
-- normalization;
-- regime-interaction policy;
-- registry version;
-- parameter policy;
-- base and context identities where applicable.
+```text
+v3sig:<feature_key>:<sha256(canonical_specification)>
+```
+
+The complete canonical definition is stored once in `signal_registry_manifest.json`. This binds the identifier to family, lookback, parameters, orientation, interpretation, crossing, persistence, normalization, interaction policy, registry version, parameter policy, and any base/context identities without repeating a large encoded specification in every long-format row.
 
 ## RSI calculation
 
-RSI uses Wilder-style causal exponential smoothing with `alpha = 1 / lookback`, no centered window, no future fill, and no target access.
+RSI uses Wilder's exact causal procedure:
+
+1. the first average gain and loss are simple averages over the first 14 price changes;
+2. later averages use Wilder's recursive update;
+3. no centered window, future fill, full-sample normalization, or target access is permitted.
 
 The registered fixed challenger uses:
 
@@ -101,7 +101,7 @@ The family includes:
 - outward and inward crossings;
 - time in extreme regions;
 - signed persistence;
-- time since crossing;
+- time since crossing and exit from extremes;
 - a training-only adaptive-threshold template.
 
 ## Bollinger calculation
@@ -122,28 +122,26 @@ The family includes:
 - distance magnitude;
 - upper and lower mean reversion;
 - upper breakout and lower breakdown;
-- outside-band continuation;
-- re-entry;
+- outside-band continuation and re-entry;
 - bandwidth, change, and acceleration;
 - squeeze and post-squeeze expansion;
 - expansion persistence;
 - band crossings;
 - time and signed persistence outside bands;
-- re-entry timing;
-- time since squeeze release;
+- re-entry timing and time since squeeze release;
 - a training-only adaptive squeeze template.
 
 ## Adaptive-parameter boundary
 
 The engine does not estimate adaptive thresholds.
 
-An adaptive specification remains visible with:
+Training-only parameters are supplied by readable `feature_key`. An adaptive specification remains visible as:
 
 ```text
 INELIGIBLE_TRAINING_PARAMETER_REQUIRED
 ```
 
-until a training-only upstream process supplies the required values. Invalid supplied thresholds fail closed. Fixed challengers remain visible regardless of adaptive availability.
+until an upstream training-only process supplies registered values. Unknown keys and invalid thresholds fail closed. Fixed challengers remain visible regardless of adaptive availability.
 
 ## Regime interactions
 
@@ -156,13 +154,7 @@ Bollinger lower breakdown × p_panic_consistent
 Bollinger post-squeeze expansion × dominant_eigenvalue_share
 ```
 
-When context is unavailable, the interaction remains visible as:
-
-```text
-INELIGIBLE_CONTEXT_UNAVAILABLE
-```
-
-When context is available, the output preserves:
+Probability and share context values must lie in `[0,1]`. Missing context remains visible as `INELIGIBLE_CONTEXT_UNAVAILABLE`. Available interactions preserve:
 
 ```text
 base_signal_value
@@ -170,7 +162,21 @@ context_value
 feature_value = base_signal_value × context_value
 ```
 
-The interaction cannot hide or replace either component.
+## Input and fail-closed controls
+
+The engine verifies:
+
+- required canonical columns;
+- valid UTC timestamps;
+- unique timestamp-asset-venue keys;
+- nonempty asset and venue identifiers;
+- finite OHLCV values;
+- positive prices and nonnegative volume;
+- valid OHLC low/high relationships;
+- finite context and bounded probability/share context;
+- registered adaptive parameter keys;
+- valid fixed and adaptive parameter contracts;
+- every no-selection and no-claim registry flag.
 
 ## Long-format output
 
@@ -181,6 +187,7 @@ timestamp
 asset
 venue
 signal_id
+feature_key
 signal_family
 interpretation
 orientation
@@ -192,7 +199,13 @@ base_signal_value
 context_value
 ```
 
-Every registered specification is emitted for every canonical source row. Insufficient history and unavailable optional inputs remain explicit; candidates are not deleted because they are sparse or unpromising.
+Every registered specification is emitted for every canonical source row. The required identity is:
+
+```text
+feature rows = canonical source rows × 48
+```
+
+Insufficient history and unavailable optional inputs remain explicit; candidates are not deleted because they are sparse or unpromising.
 
 ## Evidence outputs
 
@@ -205,33 +218,22 @@ signal_validation_report.json
 canonical_validation_report.json
 ```
 
-The runner writes LF-normalized CSV bytes and deterministic JSON objects.
+The manifests bind source input, registry, complete expanded definitions, output identity, row-count identity, available context columns, supplied training parameters, and every no-claim boundary. CSV evidence is LF-normalized.
 
-## Development validation
+## Validation boundary
 
-The isolated development suite completed with:
+A prior controlled version of the isolated suite completed with `19 passed`. Final hardening was then applied to:
 
-```text
-19 passed
-```
+- use exact Wilder initialization and recursion;
+- validate fixed and adaptive registry parameters;
+- enforce every no-claim flag;
+- reject malformed OHLC relationships;
+- reject unregistered adaptive parameter keys;
+- validate probability context ranges;
+- add row-count and context transparency;
+- replace repeated URI specifications with concise cryptographic identifiers.
 
-It covers:
-
-- bounded registry validation;
-- identifier round-trip;
-- required interpretation coverage;
-- no selection, target, or chronology access;
-- future-append invariance;
-- source-row-order invariance;
-- explicit early-history states;
-- adaptive-parameter fail-closed behavior;
-- preserved interaction components;
-- missing OHLCV and duplicate-key rejection;
-- deterministic complete runner outputs;
-- LF CSV evidence;
-- absence of predictive, economic, deterioration, and failure claims.
-
-This development execution is not the authoritative research-environment validation and does not authorize a lock.
+The existing 19 tests were updated to bind these controls without increasing the test inventory. The exact hardened current head remains unexecuted pending the authoritative Windows run.
 
 ## Scientific boundary
 
@@ -245,8 +247,7 @@ It does not support:
 - predictive superiority;
 - economic value;
 - conditional validity;
-- deterioration;
-- suspension;
+- deterioration or suspension;
 - failure probability;
 - a claim that either signal stopped working.
 
@@ -256,4 +257,4 @@ After authoritative validation and lock, the next core gate is:
 
 > Gate V3-5 — Matched Benchmark-versus-Signal Forecast Selection
 
-Gate V3-5 must retain every registered candidate, use nested chronological development selection, and compare candidates with matched benchmarks that differ only by registered signal information.
+Gate V3-5 has not started and requires separate approval. It must retain every registered candidate, use nested chronological development selection, and compare candidates with matched benchmarks differing only by registered signal information.
