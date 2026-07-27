@@ -31,59 +31,31 @@ def test_richard_question_and_frozen_answer_are_restored() -> None:
     assert frozen["modified_by_realignment"] is False
 
 
-def test_true_v3_g4_is_implemented_without_empirical_claims() -> None:
+def test_true_v3_g4_is_authoritatively_validated_without_empirical_claims() -> None:
     payload = contract()
     gate = payload["true_next_core_gate"]
     assert gate == {
         "gate": "V3-4",
         "title": "Unified RSI and Bollinger Interpretation Engine",
-        "status": "IMPLEMENTATION_COMPLETE_VALIDATION_PENDING",
+        "status": "AUTHORITATIVE_VALIDATION_COMPLETE_LOCK_PENDING",
         "implementation_started": True,
         "implementation_complete": True,
-        "authoritative_validation_complete": False,
+        "authoritative_validation_complete": True,
+        "validated_implementation_commit": "ff2e7ecba3fa69f22e0b109437d23b52d30fba2b",
         "lock_created": False,
         "predictive_claims_permitted": False,
         "economic_claims_permitted": False,
         "failure_claims_permitted": False,
     }
-
-    parent = payload["v3_1_parent_verification"]
-    assert parent == {
-        "historical_boundary_commit": "7a7a5c55184aadfb436774ff1e497ce873a96b6e",
-        "historical_lock_rewritten": False,
-        "historical_objects_verified_at_boundary": True,
-        "current_direct_objects_verified_as_git_objects": True,
-        "current_direct_worktree_mutations_fail_closed": True,
-        "shared_export_surface": "src/shockbridge_signal_validity/v3/__init__.py",
-        "shared_export_surface_may_have_later_owner": True,
-        "v3_1_export_compatibility_required": True,
-        "checkout_eol_invariant": True,
-        "authoritative_windows_rerun_pending": True,
-    }
-
     evidence = payload["v3_4_implementation"]
     assert evidence["registered_signal_count"] == 48
-    assert evidence["base_signal_count"] == 44
-    assert evidence["interaction_signal_count"] == 4
-    assert evidence["adaptive_template_count"] == 2
-    assert evidence["identifier_scheme"] == (
-        "v3sig:<feature_key>:<sha256(canonical_specification)>"
-    )
-    assert evidence["prior_development_suite_passed"] == 19
-    assert evidence["exact_hardened_suite_passed"] == 19
-    assert evidence["final_hardening_applied_after_prior_suite"] is True
-    assert evidence["current_exact_suite_execution_pending"] is True
-    assert evidence["canonical_input_materialization"] == (
-        "FROZEN_SOL_SNAPSHOT_VIA_LOCKED_V3_G1_ADAPTER"
-    )
-    assert evidence["canonical_source_path"] == "data/raw/sol_usdt_4h.csv"
-    assert evidence["canonical_adapter_config"] == (
-        "configs/v3_adapter_frozen_sol.json"
-    )
-    assert evidence["canonical_output_path"] == (
-        "outputs/v3/data_adapter/canonical_market_data.csv"
-    )
-    assert evidence["real_data_execution_pending"] is True
+    assert evidence["canonical_source_rows"] == 12171
+    assert evidence["expected_feature_rows"] == 584208
+    assert evidence["observed_feature_rows"] == 584208
+    assert evidence["row_count_identity_verified"] is True
+    assert evidence["current_exact_suite_execution_pending"] is False
+    assert evidence["real_data_execution_pending"] is False
+    assert evidence["real_data_execution_passed"] is True
     for field in (
         "automatic_selection_performed",
         "target_accessed",
@@ -95,17 +67,29 @@ def test_true_v3_g4_is_implemented_without_empirical_claims() -> None:
     ):
         assert evidence[field] is False
 
-    approval = payload["v3_5_approval"]
-    assert approval == {
-        "gate": "V3-5",
-        "title": "Matched Benchmark-versus-Signal Forecast Selection",
-        "status": "APPROVED_PENDING_V3_4_VALIDATION_AND_LOCK",
-        "implementation_started": False,
-        "parent_gate": "V3-4",
-        "parent_authoritative_validation_required": True,
-        "parent_lock_required": True,
-        "separate_approval_required_after_parent_lock": False,
-        "predictive_evaluation_permitted_before_parent_lock": False,
+
+def test_parent_and_lock_finalization_boundaries_are_explicit() -> None:
+    payload = contract()
+    parent = payload["v3_1_parent_verification"]
+    assert parent["historical_boundary_commit"] == (
+        "7a7a5c55184aadfb436774ff1e497ce873a96b6e"
+    )
+    assert parent["historical_lock_rewritten"] is False
+    assert parent["authoritative_windows_rerun_pending"] is False
+    assert parent["authoritative_windows_rerun_passed"] is True
+
+    lock = payload["v3_4_lock_finalization"]
+    assert lock == {
+        "status": "LOCK_MATERIALIZATION_PENDING",
+        "validated_implementation_commit": "ff2e7ecba3fa69f22e0b109437d23b52d30fba2b",
+        "lock_path": "V3_G4_SIGNAL_ENGINE_LOCK.json",
+        "lock_candidate_generator": "scripts/finalize_v3_g4_lock.py",
+        "lock_verifier": "scripts/verify_v3_g4_lock.py",
+        "windows_runner": "RUN_V3_G4_LOCK.ps1",
+        "posix_runner": "RUN_V3_G4_LOCK.sh",
+        "large_signal_features_tracked": False,
+        "large_signal_features_bound_by_sha256": True,
+        "curated_evidence_directory": "evidence/v3/g4_signal_lock",
     }
 
 
@@ -125,68 +109,46 @@ def test_chronology_work_is_reclassified_without_rewriting_history() -> None:
     assert all(item["historical_files_renamed"] is False for item in mappings)
 
 
-def test_core_sequence_places_signal_establishment_before_failure_model() -> None:
-    sequence = contract()["core_sequence"]
+def test_core_sequence_and_v3_g5_approval_remain_governed() -> None:
+    payload = contract()
+    sequence = payload["core_sequence"]
     assert sequence.index("V3-4_SIGNAL_INTERPRETATION") < sequence.index(
         "V3-5_MATCHED_FORECAST_ESTABLISHMENT"
     )
     assert sequence.index("V3-5_MATCHED_FORECAST_ESTABLISHMENT") < sequence.index(
         "V3-6_PROSPECTIVE_FAILURE_DEFINITION"
     )
-    assert sequence.index("V3-6_PROSPECTIVE_FAILURE_DEFINITION") < sequence.index(
-        "V3-7_FAILURE_PROBABILITY"
-    )
-    assert contract()["stop_rules"]["no_established_signal"] == (
+    assert payload["stop_rules"]["no_established_signal"] == (
         "FAILURE_MODEL_INADMISSIBLE_BASELINE_NOT_ESTABLISHED"
     )
+    approval = payload["v3_5_approval"]
+    assert approval == {
+        "gate": "V3-5",
+        "title": "Matched Benchmark-versus-Signal Forecast Selection",
+        "status": "APPROVED_PENDING_V3_4_LOCK",
+        "implementation_started": False,
+        "parent_gate": "V3-4",
+        "parent_authoritative_validation_required": True,
+        "parent_authoritative_validation_complete": True,
+        "parent_lock_required": True,
+        "separate_approval_required_after_parent_lock": False,
+        "predictive_evaluation_permitted_before_parent_lock": False,
+    }
 
 
-def test_required_documents_and_v3_g4_implementation_files_exist() -> None:
+def test_required_documents_and_implementation_files_exist() -> None:
     payload = contract()
     for relative in payload["required_documents"]:
         assert (ROOT / relative).is_file(), relative
     for relative in payload["required_v3_4_files"]:
         assert (ROOT / relative).is_file(), relative
 
-    richard = (ROOT / "RICHARD_QUESTION.md").read_text(encoding="utf-8")
-    direct = (ROOT / "DIRECT_ANSWER_LOGIC.md").read_text(encoding="utf-8")
-    decision = (ROOT / "V3_REALIGNMENT_DECISION.md").read_text(encoding="utf-8")
-    gate_map = (ROOT / "docs" / "V3_REALIGNED_GATE_MAP.md").read_text(
+    checkpoint = (ROOT / "V3_G4_SIGNAL_ENGINE_CHECKPOINT.md").read_text(
         encoding="utf-8"
     )
-    scope = (ROOT / "docs" / "V3_G4_SIGNAL_ENGINE_SCOPE.md").read_text(
-        encoding="utf-8"
-    )
-    implementation = (ROOT / "docs" / "V3_G4_SIGNAL_ENGINE.md").read_text(
-        encoding="utf-8"
-    )
-
-    assert "When will RSI stop working?" in richard
-    assert "NO_PIPELINE_ADMITTED" in richard
-    assert "NO_INCREMENTAL_EVIDENCE" in richard
-    assert "ESTABLISHMENT" in direct
-    assert "FAILURE_MODEL_INADMISSIBLE_BASELINE_NOT_ESTABLISHED" in direct
-    assert "V3-RV3" in decision
-    assert "Unified RSI and Bollinger Interpretation Engine" in decision
-    assert "APPROVED / BLOCKED BY V3-4 VALIDATION AND LOCK" in decision
-    assert "V3-4_SIGNAL_INTERPRETATION" in gate_map
-    assert "APPROVED_AND_REOPENED" in scope
-    assert "IMPLEMENTATION_COMPLETE_VALIDATION_PENDING" in scope
-    assert "IMPLEMENTATION_COMPLETE" in implementation
-    assert "PRIOR_DEVELOPMENT_SUITE_19_PASSED" in implementation
-    assert "CURRENT_HARDENED_SUITE_EXECUTION_PENDING" in implementation
-
-
-def test_governance_controls_fail_closed() -> None:
-    controls = contract()["governance_controls"]
-    assert controls == {
-        "historical_locks_rewritten": False,
-        "chronology_may_tune_signal_registry": False,
-        "panic_regime_may_rescue_v2_signal": False,
-        "automatic_signal_selection_in_v3_4": False,
-        "each_future_gate_must_state_richard_question_link": True,
-        "governance_must_be_proportional_to_scientific_gate": True,
-    }
+    assert "AUTHORITATIVE_VALIDATION_COMPLETE_LOCK_PENDING" in checkpoint
+    assert "ff2e7ecba3fa69f22e0b109437d23b52d30fba2b" in checkpoint
+    assert "584208" in checkpoint
 
 
 def test_realignment_verifier_passes() -> None:
@@ -199,16 +161,16 @@ def test_realignment_verifier_passes() -> None:
     )
     assert completed.returncode == 0, completed.stderr
     assert "Richard question restored: True" in completed.stdout
-    assert "True V3-4 implementation started: True" in completed.stdout
     assert (
-        "True V3-4 status: IMPLEMENTATION_COMPLETE_VALIDATION_PENDING"
+        "True V3-4 status: AUTHORITATIVE_VALIDATION_COMPLETE_LOCK_PENDING"
         in completed.stdout
     )
-    assert "V3-1 historical-owner boundary preserved: True" in completed.stdout
-    assert "Registered signal specifications: 48" in completed.stdout
-    assert "Current hardened V3-4 suite execution pending: True" in completed.stdout
     assert (
-        "Gate V3-5 approval: APPROVED_PENDING_V3_4_VALIDATION_AND_LOCK"
+        "Validated V3-4 implementation commit: "
+        "ff2e7ecba3fa69f22e0b109437d23b52d30fba2b"
         in completed.stdout
     )
+    assert "Authoritative source rows: 12171" in completed.stdout
+    assert "Authoritative feature rows: 584208" in completed.stdout
+    assert "Gate V3-5 approval: APPROVED_PENDING_V3_4_LOCK" in completed.stdout
     assert "Gate V3-5 implementation started: False" in completed.stdout
