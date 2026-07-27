@@ -14,7 +14,7 @@ Baseline commit: 5a07299367b80c3940e652e7bbdd208ce86ba5ef
 
 A full repository review found that Version 3 correctly implemented its canonical data, spectral, network, and panic-consistent regime layers, but then diverged from the frozen implementation sequence.
 
-The frozen plan defined Gate V3-4 as the unified RSI and Bollinger interpretation engine. The active branch instead used the V3-4A and V3-4B labels for external chronology governance and compilation, with a proposed V3-4C event-alignment evaluation.
+The frozen plan defined Gate V3-4 as the **Unified RSI and Bollinger Interpretation Engine**. The active branch instead used the V3-4A and V3-4B labels for external chronology governance and compilation, with a proposed V3-4C event-alignment evaluation.
 
 The chronology work is valid supporting research, but it does not implement the signal engine, matched forecast engine, failure definition, failure-probability model, or operational decision layer required to answer Richard's question.
 
@@ -57,8 +57,8 @@ V3-1   Canonical data and adapter layer                 COMPLETE
 V3-2   Causal feature and spectral engine               COMPLETE
 V3-2B  Market-structure extension                       COMPLETE
 V3-3   Panic-consistent probabilistic regime engine     COMPLETE
-V3-4   Unified RSI and Bollinger interpretation engine  IMPLEMENTED / VALIDATION PENDING
-V3-5   Matched benchmark-versus-signal forecast engine  NOT STARTED
+V3-4   Unified RSI and Bollinger Interpretation Engine  IMPLEMENTED / VALIDATION PENDING
+V3-5   Matched benchmark-versus-signal forecast engine  APPROVED / BLOCKED BY V3-4 VALIDATION AND LOCK
 V3-6   Prospective failure-event and monitoring layer   NOT STARTED
 V3-7   Signal-validity and failure-probability model     NOT STARTED
 V3-8   Economic and operational decision engine         NOT STARTED
@@ -78,7 +78,7 @@ V3-RV3 Regime-event alignment                            PAUSED
 
 ## True Gate V3-4 implementation
 
-The true V3-4 implementation now exists as a bounded, reproducible, target-blind signal-information engine.
+The **Unified RSI and Bollinger Interpretation Engine** now exists as a bounded, reproducible, target-blind signal-information engine.
 
 ```text
 registered specifications: 48
@@ -86,8 +86,8 @@ base specifications: 44
 explicit regime interactions: 4
 training-only adaptive templates: 2
 bounded maximum: 128
-controlled development tests: 19 passed
-authoritative Windows validation: pending
+prior controlled development suite: 19 passed
+exact hardened Windows validation: pending
 lock: not created
 ```
 
@@ -133,6 +133,14 @@ Gate V3-4 generates signal information only. It may not:
 - estimate signal-failure probability;
 - rewrite Version 1 or Version 2 results.
 
+## Gate V3-5 approval boundary
+
+Gate V3-5 — Matched Benchmark-versus-Signal Forecast Selection — is approved.
+
+Its implementation remains blocked until Gate V3-4 passes the exact hardened Windows suite, produces the complete real-data evidence package, receives final object review, and is locked. Approval does not authorize bypassing the parent-gate acceptance boundary.
+
+No Gate V3-5 model, target, fold, selection, or forecast execution has started at this decision point.
+
 ## Establishment stop rule
 
 After Gate V3-5, if no Version 3 RSI or Bollinger pipeline passes the complete establishment standard, the signal-failure programme must stop for that family.
@@ -164,4 +172,4 @@ ROADMAP.md
 
 Authoritatively validate the corrected realignment and the implemented V3-4 signal engine on the Windows research environment, review the real canonical-data manifests and tracked working-tree state, and then create the V3-4 lock only if all evidence passes.
 
-The paused `V3-RV3` event-alignment study may resume only after the core signal-establishment sequence reaches an appropriate external-validation boundary. Gate V3-5 remains not started and requires separate approval after V3-4 validation and lock.
+Gate V3-5 is approved and may begin immediately after the V3-4 lock without another approval request. The paused `V3-RV3` event-alignment study may resume only after the core signal-establishment sequence reaches an appropriate external-validation boundary.
