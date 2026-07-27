@@ -171,9 +171,9 @@ The package contains 17 canonical events supported by 27 documentary sources, in
 
 This extension may resume only at an appropriate external-validation point. It is not allowed to displace the signal-establishment sequence.
 
-# True V3-4 — Unified RSI and Bollinger interpretation engine
+# True V3-4 — Unified RSI and Bollinger Interpretation Engine
 
-**Status:** implementation complete; controlled development suite `19 passed`; authoritative Windows validation, real-data evidence review, and lock pending.
+**Status:** implementation complete; prior controlled development suite `19 passed`; exact hardened Windows validation, real-data evidence review, and lock pending.
 
 ## Richard-question link
 
@@ -254,9 +254,11 @@ canonical_validation_report.json
 - no tracked-file mutation;
 - final object review before lock.
 
-# V3-5 — Matched benchmark-versus-signal forecast selection
+# V3-5 — Matched Benchmark-versus-Signal Forecast Selection
 
-**Status:** not started. Requires separate approval after V3-4 is authoritatively validated and locked.
+**Status:** approved; implementation not started; blocked until V3-4 is authoritatively validated and locked.
+
+The approval is already recorded. No additional approval request is required after the V3-4 parent lock.
 
 ## Objective
 
@@ -269,6 +271,17 @@ Determine whether registered signal information adds incremental value beyond a 
 - identical benchmark/candidate rows, preprocessing, model class, calibration, costs, and folds;
 - multiplicity, calibration, coverage, concentration, and complexity controls;
 - frozen admitted pipeline registry.
+
+## Parent-gate boundary
+
+Before V3-4 is authoritatively validated and locked, V3-5 may not:
+
+- access outcome targets for model fitting;
+- fit or rank forecasting pipelines;
+- select signal candidates;
+- establish predictive or economic value;
+- use chronology or regime evidence to rescue a signal;
+- claim that implementation has started.
 
 ## Establishment stop rule
 
