@@ -59,7 +59,8 @@ def test_runner_writes_complete_deterministic_evidence_package(tmp_path: Path) -
 
 def test_runner_manifest_and_validation_preserve_gate_boundaries(tmp_path: Path) -> None:
     input_path = tmp_path / "canonical.csv"
-    fixture().to_csv(input_path, index=False)
+    source = fixture()
+    source.to_csv(input_path, index=False)
     output = tmp_path / "output"
     run_signal_engine(
         {
@@ -72,11 +73,19 @@ def test_runner_manifest_and_validation_preserve_gate_boundaries(tmp_path: Path)
     manifest = json.loads((output / "signal_feature_manifest.json").read_text())
     validation = json.loads((output / "signal_validation_report.json").read_text())
     assert manifest["signal_count"] == 48
+    assert manifest["source_rows"] == len(source)
+    assert manifest["expected_rows"] == len(source) * 48
+    assert manifest["rows"] == manifest["expected_rows"]
+    assert manifest["row_count_identity_verified"] is True
     assert manifest["automatic_selection_performed"] is False
     assert manifest["target_accessed"] is False
     assert manifest["chronology_accessed"] is False
+    assert validation["row_count_identity_verified"] is True
+    assert validation["context_columns_accessed"] == []
     assert validation["next_gate"] == "V3-5"
-    assert validation["richard_question_advanced_by"] == "DEFINES_SIGNAL_INFORMATION_TO_BE_TESTED"
+    assert validation["richard_question_advanced_by"] == (
+        "DEFINES_SIGNAL_INFORMATION_TO_BE_TESTED"
+    )
 
 
 def test_runner_uses_lf_for_deterministic_csv_evidence(tmp_path: Path) -> None:
