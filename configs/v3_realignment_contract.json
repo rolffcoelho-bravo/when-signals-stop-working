@@ -35,10 +35,11 @@
   "true_next_core_gate": {
     "gate": "V3-4",
     "title": "Unified RSI and Bollinger Interpretation Engine",
-    "status": "IMPLEMENTATION_COMPLETE_VALIDATION_PENDING",
+    "status": "AUTHORITATIVE_VALIDATION_COMPLETE_LOCK_PENDING",
     "implementation_started": true,
     "implementation_complete": true,
-    "authoritative_validation_complete": false,
+    "authoritative_validation_complete": true,
+    "validated_implementation_commit": "ff2e7ecba3fa69f22e0b109437d23b52d30fba2b",
     "lock_created": false,
     "predictive_claims_permitted": false,
     "economic_claims_permitted": false,
@@ -54,7 +55,8 @@
     "shared_export_surface_may_have_later_owner": true,
     "v3_1_export_compatibility_required": true,
     "checkout_eol_invariant": true,
-    "authoritative_windows_rerun_pending": true
+    "authoritative_windows_rerun_pending": false,
+    "authoritative_windows_rerun_passed": true
   },
   "v3_4_implementation": {
     "registered_signal_count": 48,
@@ -65,12 +67,18 @@
     "prior_development_suite_passed": 19,
     "exact_hardened_suite_passed": 19,
     "final_hardening_applied_after_prior_suite": true,
-    "current_exact_suite_execution_pending": true,
+    "current_exact_suite_execution_pending": false,
     "canonical_input_materialization": "FROZEN_SOL_SNAPSHOT_VIA_LOCKED_V3_G1_ADAPTER",
     "canonical_source_path": "data/raw/sol_usdt_4h.csv",
     "canonical_adapter_config": "configs/v3_adapter_frozen_sol.json",
     "canonical_output_path": "outputs/v3/data_adapter/canonical_market_data.csv",
-    "real_data_execution_pending": true,
+    "canonical_source_rows": 12171,
+    "canonical_data_sha256": "3c49bfcab5fdf3aba9ada614873fa424e97c1f66e2690b790204fc29fdb5109c",
+    "real_data_execution_pending": false,
+    "real_data_execution_passed": true,
+    "expected_feature_rows": 584208,
+    "observed_feature_rows": 584208,
+    "row_count_identity_verified": true,
     "automatic_selection_performed": false,
     "target_accessed": false,
     "chronology_accessed": false,
@@ -79,13 +87,26 @@
     "deterioration_claims_produced": false,
     "failure_claims_produced": false
   },
+  "v3_4_lock_finalization": {
+    "status": "LOCK_MATERIALIZATION_PENDING",
+    "validated_implementation_commit": "ff2e7ecba3fa69f22e0b109437d23b52d30fba2b",
+    "lock_path": "V3_G4_SIGNAL_ENGINE_LOCK.json",
+    "lock_candidate_generator": "scripts/finalize_v3_g4_lock.py",
+    "lock_verifier": "scripts/verify_v3_g4_lock.py",
+    "windows_runner": "RUN_V3_G4_LOCK.ps1",
+    "posix_runner": "RUN_V3_G4_LOCK.sh",
+    "large_signal_features_tracked": false,
+    "large_signal_features_bound_by_sha256": true,
+    "curated_evidence_directory": "evidence/v3/g4_signal_lock"
+  },
   "v3_5_approval": {
     "gate": "V3-5",
     "title": "Matched Benchmark-versus-Signal Forecast Selection",
-    "status": "APPROVED_PENDING_V3_4_VALIDATION_AND_LOCK",
+    "status": "APPROVED_PENDING_V3_4_LOCK",
     "implementation_started": false,
     "parent_gate": "V3-4",
     "parent_authoritative_validation_required": true,
+    "parent_authoritative_validation_complete": true,
     "parent_lock_required": true,
     "separate_approval_required_after_parent_lock": false,
     "predictive_evaluation_permitted_before_parent_lock": false
@@ -162,11 +183,15 @@
     "scripts/run_v3_signal_engine.py",
     "scripts/verify_v3_g1_data_adapter.py",
     "scripts/verify_v3_g4_signal_outputs.py",
+    "scripts/finalize_v3_g4_lock.py",
+    "scripts/verify_v3_g4_lock.py",
     "tests/test_v3_signal_registry.py",
     "tests/test_v3_signal_engine.py",
     "tests/test_v3_signal_runner.py",
     "RUN_V3_G4_SIGNAL_ENGINE.ps1",
-    "RUN_V3_G4_SIGNAL_ENGINE.sh"
+    "RUN_V3_G4_SIGNAL_ENGINE.sh",
+    "RUN_V3_G4_LOCK.ps1",
+    "RUN_V3_G4_LOCK.sh"
   ],
-  "next_action": "AUTHORITATIVELY_EXECUTE_REAL_DATA_V3_4_AND_LOCK_THEN_BEGIN_APPROVED_V3_5"
+  "next_action": "MATERIALIZE_AND_REVIEW_V3_4_LOCK_THEN_BEGIN_APPROVED_V3_5"
 }
