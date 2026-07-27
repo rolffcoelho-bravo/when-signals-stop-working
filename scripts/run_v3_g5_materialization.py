@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+from hashlib import sha256
 import os
 from pathlib import Path
 import sys
@@ -41,6 +42,14 @@ def parser() -> argparse.ArgumentParser:
     return value
 
 
+def file_sha256(path: str | Path) -> str:
+    digest = sha256()
+    with Path(path).open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def main() -> int:
     arguments = parser().parse_args()
     os.chdir(ROOT)
@@ -50,6 +59,21 @@ def main() -> int:
         btc_path=arguments.btc,
         signal_features_path=arguments.signal_features,
         signal_registry_manifest_path=arguments.signal_registry_manifest,
+    )
+    source_manifest = foundation.manifests["source_manifest"]
+    source_manifest.update(
+        {
+            "forecast_contract": arguments.contract,
+            "forecast_contract_sha256": file_sha256(arguments.contract),
+            "sol_source_sha256": file_sha256(arguments.sol),
+            "btc_source_sha256": file_sha256(arguments.btc),
+            "signal_features_source": arguments.signal_features,
+            "signal_features_sha256": file_sha256(arguments.signal_features),
+            "signal_registry_manifest": arguments.signal_registry_manifest,
+            "signal_registry_manifest_sha256": file_sha256(
+                arguments.signal_registry_manifest
+            ),
+        }
     )
     manifest = write_materialized_foundation(
         foundation,
@@ -61,6 +85,7 @@ def main() -> int:
     print(f"Nested fold rows: {manifest['fold_rows']}")
     print(f"Bounded candidates: {manifest['candidate_count']}")
     print(f"Candidate-horizon coverage rows: {manifest['matched_coverage_rows']}")
+    print("Input object hashes bound: True")
     print("Large-move labels materialized: False")
     print("Model fitting performed: False")
     print("Signal-establishment segment accessed: False")
