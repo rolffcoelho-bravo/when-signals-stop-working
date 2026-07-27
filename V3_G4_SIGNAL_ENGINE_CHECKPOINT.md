@@ -3,28 +3,32 @@
 ## Status
 
 ```text
-IMPLEMENTATION_COMPLETE_VALIDATION_PENDING
+IMPLEMENTATION_COMPLETE
+AUTHORITATIVE_VALIDATION_COMPLETE_LOCK_PENDING
 WINDOWS_REALIGNMENT_7_PASSED
 WINDOWS_SIGNAL_SUITE_19_PASSED
-REAL_DATA_INPUT_MATERIALIZATION_REMEDIATED
-V3_1_HISTORICAL_OWNER_REMEDIATION_IMPLEMENTED
-CURRENT_EXACT_ACCEPTANCE_RERUN_PENDING
-LOCK_NOT_CREATED
+REAL_DATA_EXECUTION_PASSED
+OUTPUT_IDENTITY_VERIFIED
+NO_TRACKED_MUTATION
+VALIDATED_IMPLEMENTATION_COMMIT_FROZEN
+LOCK_NOT_YET_PROMOTED
 ```
 
-Gate V3-4 has been implemented on `research/v3-adaptive-signal-validity`. The Windows research environment has passed the corrected seven-test repository-realignment suite and the exact hardened nineteen-test signal-engine suite.
+Gate V3-4 has passed its authoritative Windows research-environment acceptance boundary. The validated implementation is frozen at:
 
-The first real-data execution stopped because `outputs/v3/data_adapter/canonical_market_data.csv` had not been materialized locally. The self-contained runner remediation then exposed a second parent-verification problem: the historical V3-1 verifier compared the current shared package initializer `src/shockbridge_signal_validity/v3/__init__.py` with its V3-1-era blob even though later gates legitimately extended that initializer with spectral exports.
+```text
+ff2e7ecba3fa69f22e0b109437d23b52d30fba2b
+```
 
-Neither stop was an RSI, Bollinger, registry, leakage, forecast, or empirical failure. The runner and parent verifier now distinguish historical lock integrity, current direct implementation integrity, and legitimate later ownership of a shared export surface.
+Later lock tooling may be added, but every protected V3-4 implementation object must remain identical to that validated commit.
 
 ## Research-question link
 
 Gate V3-4 advances Richard's question by defining the complete bounded RSI and Bollinger information family that Gate V3-5 will compare with matched non-signal benchmarks.
 
-It does not answer whether any signal is established and cannot authorize deterioration or failure modelling.
+It does not establish predictive or economic value and cannot authorize deterioration or failure modelling.
 
-## Corrected parent boundary
+## Frozen parent and implementation boundaries
 
 ```text
 Frozen Version 2 baseline:
@@ -33,58 +37,48 @@ Frozen Version 2 baseline:
 Historical V3-1 implementation boundary:
 7a7a5c55184aadfb436774ff1e497ce873a96b6e
 
-Repository realignment checkpoint:
-V3_REALIGNMENT_CHECKPOINT.md
-
-Required standalone verifier:
-scripts/verify_v3_realignment.py
-
-Locked canonical adapter verifier:
-scripts/verify_v3_g1_data_adapter.py
+Authoritatively validated V3-4 implementation boundary:
+ff2e7ecba3fa69f22e0b109437d23b52d30fba2b
 ```
 
-The V3-1 lock file remains unchanged. Every protected object is verified at the historical V3-1 boundary. Current direct V3-1 implementation objects are separately checked as committed Git blobs, and uncommitted modifications to those direct paths fail closed. The shared `v3/__init__.py` may contain later-gate exports, but all required V3-1 public symbols must remain present.
+The V3-1 lock remains unchanged. Its historical objects are verified at the original V3-1 boundary. Current direct V3-1 objects remain protected, and the shared `v3/__init__.py` is governed through backward-compatible V3-1 exports rather than an obsolete package-level blob comparison.
 
-The chronology extension remains scientifically reclassified as `V3-RV1` and `V3-RV2`; `V3-RV3` event alignment remains paused.
-
-## Implementation inventory
+## Authoritative Windows acceptance evidence
 
 ```text
-configs/v3_adapter_frozen_sol.json
-configs/v3_signal_interpretation_registry.json
-configs/v3_signal_engine_example.json
-src/shockbridge_signal_validity/v3/signal_registry.py
-src/shockbridge_signal_validity/v3/signal_math.py
-src/shockbridge_signal_validity/v3/signal_rsi.py
-src/shockbridge_signal_validity/v3/signal_bollinger.py
-src/shockbridge_signal_validity/v3/signal_reporting.py
-src/shockbridge_signal_validity/v3/signal_engine.py
-src/shockbridge_signal_validity/v3/signal_runner.py
-scripts/run_v3_signal_engine.py
-scripts/verify_v3_g1_data_adapter.py
-scripts/verify_v3_g4_signal_outputs.py
-tests/test_v3_signal_registry.py
-tests/test_v3_signal_engine.py
-tests/test_v3_signal_runner.py
-RUN_V3_G4_SIGNAL_ENGINE.ps1
-RUN_V3_G4_SIGNAL_ENGINE.sh
-docs/V3_G4_SIGNAL_ENGINE.md
-V3_G4_SIGNAL_ENGINE_CHECKPOINT.md
+Repository realignment tests: 7 passed
+Exact hardened V3-4 tests: 19 passed
+Canonical source rows: 12171
+Canonical data SHA-256: 3c49bfcab5fdf3aba9ada614873fa424e97c1f66e2690b790204fc29fdb5109c
+Registered signal specifications: 48
+Expected feature rows: 584208
+Observed feature rows: 584208
+Row-count identity verified: true
+Automatic signal selection performed: false
+Target accessed: false
+Chronology accessed: false
+Predictive claims produced: false
+Economic claims produced: false
+Deterioration claims produced: false
+Failure claims produced: false
+Tracked working-tree mutation: false
+Next gate reported: V3-5
 ```
 
-## Canonical input contract
+The complete runner finished successfully after verifying repository realignment, historical and current-compatible V3-1 ownership, the exact nineteen-test V3-4 suite, frozen SOL canonical-data materialization, real-data signal generation, output identities, and tracked-file cleanliness.
 
-The authoritative V3-4 input is materialized deterministically from:
+## Canonical input contract
 
 ```text
 source: data/raw/sol_usdt_4h.csv
 adapter: configs/v3_adapter_frozen_sol.json
-output: outputs/v3/data_adapter/canonical_market_data.csv
+canonical output: outputs/v3/data_adapter/canonical_market_data.csv
 asset: SOL/USDT
 venue: binance_spot
+rows: 12171
 ```
 
-The source is the frozen public Version 1/2 SOL snapshot. BTC remains benchmark and market-context information for Gate V3-5; it is not silently converted into a second V3-4 target-signal family.
+BTC remains benchmark and market-context information for Gate V3-5. It is not silently converted into a second V3-4 target-signal family.
 
 ## Registry evidence
 
@@ -97,9 +91,9 @@ bounded maximum: 128
 identifier scheme: v3sig:<feature_key>:<sha256(canonical_specification)>
 ```
 
-Complete canonical definitions are stored once in `signal_registry_manifest.json`. No candidate is automatically selected, ranked, promoted, or deleted.
+No candidate was selected, ranked, promoted, or deleted by Gate V3-4.
 
-## Output contract
+## Runtime output contract
 
 ```text
 outputs/v3/signal_engine/signal_features.csv
@@ -110,68 +104,40 @@ outputs/v3/signal_engine/signal_validation_report.json
 outputs/v3/signal_engine/canonical_validation_report.json
 ```
 
-The required real-data identity is:
+The large `signal_features.csv` contains 584,208 rows. It remains a regenerable runtime artifact and will not be committed. The final lock binds it by SHA-256. Compact manifests are copied into `evidence/v3/g4_signal_lock/` for repository review.
+
+## Lock materialization package
 
 ```text
-feature rows = canonical source rows × 48
+scripts/finalize_v3_g4_lock.py
+scripts/verify_v3_g4_lock.py
+RUN_V3_G4_LOCK.ps1
+RUN_V3_G4_LOCK.sh
+V3_G4_SIGNAL_ENGINE_LOCK.json        generated locally
+evidence/v3/g4_signal_lock/*.json    generated locally
 ```
 
-The output verifier confirms that the physical CSV row count equals the manifest row count, the registry contains all 48 definitions, canonical validation passed, no prohibited action occurred, and the next gate is V3-5.
+The lock candidate generator:
 
-## Authoritative Windows evidence received
+1. requires a clean tracked working tree;
+2. verifies that the validated V3-4 commit is an ancestor of the current branch;
+3. confirms that every protected implementation object still equals the validated commit;
+4. revalidates all runtime evidence;
+5. hashes the raw source, canonical input, long-format feature table, and all manifests;
+6. curates compact JSON evidence;
+7. emits a reviewable lock candidate.
+
+The final lock status remains pending until the generated candidate and curated manifests are committed, reviewed, and promoted from:
 
 ```text
-Repository realignment: 7 passed
-Exact hardened V3-4 tests: 19 passed
-First real-data execution: stopped before feature generation
-First immediate cause: canonical input path did not exist locally
-Second self-contained rerun: stopped during V3-1 parent verification
-Second immediate cause: shared package initializer had legitimate later-gate exports
+LOCK_CANDIDATE_AWAITING_REPOSITORY_REVIEW
 ```
 
-No V3-4 output manifest existed after either stop. Blank-manifest and false-condition messages produced by manually continuing after a runner failure are cascade errors, not scientific or implementation findings.
-
-## Parent-verifier remediation
-
-The V3-1 verifier now applies three distinct checks:
+to:
 
 ```text
-historical integrity
-    every protected V3-1 blob equals the lock at commit
-    7a7a5c55184aadfb436774ff1e497ce873a96b6e
-
-current direct implementation integrity
-    direct V3-1 committed objects still equal the locked blobs
-    uncommitted modifications to those paths fail closed
-
-shared export compatibility
-    the evolved v3/__init__.py may include later exports
-    every required V3-1 public symbol must remain available
+IMPLEMENTATION_VALIDATED_AND_LOCKED
 ```
-
-Committed-object comparisons use Git object identities rather than checkout bytes, making the verifier invariant to Windows line-ending conversion. The existing V3-4 runner test now binds the historical-lock and current-export compatibility outputs without increasing the nineteen-test inventory.
-
-## Complete runner chain
-
-The platform runners perform the dependency chain in one command:
-
-```text
-verify realignment
-    ↓
-verify historical and current-compatible V3-1 parent
-    ↓
-run exact 19-test V3-4 suite
-    ↓
-materialize frozen SOL canonical input
-    ↓
-execute V3-4 real-data engine
-    ↓
-verify complete output package and row identities
-    ↓
-verify no tracked working-tree mutation
-```
-
-The runner deletes any stale V3-4 output directory before execution, so old manifests cannot be mistaken for current evidence.
 
 ## Claims prohibited at this checkpoint
 
@@ -185,34 +151,16 @@ RSI/Bollinger rescue: prohibited
 frozen V1/V2 modification: prohibited
 ```
 
-## Required final authoritative execution
+## Next action
 
 ```powershell
-.\RUN_V3_G4_SIGNAL_ENGINE.ps1
+.\RUN_V3_G4_LOCK.ps1
 ```
 
-The runner itself performs every acceptance check. Do not execute separate manifest commands unless this command completes successfully.
-
-## Acceptance conditions before lock
-
-1. The updated standalone realignment verifier passes.
-2. The historical V3-1 lock verifies at commit `7a7a5c55184aadfb436774ff1e497ce873a96b6e`.
-3. Current direct V3-1 implementation objects match their locked committed blobs and their working-tree paths are clean.
-4. The current shared Version 3 export surface preserves all V3-1 public symbols.
-5. All 19 current V3-4 tests pass.
-6. The frozen SOL snapshot is converted into valid canonical data.
-7. Real canonical data generates the complete V3-4 output package.
-8. `signal_feature_manifest.json` records 48 signals and verifies `rows = source_rows × 48`.
-9. The physical long-format CSV row count matches the manifest.
-10. The registry manifest contains all 48 complete signal definitions.
-11. Adaptive templates and unavailable context remain explicit rather than dropped.
-12. No target, chronology, predictive, economic, deterioration, or failure claim is produced.
-13. No tracked file changes are caused by the runner.
-14. Output hashes and final committed object identities are reviewed.
-15. The checkpoint and contract are revised with authoritative real-data evidence before the lock is created.
+After the lock candidate is generated and verified, commit only the compact lock and curated evidence. The ignored runtime directories remain local and reproducible.
 
 ## Next gate boundary
 
 Gate V3-5 — Matched Benchmark-versus-Signal Forecast Selection — is approved but has not started.
 
-It may begin immediately after the V3-4 authoritative evidence and lock are complete, without another approval request. Gate V3-5, not V3-4, determines whether any Version 3 RSI or Bollinger pipeline earns establishment.
+Its parent validation requirement is complete. It may begin immediately after final V3-4 lock promotion, without another approval request. Gate V3-5, not V3-4, determines whether any Version 3 RSI or Bollinger pipeline earns establishment.
