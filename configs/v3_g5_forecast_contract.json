@@ -1,0 +1,279 @@
+{
+  "schema_version": "v3.matched-forecast-contract.v1",
+  "gate": "V3-5",
+  "title": "Matched Benchmark-versus-Signal Forecast Selection",
+  "status": "APPROVED_IMPLEMENTATION_STARTED_CONTRACT_FROZEN",
+  "branch": "research/v3-adaptive-signal-validity",
+  "baseline_release": "v2.0.0",
+  "baseline_commit": "5a07299367b80c3940e652e7bbdd208ce86ba5ef",
+  "parent_gate": "V3-4",
+  "parent_lock": "V3_G4_SIGNAL_ENGINE_LOCK.json",
+  "parent_lock_status_required": "IMPLEMENTATION_VALIDATED_AND_LOCKED",
+  "parent_validated_implementation_commit": "ff2e7ecba3fa69f22e0b109437d23b52d30fba2b",
+  "parent_evidence_materialization_commit": "705511de9e8ee22a9f8aff34506aebb6c26223e7",
+  "research_question_link": "Determine whether any registered RSI or Bollinger information earns benchmark-relative predictive and economic establishment before deterioration or failure modelling is admissible.",
+  "frozen_v1_v2_determinations_modified": false,
+  "data_partition": {
+    "primary_asset": "SOL/USDT",
+    "market_context_asset": "BTC/USDT",
+    "primary_venue": "Binance spot",
+    "frequency": "4h",
+    "snapshot_start_utc": "2021-01-01T00:00:00Z",
+    "snapshot_end_utc": "2026-07-22T08:00:00Z",
+    "development_start_utc": "2021-01-01T00:00:00Z",
+    "development_end_utc": "2025-06-30T20:00:00Z",
+    "signal_establishment_start_utc": "2025-07-01T00:00:00Z",
+    "signal_establishment_end_utc": "2025-12-31T20:00:00Z",
+    "final_framework_reserve_start_utc": "2026-01-01T00:00:00Z",
+    "final_framework_reserve_end_utc": "2026-07-22T08:00:00Z",
+    "historically_unseen_claim": false,
+    "classification": "V3_METHODOLOGY_LOCKED_PARTITION_WITH_PRIOR_V1_V2_AGGREGATE_EXPOSURE",
+    "v3_5_may_access_final_framework_reserve": false
+  },
+  "forecast_horizons": {
+    "candles": [1, 2, 3, 6, 12, 18],
+    "hours": [4, 8, 12, 24, 48, 72],
+    "feasibility_exclusion_requires_pre_result_reason": true
+  },
+  "targets": {
+    "direction": {
+      "role": "CONFIRMATORY",
+      "definition": "future_log_return_h > 0",
+      "primary_metric": "incremental_log_loss"
+    },
+    "expected_return": {
+      "role": "SECONDARY",
+      "definition": "future_log_return_h",
+      "primary_metric": "incremental_mean_squared_error"
+    },
+    "large_move_probability": {
+      "role": "SECONDARY",
+      "definition": "abs(future_log_return_h) > training_only_q90_by_horizon",
+      "primary_metric": "incremental_log_loss"
+    }
+  },
+  "signal_registry": {
+    "source": "V3_G4_SIGNAL_ENGINE_LOCK.json",
+    "registered_specifications": 48,
+    "base_specifications": 44,
+    "explicit_interactions": 4,
+    "adaptive_templates": 2,
+    "single_feature_augmentations": true,
+    "predeclared_family_blocks": [
+      "RSI_LEVEL_DYNAMICS",
+      "RSI_MEAN_REVERSION",
+      "RSI_CONTINUATION",
+      "RSI_DIVERGENCE",
+      "BOLLINGER_POSITION",
+      "BOLLINGER_MEAN_REVERSION",
+      "BOLLINGER_BREAKOUT",
+      "BOLLINGER_VOLATILITY_STRUCTURE"
+    ],
+    "combined_cross_family_block_role": "SECONDARY_ONLY",
+    "full_cartesian_signal_combination_prohibited": true,
+    "automatic_candidate_deletion_prohibited": true,
+    "ineligible_candidates_remain_reported": true
+  },
+  "benchmark_information": {
+    "base_contract": "VERSION_2_NON_INDICATOR_CONTINUITY_BENCHMARK",
+    "required_families": [
+      "lagged_sol_returns",
+      "lagged_btc_returns",
+      "causal_trend",
+      "causal_realised_volatility",
+      "price_range",
+      "volume_and_volume_change",
+      "transparent_lagged_market_state"
+    ],
+    "v3_context_extensions": [
+      "causal_spectral_features",
+      "causal_market_structure_features",
+      "registered_forward_applied_regime_probabilities"
+    ],
+    "benchmark_expansion_applied_identically_to_candidate": true,
+    "candidate_definition": "benchmark_information_plus_registered_signal_information_only"
+  },
+  "matched_pair_controls": {
+    "identical_model_class": true,
+    "identical_training_rows": true,
+    "identical_test_rows": true,
+    "identical_preprocessing": true,
+    "identical_hyperparameter_selection": true,
+    "identical_calibration": true,
+    "identical_target_and_horizon": true,
+    "identical_cost_and_decision_policy": true,
+    "candidate_specific_matched_row_intersection": true,
+    "cross_candidate_raw_metric_ranking_prohibited": true
+  },
+  "model_families": {
+    "regularized_linear": {
+      "role": "PRIMARY_CONTINUITY",
+      "classification_C": [0.1, 1.0, 10.0],
+      "regression_alpha": [0.1, 1.0, 10.0]
+    },
+    "spline_regularized": {
+      "role": "RESTRAINED_NONLINEAR",
+      "degree": 3,
+      "n_knots": [4, 6],
+      "classification_C": [0.1, 1.0],
+      "regression_alpha": [0.1, 1.0]
+    },
+    "shallow_hist_gradient_boosting": {
+      "role": "RESTRAINED_NONLINEAR",
+      "learning_rate": [0.05],
+      "max_leaf_nodes": [7, 15],
+      "max_iter": [100, 200],
+      "min_samples_leaf": [100],
+      "l2_regularization": [0.0, 1.0]
+    },
+    "time_varying_regularized_glm": {
+      "role": "V3_DYNAMIC_CHALLENGER",
+      "forgetting_factors": [0.97, 0.99],
+      "minimum_training_observations": 2190
+    },
+    "state_space_or_markov_switching": {
+      "role": "ELIGIBILITY_GATED_SECONDARY",
+      "minimum_regime_occupancy": 250,
+      "identifiability_required": true,
+      "automatic_state_count_selection_prohibited": true
+    }
+  },
+  "window_schemes": {
+    "expanding": null,
+    "rolling_one_year_observations": 2190,
+    "rolling_two_year_observations": 4380
+  },
+  "validation": {
+    "outer_development_folds": 5,
+    "inner_selection_folds": 3,
+    "shuffle": false,
+    "purge_gap": "equal_to_horizon_candles",
+    "embargo_when_panel_overlap_requires": true,
+    "training_only_preprocessing": true,
+    "training_only_regime_estimation": true,
+    "training_only_large_move_threshold": true,
+    "training_only_calibration": true,
+    "minimum_positive_outer_folds": 3,
+    "maximum_single_fold_share_of_positive_gain": 0.6,
+    "one_standard_error_complexity_preference": true,
+    "selection_frequency_report_required": true
+  },
+  "preprocessing": {
+    "full_sample_scaling_prohibited": true,
+    "full_sample_winsorisation_prohibited": true,
+    "training_only_standardisation": true,
+    "training_only_clipping": true,
+    "ohlcv_imputation_prohibited": true,
+    "feature_missingness_must_be_explicit": true,
+    "fold_feature_manifest_required": true
+  },
+  "calibration": {
+    "confirmatory_candidates": ["none", "sigmoid"],
+    "diagnostic_only": ["isotonic"],
+    "training_only": true
+  },
+  "abstention": {
+    "direction_probability_distance_thresholds": [0.02, 0.05, 0.1],
+    "minimum_establishment_coverage": 0.1,
+    "minimum_establishment_nonzero_decisions": 100,
+    "abstention_selection_training_only": true
+  },
+  "metrics": {
+    "direction": {
+      "primary": "log_loss",
+      "secondary": ["brier_score", "expected_calibration_error", "roc_auc"]
+    },
+    "expected_return": {
+      "primary": "mean_squared_error",
+      "secondary": ["mean_absolute_error", "directional_accuracy"]
+    },
+    "large_move_probability": {
+      "primary": "log_loss",
+      "secondary": ["brier_score", "pr_auc"]
+    }
+  },
+  "economic_assumptions": {
+    "primary_one_way_cost_bps": 10,
+    "sensitivity_one_way_cost_bps": [5, 20],
+    "position_policy": "matched_continuous_or_abstaining_policy_by_target",
+    "overlap_control": "horizon_spaced_economic_decisions",
+    "primary_confidence_level": 0.95,
+    "uncertainty_method": "moving_block_bootstrap"
+  },
+  "multiple_testing": {
+    "confirmatory_families": ["RSI_DIRECTION", "BOLLINGER_DIRECTION"],
+    "confirmatory_method": "Holm",
+    "confirmatory_familywise_alpha": 0.05,
+    "within_family_secondary_method": "Benjamini-Hochberg",
+    "secondary_fdr_q": 0.1,
+    "development_family_diagnostic": "Superior Predictive Ability",
+    "establishment_predictive_comparison": "one_sided_overlap_aware_loss_differential_inference"
+  },
+  "development_admission": {
+    "positive_mean_incremental_primary_metric": true,
+    "minimum_positive_outer_folds": 3,
+    "maximum_single_fold_share_of_positive_gain": 0.6,
+    "calibration_materially_worse_prohibited": true,
+    "minimum_coverage_required": true,
+    "complexity_preference": "ONE_STANDARD_ERROR",
+    "economic_mean_positive_at_primary_cost": true,
+    "development_admission_is_not_final_establishment": true
+  },
+  "signal_establishment": {
+    "single_access_segment": "2025-07-01T00:00:00Z/2025-12-31T20:00:00Z",
+    "pipeline_frozen_before_access": true,
+    "predictive_lower_confidence_bound_positive": true,
+    "holm_adjusted_confirmatory_p_value_max": 0.05,
+    "economic_lower_confidence_bound_positive_at_10bps": true,
+    "chronological_subperiod_consistency_required": true,
+    "calibration_gate_required": true,
+    "coverage_gate_required": true,
+    "concentration_gate_required": true,
+    "result_states": [
+      "NO_PIPELINE_ADMITTED",
+      "NO_INCREMENTAL_EVIDENCE",
+      "PREDICTIVE_EVIDENCE_ONLY",
+      "PRIMARY_CASE_ESTABLISHED"
+    ]
+  },
+  "final_framework_reserve": {
+    "reserved_for_gate": "V3-9",
+    "start_utc": "2026-01-01T00:00:00Z",
+    "end_utc": "2026-07-22T08:00:00Z",
+    "v3_5_access_prohibited": true,
+    "forecast_failure_and_decision_pipeline_evaluation_only": true
+  },
+  "stop_rules": {
+    "no_development_pipeline": "NO_PIPELINE_ADMITTED",
+    "no_established_signal": "FAILURE_MODEL_INADMISSIBLE_BASELINE_NOT_ESTABLISHED",
+    "no_sufficient_conditional_occupancy": "CONDITIONAL_CLAIM_NOT_AUTHORIZED",
+    "final_reserve_access_before_v3_9": "PROTOCOL_VIOLATION_FINAL_RESERVE_ACCESSED"
+  },
+  "required_outputs": [
+    "target_manifest.json",
+    "fold_manifest.json",
+    "candidate_registry.json",
+    "outer_fold_predictions.csv",
+    "outer_fold_results.csv",
+    "development_selection_report.json",
+    "frozen_pipeline_registry.json",
+    "establishment_authorization.json",
+    "establishment_predictions.csv",
+    "establishment_inference.json",
+    "v3_g5_determination.json"
+  ],
+  "claims_prohibited_before_gate_completion": [
+    "SIGNAL_ESTABLISHED",
+    "CONDITIONALLY_VALID",
+    "DETERIORATING",
+    "SIGNAL_FAILED",
+    "FAILURE_PROBABILITY_ESTIMATED",
+    "OPERATIONAL_USE_AUTHORIZED"
+  ],
+  "implementation_started": true,
+  "target_accessed": false,
+  "development_model_fitting_started": false,
+  "signal_establishment_segment_accessed": false,
+  "final_framework_reserve_accessed": false,
+  "next_action": "IMPLEMENT_TARGET_FOLD_BENCHMARK_AND_MATCHED_SELECTION_ENGINES"
+}
