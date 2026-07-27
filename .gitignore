@@ -33,3 +33,8 @@ secrets.json
 
 # Optional raster exports; vector SVG figures are tracked
 outputs/figures/*.png
+
+# Regenerable Version 3 runtime evidence
+outputs/v3/data_adapter/
+outputs/v3/signal_engine/
+outputs/v3/g3_final_acceptance/
