@@ -1,0 +1,106 @@
+{
+  "schema_version": "v3.g5-model-implementation-contract.v1",
+  "gate": "V3-5",
+  "stage": "FOLD_SCOPED_PREPROCESSING_AND_MATCHED_ESTIMATOR_FAMILIES",
+  "status": "IMPLEMENTATION_CONTRACT_FROZEN",
+  "parent_forecast_contract": "configs/v3_g5_forecast_contract.json",
+  "parent_materialization_validation": "V3_G5_MATERIALIZATION_VALIDATION.json",
+  "real_development_model_fitting_authorized": false,
+  "real_development_pipeline_selection_authorized": false,
+  "preprocessing": {
+    "missing_value_policy": "NO_IMPUTATION_MATCHED_COMPLETE_ROWS_ONLY",
+    "clip_lower_quantile": 0.005,
+    "clip_upper_quantile": 0.995,
+    "clip_fit_scope": "TRAINING_FOLD_ONLY",
+    "standardization": "TRAINING_FOLD_MEAN_AND_POPULATION_STD",
+    "zero_variance_scale": 1.0,
+    "benchmark_columns_reused_exactly_in_candidate": true,
+    "test_or_future_rows_may_not_influence_fit": true,
+    "column_order_drift_prohibited": true
+  },
+  "estimator_defaults": {
+    "random_state": 20260728,
+    "logistic_solver": "lbfgs",
+    "logistic_penalty": "l2",
+    "logistic_max_iter": 2000,
+    "ridge_alpha_for_dynamic_glm": 1.0,
+    "logistic_C_for_dynamic_glm": 1.0,
+    "spline_degree": 3,
+    "spline_include_bias": false,
+    "spline_knots": "quantile",
+    "spline_extrapolation": "linear"
+  },
+  "model_families": {
+    "regularized_linear": {
+      "executable": true,
+      "role": "PRIMARY_CONTINUITY"
+    },
+    "spline_regularized": {
+      "executable": true,
+      "role": "RESTRAINED_NONLINEAR"
+    },
+    "shallow_hist_gradient_boosting": {
+      "executable": true,
+      "role": "RESTRAINED_NONLINEAR"
+    },
+    "time_varying_regularized_glm": {
+      "executable": true,
+      "role": "V3_DYNAMIC_CHALLENGER",
+      "implementation": "EXPONENTIALLY_WEIGHTED_REGULARIZED_GLM",
+      "minimum_training_observations": 2190
+    },
+    "state_space_or_markov_switching": {
+      "executable": false,
+      "role": "ELIGIBILITY_GATED_SECONDARY",
+      "status": "INELIGIBLE_IMPLEMENTATION_NOT_AUTHORIZED",
+      "automatic_state_count_selection_prohibited": true
+    }
+  },
+  "window_schemes": [
+    {
+      "window_id": "EXPANDING",
+      "observations": null
+    },
+    {
+      "window_id": "ROLLING_ONE_YEAR",
+      "observations": 2190
+    },
+    {
+      "window_id": "ROLLING_TWO_YEARS",
+      "observations": 4380
+    }
+  ],
+  "registry_identities": {
+    "targets": 3,
+    "executable_model_configurations_per_target_before_windows": 17,
+    "executable_pipeline_specs_per_target": 51,
+    "gated_pipeline_specs_per_target": 3,
+    "total_pipeline_specs_per_target": 54,
+    "executable_pipeline_specs_all_targets": 153,
+    "gated_pipeline_specs_all_targets": 9,
+    "total_pipeline_specs_all_targets": 162
+  },
+  "matched_pair_controls": {
+    "same_pipeline_spec_id": true,
+    "same_estimator_class": true,
+    "same_hyperparameters": true,
+    "same_window_scheme": true,
+    "same_training_rows": true,
+    "same_test_rows": true,
+    "same_benchmark_transformation": true,
+    "candidate_equals_transformed_benchmark_plus_transformed_registered_signal_columns": true
+  },
+  "prohibited": {
+    "real_data_model_fit": true,
+    "real_data_prediction": true,
+    "candidate_ranking": true,
+    "pipeline_admission": true,
+    "establishment_segment_access": true,
+    "final_framework_reserve_access": true,
+    "unbounded_hyperparameter_search": true,
+    "automatic_model_family_insertion": true,
+    "full_sample_preprocessing": true,
+    "ohlcv_or_feature_imputation": true
+  },
+  "claims_authorized": false
+}
