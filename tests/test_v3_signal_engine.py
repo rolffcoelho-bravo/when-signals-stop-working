@@ -120,7 +120,7 @@ def test_training_only_templates_require_external_training_parameters() -> None:
     specs = validate_registry(registry_value())
     adaptive = [spec for spec in specs if spec.parameter_policy == "TRAINING_ONLY_REQUIRED"]
     parameters = {
-        spec.signal_id: (
+        spec.feature_key: (
             {"lower": 25.0, "upper": 75.0}
             if spec.signal_family == "RSI"
             else {"squeeze_threshold": 0.06}
@@ -155,12 +155,12 @@ def test_invalid_training_only_parameters_fail_closed() -> None:
             fixture(),
             registry_value(),
             training_only_parameters={
-                rsi_adaptive.signal_id: {"lower": 80.0, "upper": 20.0}
+                rsi_adaptive.feature_key: {"lower": 80.0, "upper": 20.0}
             },
         )
     with pytest.raises(
         SignalEngineError,
-        match="unregistered or non-adaptive signals",
+        match="unregistered or non-adaptive feature keys",
     ):
         compute_signal_feature_frame(
             fixture(),
