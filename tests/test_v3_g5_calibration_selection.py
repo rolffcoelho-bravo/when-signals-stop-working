@@ -99,7 +99,7 @@ def _scores() -> list[InnerFoldScore]:
                 nonzero_decisions=200,
             )
         )
-    for fold, gain in enumerate([0.021, 0.023, 0.024], start=1):
+    for fold, gain in enumerate([0.018, 0.022, 0.026], start=1):
         rows.append(
             InnerFoldScore(
                 pipeline_spec_id="complex",
