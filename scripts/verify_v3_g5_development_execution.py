@@ -14,11 +14,11 @@ if str(SRC) not in sys.path:
 
 from shockbridge_signal_validity.v3.forecast_development_execution import (  # noqa: E402
     build_execution_plan_identity,
+    build_large_move_targets_for_partitions,
     execute_matched_outer_fold,
 )
 from shockbridge_signal_validity.v3.forecast_development_selection import (  # noqa: E402
     InnerFoldScore,
-    build_fold_large_move_target,
     positive_fold_concentration,
     select_one_standard_error_configuration,
 )
@@ -142,11 +142,36 @@ def main() -> int:
         if not np.isfinite(result.incremental_primary_gain):
             raise RuntimeError("Synthetic execution produced non-finite gain.")
 
-    large_move = build_fold_large_move_target(
-        realized.iloc[:600], realized.iloc[600:750], quantile=0.9
+    large_training, large_calibration, large_test, large_threshold = (
+        build_large_move_targets_for_partitions(
+            realized.iloc[train],
+            realized.iloc[calibration],
+            realized.iloc[test],
+            quantile=0.9,
+        )
     )
-    if large_move.training_rows != 600 or large_move.evaluation_rows != 150:
-        raise RuntimeError("Fold-scoped large-move identity changed.")
+    large_result = execute_matched_outer_fold(
+        spec=_representative(registry, "large_move_probability"),
+        implementation_contract=implementation,
+        benchmark_training=benchmark.iloc[train],
+        candidate_training=candidate.iloc[train],
+        training_target=large_training,
+        benchmark_calibration=benchmark.iloc[calibration],
+        candidate_calibration=candidate.iloc[calibration],
+        calibration_target=large_calibration,
+        benchmark_test=benchmark.iloc[test],
+        candidate_test=candidate.iloc[test],
+        test_target=large_test,
+        test_future_log_return=realized.iloc[test],
+        horizon_candles=1,
+        calibration_method="none",
+        fold_large_move_threshold=large_threshold,
+        synthetic_validation_only=True,
+    )
+    if large_result.large_move_threshold != large_threshold:
+        raise RuntimeError("Large-move execution lost its training-fold threshold.")
+    if large_result.benchmark_economic is not None or large_result.candidate_economic is not None:
+        raise RuntimeError("Large-move diagnostic created an unauthorized trading policy.")
 
     inner_rows: list[InnerFoldScore] = []
     for fold, gain in enumerate((0.020, 0.018, 0.022), start=1):
@@ -181,7 +206,8 @@ def main() -> int:
     print("Development execution authorized: False")
     print("Candidate-pipeline-target combinations: 42228")
     print("Outer-fold jobs: 211140")
-    print("Fold-scoped large-move threshold verified: True")
+    print("Strict training/calibration/test chronology verified: True")
+    print("Fold-scoped large-move threshold and execution verified: True")
     print("Training-only calibration verified: True")
     print("One-standard-error inner selection verified: True")
     print("Predictive and economic metrics verified: True")
