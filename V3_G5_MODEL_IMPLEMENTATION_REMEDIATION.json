@@ -1,19 +1,18 @@
 {
-  "schema_version": "v3.g5-model-implementation-remediation.v1",
+  "schema_version": "v3.g5-model-implementation-remediation.v2",
   "gate": "V3-5",
   "stage": "FOLD_SCOPED_PREPROCESSING_AND_MATCHED_ESTIMATOR_FAMILIES",
-  "status": "COMPATIBILITY_REMEDIATED_WARNING_FREE_RERUN_PENDING",
+  "status": "COMPATIBILITY_REMEDIATION_VALIDATED_AND_CLOSED",
   "functional_validation_commit": "5d31f1583bcf66f0231d8ef6b4f1e980d98def9b",
+  "warning_free_validation_commit": "37c7360afde61a01ee9f9c5237dcf6bdf42985dd",
   "authoritative_environment": "Windows PowerShell research environment",
   "observed_issue": {
-    "future_warnings": 6,
-    "library": "scikit-learn 1.8",
+    "future_warnings_before_remediation": 6,
+    "library": "scikit-learn",
     "component": "LogisticRegression",
     "deprecated_argument": "penalty",
     "deprecated_value": "l2",
-    "removal_version_announced": "1.10",
     "tests_failed": 0,
-    "standalone_verifier_failed": false,
     "mathematical_estimator_changed": false
   },
   "remediation": {
@@ -27,6 +26,10 @@
     },
     "future_warnings_fail_pytest": true,
     "future_warnings_fail_standalone_verifier": true,
+    "warning_free_tests_passed": 26,
+    "warning_free_standalone_verifier_passed": true,
+    "future_warnings_after_remediation": 0,
+    "validated_scikit_learn_version": "1.9",
     "test_count_changed": false,
     "pipeline_registry_count_changed": false,
     "real_development_model_fitting_performed": false,
@@ -43,5 +46,5 @@
     "establishment_segment_accessed": false,
     "final_framework_reserve_accessed": false
   },
-  "next_required_action": "RERUN_RUN_V3_G5_MODEL_IMPLEMENTATION_PS1_WITH_ZERO_WARNINGS"
+  "next_required_action": "NONE_REMEDIATION_CLOSED"
 }
