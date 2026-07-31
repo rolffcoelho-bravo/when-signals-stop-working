@@ -15,8 +15,8 @@ SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-from shockbridge_signal_validity.v3.forecast_real_execution_authorization import (  # noqa: E402
-    load_authorization_candidate,
+from shockbridge_signal_validity.v3.forecast_real_execution_batching import (  # noqa: E402
+    load_stage_aligned_authorization_candidate,
 )
 from shockbridge_signal_validity.v3.forecast_real_execution_verification import (  # noqa: E402
     verify_authorization_candidate_plan_strict,
@@ -54,7 +54,7 @@ def _git_head() -> str:
 
 
 def main() -> int:
-    authorization = load_authorization_candidate(AUTHORIZATION_CONTRACT)
+    authorization = load_stage_aligned_authorization_candidate(AUTHORIZATION_CONTRACT)
     manifest = verify_authorization_candidate_plan_strict(
         output_dir=OUTPUT_DIR,
         authorization_contract=authorization,
@@ -100,10 +100,13 @@ def main() -> int:
         raise RuntimeError("Authorization stage order changed.")
     if int(stages["job_count"].sum()) != 211140:
         raise RuntimeError("Authorization stage workload changed.")
+    if batches.groupby("batch_ordinal")["stage_rank"].nunique().max() != 1:
+        raise RuntimeError("Authorization batch manifest mixes scientific stages.")
 
     manifest_path = OUTPUT_DIR / str(outputs["authorization_candidate_manifest"])
     manifest_sha256 = _sha256_file(manifest_path)
     output_hashes = manifest["output_sha256"]
+    batch_count = int(manifest["batch_count"])
 
     print("Gate V3-5 real development execution authorization candidate verified.")
     print("Development engine boundary protected: True")
@@ -111,10 +114,12 @@ def main() -> int:
     print(f"Plan Git commit: {git_head}")
     print("Outer-fold jobs: 211140")
     print("Candidate-pipeline-target combinations: 42228")
-    print("Batches: 845")
+    print(f"Stage-aligned batches: {batch_count}")
+    print("Valid stage-aligned batch range: 847-848")
     print("Jobs per full batch: 250")
-    print("Final batch jobs: 140")
+    print("Final batch jobs: 130")
     print("Execution stages: 6")
+    print("No batch crosses a stage boundary: True")
     print(f"Authorization candidate manifest SHA-256: {manifest_sha256}")
     print(f"Execution job plan SHA-256: {output_hashes[str(outputs['job_plan'])]}")
     print(f"Execution batch manifest SHA-256: {output_hashes[str(outputs['batch_manifest'])]}")
