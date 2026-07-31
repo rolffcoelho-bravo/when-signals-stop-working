@@ -1,10 +1,11 @@
 {
-  "schema_version": "v3.g5-model-implementation-validation.v1",
+  "schema_version": "v3.g5-model-implementation-validation.v2",
   "gate": "V3-5",
   "stage": "FOLD_SCOPED_PREPROCESSING_AND_MATCHED_ESTIMATOR_FAMILIES",
-  "status": "IMPLEMENTATION_FUNCTIONALLY_VALIDATED_COMPATIBILITY_REMEDIATION_REQUIRED",
+  "status": "MODEL_IMPLEMENTATION_AUTHORITATIVELY_VALIDATED_AND_PROTECTED",
   "branch": "research/v3-adaptive-signal-validity",
-  "validated_implementation_commit": "5d31f1583bcf66f0231d8ef6b4f1e980d98def9b",
+  "validated_implementation_commit": "37c7360afde61a01ee9f9c5237dcf6bdf42985dd",
+  "functional_validation_commit": "5d31f1583bcf66f0231d8ef6b4f1e980d98def9b",
   "authoritative_environment": "Windows PowerShell research environment",
   "validation_evidence": {
     "parent_v3_4_lock_verified": true,
@@ -13,6 +14,9 @@
     "real_materialization_evidence_verified": true,
     "model_implementation_tests_passed": 26,
     "standalone_model_implementation_verifier_passed": true,
+    "future_warnings_observed": 0,
+    "scikit_learn_version": "1.9",
+    "logistic_l2_semantics_preserved": true,
     "pipeline_specifications": 162,
     "executable_pipeline_specifications": 153,
     "gated_pipeline_specifications": 9,
@@ -22,13 +26,23 @@
     "tracked_worktree_clean": true,
     "branch_up_to_date_with_origin": true
   },
-  "compatibility_observation": {
-    "future_warnings_observed": 6,
-    "source": "scikit-learn 1.8 LogisticRegression penalty deprecation",
-    "affected_mathematical_policy": "L2_REGULARIZATION",
-    "mathematical_estimator_changed": false,
-    "blocking_before_final_implementation_lock": true,
-    "required_remediation": "VERSION_COMPATIBLE_L2_CONFIGURATION_AND_WARNING_AS_ERROR_RERUN"
+  "protected_implementation": {
+    "validated_commit": "37c7360afde61a01ee9f9c5237dcf6bdf42985dd",
+    "protected_object_count": 10,
+    "protected_paths": [
+      "configs/v3_g5_model_implementation_contract.json",
+      "src/shockbridge_signal_validity/v3/forecast_preprocessing.py",
+      "src/shockbridge_signal_validity/v3/forecast_model_registry.py",
+      "src/shockbridge_signal_validity/v3/forecast_estimators.py",
+      "scripts/verify_v3_g5_model_implementation.py",
+      "tests/test_v3_g5_preprocessing.py",
+      "tests/test_v3_g5_model_registry.py",
+      "tests/test_v3_g5_estimators.py",
+      "RUN_V3_G5_MODEL_IMPLEMENTATION.ps1",
+      "RUN_V3_G5_MODEL_IMPLEMENTATION.sh"
+    ],
+    "local_or_staged_mutation_prohibited": true,
+    "post_validation_object_drift_prohibited": true
   },
   "execution_state": {
     "synthetic_estimator_fits_performed": true,
@@ -39,5 +53,5 @@
     "final_framework_reserve_accessed": false
   },
   "empirical_claims_authorized": false,
-  "next_required_action": "RERUN_WARNING_FREE_MODEL_IMPLEMENTATION_VALIDATION"
+  "next_implementation_slice": "CHRONOLOGICAL_DEVELOPMENT_EXECUTION_ENGINE_IMPLEMENTATION"
 }
