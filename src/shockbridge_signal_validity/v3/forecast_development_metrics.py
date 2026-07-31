@@ -54,15 +54,24 @@ def expected_calibration_error(
         raise ForecastProtocolViolation("Calibration rows differ.")
     if not set(np.unique(target)).issubset({0.0, 1.0}):
         raise ForecastProtocolViolation("Calibration target must be binary.")
-    if ((estimate < 0.0) | (estimate > 1.0)).any() or int(bins) < 2:
-        raise ForecastProtocolViolation("Calibration probability or bin count is invalid.")
+    if ((estimate < 0.0) | (estimate > 1.0)).any():
+        raise ForecastProtocolViolation(
+            "Calibration probabilities must lie in [0,1]."
+        )
+    if int(bins) < 2:
+        raise ForecastProtocolViolation("Calibration bin count must be at least 2.")
     edges = np.linspace(0.0, 1.0, int(bins) + 1)
-    assignments = np.minimum(np.digitize(estimate, edges[1:-1], right=True), int(bins) - 1)
+    assignments = np.minimum(
+        np.digitize(estimate, edges[1:-1], right=True),
+        int(bins) - 1,
+    )
     error = 0.0
     for bin_index in range(int(bins)):
         mask = assignments == bin_index
         if mask.any():
-            error += float(mask.mean()) * abs(float(target[mask].mean()) - float(estimate[mask].mean()))
+            error += float(mask.mean()) * abs(
+                float(target[mask].mean()) - float(estimate[mask].mean())
+            )
     return float(error)
 
 
@@ -78,22 +87,33 @@ def classification_metrics(
     if not set(np.unique(target)).issubset({0.0, 1.0}):
         raise ForecastProtocolViolation("Classification target must be binary.")
     if ((estimate < 0.0) | (estimate > 1.0)).any():
-        raise ForecastProtocolViolation("Classification probabilities must lie in [0,1].")
+        raise ForecastProtocolViolation(
+            "Classification probabilities must lie in [0,1]."
+        )
     clipped = np.clip(estimate, 1e-12, 1.0 - 1e-12)
     secondary: dict[str, float] = {
         "brier_score": float(brier_score_loss(target, estimate)),
     }
     if target_name == "direction":
-        secondary["expected_calibration_error"] = expected_calibration_error(target, estimate)
+        secondary["expected_calibration_error"] = expected_calibration_error(
+            target,
+            estimate,
+        )
         secondary["roc_auc"] = (
-            float(roc_auc_score(target, estimate)) if len(np.unique(target)) == 2 else float("nan")
+            float(roc_auc_score(target, estimate))
+            if len(np.unique(target)) == 2
+            else float("nan")
         )
     elif target_name == "large_move_probability":
         secondary["pr_auc"] = (
-            float(average_precision_score(target, estimate)) if target.sum() > 0 else float("nan")
+            float(average_precision_score(target, estimate))
+            if target.sum() > 0
+            else float("nan")
         )
     else:
-        raise ForecastProtocolViolation(f"Unknown classification target: {target_name}")
+        raise ForecastProtocolViolation(
+            f"Unknown classification target: {target_name}"
+        )
     return MetricBundle(
         target_name=target_name,
         primary_metric_name="log_loss",
@@ -113,18 +133,29 @@ def regression_metrics(y_true: Any, prediction: Any) -> MetricBundle:
         primary_loss=float(mean_squared_error(target, estimate)),
         secondary_metrics={
             "mean_absolute_error": float(mean_absolute_error(target, estimate)),
-            "directional_accuracy": float(np.mean(np.sign(target) == np.sign(estimate))),
+            "directional_accuracy": float(
+                np.mean(np.sign(target) == np.sign(estimate))
+            ),
         },
     )
 
 
-def direction_positions(probability: Any, abstention_threshold: float) -> np.ndarray:
+def direction_positions(
+    probability: Any,
+    abstention_threshold: float,
+) -> np.ndarray:
     estimate = _finite_vector(probability, "Direction probability")
     threshold = float(abstention_threshold)
     if threshold < 0.0 or threshold >= 0.5:
-        raise ForecastProtocolViolation("Direction abstention threshold is invalid.")
+        raise ForecastProtocolViolation(
+            "Direction abstention threshold is invalid."
+        )
     distance = np.abs(estimate - 0.5)
-    return np.where(distance >= threshold, np.sign(estimate - 0.5), 0.0)
+    return np.where(
+        distance >= threshold,
+        np.sign(estimate - 0.5),
+        0.0,
+    )
 
 
 def expected_return_positions(prediction: Any) -> np.ndarray:
@@ -166,7 +197,12 @@ def economic_metrics(
     )
 
 
-def incremental_economic_gain(candidate: EconomicBundle, benchmark: EconomicBundle) -> float:
+def incremental_economic_gain(
+    candidate: EconomicBundle,
+    benchmark: EconomicBundle,
+) -> float:
     if candidate.observations != benchmark.observations:
-        raise ForecastProtocolViolation("Economic benchmark and candidate observations differ.")
+        raise ForecastProtocolViolation(
+            "Economic benchmark and candidate observations differ."
+        )
     return float(candidate.net_return - benchmark.net_return)
