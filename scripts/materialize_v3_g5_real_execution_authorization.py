@@ -6,6 +6,7 @@ import platform
 import subprocess
 import sys
 
+import numpy as np
 import pandas as pd
 from sklearn import __version__ as SKLEARN_VERSION
 
@@ -110,7 +111,10 @@ def main() -> int:
         },
         git_commit=_git_head(),
         python_version=platform.python_version(),
+        pandas_version=pd.__version__,
+        numpy_version=np.__version__,
         sklearn_version=SKLEARN_VERSION,
+        platform_description=platform.platform(),
     )
     print("Gate V3-5 real execution authorization candidate plan materialized.")
     print(f"Outer-fold jobs: {manifest['outer_fold_jobs']}")
@@ -121,6 +125,7 @@ def main() -> int:
     print(f"Stages: {manifest['stage_count']}")
     print("No batch crosses a stage boundary: True")
     print("Declared empty stages preserved: True")
+    print("Python/pandas/NumPy/scikit-learn/platform bound: True")
     print("All input hashes bound: True")
     print("All batches initially planned-not-started: True")
     print("Real development execution authorized: False")
