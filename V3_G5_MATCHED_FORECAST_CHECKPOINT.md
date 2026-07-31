@@ -5,13 +5,14 @@
 ```text
 APPROVED
 PARENT_V3_4_IMPLEMENTATION_VALIDATED_AND_LOCKED
+CONTRACT_FROZEN
 CONTRACT_AUTHORITATIVELY_VALIDATED
 FOUNDATION_AUTHORITATIVELY_VALIDATED
 MATERIALIZATION_AUTHORITATIVELY_VALIDATED
 MODEL_IMPLEMENTATION_AUTHORITATIVELY_VALIDATED_AND_PROTECTED
-CHRONOLOGICAL_DEVELOPMENT_ENGINE_CONTRACT_FROZEN
-CHRONOLOGICAL_DEVELOPMENT_ENGINE_IMPLEMENTED
-CHRONOLOGICAL_DEVELOPMENT_ENGINE_AUTHORITATIVE_VALIDATION_PENDING
+DEVELOPMENT_ENGINE_AUTHORITATIVELY_VALIDATED_AND_PROTECTED
+REAL_EXECUTION_AUTHORIZATION_CANDIDATE_IMPLEMENTED
+REAL_EXECUTION_AUTHORIZATION_CANDIDATE_VALIDATION_PENDING
 TARGET_ACCESS_NOT_STARTED
 REAL_DEVELOPMENT_MODEL_FITTING_NOT_STARTED
 PIPELINE_ADMISSION_NOT_STARTED
@@ -20,9 +21,9 @@ ESTABLISHMENT_SEGMENT_NOT_ACCESSED
 FINAL_FRAMEWORK_RESERVE_NOT_ACCESSED
 ```
 
-## Research-question link
+## Research question
 
-Gate V3-5 determines whether any registered RSI or Bollinger interpretation earns new Version 3 benchmark-relative predictive and economic establishment. No earlier gate or version supplies a positive result automatically.
+Gate V3-5 tests whether any locked RSI or Bollinger interpretation earns new benchmark-relative predictive and economic establishment under Version 3. No earlier result is inherited as positive evidence.
 
 Frozen earlier determinations remain:
 
@@ -33,33 +34,36 @@ Version 2 RSI: NO_PIPELINE_ADMITTED
 Version 2 Bollinger: NO_INCREMENTAL_EVIDENCE
 ```
 
-## Validated boundaries
+## Validated chain
 
 ```text
-V3-4 signal engine lock:
+V3-4 signal engine:
 ff2e7ecba3fa69f22e0b109437d23b52d30fba2b
 
-V3-5 contract validation:
+V3-5 contract:
 013d91abc0c3c74a28784aed486edb4c95efc6d7
 
-V3-5 foundation validation:
+V3-5 forecast foundation:
 dd8a8ec5f34f0b8587c8f0cdaaf4f3c0891e944a
 
-V3-5 materialization validation:
+V3-5 real foundation materialization:
 91606edf50a2c0aee9bcb94a93350936ee53f81a
 
-V3-5 warning-free model implementation validation:
+V3-5 preprocessing and estimator implementation:
 37c7360afde61a01ee9f9c5237dcf6bdf42985dd
+
+V3-5 chronological development engine:
+9827d5320d45c4b54a7fe85a24403651f3e239c9
 ```
 
-Validated test evidence:
+Validation tests:
 
 ```text
-contract tests: 7 passed
-foundation tests: 16 passed
-materialization tests: 5 passed
-model implementation tests: 26 passed
-model implementation FutureWarnings: 0
+contract: 7 passed
+foundation: 16 passed
+materialization: 5 passed
+model implementation: 26 passed, 0 FutureWarnings
+development engine: 33 passed, 0 FutureWarnings
 ```
 
 ## Frozen partition
@@ -75,7 +79,7 @@ V3-9 final-framework reserve:
 2026-01-01T00:00:00Z to 2026-07-22T08:00:00Z
 ```
 
-The establishment segment requires a later committed authorization object. The final-framework reserve is inaccessible to Gate V3-5.
+The establishment segment requires a later committed establishment authorization. The V3-9 reserve remains inaccessible.
 
 ## Matched comparison rule
 
@@ -83,65 +87,64 @@ The establishment segment requires a later committed authorization object. The f
 candidate = benchmark information + registered signal information
 ```
 
-Benchmark and candidate must share rows, model class, preprocessing, hyperparameter selection, calibration method, target, horizon, decision policy, and cost assumptions.
+Benchmark and candidate share rows, model class, preprocessing, hyperparameter selection, calibration, target, horizon, decision policy, and costs.
 
-## Authoritative real foundation
+## Authoritative data and model identities
 
 ```text
-development rows: 9852
-target primitive rows: 59070
+development rows: 9,852
+target primitive rows: 59,070
 nested fold records: 120
 bounded candidates: 57
 candidate-horizon records: 342
 matched candidate-horizon records: 276
 explicitly ineligible candidate-horizon records: 66
-input hashes bound: true
-```
-
-Large-move labels remain fold-scoped and training-only.
-
-## Protected model implementation
-
-```text
 pipeline specifications: 162
 executable specifications: 153
 gated specifications: 9
-executable model families: 4
-window schemes: 3
-protected implementation objects: 10
 ```
 
-The preprocessing and estimator implementation is pinned to commit `37c7360afde61a01ee9f9c5237dcf6bdf42985dd`.
+Large-move labels remain training-fold-only.
 
-## Chronological development engine
-
-The new engine implements:
+## Protected development engine
 
 ```text
-fold-only q90 large-move thresholds
-training-only none/sigmoid calibration
-isotonic diagnostic calibration
-inner-only abstention selection
+strict training/calibration/test chronology
+fold-scoped q90 large-move thresholds
+training-only calibration and abstention
 one-standard-error complexity preference
-matched outer-fold prediction and metrics
-10 bps primary cost with 5/20 bps sensitivities
-horizon-spaced economic decisions
-positive-fold and gain-concentration controls
-Holm confirmatory multiplicity
-Benjamini-Hochberg secondary multiplicity
+matched outer-fold evaluation
+predictive and economic metrics
+positive-fold and concentration controls
+Holm and Benjamini-Hochberg multiplicity
 ```
 
-Bounded workload identity:
+The protected bounded workload is:
 
 ```text
-matched candidate-horizon records: 276
-executable pipeline specifications: 153
 candidate-pipeline-target combinations: 42,228
-outer folds: 5
-bounded outer-fold jobs: 211,140
+outer-fold jobs: 211,140
 ```
 
-The workload is computed but not executed in this implementation-validation slice.
+No real job has been executed.
+
+## Authorization candidate
+
+The planning-only authorization candidate defines:
+
+```text
+complete job plan: 211,140 rows
+jobs per full batch: 250
+batch count: 845
+final batch jobs: 140
+execution stages: 6
+parallel batches: 1
+worker processes: 1
+checkpoint after each batch: required
+input/output hash binding: required
+```
+
+The authorization candidate validates planning and resumability only. All batches remain `PLANNED_NOT_STARTED`; real execution remains unauthorized until a later final authorization object promotes a specific stage or batch range.
 
 ## Current truth state
 
@@ -150,14 +153,16 @@ contract validated: true
 foundation validated: true
 materialization validated: true
 model implementation validated and protected: true
-chronological engine implementation complete: true
-chronological engine authoritative validation: pending
+development engine validated and protected: true
+authorization candidate implementation complete: true
+authorization candidate authoritative validation: pending
 development target primitives generated: true
 model-selection target consumption started: false
 real development models fitted: false
 real development predictions generated: false
 development pipelines ranked: false
 development pipelines admitted: false
+final real-execution authorization created: false
 establishment authorization created: false
 establishment segment accessed: false
 final-framework reserve accessed: false
@@ -165,20 +170,14 @@ signal established: false
 failure modelling admissible: false
 ```
 
-The frozen exact token `TARGET_ACCESS_NOT_STARTED` means no target primitive has been consumed by real model-selection or model-fitting execution.
+The frozen token `TARGET_ACCESS_NOT_STARTED` means no real model-selection or model-fitting process has consumed the target primitives.
 
-## Required authoritative execution
+## Required next execution
 
 ```powershell
-.\RUN_V3_G5_DEVELOPMENT_ENGINE.ps1
+.\RUN_V3_G5_REAL_EXECUTION_AUTHORIZATION.ps1
 ```
-
-This runner uses synthetic matched fits only and treats every `FutureWarning` as an error.
-
-## Next boundary
-
-After the 31-test engine validation passes, the next step is a separate real-development execution authorization with compute limits, resumability, checkpointing, deterministic output manifests, and a staged schedule for the bounded 211,140 jobs.
 
 ## Claims boundary
 
-No predictive, economic, conditional-validity, deterioration, failure-probability, or operational-use claim is authorized at this checkpoint.
+No predictive, economic, conditional-validity, deterioration, failure-probability, or operational-use claim is authorized.
