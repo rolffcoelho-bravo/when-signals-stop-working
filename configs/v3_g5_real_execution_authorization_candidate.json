@@ -1,5 +1,5 @@
 {
-  "schema_version": "v3.g5-real-execution-authorization-candidate.v1",
+  "schema_version": "v3.g5-real-execution-authorization-candidate.v2",
   "gate": "V3-5",
   "stage": "REAL_DEVELOPMENT_EXECUTION_AUTHORIZATION_PLANNING",
   "status": "AUTHORIZATION_CANDIDATE_FROZEN",
@@ -30,8 +30,11 @@
       "outer_fold"
     ],
     "jobs_per_batch": 250,
-    "expected_batch_count": 845,
-    "expected_final_batch_jobs": 140,
+    "stage_boundary_alignment_required": true,
+    "batch_count_policy": "SUM_OF_STAGE_CEIL_JOB_COUNT_DIVIDED_BY_250",
+    "expected_batch_count_min": 847,
+    "expected_batch_count_max": 848,
+    "expected_final_batch_jobs": 130,
     "maximum_parallel_batches": 1,
     "maximum_worker_processes": 1,
     "blas_threads_per_process": 1,
@@ -100,7 +103,8 @@
   ],
   "resumability": {
     "job_identifier": "SHA256_CANONICAL_JOB_FIELDS",
-    "batch_identifier": "v3g5batch:zero_padded_ordinal",
+    "batch_identifier": "v3g5batch:zero_padded_global_ordinal",
+    "stage_batch_identifier": "stage_id:batch:zero_padded_stage_ordinal",
     "allowed_batch_states": [
       "PLANNED_NOT_STARTED",
       "RUNNING",
@@ -143,6 +147,7 @@
   "promotion_requirements": {
     "authorization_candidate_tests_pass": true,
     "exact_plan_identity_verified": true,
+    "stage_boundary_alignment_verified": true,
     "all_input_hashes_bound": true,
     "protected_engine_boundary_verified": true,
     "tracked_worktree_clean": true,
