@@ -7,6 +7,7 @@ import platform
 import subprocess
 import sys
 
+import numpy as np
 import pandas as pd
 from sklearn import __version__ as SKLEARN_VERSION
 
@@ -62,10 +63,15 @@ def main() -> int:
     git_head = _git_head()
     if manifest.get("git_commit") != git_head:
         raise RuntimeError("Authorization plan is not bound to the current Git HEAD.")
-    if manifest.get("python_version") != platform.python_version():
-        raise RuntimeError("Authorization plan Python version binding changed.")
-    if manifest.get("scikit_learn_version") != SKLEARN_VERSION:
-        raise RuntimeError("Authorization plan scikit-learn version binding changed.")
+    expected_environment = {
+        "python_version": platform.python_version(),
+        "pandas_version": pd.__version__,
+        "numpy_version": np.__version__,
+        "scikit_learn_version": SKLEARN_VERSION,
+        "platform": platform.platform(),
+    }
+    if manifest.get("environment") != expected_environment:
+        raise RuntimeError("Authorization plan serialization environment binding changed.")
 
     input_paths = {
         "authorization_candidate_contract": AUTHORIZATION_CONTRACT,
@@ -120,6 +126,11 @@ def main() -> int:
     print("Final batch jobs: 130")
     print("Execution stages: 6")
     print("No batch crosses a stage boundary: True")
+    print(f"Python version: {expected_environment['python_version']}")
+    print(f"pandas version: {expected_environment['pandas_version']}")
+    print(f"NumPy version: {expected_environment['numpy_version']}")
+    print(f"scikit-learn version: {expected_environment['scikit_learn_version']}")
+    print(f"Platform: {expected_environment['platform']}")
     print(f"Authorization candidate manifest SHA-256: {manifest_sha256}")
     print(f"Execution job plan SHA-256: {output_hashes[str(outputs['job_plan'])]}")
     print(f"Execution batch manifest SHA-256: {output_hashes[str(outputs['batch_manifest'])]}")
@@ -128,7 +139,7 @@ def main() -> int:
     print("Input and output hashes verified: True")
     print("Input hash manifests agree: True")
     print("Strict false-state parsing verified: True")
-    print("Git/environment binding verified: True")
+    print("Git and serialization environment binding verified: True")
     print("All batches planned-not-started: True")
     print("Real development execution authorized: False")
     print("Real development model fitting performed: False")
