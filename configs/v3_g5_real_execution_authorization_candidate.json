@@ -1,0 +1,162 @@
+{
+  "schema_version": "v3.g5-real-execution-authorization-candidate.v1",
+  "gate": "V3-5",
+  "stage": "REAL_DEVELOPMENT_EXECUTION_AUTHORIZATION_PLANNING",
+  "status": "AUTHORIZATION_CANDIDATE_FROZEN",
+  "parent_engine_validation": "V3_G5_DEVELOPMENT_ENGINE_VALIDATION.json",
+  "planning_and_manifest_generation_authorized": true,
+  "real_development_execution_authorized": false,
+  "real_development_model_fitting_authorized": false,
+  "development_pipeline_selection_authorized": false,
+  "development_pipeline_admission_authorized": false,
+  "signal_establishment_segment_access_authorized": false,
+  "final_framework_reserve_access_authorized": false,
+  "bounded_workload": {
+    "matched_candidate_horizon_records": 276,
+    "executable_pipeline_specifications": 153,
+    "outer_folds": 5,
+    "candidate_pipeline_target_combinations": 42228,
+    "outer_fold_jobs": 211140
+  },
+  "batching": {
+    "sort_order": [
+      "stage_rank",
+      "target_name",
+      "horizon_candles",
+      "candidate_id",
+      "model_family",
+      "window_id",
+      "pipeline_spec_id",
+      "outer_fold"
+    ],
+    "jobs_per_batch": 250,
+    "expected_batch_count": 845,
+    "expected_final_batch_jobs": 140,
+    "maximum_parallel_batches": 1,
+    "maximum_worker_processes": 1,
+    "blas_threads_per_process": 1,
+    "checkpoint_after_every_batch": true,
+    "atomic_checkpoint_writes": true,
+    "completed_batch_overwrite_prohibited": true
+  },
+  "stage_schedule": [
+    {
+      "stage_rank": 1,
+      "stage_id": "S1_CONFIRMATORY_DIRECTION_PRIMARY",
+      "target_name": "direction",
+      "confirmatory_role": "ELIGIBLE_BY_FAMILY",
+      "model_families": ["regularized_linear"]
+    },
+    {
+      "stage_rank": 2,
+      "stage_id": "S2_CONFIRMATORY_DIRECTION_NONLINEAR",
+      "target_name": "direction",
+      "confirmatory_role": "ELIGIBLE_BY_FAMILY",
+      "model_families": ["spline_regularized", "shallow_hist_gradient_boosting"]
+    },
+    {
+      "stage_rank": 3,
+      "stage_id": "S3_CONFIRMATORY_DIRECTION_DYNAMIC",
+      "target_name": "direction",
+      "confirmatory_role": "ELIGIBLE_BY_FAMILY",
+      "model_families": ["time_varying_regularized_glm"]
+    },
+    {
+      "stage_rank": 4,
+      "stage_id": "S4_SECONDARY_DIRECTION_COMBINED",
+      "target_name": "direction",
+      "confirmatory_role": "SECONDARY_ONLY",
+      "model_families": [
+        "regularized_linear",
+        "spline_regularized",
+        "shallow_hist_gradient_boosting",
+        "time_varying_regularized_glm"
+      ]
+    },
+    {
+      "stage_rank": 5,
+      "stage_id": "S5_EXPECTED_RETURN_ALL",
+      "target_name": "expected_return",
+      "confirmatory_role": "ANY",
+      "model_families": [
+        "regularized_linear",
+        "spline_regularized",
+        "shallow_hist_gradient_boosting",
+        "time_varying_regularized_glm"
+      ]
+    },
+    {
+      "stage_rank": 6,
+      "stage_id": "S6_LARGE_MOVE_ALL",
+      "target_name": "large_move_probability",
+      "confirmatory_role": "ANY",
+      "model_families": [
+        "regularized_linear",
+        "spline_regularized",
+        "shallow_hist_gradient_boosting",
+        "time_varying_regularized_glm"
+      ]
+    }
+  ],
+  "resumability": {
+    "job_identifier": "SHA256_CANONICAL_JOB_FIELDS",
+    "batch_identifier": "v3g5batch:zero_padded_ordinal",
+    "allowed_batch_states": [
+      "PLANNED_NOT_STARTED",
+      "RUNNING",
+      "COMPLETE",
+      "FAILED",
+      "QUARANTINED"
+    ],
+    "initial_batch_state": "PLANNED_NOT_STARTED",
+    "resume_from_first_noncomplete_batch": true,
+    "completed_batch_hash_verification_required": true,
+    "failed_batch_error_manifest_required": true,
+    "quarantine_on_output_hash_mismatch": true
+  },
+  "determinism": {
+    "global_random_seed": 20260731,
+    "single_threaded_linear_algebra": true,
+    "canonical_json_sort_keys": true,
+    "canonical_csv_line_ending": "LF",
+    "input_hash_binding_required": true,
+    "output_hash_binding_required": true,
+    "environment_manifest_required": true,
+    "git_commit_binding_required": true
+  },
+  "planning_outputs": {
+    "runtime_directory": "outputs/v3/development_execution_plan",
+    "job_plan": "execution_job_plan.csv",
+    "batch_manifest": "execution_batch_manifest.csv",
+    "stage_manifest": "execution_stage_manifest.csv",
+    "authorization_candidate_manifest": "authorization_candidate_manifest.json",
+    "input_hash_manifest": "authorization_input_hashes.json"
+  },
+  "future_execution_outputs": {
+    "batch_result_directory_pattern": "outputs/v3/development_execution/batch_{batch_ordinal:04d}",
+    "batch_checkpoint": "batch_checkpoint.json",
+    "inner_selection_results": "inner_selection_results.csv",
+    "outer_fold_predictions": "outer_fold_predictions.csv",
+    "outer_fold_results": "outer_fold_results.csv",
+    "batch_output_hashes": "batch_output_hashes.json"
+  },
+  "promotion_requirements": {
+    "authorization_candidate_tests_pass": true,
+    "exact_plan_identity_verified": true,
+    "all_input_hashes_bound": true,
+    "protected_engine_boundary_verified": true,
+    "tracked_worktree_clean": true,
+    "explicit_final_authorization_object_required": true
+  },
+  "prohibited_during_candidate_validation": {
+    "real_development_target_consumption": true,
+    "real_development_model_fit": true,
+    "real_development_prediction": true,
+    "pipeline_ranking": true,
+    "pipeline_admission": true,
+    "batch_state_promotion_to_running": true,
+    "signal_establishment_segment_access": true,
+    "final_framework_reserve_access": true,
+    "empirical_claims": true
+  }
+}
