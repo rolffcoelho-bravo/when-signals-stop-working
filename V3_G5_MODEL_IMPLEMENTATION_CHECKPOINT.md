@@ -11,7 +11,9 @@ V3_5_MATERIALIZATION_AUTHORITATIVELY_VALIDATED
 MODEL_IMPLEMENTATION_CONTRACT_FROZEN
 FOLD_SCOPED_PREPROCESSING_IMPLEMENTED
 MATCHED_ESTIMATOR_FAMILIES_IMPLEMENTED
-AUTHORITATIVE_EXECUTION_PENDING
+FUNCTIONAL_VALIDATION_PASSED
+COMPATIBILITY_REMEDIATION_IMPLEMENTED
+WARNING_FREE_AUTHORITATIVE_RERUN_PENDING
 REAL_DEVELOPMENT_MODEL_FITTING_NOT_STARTED
 DEVELOPMENT_PIPELINE_SELECTION_NOT_STARTED
 ESTABLISHMENT_SEGMENT_NOT_ACCESSED
@@ -43,6 +45,59 @@ tracked worktree clean: true
 ```
 
 The machine-readable record is `V3_G5_MATERIALIZATION_VALIDATION.json`.
+
+## Functional implementation validation
+
+The first authoritative Windows execution completed at commit:
+
+```text
+5d31f1583bcf66f0231d8ef6b4f1e980d98def9b
+```
+
+Observed results:
+
+```text
+model-implementation tests: 26 passed
+standalone verifier: passed
+pipeline specifications: 162
+executable specifications: 153
+gated specifications: 9
+executable model families: 4
+window schemes: 3
+synthetic classification and regression fits: passed
+real development model fitting: false
+development pipeline selection: false
+establishment segment access: false
+final reserve access: false
+```
+
+The run emitted six scikit-learn 1.8 `FutureWarning` messages because `LogisticRegression` was supplied with the explicit deprecated argument `penalty="l2"`. The warnings did not change fit results or the mathematical estimator, but they block final implementation lock because the argument is scheduled for removal in scikit-learn 1.10.
+
+Machine-readable records:
+
+```text
+V3_G5_MODEL_IMPLEMENTATION_VALIDATION.json
+V3_G5_MODEL_IMPLEMENTATION_REMEDIATION.json
+```
+
+## Compatibility remediation
+
+The frozen mathematical policy remains L2-regularized logistic regression.
+
+The API spelling is now version-aware:
+
+```text
+scikit-learn before 1.8:
+penalty = "l2"
+
+scikit-learn 1.8 or later:
+l1_ratio = 0.0
+deprecated penalty argument omitted
+```
+
+The classification `C` grid, solver, iteration limit, random seed, target registry, model-family registry, window registry, matched comparison rule, and candidate inventory are unchanged.
+
+Both the pytest runner and standalone verifier now treat every `FutureWarning` as an execution failure.
 
 ## Scientific purpose
 
@@ -134,7 +189,7 @@ The time-varying regularized GLM is implemented as a deterministic exponentially
 ```text
 forgetting factors: 0.97, 0.99
 minimum training observations: 2190
-classification regularization: fixed C = 1.0
+classification regularization: fixed C = 1.0 with L2 semantics
 regression regularization: fixed alpha = 1.0
 ```
 
@@ -156,13 +211,14 @@ RUN_V3_G5_MODEL_IMPLEMENTATION.ps1
 RUN_V3_G5_MODEL_IMPLEMENTATION.sh
 ```
 
-## Expected validation identity
+## Required warning-free validation identity
 
 ```text
 preprocessing tests: 8
 model-registry tests: 7
 estimator tests: 11
 total model-implementation tests: 26
+FutureWarnings: 0
 pipeline specifications: 162
 executable specifications: 153
 gated specifications: 9
@@ -171,7 +227,7 @@ window schemes: 3
 real development model fitting: false
 ```
 
-## Required authoritative execution
+## Required authoritative rerun
 
 ```powershell
 .\RUN_V3_G5_MODEL_IMPLEMENTATION.ps1
@@ -201,4 +257,4 @@ No predictive, economic, conditional-validity, deterioration, failure-probabilit
 
 ## Next implementation after validation
 
-After this implementation passes, the next slice may implement the chronological development execution engine, fold-scoped large-move threshold generation, calibration and abstention selection, predictive/economic metrics, and multiplicity controls. Actual real-data fitting must remain a separately authorized and validated execution boundary.
+The chronological development execution engine remains blocked until the warning-free model implementation rerun passes and this layer is finally locked.
