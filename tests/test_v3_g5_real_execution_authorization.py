@@ -13,8 +13,11 @@ from shockbridge_signal_validity.v3.forecast_model_registry import (
 )
 from shockbridge_signal_validity.v3.forecast_real_execution_authorization import (
     build_authorization_job_plan,
-    build_batch_manifest,
-    load_authorization_candidate,
+)
+from shockbridge_signal_validity.v3.forecast_real_execution_batching import (
+    align_plan_batches_to_stages,
+    build_stage_aligned_batch_manifest,
+    load_stage_aligned_authorization_candidate,
 )
 from shockbridge_signal_validity.v3.forecast_real_execution_stages import (
     build_complete_stage_manifest,
@@ -73,7 +76,7 @@ def _synthetic_inventory_and_coverage() -> tuple[pd.DataFrame, pd.DataFrame]:
 
 @pytest.fixture(scope="module")
 def authorization_bundle():
-    authorization = load_authorization_candidate(AUTHORIZATION_CONTRACT)
+    authorization = load_stage_aligned_authorization_candidate(AUTHORIZATION_CONTRACT)
     forecast, implementation = load_contracts(FORECAST_CONTRACT, MODEL_CONTRACT)
     registry = build_pipeline_registry(forecast, implementation)
     candidates, coverage = _synthetic_inventory_and_coverage()
@@ -83,17 +86,19 @@ def authorization_bundle():
         pipeline_specs=registry,
         authorization_contract=authorization,
     )
-    batches = build_batch_manifest(plan, authorization)
+    plan = align_plan_batches_to_stages(plan, authorization)
+    batches = build_stage_aligned_batch_manifest(plan, authorization)
     stages = build_complete_stage_manifest(plan, authorization)
     return authorization, registry, candidates, coverage, plan, batches, stages
 
 
 def test_authorization_candidate_is_planning_only() -> None:
-    authorization = load_authorization_candidate(AUTHORIZATION_CONTRACT)
+    authorization = load_stage_aligned_authorization_candidate(AUTHORIZATION_CONTRACT)
     assert authorization["planning_and_manifest_generation_authorized"] is True
     assert authorization["real_development_execution_authorized"] is False
     assert authorization["real_development_model_fitting_authorized"] is False
     assert authorization["development_pipeline_selection_authorized"] is False
+    assert authorization["batching"]["stage_boundary_alignment_required"] is True
 
 
 def test_exact_job_plan_identity(authorization_bundle) -> None:
@@ -105,13 +110,14 @@ def test_exact_job_plan_identity(authorization_bundle) -> None:
     assert plan["job_id"].str.startswith("v3g5job:").all()
 
 
-def test_exact_batch_identity(authorization_bundle) -> None:
+def test_exact_stage_aligned_batch_identity(authorization_bundle) -> None:
     _, _, _, _, plan, batches, _ = authorization_bundle
-    assert plan["batch_ordinal"].nunique() == 845
-    assert len(batches) == 845
+    assert plan["batch_ordinal"].nunique() == 847
+    assert len(batches) == 847
     assert int(batches["job_count"].sum()) == 211140
-    assert int(batches.iloc[-1]["job_count"]) == 140
-    assert batches.iloc[-1]["batch_id"] == "v3g5batch:0845"
+    assert int(batches.iloc[-1]["job_count"]) == 130
+    assert batches.iloc[-1]["batch_id"] == "v3g5batch:0847"
+    assert batches.groupby("batch_ordinal")["stage_rank"].nunique().max() == 1
 
 
 def test_declared_empty_stage_is_preserved(authorization_bundle) -> None:
@@ -162,7 +168,7 @@ def test_authorization_stage_order_is_deterministic(authorization_bundle) -> Non
 
 
 def test_authorization_rejects_execution_flag() -> None:
-    authorization = load_authorization_candidate(AUTHORIZATION_CONTRACT)
+    authorization = load_stage_aligned_authorization_candidate(AUTHORIZATION_CONTRACT)
     changed = copy.deepcopy(authorization)
     changed["real_development_execution_authorized"] = True
     temporary = ROOT / "outputs" / "v3" / "test_authorization_candidate.json"
@@ -170,7 +176,7 @@ def test_authorization_rejects_execution_flag() -> None:
     try:
         temporary.write_text(__import__("json").dumps(changed), encoding="utf-8")
         with pytest.raises(ForecastProtocolViolation, match="advanced prematurely"):
-            load_authorization_candidate(temporary)
+            load_stage_aligned_authorization_candidate(temporary)
     finally:
         temporary.unlink(missing_ok=True)
 
@@ -202,7 +208,7 @@ def test_job_ids_bind_outer_fold(authorization_bundle) -> None:
 
 def test_batch_hashes_are_unique(authorization_bundle) -> None:
     _, _, _, _, _, batches, _ = authorization_bundle
-    assert batches["job_ids_sha256"].nunique() == 845
+    assert batches["job_ids_sha256"].nunique() == 847
     assert batches["attempt_count"].eq(0).all()
 
 
