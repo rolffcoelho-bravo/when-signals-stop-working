@@ -1,0 +1,43 @@
+{
+  "schema_version": "v3.g5-model-implementation-validation.v1",
+  "gate": "V3-5",
+  "stage": "FOLD_SCOPED_PREPROCESSING_AND_MATCHED_ESTIMATOR_FAMILIES",
+  "status": "IMPLEMENTATION_FUNCTIONALLY_VALIDATED_COMPATIBILITY_REMEDIATION_REQUIRED",
+  "branch": "research/v3-adaptive-signal-validity",
+  "validated_implementation_commit": "5d31f1583bcf66f0231d8ef6b4f1e980d98def9b",
+  "authoritative_environment": "Windows PowerShell research environment",
+  "validation_evidence": {
+    "parent_v3_4_lock_verified": true,
+    "validated_v3_5_foundation_boundary_verified": true,
+    "validated_v3_5_materialization_boundary_verified": true,
+    "real_materialization_evidence_verified": true,
+    "model_implementation_tests_passed": 26,
+    "standalone_model_implementation_verifier_passed": true,
+    "pipeline_specifications": 162,
+    "executable_pipeline_specifications": 153,
+    "gated_pipeline_specifications": 9,
+    "executable_model_families": 4,
+    "window_schemes": 3,
+    "patch_integrity_passed": true,
+    "tracked_worktree_clean": true,
+    "branch_up_to_date_with_origin": true
+  },
+  "compatibility_observation": {
+    "future_warnings_observed": 6,
+    "source": "scikit-learn 1.8 LogisticRegression penalty deprecation",
+    "affected_mathematical_policy": "L2_REGULARIZATION",
+    "mathematical_estimator_changed": false,
+    "blocking_before_final_implementation_lock": true,
+    "required_remediation": "VERSION_COMPATIBLE_L2_CONFIGURATION_AND_WARNING_AS_ERROR_RERUN"
+  },
+  "execution_state": {
+    "synthetic_estimator_fits_performed": true,
+    "real_development_model_fitting_started": false,
+    "development_pipeline_selection_performed": false,
+    "establishment_authorization_created": false,
+    "signal_establishment_segment_accessed": false,
+    "final_framework_reserve_accessed": false
+  },
+  "empirical_claims_authorized": false,
+  "next_required_action": "RERUN_WARNING_FREE_MODEL_IMPLEMENTATION_VALIDATION"
+}
