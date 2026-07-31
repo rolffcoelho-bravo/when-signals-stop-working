@@ -13,7 +13,9 @@ MATERIALIZATION_AUTHORITATIVELY_VALIDATED
 MODEL_IMPLEMENTATION_CONTRACT_FROZEN
 FOLD_SCOPED_PREPROCESSING_IMPLEMENTED
 MATCHED_ESTIMATOR_FAMILIES_IMPLEMENTED
-MODEL_IMPLEMENTATION_AUTHORITATIVE_EXECUTION_PENDING
+MODEL_IMPLEMENTATION_FUNCTIONAL_VALIDATION_PASSED
+MODEL_IMPLEMENTATION_COMPATIBILITY_REMEDIATION_IMPLEMENTED
+MODEL_IMPLEMENTATION_WARNING_FREE_RERUN_PENDING
 TARGET_ACCESS_NOT_STARTED
 REAL_DEVELOPMENT_MODEL_FITTING_NOT_STARTED
 PIPELINE_ADMISSION_NOT_STARTED
@@ -45,9 +47,11 @@ V3-4 validated implementation: ff2e7ecba3fa69f22e0b109437d23b52d30fba2b
 V3-5 contract validation commit: 013d91abc0c3c74a28784aed486edb4c95efc6d7
 V3-5 foundation validation commit: dd8a8ec5f34f0b8587c8f0cdaaf4f3c0891e944a
 V3-5 materialization validation commit: 91606edf50a2c0aee9bcb94a93350936ee53f81a
+V3-5 functional model validation commit: 5d31f1583bcf66f0231d8ef6b4f1e980d98def9b
 V3-5 contract tests: 7 passed
 V3-5 foundation tests: 16 passed
 V3-5 materialization tests: 5 passed
+V3-5 model implementation tests: 26 passed
 ```
 
 Machine-readable records:
@@ -56,7 +60,11 @@ Machine-readable records:
 V3_G5_CONTRACT_VALIDATION.json
 V3_G5_FOUNDATION_VALIDATION.json
 V3_G5_MATERIALIZATION_VALIDATION.json
+V3_G5_MODEL_IMPLEMENTATION_VALIDATION.json
+V3_G5_MODEL_IMPLEMENTATION_REMEDIATION.json
 ```
+
+The model implementation run passed functionally but emitted six scikit-learn 1.8 `FutureWarning` messages for the deprecated explicit `penalty="l2"` argument. The mathematical estimator remained L2-regularized, but final implementation lock is blocked until a warning-free rerun passes.
 
 ## Frozen partition
 
@@ -173,6 +181,17 @@ gated specifications: 9
 
 No model family, specification, or candidate is selected automatically.
 
+## Logistic compatibility remediation
+
+The frozen classification policy remains L2-regularized logistic regression.
+
+```text
+scikit-learn before 1.8: penalty = "l2"
+scikit-learn 1.8 or later: l1_ratio = 0.0 and deprecated penalty omitted
+```
+
+The `C` grids, solver, targets, model families, windows, matched-row contracts, and candidate inventory are unchanged. Pytest and the standalone verifier now fail on every `FutureWarning`.
+
 ## Current truth state
 
 ```text
@@ -186,7 +205,8 @@ real candidate inventory generated: true
 real matched-row coverage generated: true
 fold-scoped large-move labels generated: false
 model implementation complete: true
-model implementation authoritative execution: pending
+model implementation functional validation: passed
+model implementation warning-free validation: pending
 model-selection target consumption started: false
 real development models fitted: false
 development pipelines ranked: false
@@ -199,7 +219,7 @@ failure modelling admissible: false
 
 The frozen exact token `TARGET_ACCESS_NOT_STARTED` is retained and means that target primitives have not been consumed by model-selection or model-fitting execution.
 
-## Required authoritative execution
+## Required authoritative rerun
 
 ```powershell
 .\RUN_V3_G5_MODEL_IMPLEMENTATION.ps1
@@ -211,13 +231,13 @@ Expected runner stages:
 2. verify validated V3-5 contract and foundation objects;
 3. verify the authoritative materialization boundary;
 4. verify or regenerate the real development foundation;
-5. run 26 model-implementation tests;
-6. run the standalone implementation verifier using synthetic data only;
-7. verify no tracked or staged mutation.
+5. run 26 model-implementation tests with `FutureWarning` treated as error;
+6. run the standalone implementation verifier with `FutureWarning` treated as error;
+7. verify zero tracked or staged mutation.
 
 ## Next implementation after validation
 
-After this implementation passes, the next slice may implement chronological development execution, fold-scoped large-move thresholds, calibration, abstention, predictive/economic metrics, and multiplicity controls. Real-data model fitting remains a separate governed execution boundary.
+The chronological development execution engine remains blocked until the warning-free implementation rerun passes and the estimator layer is finally locked. Real-data model fitting remains a separate governed execution boundary.
 
 ## Claims boundary
 
