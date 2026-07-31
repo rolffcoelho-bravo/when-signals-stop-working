@@ -51,8 +51,8 @@ try {
         }
     }
 
-    Write-Host "5. RUNNING MODEL IMPLEMENTATION TESTS"
-    python -m pytest -q `
+    Write-Host "5. RUNNING WARNING-FREE MODEL IMPLEMENTATION TESTS"
+    python -W error::FutureWarning -m pytest -q `
         tests/test_v3_g5_preprocessing.py `
         tests/test_v3_g5_model_registry.py `
         tests/test_v3_g5_estimators.py
@@ -60,8 +60,8 @@ try {
         throw "Gate V3-5 model implementation tests failed."
     }
 
-    Write-Host "6. RUNNING STANDALONE MODEL IMPLEMENTATION VERIFIER"
-    python scripts/verify_v3_g5_model_implementation.py
+    Write-Host "6. RUNNING WARNING-FREE STANDALONE MODEL IMPLEMENTATION VERIFIER"
+    python -W error::FutureWarning scripts/verify_v3_g5_model_implementation.py
     if ($LASTEXITCODE -ne 0) {
         throw "Gate V3-5 model implementation verification failed."
     }
@@ -83,6 +83,7 @@ try {
     Write-Host "Gate V3-5 model implementation evidence passed."
     Write-Host "Fold-scoped preprocessing is implemented."
     Write-Host "Matched estimator families are implemented."
+    Write-Host "Logistic L2 compatibility warnings observed: 0"
     Write-Host "Only synthetic estimator fits were executed."
     Write-Host "Real development model fitting remains disabled."
     Write-Host "Development pipeline selection remains disabled."
