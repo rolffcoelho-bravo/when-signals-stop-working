@@ -78,6 +78,15 @@ outer-test labels: same training threshold applied forward
 outer-test influence on threshold: prohibited
 ```
 
+Every synthetic execution partition must satisfy:
+
+```text
+training end < calibration start
+calibration end < outer-test start
+```
+
+A large-move outer-fold result must carry the exact training-fold threshold used to label calibration and test observations.
+
 ## Inner selection policy
 
 ```text
@@ -197,8 +206,8 @@ RUN_V3_G5_DEVELOPMENT_ENGINE.sh
 development metric tests: 8
 calibration and selection tests: 10
 multiplicity tests: 5
-development execution tests: 8
-total tests: 31
+development execution tests: 10
+total tests: 33
 FutureWarnings: 0
 candidate-pipeline-target combinations: 42,228
 outer-fold jobs: 211,140
