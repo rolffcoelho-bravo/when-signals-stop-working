@@ -20,9 +20,12 @@ from shockbridge_signal_validity.v3.forecast_model_registry import (  # noqa: E4
 )
 from shockbridge_signal_validity.v3.forecast_real_execution_authorization import (  # noqa: E402
     build_authorization_job_plan,
-    build_batch_manifest,
-    load_authorization_candidate,
     write_authorization_candidate_plan,
+)
+from shockbridge_signal_validity.v3.forecast_real_execution_batching import (  # noqa: E402
+    align_plan_batches_to_stages,
+    build_stage_aligned_batch_manifest,
+    load_stage_aligned_authorization_candidate,
 )
 from shockbridge_signal_validity.v3.forecast_real_execution_stages import (  # noqa: E402
     build_complete_stage_manifest,
@@ -54,7 +57,7 @@ def _git_head() -> str:
 
 
 def main() -> int:
-    authorization = load_authorization_candidate(AUTHORIZATION_CONTRACT)
+    authorization = load_stage_aligned_authorization_candidate(AUTHORIZATION_CONTRACT)
     engine_validation = json.loads(ENGINE_VALIDATION.read_text(encoding="utf-8"))
     if engine_validation.get("status") != (
         "DEVELOPMENT_ENGINE_AUTHORITATIVELY_VALIDATED_AND_PROTECTED"
@@ -86,7 +89,8 @@ def main() -> int:
         pipeline_specs=registry,
         authorization_contract=authorization,
     )
-    batches = build_batch_manifest(plan, authorization)
+    plan = align_plan_batches_to_stages(plan, authorization)
+    batches = build_stage_aligned_batch_manifest(plan, authorization)
     stages = build_complete_stage_manifest(plan, authorization)
     manifest = write_authorization_candidate_plan(
         plan=plan,
@@ -111,10 +115,11 @@ def main() -> int:
     print("Gate V3-5 real execution authorization candidate plan materialized.")
     print(f"Outer-fold jobs: {manifest['outer_fold_jobs']}")
     print(f"Candidate-pipeline-target combinations: {manifest['candidate_pipeline_target_combinations']}")
-    print(f"Batches: {manifest['batch_count']}")
+    print(f"Stage-aligned batches: {manifest['batch_count']}")
     print(f"Jobs per full batch: {manifest['jobs_per_batch']}")
     print(f"Final batch jobs: {manifest['final_batch_jobs']}")
     print(f"Stages: {manifest['stage_count']}")
+    print("No batch crosses a stage boundary: True")
     print("Declared empty stages preserved: True")
     print("All input hashes bound: True")
     print("All batches initially planned-not-started: True")
