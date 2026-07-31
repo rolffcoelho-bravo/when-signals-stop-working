@@ -2,10 +2,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from hashlib import sha256
+import re
 from typing import Any
 
 import numpy as np
 import pandas as pd
+from sklearn import __version__ as SKLEARN_VERSION
 from sklearn.base import BaseEstimator, ClassifierMixin, RegressorMixin
 from sklearn.ensemble import HistGradientBoostingClassifier, HistGradientBoostingRegressor
 from sklearn.linear_model import LogisticRegression, Ridge
@@ -14,6 +16,29 @@ from sklearn.preprocessing import SplineTransformer
 
 from .forecast_contract import ForecastProtocolViolation, require_utc_index
 from .forecast_model_registry import ForecastPipelineSpec
+
+
+def sklearn_major_minor() -> tuple[int, int]:
+    match = re.match(r"^(\d+)\.(\d+)", str(SKLEARN_VERSION))
+    if match is None:
+        raise ForecastProtocolViolation(
+            f"Unable to parse scikit-learn version: {SKLEARN_VERSION!r}"
+        )
+    return int(match.group(1)), int(match.group(2))
+
+
+def version_compatible_logistic_l2_arguments(
+    *,
+    penalty_before_sklearn_1_8: str,
+    l1_ratio_from_sklearn_1_8: float,
+) -> dict[str, object]:
+    if str(penalty_before_sklearn_1_8) != "l2":
+        raise ForecastProtocolViolation("Pre-1.8 logistic policy must preserve L2.")
+    if float(l1_ratio_from_sklearn_1_8) != 0.0:
+        raise ForecastProtocolViolation("Scikit-learn 1.8+ logistic policy must preserve L2.")
+    if sklearn_major_minor() >= (1, 8):
+        return {"l1_ratio": 0.0}
+    return {"penalty": "l2"}
 
 
 class ExponentiallyWeightedGLMClassifier(ClassifierMixin, BaseEstimator):
@@ -25,12 +50,16 @@ class ExponentiallyWeightedGLMClassifier(ClassifierMixin, BaseEstimator):
         C: float = 1.0,
         max_iter: int = 2000,
         random_state: int = 20260728,
+        penalty_before_sklearn_1_8: str = "l2",
+        l1_ratio_from_sklearn_1_8: float = 0.0,
     ) -> None:
         self.forgetting_factor = forgetting_factor
         self.minimum_training_observations = minimum_training_observations
         self.C = C
         self.max_iter = max_iter
         self.random_state = random_state
+        self.penalty_before_sklearn_1_8 = penalty_before_sklearn_1_8
+        self.l1_ratio_from_sklearn_1_8 = l1_ratio_from_sklearn_1_8
 
     def fit(self, X: Any, y: Any) -> "ExponentiallyWeightedGLMClassifier":
         values = np.asarray(X, dtype=float)
@@ -53,12 +82,16 @@ class ExponentiallyWeightedGLMClassifier(ClassifierMixin, BaseEstimator):
         age = np.arange(len(values) - 1, -1, -1, dtype=float)
         weights = np.power(float(self.forgetting_factor), age)
         weights = np.maximum(weights, np.finfo(float).tiny)
+        regularization = version_compatible_logistic_l2_arguments(
+            penalty_before_sklearn_1_8=str(self.penalty_before_sklearn_1_8),
+            l1_ratio_from_sklearn_1_8=float(self.l1_ratio_from_sklearn_1_8),
+        )
         self.model_ = LogisticRegression(
             C=float(self.C),
-            penalty="l2",
             solver="lbfgs",
             max_iter=int(self.max_iter),
             random_state=int(self.random_state),
+            **regularization,
         )
         self.model_.fit(values, target, sample_weight=weights)
         self.classes_ = self.model_.classes_
@@ -158,6 +191,28 @@ class MatchedEstimatorPair:
         }
 
 
+def _logistic_estimator(
+    *,
+    C: float,
+    defaults: dict[str, object],
+) -> LogisticRegression:
+    regularization = version_compatible_logistic_l2_arguments(
+        penalty_before_sklearn_1_8=str(
+            defaults["logistic_penalty_before_sklearn_1_8"]
+        ),
+        l1_ratio_from_sklearn_1_8=float(
+            defaults["logistic_l1_ratio_from_sklearn_1_8"]
+        ),
+    )
+    return LogisticRegression(
+        C=float(C),
+        solver=str(defaults["logistic_solver"]),
+        max_iter=int(defaults["logistic_max_iter"]),
+        random_state=int(defaults["random_state"]),
+        **regularization,
+    )
+
+
 def _spline_pipeline(
     *,
     task_type: str,
@@ -172,12 +227,9 @@ def _spline_pipeline(
         include_bias=bool(defaults["spline_include_bias"]),
     )
     if task_type == "CLASSIFICATION":
-        model: BaseEstimator = LogisticRegression(
+        model: BaseEstimator = _logistic_estimator(
             C=float(parameters["C"]),
-            penalty=str(defaults["logistic_penalty"]),
-            solver=str(defaults["logistic_solver"]),
-            max_iter=int(defaults["logistic_max_iter"]),
-            random_state=int(defaults["random_state"]),
+            defaults=defaults,
         )
     else:
         model = Ridge(alpha=float(parameters["alpha"]))
@@ -196,14 +248,16 @@ def build_estimator(
     parameters = spec.parameter_dict()
     family = spec.model_family
 
+    if defaults.get("logistic_l2_compatibility_policy") != (
+        "VERSION_AWARE_EQUIVALENT_L2"
+    ):
+        raise ForecastProtocolViolation("Logistic L2 compatibility policy changed.")
+
     if family == "regularized_linear":
         if spec.task_type == "CLASSIFICATION":
-            return LogisticRegression(
+            return _logistic_estimator(
                 C=float(parameters["C"]),
-                penalty=str(defaults["logistic_penalty"]),
-                solver=str(defaults["logistic_solver"]),
-                max_iter=int(defaults["logistic_max_iter"]),
-                random_state=int(defaults["random_state"]),
+                defaults=defaults,
             )
         return Ridge(alpha=float(parameters["alpha"]))
 
@@ -237,6 +291,12 @@ def build_estimator(
                 C=float(defaults["logistic_C_for_dynamic_glm"]),
                 max_iter=int(defaults["logistic_max_iter"]),
                 random_state=int(defaults["random_state"]),
+                penalty_before_sklearn_1_8=str(
+                    defaults["logistic_penalty_before_sklearn_1_8"]
+                ),
+                l1_ratio_from_sklearn_1_8=float(
+                    defaults["logistic_l1_ratio_from_sklearn_1_8"]
+                ),
             )
         return ExponentiallyWeightedGLMRegressor(
             forgetting_factor=float(parameters["forgetting_factor"]),
