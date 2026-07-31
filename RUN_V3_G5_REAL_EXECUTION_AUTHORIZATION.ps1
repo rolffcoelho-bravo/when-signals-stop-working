@@ -70,7 +70,7 @@ try {
         throw "Gate V3-5 real execution authorization tests failed."
     }
 
-    Write-Host "8. MATERIALIZING DETERMINISTIC AUTHORIZATION CANDIDATE PLAN"
+    Write-Host "8. MATERIALIZING DETERMINISTIC STAGE-ALIGNED AUTHORIZATION PLAN"
     python -W error::FutureWarning scripts/materialize_v3_g5_real_execution_authorization.py
     if ($LASTEXITCODE -ne 0) {
         throw "Gate V3-5 authorization candidate plan materialization failed."
@@ -99,7 +99,8 @@ try {
     Write-Host "Gate V3-5 real execution authorization candidate evidence passed."
     Write-Host "Development engine remains protected."
     Write-Host "The complete 211140-job plan is deterministic and hash-bound."
-    Write-Host "All 845 batches remain PLANNED_NOT_STARTED."
+    Write-Host "All stage-aligned batches remain PLANNED_NOT_STARTED."
+    Write-Host "No batch crosses a scientific stage boundary."
     Write-Host "Real development execution remains unauthorized."
     Write-Host "Real development model fitting remains disabled."
     Write-Host "Development pipeline selection remains disabled."
