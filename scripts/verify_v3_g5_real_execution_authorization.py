@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from hashlib import sha256
-import json
 from pathlib import Path
 import platform
 import subprocess
@@ -17,7 +16,9 @@ if str(SRC) not in sys.path:
 
 from shockbridge_signal_validity.v3.forecast_real_execution_authorization import (  # noqa: E402
     load_authorization_candidate,
-    verify_authorization_candidate_plan,
+)
+from shockbridge_signal_validity.v3.forecast_real_execution_verification import (  # noqa: E402
+    verify_authorization_candidate_plan_strict,
 )
 
 AUTHORIZATION_CONTRACT = (
@@ -53,7 +54,7 @@ def _git_head() -> str:
 
 def main() -> int:
     authorization = load_authorization_candidate(AUTHORIZATION_CONTRACT)
-    manifest = verify_authorization_candidate_plan(
+    manifest = verify_authorization_candidate_plan_strict(
         output_dir=OUTPUT_DIR,
         authorization_contract=authorization,
     )
@@ -82,24 +83,11 @@ def main() -> int:
             raise RuntimeError(f"Authorization input hash mismatch: {name}")
 
     outputs = authorization["planning_outputs"]
-    plan = pd.read_csv(OUTPUT_DIR / str(outputs["job_plan"]))
     batches = pd.read_csv(OUTPUT_DIR / str(outputs["batch_manifest"]))
     stages = pd.read_csv(OUTPUT_DIR / str(outputs["stage_manifest"]))
-    false_tokens = {False, "False", "false", 0, "0"}
-    for column in (
-        "real_execution_authorized",
-        "real_development_model_fitting_performed",
-        "development_pipeline_selection_performed",
-        "signal_establishment_segment_accessed",
-        "final_framework_reserve_accessed",
-    ):
-        if not set(plan[column].unique()).issubset(false_tokens):
-            raise RuntimeError(f"Authorization plan advanced execution state: {column}")
-    if set(plan["batch_state"].unique()) != {"PLANNED_NOT_STARTED"}:
-        raise RuntimeError("Authorization plan contains a started batch.")
     if set(batches["batch_state"].unique()) != {"PLANNED_NOT_STARTED"}:
         raise RuntimeError("Authorization batch manifest contains a started batch.")
-    if list(stages["stage_rank"]) != [1, 2, 3, 4, 5, 6]:
+    if list(stages["stage_rank"].astype(int)) != [1, 2, 3, 4, 5, 6]:
         raise RuntimeError("Authorization stage order changed.")
     if int(stages["job_count"].sum()) != 211140:
         raise RuntimeError("Authorization stage workload changed.")
@@ -114,6 +102,7 @@ def main() -> int:
     print("Final batch jobs: 140")
     print("Execution stages: 6")
     print("Input and output hashes verified: True")
+    print("Strict false-state parsing verified: True")
     print("Git/environment binding verified: True")
     print("All batches planned-not-started: True")
     print("Real development execution authorized: False")
