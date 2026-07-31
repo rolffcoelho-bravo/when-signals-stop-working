@@ -135,14 +135,17 @@ The planning-only authorization candidate defines:
 ```text
 complete job plan: 211,140 rows
 jobs per full batch: 250
-batch count: 845
-final batch jobs: 140
+stage-aligned batch count: 847 to 848
+final batch jobs: 130
 execution stages: 6
+mixed-stage batches: prohibited
 parallel batches: 1
 worker processes: 1
 checkpoint after each batch: required
 input/output hash binding: required
 ```
+
+The exact batch count depends only on whether the combined secondary direction candidate is eligible. The workload remains fixed at 211,140 jobs.
 
 The authorization candidate validates planning and resumability only. All batches remain `PLANNED_NOT_STARTED`; real execution remains unauthorized until a later final authorization object promotes a specific stage or batch range.
 
