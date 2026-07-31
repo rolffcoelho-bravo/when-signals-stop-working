@@ -1,0 +1,116 @@
+{
+  "schema_version": "v3.g5-development-execution-contract.v1",
+  "gate": "V3-5",
+  "stage": "CHRONOLOGICAL_DEVELOPMENT_EXECUTION_ENGINE",
+  "status": "EXECUTION_ENGINE_CONTRACT_FROZEN",
+  "parent_model_validation": "V3_G5_MODEL_IMPLEMENTATION_VALIDATION.json",
+  "real_development_execution_authorized": false,
+  "real_development_model_fitting_authorized": false,
+  "development_pipeline_selection_authorized": false,
+  "signal_establishment_segment_access_authorized": false,
+  "final_framework_reserve_access_authorized": false,
+  "targets": {
+    "direction": {
+      "task_type": "CLASSIFICATION",
+      "primary_metric": "log_loss",
+      "secondary_metrics": ["brier_score", "expected_calibration_error", "roc_auc"]
+    },
+    "expected_return": {
+      "task_type": "REGRESSION",
+      "primary_metric": "mean_squared_error",
+      "secondary_metrics": ["mean_absolute_error", "directional_accuracy"]
+    },
+    "large_move_probability": {
+      "task_type": "CLASSIFICATION",
+      "primary_metric": "log_loss",
+      "secondary_metrics": ["brier_score", "pr_auc"],
+      "threshold_quantile": 0.9,
+      "threshold_fit_scope": "TRAINING_FOLD_ONLY"
+    }
+  },
+  "inner_selection": {
+    "folds": 3,
+    "primary_loss_minimized": true,
+    "one_standard_error_complexity_preference": true,
+    "complexity_rank_ascending": true,
+    "minimum_valid_inner_folds": 3,
+    "candidate_and_benchmark_same_rows": true,
+    "candidate_and_benchmark_same_pipeline_specification": true,
+    "candidate_and_benchmark_same_calibration_method": true,
+    "candidate_and_benchmark_same_abstention_threshold": true
+  },
+  "calibration": {
+    "confirmatory_methods": ["none", "sigmoid"],
+    "diagnostic_only_methods": ["isotonic"],
+    "fit_scope": "TRAINING_OR_INNER_VALIDATION_ONLY",
+    "future_or_outer_test_access_prohibited": true
+  },
+  "abstention": {
+    "direction_probability_distance_thresholds": [0.02, 0.05, 0.1],
+    "minimum_coverage": 0.1,
+    "minimum_nonzero_decisions": 100,
+    "selection_scope": "INNER_FOLDS_ONLY"
+  },
+  "outer_evaluation": {
+    "outer_folds": 5,
+    "purge_gap": "EQUAL_TO_HORIZON_CANDLES",
+    "shuffle": false,
+    "predictions_long_format_required": true,
+    "benchmark_candidate_row_identity_required": true,
+    "selection_frequency_report_required": true,
+    "minimum_positive_outer_folds": 3,
+    "maximum_single_fold_share_of_positive_gain": 0.6
+  },
+  "economic_policy": {
+    "primary_one_way_cost_bps": 10,
+    "sensitivity_one_way_cost_bps": [5, 20],
+    "direction_position": "SIGN_OF_CALIBRATED_PROBABILITY_MINUS_HALF_AFTER_ABSTENTION",
+    "expected_return_position": "CLIPPED_PREDICTED_RETURN_SIGNED_UNIT_POSITION",
+    "large_move_probability_position": "NO_PRIMARY_TRADING_POLICY_DIAGNOSTIC_ONLY",
+    "turnover": "ABSOLUTE_POSITION_CHANGE",
+    "overlap_control": "HORIZON_SPACED_DECISIONS",
+    "economic_gain": "CANDIDATE_NET_RETURN_MINUS_BENCHMARK_NET_RETURN"
+  },
+  "multiplicity": {
+    "confirmatory_families": ["RSI_DIRECTION", "BOLLINGER_DIRECTION"],
+    "confirmatory_method": "HOLM",
+    "confirmatory_alpha": 0.05,
+    "secondary_method": "BENJAMINI_HOCHBERG",
+    "secondary_q": 0.1
+  },
+  "bounded_identity": {
+    "forecast_horizons": 6,
+    "outer_folds_per_horizon": 5,
+    "inner_folds_per_outer_fold": 3,
+    "candidate_horizon_records": 342,
+    "matched_candidate_horizon_records": 276,
+    "explicitly_ineligible_candidate_horizon_records": 66,
+    "pipeline_specifications": 162,
+    "executable_pipeline_specifications": 153,
+    "gated_pipeline_specifications": 9
+  },
+  "required_future_outputs": [
+    "development_execution_plan.json",
+    "fold_large_move_thresholds.csv",
+    "inner_selection_results.csv",
+    "outer_fold_predictions.csv",
+    "outer_fold_results.csv",
+    "selection_frequency_report.csv",
+    "multiplicity_report.csv",
+    "development_selection_report.json",
+    "frozen_pipeline_registry.json"
+  ],
+  "prohibited": {
+    "real_data_fit_during_implementation_validation": true,
+    "outer_test_influence_on_preprocessing": true,
+    "outer_test_influence_on_large_move_threshold": true,
+    "outer_test_influence_on_calibration": true,
+    "outer_test_influence_on_abstention": true,
+    "candidate_benchmark_row_mismatch": true,
+    "unbounded_search": true,
+    "automatic_candidate_deletion": true,
+    "establishment_segment_access": true,
+    "final_framework_reserve_access": true,
+    "empirical_claims": true
+  }
+}
