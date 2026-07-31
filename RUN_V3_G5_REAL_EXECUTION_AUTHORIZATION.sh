@@ -40,7 +40,7 @@ echo "7. RUNNING WARNING-FREE AUTHORIZATION PLANNING TESTS"
 python -W error::FutureWarning -m pytest -q \
   tests/test_v3_g5_real_execution_authorization.py
 
-echo "8. MATERIALIZING DETERMINISTIC AUTHORIZATION CANDIDATE PLAN"
+echo "8. MATERIALIZING DETERMINISTIC STAGE-ALIGNED AUTHORIZATION PLAN"
 python -W error::FutureWarning scripts/materialize_v3_g5_real_execution_authorization.py
 
 echo "9. VERIFYING COMPLETE AUTHORIZATION CANDIDATE EVIDENCE"
@@ -54,7 +54,8 @@ git diff --cached --quiet
 echo "Gate V3-5 real execution authorization candidate evidence passed."
 echo "Development engine remains protected."
 echo "The complete 211140-job plan is deterministic and hash-bound."
-echo "All 845 batches remain PLANNED_NOT_STARTED."
+echo "All stage-aligned batches remain PLANNED_NOT_STARTED."
+echo "No batch crosses a scientific stage boundary."
 echo "Real development execution remains unauthorized."
 echo "Real development model fitting remains disabled."
 echo "Development pipeline selection remains disabled."
