@@ -57,19 +57,26 @@ def build_fold_large_move_target(
     training = np.asarray(list(training_future_returns), dtype=float).reshape(-1)
     evaluation = np.asarray(list(evaluation_future_returns), dtype=float).reshape(-1)
     if training.size == 0 or evaluation.size == 0:
-        raise ForecastProtocolViolation("Large-move target requires training and evaluation rows.")
+        raise ForecastProtocolViolation(
+            "Large-move target requires training and evaluation rows."
+        )
     if not np.isfinite(training).all() or not np.isfinite(evaluation).all():
         raise ForecastProtocolViolation("Large-move returns must be finite.")
     if not 0.0 < float(quantile) < 1.0:
         raise ForecastProtocolViolation("Large-move quantile must lie in (0,1).")
     threshold = float(np.quantile(np.abs(training), float(quantile)))
     training_labels = (np.abs(training) >= threshold).astype(int)
+    training_positive = int(training_labels.sum())
+    if training_positive == 0 or training_positive == len(training_labels):
+        raise ForecastProtocolViolation(
+            "Training-fold large-move threshold must produce both binary classes."
+        )
     evaluation_labels = (np.abs(evaluation) >= threshold).astype(int)
     return FoldLargeMoveTarget(
         threshold=threshold,
         quantile=float(quantile),
         training_rows=int(len(training)),
-        training_positive_rows=int(training_labels.sum()),
+        training_positive_rows=training_positive,
         evaluation_rows=int(len(evaluation)),
         evaluation_positive_rows=int(evaluation_labels.sum()),
         evaluation_labels=evaluation_labels,
@@ -86,6 +93,12 @@ def select_one_standard_error_configuration(
     rows = list(scores)
     if not rows:
         raise ForecastProtocolViolation("Inner selection requires score rows.")
+    if int(minimum_valid_inner_folds) < 1:
+        raise ForecastProtocolViolation("Minimum valid inner folds must be positive.")
+    if not 0.0 <= float(minimum_coverage) <= 1.0:
+        raise ForecastProtocolViolation("Minimum coverage must lie in [0,1].")
+    if int(minimum_nonzero_decisions) < 0:
+        raise ForecastProtocolViolation("Minimum nonzero decisions cannot be negative.")
     groups: dict[tuple[str, str, float, int], list[InnerFoldScore]] = {}
     for row in rows:
         if not np.isfinite(
@@ -96,6 +109,10 @@ def select_one_standard_error_configuration(
             ]
         ).all():
             raise ForecastProtocolViolation("Inner selection contains non-finite values.")
+        if not 0.0 <= float(row.coverage) <= 1.0 or int(row.nonzero_decisions) < 0:
+            raise ForecastProtocolViolation(
+                "Inner selection coverage or decision count is invalid."
+            )
         key = (
             str(row.pipeline_spec_id),
             str(row.calibration_method),
@@ -115,7 +132,11 @@ def select_one_standard_error_configuration(
         ):
             continue
         gains = np.asarray([row.incremental_gain for row in group], dtype=float)
-        standard_error = float(gains.std(ddof=1) / np.sqrt(len(gains))) if len(gains) > 1 else 0.0
+        standard_error = (
+            float(gains.std(ddof=1) / np.sqrt(len(gains)))
+            if len(gains) > 1
+            else 0.0
+        )
         summaries.append(
             SelectedDevelopmentConfiguration(
                 pipeline_spec_id=key[0],
@@ -129,7 +150,9 @@ def select_one_standard_error_configuration(
             )
         )
     if not summaries:
-        raise ForecastProtocolViolation("No inner configuration satisfies eligibility requirements.")
+        raise ForecastProtocolViolation(
+            "No inner configuration satisfies eligibility requirements."
+        )
     best = max(
         summaries,
         key=lambda value: (
@@ -141,7 +164,9 @@ def select_one_standard_error_configuration(
         ),
     )
     lower_bound = best.mean_incremental_gain - best.standard_error
-    eligible = [value for value in summaries if value.mean_incremental_gain >= lower_bound]
+    eligible = [
+        value for value in summaries if value.mean_incremental_gain >= lower_bound
+    ]
     return min(
         eligible,
         key=lambda value: (
