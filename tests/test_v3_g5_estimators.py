@@ -12,6 +12,7 @@ from shockbridge_signal_validity.v3.forecast_estimators import (
     ExponentiallyWeightedGLMRegressor,
     build_estimator,
     build_matched_estimator_pair,
+    sklearn_major_minor,
     select_training_window,
 )
 from shockbridge_signal_validity.v3.forecast_model_registry import (
@@ -72,6 +73,13 @@ def _regression_data(rows: int = 500) -> tuple[pd.DataFrame, pd.Series]:
     return features, target
 
 
+def _assert_logistic_l2_parameters(parameters: dict[str, object]) -> None:
+    if sklearn_major_minor() >= (1, 8):
+        assert float(parameters["l1_ratio"]) == 0.0
+    else:
+        assert parameters["penalty"] == "l2"
+
+
 def test_all_executable_specs_build_matched_estimators() -> None:
     _, implementation, registry = _contracts_and_registry()
     executable = [spec for spec in registry if spec.executable]
@@ -88,6 +96,7 @@ def test_regularized_linear_classification_fits_synthetic_data() -> None:
     _, implementation, registry = _contracts_and_registry()
     spec = _spec(registry, "direction", "regularized_linear")
     estimator = build_estimator(spec, implementation)
+    _assert_logistic_l2_parameters(estimator.get_params(deep=True))
     features, target = _classification_data()
     estimator.fit(features, target)
     probabilities = estimator.predict_proba(features.iloc[-30:])[:, 1]
@@ -99,6 +108,7 @@ def test_spline_classification_fits_synthetic_data() -> None:
     _, implementation, registry = _contracts_and_registry()
     spec = _spec(registry, "direction", "spline_regularized")
     estimator = build_estimator(spec, implementation)
+    _assert_logistic_l2_parameters(estimator.named_steps["model"].get_params(deep=True))
     features, target = _classification_data()
     estimator.fit(features, target)
     probabilities = estimator.predict_proba(features.iloc[-30:])[:, 1]
@@ -146,6 +156,7 @@ def test_dynamic_classifier_fits_at_registered_minimum() -> None:
     estimator = build_estimator(spec, implementation)
     features, target = _classification_data(2190)
     estimator.fit(features, target)
+    _assert_logistic_l2_parameters(estimator.model_.get_params(deep=True))
     probabilities = estimator.predict_proba(features.iloc[-20:])[:, 1]
     assert np.isfinite(probabilities).all()
     assert estimator.training_rows_ == 2190
