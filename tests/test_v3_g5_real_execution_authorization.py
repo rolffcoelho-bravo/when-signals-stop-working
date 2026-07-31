@@ -176,7 +176,10 @@ def test_authorization_rejects_execution_flag() -> None:
 
 def test_authorization_rejects_wrong_available_coverage_count(authorization_bundle) -> None:
     authorization, registry, candidates, coverage, _, _, _ = authorization_bundle
-    reduced = coverage.iloc[:-1].copy()
+    available_index = coverage.index[
+        coverage["coverage_status"] == "MATCHED_ROWS_AVAILABLE"
+    ][0]
+    reduced = coverage.drop(index=available_index).copy()
     with pytest.raises(ForecastProtocolViolation, match="276 matched"):
         build_authorization_job_plan(
             matched_coverage=reduced,
