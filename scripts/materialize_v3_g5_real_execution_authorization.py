@@ -21,9 +21,11 @@ from shockbridge_signal_validity.v3.forecast_model_registry import (  # noqa: E4
 from shockbridge_signal_validity.v3.forecast_real_execution_authorization import (  # noqa: E402
     build_authorization_job_plan,
     build_batch_manifest,
-    build_stage_manifest,
     load_authorization_candidate,
     write_authorization_candidate_plan,
+)
+from shockbridge_signal_validity.v3.forecast_real_execution_stages import (  # noqa: E402
+    build_complete_stage_manifest,
 )
 
 FORECAST_CONTRACT = ROOT / "configs" / "v3_g5_forecast_contract.json"
@@ -85,7 +87,7 @@ def main() -> int:
         authorization_contract=authorization,
     )
     batches = build_batch_manifest(plan, authorization)
-    stages = build_stage_manifest(plan)
+    stages = build_complete_stage_manifest(plan, authorization)
     manifest = write_authorization_candidate_plan(
         plan=plan,
         batch_manifest=batches,
@@ -113,6 +115,7 @@ def main() -> int:
     print(f"Jobs per full batch: {manifest['jobs_per_batch']}")
     print(f"Final batch jobs: {manifest['final_batch_jobs']}")
     print(f"Stages: {manifest['stage_count']}")
+    print("Declared empty stages preserved: True")
     print("All input hashes bound: True")
     print("All batches initially planned-not-started: True")
     print("Real development execution authorized: False")
