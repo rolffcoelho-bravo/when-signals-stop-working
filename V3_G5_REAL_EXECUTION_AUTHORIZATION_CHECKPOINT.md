@@ -7,7 +7,7 @@ APPROVED_WITHIN_V3_5
 DEVELOPMENT_ENGINE_AUTHORITATIVELY_VALIDATED_AND_PROTECTED
 AUTHORIZATION_CANDIDATE_CONTRACT_FROZEN
 DETERMINISTIC_JOB_PLANNER_IMPLEMENTED
-RESUMABLE_BATCH_MANIFEST_IMPLEMENTED
+STAGE_ALIGNED_RESUMABLE_BATCHING_IMPLEMENTED
 INPUT_AND_OUTPUT_HASH_BINDING_IMPLEMENTED
 STRICT_FALSE_STATE_VERIFICATION_IMPLEMENTED
 SIX_STAGE_EXECUTION_ORDER_IMPLEMENTED
@@ -65,12 +65,14 @@ outer-fold jobs: 211,140
 
 No candidate, horizon, target, executable pipeline specification, or outer fold is deleted.
 
-## Deterministic batching
+## Stage-aligned deterministic batching
 
 ```text
 jobs per full batch: 250
-batch count: 845
-final batch jobs: 140
+batch-count rule: sum of each nonempty stage's ceiling(job count / 250)
+valid batch-count range: 847 to 848
+final batch jobs: 130
+stage-boundary alignment: required
 maximum parallel batches: 1
 maximum worker processes: 1
 BLAS threads per process: 1
@@ -79,15 +81,18 @@ atomic checkpoint writes: required
 completed-batch overwrite: prohibited
 ```
 
+The exact batch count depends only on whether the predeclared combined secondary direction candidate has matched rows. An ineligible combined candidate produces an explicit empty Stage 4 and 847 batches; an eligible combined candidate produces 848 batches. In both cases the full governed workload remains 211,140 jobs and the final batch contains 130 jobs.
+
 Every job receives a SHA-256 identifier derived from candidate, horizon, matched-row contract, target, pipeline specification, and outer fold.
 
-Every batch receives a stable zero-padded identifier:
+Each global batch and stage-local batch receives a stable identifier:
 
 ```text
 v3g5batch:0001
-...
-v3g5batch:0845
+stage_id:batch:0001
 ```
+
+No batch may cross a scientific stage boundary.
 
 ## Staged scientific order
 
@@ -140,7 +145,7 @@ Python version
 scikit-learn version
 ```
 
-Generated job, batch, stage, and input-hash manifests are SHA-256 bound.
+Generated job, batch, stage, and input-hash manifests are SHA-256 bound. The verifier prints the Git commit and all five evidence hashes needed for later final promotion.
 
 CSV execution-state fields are parsed through explicit tokens only. Values such as `False`, `false`, or `0` remain false; arbitrary nonempty strings can never pass through generic truthiness.
 
@@ -161,6 +166,7 @@ The directory is ignored and must not be committed.
 ```text
 configs/v3_g5_real_execution_authorization_candidate.json
 src/shockbridge_signal_validity/v3/forecast_real_execution_authorization.py
+src/shockbridge_signal_validity/v3/forecast_real_execution_batching.py
 src/shockbridge_signal_validity/v3/forecast_real_execution_stages.py
 src/shockbridge_signal_validity/v3/forecast_real_execution_verification.py
 scripts/materialize_v3_g5_real_execution_authorization.py
@@ -178,9 +184,10 @@ authorization planning tests: 12
 FutureWarnings: 0
 job-plan rows: 211,140
 unique job identifiers: 211,140
-batch rows: 845
-final batch jobs: 140
+stage-aligned batch rows: 847 or 848
+final batch jobs: 130
 declared stages: 6
+mixed-stage batches: 0
 all batches planned-not-started: true
 strict false-state parsing: true
 all input/output hashes verified: true
@@ -220,4 +227,4 @@ No predictive, economic, conditional-validity, deterioration, failure-probabilit
 
 ## Promotion rule
 
-After the 12-test planning validation passes, the authorization candidate may be frozen and protected. A separate `V3_G5_REAL_EXECUTION_AUTHORIZATION.json` must then bind the validated plan hash and explicitly promote only the authorized stage or batch range. No real batch may start before that final authorization object and its verifier are committed.
+After the 12-test planning validation passes, the authorization candidate may be frozen and protected. A separate `V3_G5_REAL_EXECUTION_AUTHORIZATION.json` must then bind the validated Git commit and all printed plan hashes, and explicitly promote only the authorized stage or batch range. No real batch may start before that final authorization object and its verifier are committed.
