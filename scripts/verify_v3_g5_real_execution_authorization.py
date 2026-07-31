@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from hashlib import sha256
+import json
 from pathlib import Path
 import platform
 import subprocess
@@ -58,7 +59,8 @@ def main() -> int:
         output_dir=OUTPUT_DIR,
         authorization_contract=authorization,
     )
-    if manifest.get("git_commit") != _git_head():
+    git_head = _git_head()
+    if manifest.get("git_commit") != git_head:
         raise RuntimeError("Authorization plan is not bound to the current Git HEAD.")
     if manifest.get("python_version") != platform.python_version():
         raise RuntimeError("Authorization plan Python version binding changed.")
@@ -83,6 +85,13 @@ def main() -> int:
             raise RuntimeError(f"Authorization input hash mismatch: {name}")
 
     outputs = authorization["planning_outputs"]
+    input_manifest_path = OUTPUT_DIR / str(outputs["input_hash_manifest"])
+    input_manifest = json.loads(input_manifest_path.read_text(encoding="utf-8"))
+    if input_manifest.get("all_inputs_bound") is not True:
+        raise RuntimeError("Authorization input manifest is not fully bound.")
+    if input_manifest.get("input_sha256") != observed_input_hashes:
+        raise RuntimeError("Authorization input manifests disagree.")
+
     batches = pd.read_csv(OUTPUT_DIR / str(outputs["batch_manifest"]))
     stages = pd.read_csv(OUTPUT_DIR / str(outputs["stage_manifest"]))
     if set(batches["batch_state"].unique()) != {"PLANNED_NOT_STARTED"}:
@@ -92,16 +101,27 @@ def main() -> int:
     if int(stages["job_count"].sum()) != 211140:
         raise RuntimeError("Authorization stage workload changed.")
 
+    manifest_path = OUTPUT_DIR / str(outputs["authorization_candidate_manifest"])
+    manifest_sha256 = _sha256_file(manifest_path)
+    output_hashes = manifest["output_sha256"]
+
     print("Gate V3-5 real development execution authorization candidate verified.")
     print("Development engine boundary protected: True")
     print("Authorization candidate contract frozen: True")
+    print(f"Plan Git commit: {git_head}")
     print("Outer-fold jobs: 211140")
     print("Candidate-pipeline-target combinations: 42228")
     print("Batches: 845")
     print("Jobs per full batch: 250")
     print("Final batch jobs: 140")
     print("Execution stages: 6")
+    print(f"Authorization candidate manifest SHA-256: {manifest_sha256}")
+    print(f"Execution job plan SHA-256: {output_hashes[str(outputs['job_plan'])]}")
+    print(f"Execution batch manifest SHA-256: {output_hashes[str(outputs['batch_manifest'])]}")
+    print(f"Execution stage manifest SHA-256: {output_hashes[str(outputs['stage_manifest'])]}")
+    print(f"Authorization input manifest SHA-256: {output_hashes[str(outputs['input_hash_manifest'])]}")
     print("Input and output hashes verified: True")
+    print("Input hash manifests agree: True")
     print("Strict false-state parsing verified: True")
     print("Git/environment binding verified: True")
     print("All batches planned-not-started: True")
