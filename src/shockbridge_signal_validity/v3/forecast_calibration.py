@@ -8,7 +8,7 @@ from sklearn.isotonic import IsotonicRegression
 from sklearn.linear_model import LogisticRegression
 
 from .forecast_contract import ForecastProtocolViolation
-from .forecast_estimators import logistic_l2_kwargs
+from .forecast_estimators import version_compatible_logistic_l2_arguments
 
 
 class ProbabilityCalibrator:
@@ -46,12 +46,16 @@ class SigmoidCalibrator(ProbabilityCalibrator):
         estimate, truth = _validated_probability_target(probability, target)
         if len(np.unique(truth)) != 2:
             raise ForecastProtocolViolation("Sigmoid calibration requires both binary classes.")
+        regularization = version_compatible_logistic_l2_arguments(
+            penalty_before_sklearn_1_8="l2",
+            l1_ratio_from_sklearn_1_8=0.0,
+        )
         self.model_ = LogisticRegression(
             C=1.0,
             solver="lbfgs",
             max_iter=int(self.max_iter),
             random_state=int(self.random_state),
-            **logistic_l2_kwargs(),
+            **regularization,
         )
         self.model_.fit(_logit_feature(estimate), truth)
         self.training_rows_ = len(estimate)
