@@ -65,7 +65,7 @@
     "primary_one_way_cost_bps": 10,
     "sensitivity_one_way_cost_bps": [5, 20],
     "direction_position": "SIGN_OF_CALIBRATED_PROBABILITY_MINUS_HALF_AFTER_ABSTENTION",
-    "expected_return_position": "CLIPPED_PREDICTED_RETURN_SIGNED_UNIT_POSITION",
+    "expected_return_position": "CONTINUOUS_PREDICTED_RETURN_CLIPPED_TO_MINUS_ONE_PLUS_ONE",
     "large_move_probability_position": "NO_PRIMARY_TRADING_POLICY_DIAGNOSTIC_ONLY",
     "turnover": "ABSOLUTE_POSITION_CHANGE",
     "overlap_control": "HORIZON_SPACED_DECISIONS",
