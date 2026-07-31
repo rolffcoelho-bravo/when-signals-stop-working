@@ -45,17 +45,25 @@ def test_regression_metrics_match_perfect_prediction() -> None:
 def test_expected_calibration_error_rejects_invalid_probabilities() -> None:
     with pytest.raises(ForecastProtocolViolation, match=r"\[0,1\]"):
         expected_calibration_error([0, 1], [-0.1, 1.1])
+    with pytest.raises(ForecastProtocolViolation, match="at least 2"):
+        expected_calibration_error([0, 1], [0.1, 0.9], bins=1)
 
 
 def test_direction_positions_apply_abstention() -> None:
     probability = np.array([0.2, 0.49, 0.5, 0.51, 0.8])
     positions = direction_positions(probability, 0.05)
-    np.testing.assert_array_equal(positions, np.array([-1.0, 0.0, 0.0, 0.0, 1.0]))
+    np.testing.assert_array_equal(
+        positions,
+        np.array([-1.0, 0.0, 0.0, 0.0, 1.0]),
+    )
 
 
 def test_expected_return_positions_are_clipped() -> None:
     positions = expected_return_positions([-2.0, -0.5, 0.0, 0.6, 3.0])
-    np.testing.assert_allclose(positions, [-1.0, -0.5, 0.0, 0.6, 1.0])
+    np.testing.assert_allclose(
+        positions,
+        [-1.0, -0.5, 0.0, 0.6, 1.0],
+    )
 
 
 def test_economic_metrics_use_horizon_spacing_and_turnover_cost() -> None:
@@ -76,7 +84,17 @@ def test_economic_metrics_use_horizon_spacing_and_turnover_cost() -> None:
 
 
 def test_incremental_economic_gain_requires_matched_observations() -> None:
-    first = economic_metrics([0.01, 0.02], [1, 1], one_way_cost_bps=10, horizon_candles=1)
-    second = economic_metrics([0.01, 0.02, 0.03], [1, 1, 1], one_way_cost_bps=10, horizon_candles=1)
+    first = economic_metrics(
+        [0.01, 0.02],
+        [1, 1],
+        one_way_cost_bps=10,
+        horizon_candles=1,
+    )
+    second = economic_metrics(
+        [0.01, 0.02, 0.03],
+        [1, 1, 1],
+        one_way_cost_bps=10,
+        horizon_candles=1,
+    )
     with pytest.raises(ForecastProtocolViolation, match="observations differ"):
         incremental_economic_gain(first, second)
