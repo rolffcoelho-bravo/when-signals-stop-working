@@ -215,7 +215,10 @@ def write_authorization_candidate_plan(
     input_paths: dict[str, str | Path],
     git_commit: str,
     python_version: str,
+    pandas_version: str,
+    numpy_version: str,
     sklearn_version: str,
+    platform_description: str,
 ) -> dict[str, Any]:
     destination = Path(output_dir)
     destination.mkdir(parents=True, exist_ok=True)
@@ -251,8 +254,13 @@ def write_authorization_candidate_plan(
         "schema_version": "v3.g5-real-execution-authorization-candidate-manifest.v2",
         "status": "AUTHORIZATION_CANDIDATE_PLAN_MATERIALIZED",
         "git_commit": str(git_commit),
-        "python_version": str(python_version),
-        "scikit_learn_version": str(sklearn_version),
+        "environment": {
+            "python_version": str(python_version),
+            "pandas_version": str(pandas_version),
+            "numpy_version": str(numpy_version),
+            "scikit_learn_version": str(sklearn_version),
+            "platform": str(platform_description),
+        },
         "job_count": int(len(plan)),
         "batch_count": int(len(batch_manifest)),
         "stage_count": int(len(stage_manifest)),
