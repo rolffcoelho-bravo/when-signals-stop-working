@@ -133,10 +133,30 @@ def _validate_partition(
     target_index = require_utc_index(target.index, f"{label} target timestamps")
     if not benchmark_index.equals(candidate_index) or not benchmark_index.equals(target_index):
         raise ForecastProtocolViolation(f"{label} matched rows differ.")
-    if not list(candidate.columns[: len(benchmark.columns)]) == list(benchmark.columns):
-        raise ForecastProtocolViolation(f"{label} candidate does not preserve benchmark columns first.")
+    if list(candidate.columns[: len(benchmark.columns)]) != list(benchmark.columns):
+        raise ForecastProtocolViolation(
+            f"{label} candidate does not preserve benchmark columns first."
+        )
     if benchmark.isna().any().any() or candidate.isna().any().any() or target.isna().any():
         raise ForecastProtocolViolation(f"{label} matched rows must be complete.")
+
+
+def _assert_partition_chronology(
+    training_index: pd.Index,
+    calibration_index: pd.Index,
+    test_index: pd.Index,
+) -> None:
+    training = require_utc_index(training_index, "training chronology")
+    calibration = require_utc_index(calibration_index, "calibration chronology")
+    test = require_utc_index(test_index, "test chronology")
+    if training.max() >= calibration.min():
+        raise ForecastProtocolViolation(
+            "Training observations must end before calibration begins."
+        )
+    if calibration.max() >= test.min():
+        raise ForecastProtocolViolation(
+            "Calibration observations must end before outer testing begins."
+        )
 
 
 def _classification_prediction(estimator: Any, features: pd.DataFrame) -> np.ndarray:
@@ -144,7 +164,9 @@ def _classification_prediction(estimator: Any, features: pd.DataFrame) -> np.nda
         raise ForecastProtocolViolation("Classification estimator lacks predict_proba.")
     values = np.asarray(estimator.predict_proba(features)[:, 1], dtype=float)
     if not np.isfinite(values).all():
-        raise ForecastProtocolViolation("Classification estimator produced non-finite probabilities.")
+        raise ForecastProtocolViolation(
+            "Classification estimator produced non-finite probabilities."
+        )
     return values
 
 
@@ -166,6 +188,7 @@ def execute_matched_outer_fold(
     calibration_method: str = "none",
     abstention_threshold: float = 0.02,
     one_way_cost_bps: float = 10.0,
+    fold_large_move_threshold: float | None = None,
     synthetic_validation_only: bool = False,
 ) -> MatchedOuterFoldResult:
     if not synthetic_validation_only:
@@ -178,10 +201,33 @@ def execute_matched_outer_fold(
         ("test", benchmark_test, candidate_test, test_target),
     ):
         _validate_partition(benchmark, candidate, target, label)
+    _assert_partition_chronology(
+        benchmark_training.index,
+        benchmark_calibration.index,
+        benchmark_test.index,
+    )
     if not require_utc_index(test_target.index, "test target timestamps").equals(
         require_utc_index(test_future_log_return.index, "test return timestamps")
     ):
         raise ForecastProtocolViolation("Test target and realized-return rows differ.")
+    if test_future_log_return.isna().any() or not np.isfinite(
+        test_future_log_return.to_numpy(dtype=float)
+    ).all():
+        raise ForecastProtocolViolation("Test realized returns must be finite and complete.")
+
+    large_move_threshold: float | None = None
+    if spec.target_name == "large_move_probability":
+        if fold_large_move_threshold is None or not np.isfinite(
+            float(fold_large_move_threshold)
+        ) or float(fold_large_move_threshold) < 0.0:
+            raise ForecastProtocolViolation(
+                "Large-move execution requires a valid training-fold threshold."
+            )
+        large_move_threshold = float(fold_large_move_threshold)
+    elif fold_large_move_threshold is not None:
+        raise ForecastProtocolViolation(
+            "A large-move threshold was supplied for a different target."
+        )
 
     selected_benchmark, selected_target = select_training_window(
         benchmark_training, training_target, spec
@@ -189,24 +235,27 @@ def execute_matched_outer_fold(
     selected_candidate, candidate_target = select_training_window(
         candidate_training, training_target, spec
     )
-    if not selected_benchmark.index.equals(selected_candidate.index) or not selected_target.equals(candidate_target):
+    if not selected_benchmark.index.equals(selected_candidate.index) or not selected_target.equals(
+        candidate_target
+    ):
         raise ForecastProtocolViolation("Matched training-window selection differs.")
 
-    preprocessors = fit_matched_fold_preprocessors(selected_benchmark, selected_candidate)
-    transformed_benchmark_train, transformed_candidate_train = preprocessors.transform_pair(
+    preprocessors = fit_matched_fold_preprocessors(
         selected_benchmark, selected_candidate
     )
-    transformed_benchmark_calibration, transformed_candidate_calibration = preprocessors.transform_pair(
-        benchmark_calibration, candidate_calibration
+    transformed_benchmark_train, transformed_candidate_train = (
+        preprocessors.transform_pair(selected_benchmark, selected_candidate)
     )
-    transformed_benchmark_test, transformed_candidate_test = preprocessors.transform_pair(
-        benchmark_test, candidate_test
+    transformed_benchmark_calibration, transformed_candidate_calibration = (
+        preprocessors.transform_pair(benchmark_calibration, candidate_calibration)
+    )
+    transformed_benchmark_test, transformed_candidate_test = (
+        preprocessors.transform_pair(benchmark_test, candidate_test)
     )
     pair = build_matched_estimator_pair(spec, implementation_contract)
     pair.benchmark_estimator.fit(transformed_benchmark_train, selected_target)
     pair.candidate_estimator.fit(transformed_candidate_train, selected_target)
 
-    large_move_threshold: float | None = None
     benchmark_economic: EconomicBundle | None = None
     candidate_economic: EconomicBundle | None = None
     economic_gain: float | None = None
@@ -224,16 +273,28 @@ def execute_matched_outer_fold(
             candidate_calibration_raw,
             calibration_target,
         )
-        benchmark_raw = _classification_prediction(pair.benchmark_estimator, transformed_benchmark_test)
-        candidate_raw = _classification_prediction(pair.candidate_estimator, transformed_candidate_test)
+        benchmark_raw = _classification_prediction(
+            pair.benchmark_estimator, transformed_benchmark_test
+        )
+        candidate_raw = _classification_prediction(
+            pair.candidate_estimator, transformed_candidate_test
+        )
         benchmark_prediction, candidate_prediction = calibrators.transform_pair(
             benchmark_raw, candidate_raw
         )
-        benchmark_metrics = classification_metrics(spec.target_name, test_target, benchmark_prediction)
-        candidate_metrics = classification_metrics(spec.target_name, test_target, candidate_prediction)
+        benchmark_metrics = classification_metrics(
+            spec.target_name, test_target, benchmark_prediction
+        )
+        candidate_metrics = classification_metrics(
+            spec.target_name, test_target, candidate_prediction
+        )
         if spec.target_name == "direction":
-            benchmark_position = direction_positions(benchmark_prediction, abstention_threshold)
-            candidate_position = direction_positions(candidate_prediction, abstention_threshold)
+            benchmark_position = direction_positions(
+                benchmark_prediction, abstention_threshold
+            )
+            candidate_position = direction_positions(
+                candidate_prediction, abstention_threshold
+            )
             benchmark_economic = economic_metrics(
                 test_future_log_return,
                 benchmark_position,
@@ -246,7 +307,9 @@ def execute_matched_outer_fold(
                 one_way_cost_bps=one_way_cost_bps,
                 horizon_candles=horizon_candles,
             )
-            economic_gain = incremental_economic_gain(candidate_economic, benchmark_economic)
+            economic_gain = incremental_economic_gain(
+                candidate_economic, benchmark_economic
+            )
     else:
         benchmark_prediction = np.asarray(
             pair.benchmark_estimator.predict(transformed_benchmark_test), dtype=float
@@ -268,7 +331,9 @@ def execute_matched_outer_fold(
             one_way_cost_bps=one_way_cost_bps,
             horizon_candles=horizon_candles,
         )
-        economic_gain = incremental_economic_gain(candidate_economic, benchmark_economic)
+        economic_gain = incremental_economic_gain(
+            candidate_economic, benchmark_economic
+        )
 
     return MatchedOuterFoldResult(
         pipeline_spec_id=spec.pipeline_spec_id,
@@ -301,6 +366,16 @@ def build_large_move_targets_for_partitions(
     *,
     quantile: float = 0.9,
 ) -> tuple[pd.Series, pd.Series, pd.Series, float]:
+    training_index = require_utc_index(
+        training_future_log_return.index, "large-move training chronology"
+    )
+    calibration_index = require_utc_index(
+        calibration_future_log_return.index, "large-move calibration chronology"
+    )
+    test_index = require_utc_index(
+        test_future_log_return.index, "large-move test chronology"
+    )
+    _assert_partition_chronology(training_index, calibration_index, test_index)
     calibration = build_fold_large_move_target(
         training_future_log_return,
         calibration_future_log_return,
@@ -313,13 +388,27 @@ def build_large_move_targets_for_partitions(
     )
     threshold = calibration.threshold
     if not np.isclose(test.threshold, threshold, rtol=0.0, atol=0.0):
-        raise ForecastProtocolViolation("Fold large-move threshold is not training-only deterministic.")
+        raise ForecastProtocolViolation(
+            "Fold large-move threshold is not training-only deterministic."
+        )
     training_labels = (
         np.abs(training_future_log_return.to_numpy(dtype=float)) >= threshold
     ).astype(int)
     return (
-        pd.Series(training_labels, index=training_future_log_return.index, name="large_move_probability"),
-        pd.Series(calibration.evaluation_labels, index=calibration_future_log_return.index, name="large_move_probability"),
-        pd.Series(test.evaluation_labels, index=test_future_log_return.index, name="large_move_probability"),
+        pd.Series(
+            training_labels,
+            index=training_future_log_return.index,
+            name="large_move_probability",
+        ),
+        pd.Series(
+            calibration.evaluation_labels,
+            index=calibration_future_log_return.index,
+            name="large_move_probability",
+        ),
+        pd.Series(
+            test.evaluation_labels,
+            index=test_future_log_return.index,
+            name="large_move_probability",
+        ),
         threshold,
     )
