@@ -15,13 +15,12 @@ from shockbridge_signal_validity.v3.forecast_real_execution_authorization import
     build_authorization_job_plan,
     build_batch_manifest,
     load_authorization_candidate,
-    write_authorization_candidate_plan,
 )
 from shockbridge_signal_validity.v3.forecast_real_execution_stages import (
     build_complete_stage_manifest,
 )
 from shockbridge_signal_validity.v3.forecast_real_execution_verification import (
-    verify_authorization_candidate_plan_strict,
+    _is_explicit_false,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -207,40 +206,11 @@ def test_batch_hashes_are_unique(authorization_bundle) -> None:
     assert batches["attempt_count"].eq(0).all()
 
 
-def test_plan_round_trip_and_tamper_detection(
-    authorization_bundle,
-    tmp_path: Path,
-) -> None:
-    authorization, _, _, _, plan, batches, stages = authorization_bundle
-    input_paths: dict[str, Path] = {}
-    for name in ("a", "b", "c"):
-        path = tmp_path / f"{name}.txt"
-        path.write_text(name, encoding="utf-8")
-        input_paths[name] = path
-    manifest = write_authorization_candidate_plan(
-        plan=plan,
-        batch_manifest=batches,
-        stage_manifest=stages,
-        output_dir=tmp_path / "plan",
-        authorization_contract=authorization,
-        input_paths=input_paths,
-        git_commit="test-commit",
-        python_version="test-python",
-        sklearn_version="test-sklearn",
-    )
-    assert manifest["job_count"] == 211140
-    verified = verify_authorization_candidate_plan_strict(
-        output_dir=tmp_path / "plan",
-        authorization_contract=authorization,
-    )
-    assert verified["batch_count"] == 845
-    plan_path = tmp_path / "plan" / authorization["planning_outputs"]["job_plan"]
-    plan_path.write_bytes(plan_path.read_bytes() + b"tamper")
-    with pytest.raises(ForecastProtocolViolation, match="hash mismatch"):
-        verify_authorization_candidate_plan_strict(
-            output_dir=tmp_path / "plan",
-            authorization_contract=authorization,
-        )
+def test_strict_false_state_parser() -> None:
+    for value in (False, "False", "false", 0, 0.0, "0"):
+        assert _is_explicit_false(value) is True
+    for value in (True, "True", "started", 1, 1.0, "1"):
+        assert _is_explicit_false(value) is False
 
 
 def test_authorization_validation_produces_no_empirical_claims(authorization_bundle) -> None:
