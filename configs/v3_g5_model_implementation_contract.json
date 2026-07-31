@@ -21,7 +21,9 @@
   "estimator_defaults": {
     "random_state": 20260728,
     "logistic_solver": "lbfgs",
-    "logistic_penalty": "l2",
+    "logistic_l2_compatibility_policy": "VERSION_AWARE_EQUIVALENT_L2",
+    "logistic_penalty_before_sklearn_1_8": "l2",
+    "logistic_l1_ratio_from_sklearn_1_8": 0.0,
     "logistic_max_iter": 2000,
     "ridge_alpha_for_dynamic_glm": 1.0,
     "logistic_C_for_dynamic_glm": 1.0,
@@ -89,6 +91,11 @@
     "same_test_rows": true,
     "same_benchmark_transformation": true,
     "candidate_equals_transformed_benchmark_plus_transformed_registered_signal_columns": true
+  },
+  "compatibility_controls": {
+    "future_warnings_fail_validation": true,
+    "logistic_l2_semantics_preserved_across_sklearn_versions": true,
+    "deprecated_penalty_argument_used_on_sklearn_1_8_or_later": false
   },
   "prohibited": {
     "real_data_model_fit": true,
