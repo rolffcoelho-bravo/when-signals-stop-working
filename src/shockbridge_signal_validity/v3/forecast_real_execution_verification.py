@@ -36,6 +36,7 @@ def verify_authorization_candidate_plan_strict(
         "stage_count": 6,
         "jobs_per_batch": 250,
         "final_batch_jobs": 130,
+        "stage_boundary_alignment_verified": True,
         "candidate_pipeline_target_combinations": 42228,
         "outer_fold_jobs": 211140,
         "all_jobs_initially_planned_not_started": True,
