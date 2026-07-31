@@ -204,6 +204,58 @@ def test_large_move_partition_threshold_is_training_only() -> None:
     assert len(calibration) == len(test) == 150
 
 
+def test_large_move_execution_requires_and_records_fold_threshold() -> None:
+    implementation, spec = _spec("large_move_probability")
+    benchmark, candidate, _, _, realized, slices = _partitions()
+    train, calibration, test = slices
+    training_target, calibration_target, test_target, threshold = (
+        build_large_move_targets_for_partitions(
+            realized.iloc[train],
+            realized.iloc[calibration],
+            realized.iloc[test],
+            quantile=0.9,
+        )
+    )
+    with pytest.raises(ForecastProtocolViolation, match="training-fold threshold"):
+        execute_matched_outer_fold(
+            spec=spec,
+            implementation_contract=implementation,
+            benchmark_training=benchmark.iloc[train],
+            candidate_training=candidate.iloc[train],
+            training_target=training_target,
+            benchmark_calibration=benchmark.iloc[calibration],
+            candidate_calibration=candidate.iloc[calibration],
+            calibration_target=calibration_target,
+            benchmark_test=benchmark.iloc[test],
+            candidate_test=candidate.iloc[test],
+            test_target=test_target,
+            test_future_log_return=realized.iloc[test],
+            horizon_candles=1,
+            synthetic_validation_only=True,
+        )
+    result = execute_matched_outer_fold(
+        spec=spec,
+        implementation_contract=implementation,
+        benchmark_training=benchmark.iloc[train],
+        candidate_training=candidate.iloc[train],
+        training_target=training_target,
+        benchmark_calibration=benchmark.iloc[calibration],
+        candidate_calibration=candidate.iloc[calibration],
+        calibration_target=calibration_target,
+        benchmark_test=benchmark.iloc[test],
+        candidate_test=candidate.iloc[test],
+        test_target=test_target,
+        test_future_log_return=realized.iloc[test],
+        horizon_candles=1,
+        calibration_method="none",
+        fold_large_move_threshold=threshold,
+        synthetic_validation_only=True,
+    )
+    assert result.large_move_threshold == pytest.approx(threshold)
+    assert result.benchmark_economic is None
+    assert result.candidate_economic is None
+
+
 def test_execution_rejects_mismatched_target_rows() -> None:
     implementation, spec = _spec("direction")
     benchmark, candidate, direction, _, realized, slices = _partitions()
@@ -233,6 +285,31 @@ def test_execution_rejects_candidate_without_benchmark_prefix() -> None:
     candidate = candidate[["registered_signal", "sol_ret_1", "btc_ret_1", "vol_20"]]
     train, calibration, test = slices
     with pytest.raises(ForecastProtocolViolation, match="benchmark columns first"):
+        execute_matched_outer_fold(
+            spec=spec,
+            implementation_contract=implementation,
+            benchmark_training=benchmark.iloc[train],
+            candidate_training=candidate.iloc[train],
+            training_target=direction.iloc[train],
+            benchmark_calibration=benchmark.iloc[calibration],
+            candidate_calibration=candidate.iloc[calibration],
+            calibration_target=direction.iloc[calibration],
+            benchmark_test=benchmark.iloc[test],
+            candidate_test=candidate.iloc[test],
+            test_target=direction.iloc[test],
+            test_future_log_return=realized.iloc[test],
+            horizon_candles=1,
+            synthetic_validation_only=True,
+        )
+
+
+def test_execution_rejects_nonchronological_partitions() -> None:
+    implementation, spec = _spec("direction")
+    benchmark, candidate, direction, _, realized, _ = _partitions()
+    train = slice(0, 600)
+    calibration = slice(500, 650)
+    test = slice(750, 900)
+    with pytest.raises(ForecastProtocolViolation, match="Training observations must end"):
         execute_matched_outer_fold(
             spec=spec,
             implementation_contract=implementation,
