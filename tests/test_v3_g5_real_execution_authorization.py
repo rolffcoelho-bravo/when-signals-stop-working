@@ -15,11 +15,13 @@ from shockbridge_signal_validity.v3.forecast_real_execution_authorization import
     build_authorization_job_plan,
     build_batch_manifest,
     load_authorization_candidate,
-    verify_authorization_candidate_plan,
     write_authorization_candidate_plan,
 )
 from shockbridge_signal_validity.v3.forecast_real_execution_stages import (
     build_complete_stage_manifest,
+)
+from shockbridge_signal_validity.v3.forecast_real_execution_verification import (
+    verify_authorization_candidate_plan_strict,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -227,7 +229,7 @@ def test_plan_round_trip_and_tamper_detection(
         sklearn_version="test-sklearn",
     )
     assert manifest["job_count"] == 211140
-    verified = verify_authorization_candidate_plan(
+    verified = verify_authorization_candidate_plan_strict(
         output_dir=tmp_path / "plan",
         authorization_contract=authorization,
     )
@@ -235,7 +237,7 @@ def test_plan_round_trip_and_tamper_detection(
     plan_path = tmp_path / "plan" / authorization["planning_outputs"]["job_plan"]
     plan_path.write_bytes(plan_path.read_bytes() + b"tamper")
     with pytest.raises(ForecastProtocolViolation, match="hash mismatch"):
-        verify_authorization_candidate_plan(
+        verify_authorization_candidate_plan_strict(
             output_dir=tmp_path / "plan",
             authorization_contract=authorization,
         )
