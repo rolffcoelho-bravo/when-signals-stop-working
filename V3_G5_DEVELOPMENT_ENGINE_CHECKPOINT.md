@@ -132,14 +132,17 @@ The separate authorization candidate now defines:
 
 ```text
 jobs per full batch: 250
-batches: 845
-final batch jobs: 140
+stage-aligned batches: 847 to 848
+final batch jobs: 130
+stage-boundary crossing: prohibited
 maximum parallel batches: 1
 maximum worker processes: 1
 checkpoint after every batch: required
 atomic writes: required
 completed-batch overwrite: prohibited
 ```
+
+The exact batch count depends only on whether the explicitly predeclared combined secondary direction candidate is eligible. The 211,140-job workload does not change.
 
 The candidate plan is implementation-only until `RUN_V3_G5_REAL_EXECUTION_AUTHORIZATION.ps1` passes and a later final authorization object promotes an explicit stage or batch range.
 
