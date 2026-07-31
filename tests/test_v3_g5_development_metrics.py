@@ -43,7 +43,7 @@ def test_regression_metrics_match_perfect_prediction() -> None:
 
 
 def test_expected_calibration_error_rejects_invalid_probabilities() -> None:
-    with pytest.raises(ForecastProtocolViolation, match="\[0,1\]"):
+    with pytest.raises(ForecastProtocolViolation, match=r"\[0,1\]"):
         expected_calibration_error([0, 1], [-0.1, 1.1])
 
 
