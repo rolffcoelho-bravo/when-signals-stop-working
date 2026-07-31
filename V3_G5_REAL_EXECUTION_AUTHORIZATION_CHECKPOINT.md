@@ -9,6 +9,7 @@ AUTHORIZATION_CANDIDATE_CONTRACT_FROZEN
 DETERMINISTIC_JOB_PLANNER_IMPLEMENTED
 STAGE_ALIGNED_RESUMABLE_BATCHING_IMPLEMENTED
 INPUT_AND_OUTPUT_HASH_BINDING_IMPLEMENTED
+FULL_SERIALIZATION_ENVIRONMENT_BINDING_IMPLEMENTED
 STRICT_FALSE_STATE_VERIFICATION_IMPLEMENTED
 SIX_STAGE_EXECUTION_ORDER_IMPLEMENTED
 AUTHORITATIVE_PLANNING_VALIDATION_PENDING
@@ -142,10 +143,13 @@ matched-row coverage
 candidate inventory
 Git HEAD
 Python version
+pandas version
+NumPy version
 scikit-learn version
+platform string
 ```
 
-Generated job, batch, stage, and input-hash manifests are SHA-256 bound. The verifier prints the Git commit and all five evidence hashes needed for later final promotion.
+Generated job, batch, stage, and input-hash manifests are SHA-256 bound. The verifier prints the Git commit, full serialization environment, and all five evidence hashes needed for later final promotion.
 
 CSV execution-state fields are parsed through explicit tokens only. Values such as `False`, `false`, or `0` remain false; arbitrary nonempty strings can never pass through generic truthiness.
 
@@ -190,6 +194,7 @@ declared stages: 6
 mixed-stage batches: 0
 all batches planned-not-started: true
 strict false-state parsing: true
+full serialization environment binding: true
 all input/output hashes verified: true
 real development execution authorized: false
 real development model fitting: false
@@ -227,4 +232,4 @@ No predictive, economic, conditional-validity, deterioration, failure-probabilit
 
 ## Promotion rule
 
-After the 12-test planning validation passes, the authorization candidate may be frozen and protected. A separate `V3_G5_REAL_EXECUTION_AUTHORIZATION.json` must then bind the validated Git commit and all printed plan hashes, and explicitly promote only the authorized stage or batch range. No real batch may start before that final authorization object and its verifier are committed.
+After the 12-test planning validation passes, the authorization candidate may be frozen and protected. A separate `V3_G5_REAL_EXECUTION_AUTHORIZATION.json` must then bind the validated Git commit, full environment identity, and all printed plan hashes, and explicitly promote only the authorized stage or batch range. No real batch may start before that final authorization object and its verifier are committed.
