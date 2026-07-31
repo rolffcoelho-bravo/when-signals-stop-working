@@ -9,6 +9,7 @@ AUTHORIZATION_CANDIDATE_CONTRACT_FROZEN
 DETERMINISTIC_JOB_PLANNER_IMPLEMENTED
 RESUMABLE_BATCH_MANIFEST_IMPLEMENTED
 INPUT_AND_OUTPUT_HASH_BINDING_IMPLEMENTED
+STRICT_FALSE_STATE_VERIFICATION_IMPLEMENTED
 SIX_STAGE_EXECUTION_ORDER_IMPLEMENTED
 AUTHORITATIVE_PLANNING_VALIDATION_PENDING
 REAL_DEVELOPMENT_EXECUTION_NOT_AUTHORIZED
@@ -121,7 +122,7 @@ Future execution must:
 - quarantine any batch whose output hash does not match its checkpoint;
 - never overwrite a complete batch silently.
 
-## Hash and environment binding
+## Hash, environment, and state binding
 
 The planning evidence binds:
 
@@ -141,6 +142,8 @@ scikit-learn version
 
 Generated job, batch, stage, and input-hash manifests are SHA-256 bound.
 
+CSV execution-state fields are parsed through explicit tokens only. Values such as `False`, `false`, or `0` remain false; arbitrary nonempty strings can never pass through generic truthiness.
+
 ## Regenerable planning outputs
 
 ```text
@@ -159,6 +162,7 @@ The directory is ignored and must not be committed.
 configs/v3_g5_real_execution_authorization_candidate.json
 src/shockbridge_signal_validity/v3/forecast_real_execution_authorization.py
 src/shockbridge_signal_validity/v3/forecast_real_execution_stages.py
+src/shockbridge_signal_validity/v3/forecast_real_execution_verification.py
 scripts/materialize_v3_g5_real_execution_authorization.py
 scripts/verify_v3_g5_real_execution_authorization.py
 scripts/verify_v3_g5_development_engine_boundary.py
@@ -178,6 +182,7 @@ batch rows: 845
 final batch jobs: 140
 declared stages: 6
 all batches planned-not-started: true
+strict false-state parsing: true
 all input/output hashes verified: true
 real development execution authorized: false
 real development model fitting: false
