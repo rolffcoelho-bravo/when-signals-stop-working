@@ -44,5 +44,5 @@ def test_adjusted_p_values_remain_bounded() -> None:
 def test_multiplicity_rejects_duplicate_ids_and_invalid_values() -> None:
     with pytest.raises(ForecastProtocolViolation, match="unique"):
         holm_adjust(["a", "a"], [0.1, 0.2])
-    with pytest.raises(ForecastProtocolViolation, match="\[0,1\]"):
+    with pytest.raises(ForecastProtocolViolation, match=r"\[0,1\]"):
         benjamini_hochberg_adjust(["a", "b"], [0.1, 1.2])
