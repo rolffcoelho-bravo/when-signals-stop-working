@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import sys
+import warnings
 
 import numpy as np
 import pandas as pd
@@ -18,6 +19,7 @@ from shockbridge_signal_validity.v3.forecast_contract import (  # noqa: E402
 from shockbridge_signal_validity.v3.forecast_estimators import (  # noqa: E402
     build_estimator,
     build_matched_estimator_pair,
+    sklearn_major_minor,
 )
 from shockbridge_signal_validity.v3.forecast_model_registry import (  # noqa: E402
     build_pipeline_registry,
@@ -75,6 +77,8 @@ def representative(registry, target: str, family: str):
 
 
 def main() -> int:
+    warnings.simplefilter("error", FutureWarning)
+
     validation = json.loads(MATERIALIZATION_VALIDATION.read_text(encoding="utf-8"))
     if validation.get("status") != "MATERIALIZATION_AUTHORITATIVELY_VALIDATED":
         raise RuntimeError("V3-5 materialization validation is not authoritative.")
@@ -97,6 +101,23 @@ def main() -> int:
     )
     if implementation.get("real_development_model_fitting_authorized") is not False:
         raise RuntimeError("Real development model fitting is authorized prematurely.")
+    compatibility = implementation.get("compatibility_controls", {})
+    if compatibility != {
+        "future_warnings_fail_validation": True,
+        "logistic_l2_semantics_preserved_across_sklearn_versions": True,
+        "deprecated_penalty_argument_used_on_sklearn_1_8_or_later": False,
+    }:
+        raise RuntimeError("Estimator compatibility controls changed.")
+    defaults = implementation.get("estimator_defaults", {})
+    if defaults.get("logistic_l2_compatibility_policy") != (
+        "VERSION_AWARE_EQUIVALENT_L2"
+    ):
+        raise RuntimeError("Logistic L2 compatibility policy changed.")
+    if defaults.get("logistic_penalty_before_sklearn_1_8") != "l2":
+        raise RuntimeError("Pre-1.8 logistic L2 policy changed.")
+    if float(defaults.get("logistic_l1_ratio_from_sklearn_1_8", -1.0)) != 0.0:
+        raise RuntimeError("Scikit-learn 1.8+ logistic L2 policy changed.")
+
     registry = build_pipeline_registry(forecast, implementation)
     manifest = pipeline_registry_manifest(registry)
     if manifest["pipeline_specifications"] != 162:
@@ -179,6 +200,9 @@ def main() -> int:
     print("Gated pipeline specifications: 9")
     print("Executable model families: 4")
     print("Window schemes: 3")
+    print(f"scikit-learn version: {sklearn_major_minor()[0]}.{sklearn_major_minor()[1]}")
+    print("Logistic L2 semantics preserved: True")
+    print("FutureWarnings observed: 0")
     print("Synthetic classification and regression fits: passed")
     print("Real development model fitting performed: False")
     print("Development pipeline selection performed: False")
