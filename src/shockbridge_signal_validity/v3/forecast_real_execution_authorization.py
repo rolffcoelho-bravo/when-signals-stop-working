@@ -36,43 +36,6 @@ def _sha256_file(path: str | Path) -> str:
     return _sha256_bytes(source.read_bytes())
 
 
-def load_authorization_candidate(path: str | Path) -> dict[str, Any]:
-    payload = json.loads(Path(path).read_text(encoding="utf-8"))
-    if not isinstance(payload, dict):
-        raise ForecastProtocolViolation("Execution authorization candidate must be an object.")
-    if payload.get("status") != "AUTHORIZATION_CANDIDATE_FROZEN":
-        raise ForecastProtocolViolation("Execution authorization candidate is not frozen.")
-    if payload.get("planning_and_manifest_generation_authorized") is not True:
-        raise ForecastProtocolViolation("Authorization planning is not enabled.")
-    for field in (
-        "real_development_execution_authorized",
-        "real_development_model_fitting_authorized",
-        "development_pipeline_selection_authorized",
-        "development_pipeline_admission_authorized",
-        "signal_establishment_segment_access_authorized",
-        "final_framework_reserve_access_authorized",
-    ):
-        if payload.get(field) is not False:
-            raise ForecastProtocolViolation(
-                f"Execution authorization candidate advanced prematurely: {field}"
-            )
-    batching = payload.get("batching", {})
-    expected = {
-        "jobs_per_batch": 250,
-        "expected_batch_count": 845,
-        "expected_final_batch_jobs": 140,
-        "maximum_parallel_batches": 1,
-        "maximum_worker_processes": 1,
-        "blas_threads_per_process": 1,
-    }
-    for field, value in expected.items():
-        if batching.get(field) != value:
-            raise ForecastProtocolViolation(
-                f"Authorization batching identity changed: {field}"
-            )
-    return payload
-
-
 def _stage_lookup(contract: dict[str, Any]) -> list[dict[str, Any]]:
     schedule = contract.get("stage_schedule")
     if not isinstance(schedule, list) or len(schedule) != 6:
@@ -186,7 +149,9 @@ def build_authorization_job_plan(
     pipelines = _pipeline_frame(pipeline_specs)
     available["_join"] = 1
     pipelines["_join"] = 1
-    combinations = available.merge(pipelines, on="_join", how="inner").drop(columns="_join")
+    combinations = available.merge(pipelines, on="_join", how="inner").drop(
+        columns="_join"
+    )
     if len(combinations) != 42228:
         raise ForecastProtocolViolation(
             f"Candidate-pipeline identity failed: expected 42228, observed {len(combinations)}."
@@ -213,18 +178,15 @@ def build_authorization_job_plan(
             f"Outer-fold job identity failed: expected 211140, observed {len(plan)}."
         )
 
-    sort_order = [str(value) for value in authorization_contract["batching"]["sort_order"]]
+    sort_order = [
+        str(value) for value in authorization_contract["batching"]["sort_order"]
+    ]
     plan = plan.sort_values(sort_order, kind="mergesort").reset_index(drop=True)
     job_records = plan.loc[:, list(JOB_ID_FIELDS)].to_dict(orient="records")
     plan["job_id"] = [_job_id(record) for record in job_records]
     if plan["job_id"].duplicated().any():
         raise ForecastProtocolViolation("Authorization job identifiers are not unique.")
     plan["job_ordinal"] = pd.RangeIndex(start=1, stop=len(plan) + 1, step=1)
-    jobs_per_batch = int(authorization_contract["batching"]["jobs_per_batch"])
-    plan["batch_ordinal"] = ((plan["job_ordinal"] - 1) // jobs_per_batch) + 1
-    plan["batch_id"] = plan["batch_ordinal"].map(
-        lambda value: f"v3g5batch:{int(value):04d}"
-    )
     plan["batch_state"] = str(
         authorization_contract["resumability"]["initial_batch_state"]
     )
@@ -233,77 +195,7 @@ def build_authorization_job_plan(
     plan["development_pipeline_selection_performed"] = False
     plan["signal_establishment_segment_accessed"] = False
     plan["final_framework_reserve_accessed"] = False
-
-    if int(plan["batch_ordinal"].max()) != 845:
-        raise ForecastProtocolViolation("Authorization batch count is not 845.")
-    final_jobs = int((plan["batch_ordinal"] == 845).sum())
-    if final_jobs != 140:
-        raise ForecastProtocolViolation("Authorization final batch does not contain 140 jobs.")
     return plan
-
-
-def build_batch_manifest(
-    plan: pd.DataFrame,
-    authorization_contract: dict[str, Any],
-) -> pd.DataFrame:
-    records: list[dict[str, object]] = []
-    for batch_ordinal, group in plan.groupby("batch_ordinal", sort=True):
-        job_material = "\n".join(group["job_id"].astype(str)) + "\n"
-        records.append(
-            {
-                "batch_ordinal": int(batch_ordinal),
-                "batch_id": str(group["batch_id"].iloc[0]),
-                "job_count": int(len(group)),
-                "first_job_ordinal": int(group["job_ordinal"].min()),
-                "last_job_ordinal": int(group["job_ordinal"].max()),
-                "first_stage_rank": int(group["stage_rank"].min()),
-                "last_stage_rank": int(group["stage_rank"].max()),
-                "job_ids_sha256": _sha256_bytes(job_material.encode("utf-8")),
-                "batch_state": str(
-                    authorization_contract["resumability"]["initial_batch_state"]
-                ),
-                "attempt_count": 0,
-                "checkpoint_path": None,
-                "output_hash_manifest_path": None,
-                "real_execution_authorized": False,
-                "real_development_model_fitting_performed": False,
-            }
-        )
-    manifest = pd.DataFrame.from_records(records)
-    if len(manifest) != 845 or int(manifest["job_count"].sum()) != 211140:
-        raise ForecastProtocolViolation("Authorization batch manifest identity failed.")
-    if int(manifest.iloc[-1]["job_count"]) != 140:
-        raise ForecastProtocolViolation("Authorization final batch manifest identity failed.")
-    return manifest
-
-
-def build_stage_manifest(plan: pd.DataFrame) -> pd.DataFrame:
-    records: list[dict[str, object]] = []
-    for (stage_rank, stage_id), group in plan.groupby(
-        ["stage_rank", "stage_id"], sort=True
-    ):
-        records.append(
-            {
-                "stage_rank": int(stage_rank),
-                "stage_id": str(stage_id),
-                "job_count": int(len(group)),
-                "candidate_count": int(group["candidate_id"].nunique()),
-                "horizon_count": int(group["horizon_candles"].nunique()),
-                "pipeline_specification_count": int(
-                    group["pipeline_spec_id"].nunique()
-                ),
-                "outer_fold_count": int(group["outer_fold"].nunique()),
-                "first_job_ordinal": int(group["job_ordinal"].min()),
-                "last_job_ordinal": int(group["job_ordinal"].max()),
-                "real_execution_authorized": False,
-            }
-        )
-    manifest = pd.DataFrame.from_records(records)
-    if list(manifest["stage_rank"]) != [1, 2, 3, 4, 5, 6]:
-        raise ForecastProtocolViolation("Authorization stage manifest identity failed.")
-    if int(manifest["job_count"].sum()) != 211140:
-        raise ForecastProtocolViolation("Authorization stage jobs do not sum to 211140.")
-    return manifest
 
 
 def _atomic_write(path: Path, payload: bytes) -> None:
@@ -329,7 +221,9 @@ def write_authorization_candidate_plan(
     destination.mkdir(parents=True, exist_ok=True)
     outputs = authorization_contract["planning_outputs"]
     payloads: dict[str, bytes] = {
-        str(outputs["job_plan"]): plan.to_csv(index=False, lineterminator="\n").encode("utf-8"),
+        str(outputs["job_plan"]): plan.to_csv(
+            index=False, lineterminator="\n"
+        ).encode("utf-8"),
         str(outputs["batch_manifest"]): batch_manifest.to_csv(
             index=False, lineterminator="\n"
         ).encode("utf-8"),
@@ -338,21 +232,23 @@ def write_authorization_candidate_plan(
         ).encode("utf-8"),
     }
     output_hashes = {name: _sha256_bytes(value) for name, value in payloads.items()}
-    input_hashes = {name: _sha256_file(path) for name, path in sorted(input_paths.items())}
+    input_hashes = {
+        name: _sha256_file(path) for name, path in sorted(input_paths.items())
+    }
     input_payload = {
         "schema_version": "v3.g5-real-execution-authorization-inputs.v1",
         "input_sha256": input_hashes,
         "all_inputs_bound": True,
     }
     input_name = str(outputs["input_hash_manifest"])
-    input_bytes = (json.dumps(input_payload, indent=2, sort_keys=True) + "\n").encode(
-        "utf-8"
-    )
+    input_bytes = (
+        json.dumps(input_payload, indent=2, sort_keys=True) + "\n"
+    ).encode("utf-8")
     payloads[input_name] = input_bytes
     output_hashes[input_name] = _sha256_bytes(input_bytes)
 
     manifest = {
-        "schema_version": "v3.g5-real-execution-authorization-candidate-manifest.v1",
+        "schema_version": "v3.g5-real-execution-authorization-candidate-manifest.v2",
         "status": "AUTHORIZATION_CANDIDATE_PLAN_MATERIALIZED",
         "git_commit": str(git_commit),
         "python_version": str(python_version),
@@ -362,6 +258,9 @@ def write_authorization_candidate_plan(
         "stage_count": int(len(stage_manifest)),
         "jobs_per_batch": int(authorization_contract["batching"]["jobs_per_batch"]),
         "final_batch_jobs": int(batch_manifest.iloc[-1]["job_count"]),
+        "stage_boundary_alignment_verified": bool(
+            plan.groupby("batch_ordinal")["stage_rank"].nunique().eq(1).all()
+        ),
         "candidate_pipeline_target_combinations": 42228,
         "outer_fold_jobs": 211140,
         "output_sha256": output_hashes,
@@ -377,76 +276,15 @@ def write_authorization_candidate_plan(
         "predictive_claims_produced": False,
         "economic_claims_produced": False,
     }
+    if manifest["stage_boundary_alignment_verified"] is not True:
+        raise ForecastProtocolViolation(
+            "Authorization candidate plan contains a mixed-stage batch."
+        )
     manifest_name = str(outputs["authorization_candidate_manifest"])
-    manifest_bytes = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode(
-        "utf-8"
-    )
+    manifest_bytes = (
+        json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+    ).encode("utf-8")
     for name, payload in payloads.items():
         _atomic_write(destination / name, payload)
     _atomic_write(destination / manifest_name, manifest_bytes)
-    return manifest
-
-
-def verify_authorization_candidate_plan(
-    *,
-    output_dir: str | Path,
-    authorization_contract: dict[str, Any],
-) -> dict[str, Any]:
-    destination = Path(output_dir)
-    outputs = authorization_contract["planning_outputs"]
-    manifest_path = destination / str(outputs["authorization_candidate_manifest"])
-    if not manifest_path.is_file():
-        raise ForecastProtocolViolation("Authorization candidate manifest is missing.")
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    if manifest.get("status") != "AUTHORIZATION_CANDIDATE_PLAN_MATERIALIZED":
-        raise ForecastProtocolViolation("Authorization candidate manifest status changed.")
-    expected = {
-        "job_count": 211140,
-        "batch_count": 845,
-        "stage_count": 6,
-        "jobs_per_batch": 250,
-        "final_batch_jobs": 140,
-        "candidate_pipeline_target_combinations": 42228,
-        "outer_fold_jobs": 211140,
-        "all_jobs_initially_planned_not_started": True,
-        "real_development_execution_authorized": False,
-        "real_development_model_fitting_performed": False,
-        "development_pipeline_selection_performed": False,
-        "signal_establishment_segment_accessed": False,
-        "final_framework_reserve_accessed": False,
-    }
-    for field, value in expected.items():
-        if manifest.get(field) != value:
-            raise ForecastProtocolViolation(
-                f"Authorization candidate manifest identity failed: {field}"
-            )
-    output_hashes = manifest.get("output_sha256", {})
-    for name, expected_hash in output_hashes.items():
-        path = destination / str(name)
-        if _sha256_file(path) != str(expected_hash):
-            raise ForecastProtocolViolation(
-                f"Authorization candidate output hash mismatch: {name}"
-            )
-    plan = pd.read_csv(destination / str(outputs["job_plan"]))
-    batches = pd.read_csv(destination / str(outputs["batch_manifest"]))
-    stages = pd.read_csv(destination / str(outputs["stage_manifest"]))
-    if len(plan) != 211140 or plan["job_id"].duplicated().any():
-        raise ForecastProtocolViolation("Authorization job plan identity failed.")
-    if len(batches) != 845 or int(batches["job_count"].sum()) != 211140:
-        raise ForecastProtocolViolation("Authorization batch plan identity failed.")
-    if len(stages) != 6 or int(stages["job_count"].sum()) != 211140:
-        raise ForecastProtocolViolation("Authorization stage plan identity failed.")
-    for column in (
-        "real_execution_authorized",
-        "real_development_model_fitting_performed",
-        "development_pipeline_selection_performed",
-        "signal_establishment_segment_accessed",
-        "final_framework_reserve_accessed",
-    ):
-        if plan[column].astype(bool).any():
-            raise ForecastProtocolViolation(
-                f"Authorization plan advanced execution state: {column}"
-            )
-    if not plan["batch_state"].eq("PLANNED_NOT_STARTED").all():
-        raise ForecastProtocolViolation("Authorization plan contains a started batch.")
     return manifest
