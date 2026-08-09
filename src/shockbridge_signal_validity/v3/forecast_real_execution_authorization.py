@@ -181,9 +181,27 @@ def build_authorization_job_plan(
     sort_order = [
         str(value) for value in authorization_contract["batching"]["sort_order"]
     ]
-    plan = plan.sort_values(sort_order, kind="mergesort").reset_index(drop=True)
-    job_records = plan.loc[:, list(JOB_ID_FIELDS)].to_dict(orient="records")
-    plan["job_id"] = [_job_id(record) for record in job_records]
+    cols = list(plan.columns)
+    sort_indices = [cols.index(c) for c in sort_order]
+    
+    def _sort_key(row):
+        return tuple(row[i] for i in sort_indices)
+        
+    row_tuples = list(plan.itertuples(index=False))
+    row_tuples.sort(key=_sort_key)
+    plan = pd.DataFrame(row_tuples, columns=cols)
+    job_ids = []
+    for row in plan[list(JOB_ID_FIELDS)].itertuples(index=False):
+        payload = {
+            "candidate_id": str(row.candidate_id),
+            "horizon_candles": int(row.horizon_candles),
+            "row_contract_id": str(row.row_contract_id) if pd.notna(row.row_contract_id) else None,
+            "target_name": str(row.target_name),
+            "pipeline_spec_id": str(row.pipeline_spec_id),
+            "outer_fold": int(row.outer_fold)
+        }
+        job_ids.append("v3g5job:" + sha256(_canonical_json(payload).encode("utf-8")).hexdigest())
+    plan["job_id"] = job_ids
     if plan["job_id"].duplicated().any():
         raise ForecastProtocolViolation("Authorization job identifiers are not unique.")
     plan["job_ordinal"] = pd.RangeIndex(start=1, stop=len(plan) + 1, step=1)

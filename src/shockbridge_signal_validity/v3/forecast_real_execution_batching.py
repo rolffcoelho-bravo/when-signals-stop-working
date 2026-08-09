@@ -82,23 +82,14 @@ def align_plan_batches_to_stages(
     for key, count in stage_batch_counts.items():
         offsets[(int(key[0]), str(key[1]))] = cumulative
         cumulative += int(count)
-    aligned["batch_ordinal"] = [
-        offsets[(int(stage_rank), str(stage_id))] + int(stage_batch)
-        for stage_rank, stage_id, stage_batch in zip(
-            aligned["stage_rank"],
-            aligned["stage_id"],
-            aligned["stage_batch_ordinal"],
-        )
-    ]
-    aligned["batch_id"] = aligned["batch_ordinal"].map(
-        lambda value: f"v3g5batch:{int(value):04d}"
+    aligned["batch_ordinal"] = aligned.apply(
+        lambda row: offsets[(int(row["stage_rank"]), str(row["stage_id"]))] + int(row["stage_batch_ordinal"]),
+        axis=1
     )
-    aligned["stage_batch_id"] = [
-        f"{stage_id}:batch:{int(stage_batch):04d}"
-        for stage_id, stage_batch in zip(
-            aligned["stage_id"], aligned["stage_batch_ordinal"]
-        )
-    ]
+    aligned["batch_id"] = "v3g5batch:" + aligned["batch_ordinal"].astype(str).str.zfill(4)
+    aligned["stage_batch_id"] = (
+        aligned["stage_id"].astype(str) + ":batch:" + aligned["stage_batch_ordinal"].astype(str).str.zfill(4)
+    )
     batch_count = int(aligned["batch_ordinal"].max())
     minimum = int(authorization_contract["batching"]["expected_batch_count_min"])
     maximum = int(authorization_contract["batching"]["expected_batch_count_max"])
