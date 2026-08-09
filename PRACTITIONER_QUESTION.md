@@ -1,12 +1,12 @@
-# Richard Question and Research Anchor
+# the practitioner Question and Research Anchor
 
 ## Original practical question
 
-The repository exists to answer a direct operational question raised by Richard:
+The repository exists to answer a direct operational question raised by the practitioner:
 
 > When will RSI stop working?
 
-Richard later clarified that the indicator used in practice was Bollinger Bands. The governed research programme therefore keeps RSI and Bollinger Bands separate and asks the same sequence for each family.
+the practitioner later clarified that the indicator used in practice was Bollinger Bands. The governed research programme therefore keeps RSI and Bollinger Bands separate and asks the same sequence for each family.
 
 ## Formal research question
 
@@ -59,7 +59,7 @@ Version 2 tested broader horizons, alternative interpretations, nonlinear candid
 
 The admitted Bollinger pipeline produced favourable mean contributions, but the Holm-adjusted p-value exceeded 0.05 and dependence-aware predictive and economic lower confidence bounds crossed zero. Stable incremental value was not established.
 
-## Direct answer to Richard today
+## Direct answer to the practitioner today
 
 > Under the tested SOL/USDT four-hour contracts, neither RSI nor Bollinger Bands can be said to have stopped working because stable incremental value was not established first. RSI failed Version 2 development admission. Bollinger Bands showed suggestive average evidence but failed the complete multiplicity-adjusted, dependence-aware, chronological, and economic establishment standard.
 
@@ -80,4 +80,4 @@ Spectral, network, panic-consistent, liquidity, funding, volatility, downside, a
 
 ## Non-divergence rule
 
-Every future gate must state explicitly which part of Richard's question it advances. A gate that validates only market regimes, chronology, software portability, or lock integrity is supporting infrastructure and may not be presented as completion of the signal-validity or signal-failure question.
+Every future gate must state explicitly which part of the practitioner's question it advances. A gate that validates only market regimes, chronology, software portability, or lock integrity is supporting infrastructure and may not be presented as completion of the signal-validity or signal-failure question.

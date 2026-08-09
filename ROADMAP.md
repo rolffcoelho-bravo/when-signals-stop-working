@@ -127,7 +127,7 @@ A full repository review found that implementation diverged after V3-3. The froz
 
 The realignment:
 
-- restored Richard's question at repository root;
+- restored the practitioner's question at repository root;
 - restored the direct-answer logic;
 - preserved all historical chronology artifacts and locks;
 - reclassified chronology as a separate regime-validation extension;
@@ -139,7 +139,7 @@ The realignment:
 Authoritative documents:
 
 ```text
-RICHARD_QUESTION.md
+PRACTITIONER_QUESTION.md
 DIRECT_ANSWER_LOGIC.md
 V3_REALIGNMENT_DECISION.md
 docs/V3_REALIGNED_GATE_MAP.md
@@ -173,7 +173,7 @@ This extension may resume only at an appropriate external-validation point. It i
 
 **Status:** authoritatively validated and locked.
 
-## Richard-question link
+## the practitioner-question link
 
 V3-4 defines the exact RSI and Bollinger information that V3-5 tests against matched non-signal benchmarks. It does not establish signal value and does not answer whether a signal stopped working.
 
@@ -510,7 +510,7 @@ Completion requires:
 
 Every gate must preserve:
 
-- the Richard research anchor;
+- the the practitioner research anchor;
 - predeclared hypotheses and parameter ranges;
 - chronological validation;
 - locked evaluation boundaries;

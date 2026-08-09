@@ -12,9 +12,9 @@ GATE_COMPLETE
 
 The exact hardened implementation passed the authoritative Windows research-environment run and is frozen at commit `ff2e7ecba3fa69f22e0b109437d23b52d30fba2b`. Compact evidence was materialized at commit `705511de9e8ee22a9f8aff34506aebb6c26223e7`, and the final lock is `V3_G4_SIGNAL_ENGINE_LOCK.json` with status `IMPLEMENTATION_VALIDATED_AND_LOCKED`.
 
-## Richard-question link
+## the practitioner-question link
 
-This gate advances Richard's question by defining exactly which RSI and Bollinger information Gate V3-5 may test against matched non-signal benchmarks.
+This gate advances the practitioner's question by defining exactly which RSI and Bollinger information Gate V3-5 may test against matched non-signal benchmarks.
 
 It does not determine whether any interpretation predicts returns, creates economic value, deteriorates, or is likely to fail.
 

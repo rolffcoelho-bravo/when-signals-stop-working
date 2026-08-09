@@ -10,7 +10,7 @@ V3_5_IMPLEMENTATION_STARTED_CONTRACT_FROZEN
 REALIGNMENT_COMPLETE
 ```
 
-The repository realignment is complete. Richard's question and the establishment-before-failure sequence are restored, historical chronology work remains preserved under the V3-RV extension, Gate V3-4 is authoritatively validated and locked, and Gate V3-5 is active at its frozen-contract boundary.
+The repository realignment is complete. the practitioner's question and the establishment-before-failure sequence are restored, historical chronology work remains preserved under the V3-RV extension, Gate V3-4 is authoritatively validated and locked, and Gate V3-5 is active at its frozen-contract boundary.
 
 ## Baseline and branch
 
@@ -25,7 +25,7 @@ V3-4 lock promotion commit: 4150d73ff1e12d5b022e591f0a6ee700c29b5ce1
 
 ## What was corrected
 
-1. Richard's original question is restored at repository root.
+1. the practitioner's original question is restored at repository root.
 2. The direct-answer hierarchy is explicit: establishment precedes conditional validity, deterioration, failure probability, and operational action.
 3. Frozen Version 1 and Version 2 determinations remain unchanged.
 4. Historical chronology work is preserved but reclassified as `V3-RV1` and `V3-RV2` regime-validation evidence.
@@ -121,7 +121,7 @@ The 2026 reserve is inaccessible to Gate V3-5. Early access is the protocol viol
 
 The seven tests now cover:
 
-1. preservation of Richard's question and frozen Version 1/2 answers;
+1. preservation of the practitioner's question and frozen Version 1/2 answers;
 2. final V3-4 lock and authoritative evidence;
 3. active V3-5 contract state without target or model access;
 4. chronology reclassification without historical rewriting;

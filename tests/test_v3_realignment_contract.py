@@ -165,7 +165,7 @@ def test_realignment_verifier_passes_at_active_v3_g5_boundary() -> None:
         text=True,
     )
     assert completed.returncode == 0, completed.stderr
-    assert "Richard question restored: True" in completed.stdout
+    assert "the practitioner question restored: True" in completed.stdout
     assert "Gate V3-4 status: IMPLEMENTATION_VALIDATED_AND_LOCKED" in completed.stdout
     assert (
         "Current core gate: V3-5 — Matched Benchmark-versus-Signal Forecast Selection"

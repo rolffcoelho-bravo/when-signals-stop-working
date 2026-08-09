@@ -6,7 +6,7 @@
 
 ## The question this repository must answer
 
-Richard asked:
+The practitioner asked:
 
 > When will RSI stop working?
 
@@ -14,7 +14,7 @@ He later clarified that the indicator used in practice was Bollinger Bands. The 
 
 > A signal cannot be classified as deteriorated, failed, reduced, or suspended unless stable incremental value was first established under a predeclared benchmark-relative and chronological validation contract.
 
-The complete research anchor is documented in [`RICHARD_QUESTION.md`](RICHARD_QUESTION.md). The decision sequence is documented in [`DIRECT_ANSWER_LOGIC.md`](DIRECT_ANSWER_LOGIC.md).
+The complete research anchor is documented in [`PRACTITIONER_QUESTION.md`](PRACTITIONER_QUESTION.md). The decision sequence is documented in [`DIRECT_ANSWER_LOGIC.md`](DIRECT_ANSWER_LOGIC.md).
 
 ## Direct answer from the frozen evidence
 
@@ -39,7 +39,7 @@ Version 2 tested broader horizons, continuation and mean-reversion interpretatio
 
 The frozen Bollinger pipeline produced a positive mean benchmark-relative log-loss contribution of `0.002108928`, and two of three locked subperiods were positive. The raw one-sided p-value was `0.032339`, but the Holm-adjusted value was `0.064677`; dependence-aware predictive and economic lower confidence bounds crossed zero.
 
-### Current answer to Richard
+### Current answer to the practitioner
 
 > Under the tested SOL/USDT four-hour contracts, neither RSI nor Bollinger Bands can be said to have stopped working because stable incremental value was not established first. RSI failed Version 2 development admission. Bollinger Bands showed suggestive average evidence but failed the complete multiplicity-adjusted, dependence-aware, chronological, and economic establishment standard.
 
@@ -284,7 +284,7 @@ python scripts/verify_v3_g4_lock.py
 
 ## Key documentation
 
-- Richard question: [`RICHARD_QUESTION.md`](RICHARD_QUESTION.md)
+- the practitioner question: [`PRACTITIONER_QUESTION.md`](PRACTITIONER_QUESTION.md)
 - Direct-answer logic: [`DIRECT_ANSWER_LOGIC.md`](DIRECT_ANSWER_LOGIC.md)
 - Empirical determination: [`RESULTS.md`](RESULTS.md)
 - Version 2 evidence report: [`outputs/v2/publication/V2_FINAL_EVIDENCE_REPORT.md`](outputs/v2/publication/V2_FINAL_EVIDENCE_REPORT.md)

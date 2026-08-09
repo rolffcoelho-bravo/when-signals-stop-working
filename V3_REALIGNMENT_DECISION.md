@@ -16,7 +16,7 @@ A full repository review found that Version 3 correctly implemented its canonica
 
 The frozen plan defined Gate V3-4 as the **Unified RSI and Bollinger Interpretation Engine**. Historical development instead used the V3-4A and V3-4B labels for external chronology governance and compilation, with a proposed V3-4C event-alignment evaluation.
 
-The chronology work remains valid supporting research, but it does not implement the signal engine, matched forecast engine, failure definition, failure-probability model, or operational decision layer required to answer Richard's question.
+The chronology work remains valid supporting research, but it does not implement the signal engine, matched forecast engine, failure definition, failure-probability model, or operational decision layer required to answer the practitioner's question.
 
 ## Research anchor restored
 
@@ -159,7 +159,7 @@ Future governance work must be proportional to the scientific gate it protects. 
 ## Authoritative supporting documents
 
 ```text
-RICHARD_QUESTION.md
+PRACTITIONER_QUESTION.md
 DIRECT_ANSWER_LOGIC.md
 docs/V3_REALIGNED_GATE_MAP.md
 docs/V3_G4_SIGNAL_ENGINE_SCOPE.md

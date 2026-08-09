@@ -165,7 +165,7 @@
     "governance_must_be_proportional_to_scientific_gate": true
   },
   "required_documents": [
-    "RICHARD_QUESTION.md",
+    "PRACTITIONER_QUESTION.md",
     "DIRECT_ANSWER_LOGIC.md",
     "V3_REALIGNMENT_DECISION.md",
     "docs/V3_REALIGNED_GATE_MAP.md",

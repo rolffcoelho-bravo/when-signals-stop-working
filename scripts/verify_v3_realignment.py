@@ -77,9 +77,9 @@ def verify_research_anchor(payload: dict[str, Any]) -> None:
 
     anchor = payload.get("research_anchor", {})
     if anchor.get("original_question") != "When will RSI stop working?":
-        fail("Richard's original question is not preserved")
+        fail("the practitioner's original question is not preserved")
     if anchor.get("corrected_practical_indicator") != "Bollinger Bands":
-        fail("Richard's corrected practical indicator is not preserved")
+        fail("the practitioner's corrected practical indicator is not preserved")
     if anchor.get("establishment_precedes_deterioration") is not True:
         fail("Establishment-before-deterioration rule changed")
     if anchor.get("establishment_precedes_failure_probability") is not True:
@@ -235,7 +235,7 @@ def verify_reclassification_and_controls(payload: dict[str, Any]) -> None:
         if controls.get(field) is not False:
             fail(f"Governance control changed: {field}")
     if controls.get("each_future_gate_must_state_richard_question_link") is not True:
-        fail("Future gates are not linked to Richard's question")
+        fail("Future gates are not linked to the practitioner's question")
     if controls.get("governance_must_be_proportional_to_scientific_gate") is not True:
         fail("Governance proportionality rule changed")
 
@@ -259,7 +259,7 @@ def verify_documents_and_registry(payload: dict[str, Any]) -> None:
         fail("Committed V3-4 registry does not expand to 48 specifications")
 
     required_phrases = {
-        "RICHARD_QUESTION.md": (
+        "PRACTITIONER_QUESTION.md": (
             "When will RSI stop working?",
             "NO_PIPELINE_ADMITTED",
             "NO_INCREMENTAL_EVIDENCE",
@@ -297,7 +297,7 @@ def main() -> int:
     verify_documents_and_registry(payload)
 
     print("Version 3 repository realignment verification passed.")
-    print("Richard question restored: True")
+    print("the practitioner question restored: True")
     print("Frozen V1/V2 determinations modified: False")
     print("Historical chronology work reclassified: V3-RV1/V3-RV2")
     print("Event alignment: V3-RV3 PAUSED_NOT_STARTED")

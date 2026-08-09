@@ -9,7 +9,7 @@ Historical design and lock objects remain point-in-time evidence. This map contr
 ## Research chain
 
 ```text
-Richard's question
+the practitioner's question
     ↓
 Signal interpretation
     ↓
@@ -30,7 +30,7 @@ Spectral, network, panic-consistent, and external-event evidence enter as suppor
 
 ## Core gate map
 
-| Gate | Purpose | Current status | Advances Richard's question by |
+| Gate | Purpose | Current status | Advances the practitioner's question by |
 |---|---|---|---|
 | V3-0 | Design and product freeze | Complete | Defines the complete answer and product boundary |
 | V3-1 | Canonical data and adapters | Complete and locked | Makes the answer reusable across conforming data |

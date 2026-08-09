@@ -15,7 +15,7 @@ MODEL_FITTING_NOT_STARTED
 
 Gate V3-5 is the first Version 3 gate permitted to test whether the 48 registered RSI and Bollinger specifications add incremental forecast and economic value beyond a matched non-signal benchmark.
 
-It answers the establishment part of Richard's question. It does not define deterioration or estimate failure probability.
+It answers the establishment part of the practitioner's question. It does not define deterioration or estimate failure probability.
 
 The controlling order remains:
 

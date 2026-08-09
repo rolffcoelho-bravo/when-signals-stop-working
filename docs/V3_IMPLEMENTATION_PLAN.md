@@ -309,4 +309,4 @@ Acceptance:
 
 ## Final completion statement
 
-Only Gate V3-11 produces the model Richard can actually use. Gates V3-1 through V3-10 establish that the model and its decision states have a defensible evidential basis. Gate V3-12 makes the complete framework reproducible, citable, and immutable.
+Only Gate V3-11 produces the model the practitioner can actually use. Gates V3-1 through V3-10 establish that the model and its decision states have a defensible evidential basis. Gate V3-12 makes the complete framework reproducible, citable, and immutable.

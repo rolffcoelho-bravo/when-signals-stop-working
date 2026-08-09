@@ -270,7 +270,7 @@ A cross-gate latest-owner audit separates historical integrity from current owne
 
 ### Governance contribution V3-RL-M1
 
-The realignment restores Richard's practical question and the scientific priority ordering `ESTABLISHMENT → CONDITIONAL_VALIDITY → DETERIORATION → FAILURE_PROBABILITY → OPERATIONAL_ACTION`. Supporting spectral, panic-consistent, chronology, portability, and lock layers may not substitute for this signal-establishment chain.
+The realignment restores the practitioner's practical question and the scientific priority ordering `ESTABLISHMENT → CONDITIONAL_VALIDITY → DETERIORATION → FAILURE_PROBABILITY → OPERATIONAL_ACTION`. Supporting spectral, panic-consistent, chronology, portability, and lock layers may not substitute for this signal-establishment chain.
 
 ### Governance contribution V3-RL-M2
 
@@ -278,7 +278,7 @@ Historical chronology work is preserved without renaming or rewriting its lock o
 
 ### Validation finding V3-RL-V1
 
-The corrected repository realignment suite completed with `7 passed`. It verifies Richard's question, frozen Version 1 and Version 2 determinations, chronology reclassification, the establishment-before-failure sequence, final V3-4 lock, active V3-5 contract boundary, and fail-closed protection of the V3-9 final-framework reserve.
+The corrected repository realignment suite completed with `7 passed`. It verifies the practitioner's question, frozen Version 1 and Version 2 determinations, chronology reclassification, the establishment-before-failure sequence, final V3-4 lock, active V3-5 contract boundary, and fail-closed protection of the V3-9 final-framework reserve.
 
 ---
 
