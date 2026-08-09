@@ -219,8 +219,14 @@ def build_authorization_job_plan(
 def _atomic_write(path: Path, payload: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_bytes(payload)
-    temporary.replace(path)
+    try:
+        with open(temporary, "wb") as f:
+            chunk_size = 1024 * 1024
+            for i in range(0, len(payload), chunk_size):
+                f.write(payload[i:i+chunk_size])
+        temporary.replace(path)
+    except Exception as e:
+        raise RuntimeError(f"Failed to write {path}: {e}") from e
 
 
 def write_authorization_candidate_plan(
