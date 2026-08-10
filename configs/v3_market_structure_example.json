@@ -3,10 +3,10 @@
   "timezone": "UTC",
   "panel": {
     "members": [
-      "SOL/USDT@binance",
-      "BTC/USDT@binance",
-      "ETH/USDT@binance",
-      "BNB/USDT@binance"
+      "SOL/USDT@binance_spot",
+      "BTC/USDT@binance_spot",
+      "ETH/USDT@binance_spot",
+      "BNB/USDT@binance_spot"
     ],
     "dependence_windows": [30, 60, 120],
     "minimum_complete_observations": 20,

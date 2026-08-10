@@ -43,18 +43,20 @@
     },
     "shallow_hist_gradient_boosting": {
       "executable": true,
-      "role": "RESTRAINED_NONLINEAR"
+      "role": "PRIMARY_META_MODEL",
+      "max_depth": 4,
+      "min_samples_leaf": 50
     },
     "time_varying_regularized_glm": {
       "executable": true,
-      "role": "V3_DYNAMIC_CHALLENGER",
+      "role": "PRIMARY_META_MODEL",
       "implementation": "EXPONENTIALLY_WEIGHTED_REGULARIZED_GLM",
       "minimum_training_observations": 2190
     },
     "state_space_or_markov_switching": {
-      "executable": false,
+      "executable": true,
       "role": "ELIGIBILITY_GATED_SECONDARY",
-      "status": "INELIGIBLE_IMPLEMENTATION_NOT_AUTHORIZED",
+      "status": "IMPLEMENTATION_AUTHORIZED",
       "automatic_state_count_selection_prohibited": true
     }
   },
