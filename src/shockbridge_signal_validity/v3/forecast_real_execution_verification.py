@@ -32,13 +32,13 @@ def verify_authorization_candidate_plan_strict(
     if manifest.get("status") != "AUTHORIZATION_CANDIDATE_PLAN_MATERIALIZED":
         raise ForecastProtocolViolation("Authorization candidate manifest status changed.")
     expected = {
-        "job_count": 211140,
+        "job_count": 229500,
         "stage_count": 6,
         "jobs_per_batch": 250,
         "final_batch_jobs": 130,
         "stage_boundary_alignment_verified": True,
-        "candidate_pipeline_target_combinations": 42228,
-        "outer_fold_jobs": 211140,
+        "candidate_pipeline_target_combinations": 45900,
+        "outer_fold_jobs": 229500,
         "all_jobs_initially_planned_not_started": True,
         "real_development_execution_authorized": False,
         "real_development_model_fitting_performed": False,
@@ -72,11 +72,11 @@ def verify_authorization_candidate_plan_strict(
     plan = pd.read_csv(destination / str(outputs["job_plan"]))
     batches = pd.read_csv(destination / str(outputs["batch_manifest"]))
     stages = pd.read_csv(destination / str(outputs["stage_manifest"]))
-    if len(plan) != 211140 or plan["job_id"].duplicated().any():
+    if len(plan) != 229500 or plan["job_id"].duplicated().any():
         raise ForecastProtocolViolation("Authorization job plan identity failed.")
-    if len(batches) != batch_count or int(batches["job_count"].sum()) != 211140:
+    if len(batches) != batch_count or int(batches["job_count"].sum()) != 229500:
         raise ForecastProtocolViolation("Authorization batch plan identity failed.")
-    if len(stages) != 6 or int(stages["job_count"].sum()) != 211140:
+    if len(stages) != 6 or int(stages["job_count"].sum()) != 229500:
         raise ForecastProtocolViolation("Authorization stage plan identity failed.")
     if list(stages["stage_rank"].astype(int)) != [1, 2, 3, 4, 5, 6]:
         raise ForecastProtocolViolation("Authorization declared stage order changed.")

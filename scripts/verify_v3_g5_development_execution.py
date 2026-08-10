@@ -106,9 +106,9 @@ def main() -> int:
         outer_folds=5,
         real_execution_authorized=False,
     )
-    if identity.candidate_pipeline_target_combinations != 42228:
+    if identity.candidate_pipeline_target_combinations != 45900:
         raise RuntimeError("Candidate-pipeline workload identity changed.")
-    if identity.outer_fold_jobs != 211140:
+    if identity.outer_fold_jobs != 229500:
         raise RuntimeError("Outer-fold workload identity changed.")
 
     benchmark, candidate, direction, expected_return, realized = _synthetic_partitions()
@@ -204,8 +204,8 @@ def main() -> int:
     print("Model implementation boundary protected: True")
     print("Execution engine contract frozen: True")
     print("Development execution authorized: False")
-    print("Candidate-pipeline-target combinations: 42228")
-    print("Outer-fold jobs: 211140")
+    print("Candidate-pipeline-target combinations: 45900")
+    print("Outer-fold jobs: 229500")
     print("Strict training/calibration/test chronology verified: True")
     print("Fold-scoped large-move threshold and execution verified: True")
     print("Training-only calibration verified: True")

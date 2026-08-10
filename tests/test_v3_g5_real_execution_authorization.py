@@ -103,20 +103,20 @@ def test_authorization_candidate_is_planning_only() -> None:
 
 def test_exact_job_plan_identity(authorization_bundle) -> None:
     _, _, _, _, plan, _, _ = authorization_bundle
-    assert len(plan) == 211140
-    assert plan["job_id"].nunique() == 211140
+    assert len(plan) == 229500
+    assert plan["job_id"].nunique() == 229500
     assert int(plan["job_ordinal"].min()) == 1
-    assert int(plan["job_ordinal"].max()) == 211140
+    assert int(plan["job_ordinal"].max()) == 229500
     assert plan["job_id"].str.startswith("v3g5job:").all()
 
 
 def test_exact_stage_aligned_batch_identity(authorization_bundle) -> None:
     _, _, _, _, plan, batches, _ = authorization_bundle
-    assert plan["batch_ordinal"].nunique() == 847
-    assert len(batches) == 847
-    assert int(batches["job_count"].sum()) == 211140
+    assert plan["batch_ordinal"].nunique() == 918
+    assert len(batches) == 918
+    assert int(batches["job_count"].sum()) == 229500
     assert int(batches.iloc[-1]["job_count"]) == 130
-    assert batches.iloc[-1]["batch_id"] == "v3g5batch:0847"
+    assert batches.iloc[-1]["batch_id"] == "v3g5batch:0918"
     assert batches.groupby("batch_ordinal")["stage_rank"].nunique().max() == 1
 
 
@@ -127,7 +127,7 @@ def test_declared_empty_stage_is_preserved(authorization_bundle) -> None:
     stage_four = stages.loc[stages["stage_rank"] == 4].iloc[0]
     assert int(stage_four["job_count"]) == 0
     assert bool(stage_four["empty_stage_preserved"]) is True
-    assert int(stages["job_count"].sum()) == 211140
+    assert int(stages["job_count"].sum()) == 229500
 
 
 def test_all_jobs_remain_unstarted_and_unauthorized(authorization_bundle) -> None:
@@ -208,7 +208,7 @@ def test_job_ids_bind_outer_fold(authorization_bundle) -> None:
 
 def test_batch_hashes_are_unique(authorization_bundle) -> None:
     _, _, _, _, _, batches, _ = authorization_bundle
-    assert batches["job_ids_sha256"].nunique() == 847
+    assert batches["job_ids_sha256"].nunique() == 918
     assert batches["attempt_count"].eq(0).all()
 
 

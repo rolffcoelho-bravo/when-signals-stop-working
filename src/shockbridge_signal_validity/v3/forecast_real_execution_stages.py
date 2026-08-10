@@ -43,8 +43,8 @@ def build_complete_stage_manifest(
     manifest = pd.DataFrame.from_records(records)
     if list(manifest["stage_rank"]) != [1, 2, 3, 4, 5, 6]:
         raise ForecastProtocolViolation("Authorization stage manifest identity failed.")
-    if int(manifest["job_count"].sum()) != 211140:
-        raise ForecastProtocolViolation("Authorization stage jobs do not sum to 211140.")
+    if int(manifest["job_count"].sum()) != 229500:
+        raise ForecastProtocolViolation("Authorization stage jobs do not sum to 229500.")
     if not manifest["stage_id"].is_unique:
         raise ForecastProtocolViolation("Authorization stage identifiers are not unique.")
     return manifest

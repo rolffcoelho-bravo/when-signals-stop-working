@@ -35,8 +35,8 @@ def load_stage_aligned_authorization_candidate(path: str | Path) -> dict[str, An
         raise ForecastProtocolViolation("Authorization batches must align to stage boundaries.")
     expected = {
         "jobs_per_batch": 250,
-        "expected_batch_count_min": 847,
-        "expected_batch_count_max": 848,
+        "expected_batch_count_min": 918,
+        "expected_batch_count_max": 919,
         "expected_final_batch_jobs": 130,
         "maximum_parallel_batches": 1,
         "maximum_worker_processes": 1,
@@ -146,8 +146,8 @@ def build_stage_aligned_batch_manifest(
     maximum = int(authorization_contract["batching"]["expected_batch_count_max"])
     if not minimum <= len(manifest) <= maximum:
         raise ForecastProtocolViolation("Stage-aligned batch manifest count changed.")
-    if int(manifest["job_count"].sum()) != 211140:
-        raise ForecastProtocolViolation("Stage-aligned batch jobs do not sum to 211140.")
+    if int(manifest["job_count"].sum()) != 229500:
+        raise ForecastProtocolViolation("Stage-aligned batch jobs do not sum to 229500.")
     if int(manifest.iloc[-1]["job_count"]) != 130:
         raise ForecastProtocolViolation("Stage-aligned final batch identity changed.")
     if manifest.groupby("batch_ordinal")["stage_rank"].nunique().max() != 1:

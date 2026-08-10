@@ -82,8 +82,8 @@ def test_execution_plan_identity_matches_frozen_workload() -> None:
         outer_folds=5,
         real_execution_authorized=False,
     )
-    assert identity.candidate_pipeline_target_combinations == 42228
-    assert identity.outer_fold_jobs == 211140
+    assert identity.candidate_pipeline_target_combinations == 45900
+    assert identity.outer_fold_jobs == 229500
     assert identity.real_execution_authorized is False
 
 

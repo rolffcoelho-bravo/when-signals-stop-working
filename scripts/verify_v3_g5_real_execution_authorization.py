@@ -104,7 +104,7 @@ def main() -> int:
         raise RuntimeError("Authorization batch manifest contains a started batch.")
     if list(stages["stage_rank"].astype(int)) != [1, 2, 3, 4, 5, 6]:
         raise RuntimeError("Authorization stage order changed.")
-    if int(stages["job_count"].sum()) != 211140:
+    if int(stages["job_count"].sum()) != 229500:
         raise RuntimeError("Authorization stage workload changed.")
     if batches.groupby("batch_ordinal")["stage_rank"].nunique().max() != 1:
         raise RuntimeError("Authorization batch manifest mixes scientific stages.")
@@ -118,10 +118,10 @@ def main() -> int:
     print("Development engine boundary protected: True")
     print("Authorization candidate contract frozen: True")
     print(f"Plan Git commit: {git_head}")
-    print("Outer-fold jobs: 211140")
-    print("Candidate-pipeline-target combinations: 42228")
+    print("Outer-fold jobs: 229500")
+    print("Candidate-pipeline-target combinations: 45900")
     print(f"Stage-aligned batches: {batch_count}")
-    print("Valid stage-aligned batch range: 847-848")
+    print("Valid stage-aligned batch range: 918-919")
     print("Jobs per full batch: 250")
     print("Final batch jobs: 130")
     print("Execution stages: 6")

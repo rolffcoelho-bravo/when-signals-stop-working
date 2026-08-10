@@ -102,8 +102,8 @@ def main() -> int:
         "development_engine_tests_passed": 33,
         "development_engine_tests_failed": 0,
         "future_warnings_observed": 0,
-        "candidate_pipeline_target_combinations": 42228,
-        "outer_fold_jobs": 211140,
+        "candidate_pipeline_target_combinations": 45900,
+        "outer_fold_jobs": 229500,
         "strict_training_calibration_test_chronology_verified": True,
         "fold_scoped_large_move_threshold_verified": True,
         "training_only_calibration_verified": True,
@@ -138,8 +138,8 @@ def main() -> int:
     print(f"Protected development engine objects: {len(paths)}")
     print("Development engine tests: 33")
     print("FutureWarnings observed: 0")
-    print("Candidate-pipeline-target combinations: 42228")
-    print("Outer-fold jobs: 211140")
+    print("Candidate-pipeline-target combinations: 45900")
+    print("Outer-fold jobs: 229500")
     print("Real development model fitting started: False")
     print("Development pipeline selection performed: False")
     return 0

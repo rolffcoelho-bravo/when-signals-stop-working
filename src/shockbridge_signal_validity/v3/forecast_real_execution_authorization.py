@@ -152,9 +152,9 @@ def build_authorization_job_plan(
     combinations = available.merge(pipelines, on="_join", how="inner").drop(
         columns="_join"
     )
-    if len(combinations) != 42228:
+    if len(combinations) != 45900:
         raise ForecastProtocolViolation(
-            f"Candidate-pipeline identity failed: expected 42228, observed {len(combinations)}."
+            f"Candidate-pipeline identity failed: expected 45900, observed {len(combinations)}."
         )
     schedule = _stage_lookup(authorization_contract)
     assigned = combinations.apply(
@@ -173,9 +173,9 @@ def build_authorization_job_plan(
     folds = pd.DataFrame({"outer_fold": [1, 2, 3, 4, 5], "_join": 1})
     combinations["_join"] = 1
     plan = combinations.merge(folds, on="_join", how="inner").drop(columns="_join")
-    if len(plan) != 211140:
+    if len(plan) != 229500:
         raise ForecastProtocolViolation(
-            f"Outer-fold job identity failed: expected 211140, observed {len(plan)}."
+            f"Outer-fold job identity failed: expected 229500, observed {len(plan)}."
         )
 
     sort_order = [
@@ -293,8 +293,8 @@ def write_authorization_candidate_plan(
         "stage_boundary_alignment_verified": bool(
             plan.groupby("batch_ordinal")["stage_rank"].nunique().eq(1).all()
         ),
-        "candidate_pipeline_target_combinations": 42228,
-        "outer_fold_jobs": 211140,
+        "candidate_pipeline_target_combinations": 45900,
+        "outer_fold_jobs": 229500,
         "output_sha256": output_hashes,
         "input_sha256": input_hashes,
         "all_jobs_initially_planned_not_started": bool(
