@@ -77,7 +77,7 @@ def _partitions():
 
 def test_execution_plan_identity_matches_frozen_workload() -> None:
     identity = build_execution_plan_identity(
-        matched_candidate_horizon_records=276,
+        matched_candidate_horizon_records=300,
         executable_pipeline_specifications=153,
         outer_folds=5,
         real_execution_authorized=False,

@@ -187,7 +187,7 @@ def test_authorization_rejects_wrong_available_coverage_count(authorization_bund
         coverage["coverage_status"] == "MATCHED_ROWS_AVAILABLE"
     ][0]
     reduced = coverage.drop(index=available_index).copy()
-    with pytest.raises(ForecastProtocolViolation, match="276 matched"):
+    with pytest.raises(ForecastProtocolViolation, match="300 matched"):
         build_authorization_job_plan(
             matched_coverage=reduced,
             candidate_inventory=candidates,

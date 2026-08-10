@@ -101,7 +101,7 @@ def main() -> int:
     forecast, implementation = load_contracts(FORECAST_CONTRACT, MODEL_CONTRACT)
     registry = build_pipeline_registry(forecast, implementation)
     identity = build_execution_plan_identity(
-        matched_candidate_horizon_records=276,
+        matched_candidate_horizon_records=300,
         executable_pipeline_specifications=sum(value.executable for value in registry),
         outer_folds=5,
         real_execution_authorized=False,

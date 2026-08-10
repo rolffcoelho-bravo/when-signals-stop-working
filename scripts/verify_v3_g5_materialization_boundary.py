@@ -99,10 +99,10 @@ def main() -> int:
         "development_rows": 9852,
         "target_primitive_rows": 59070,
         "nested_fold_records": 120,
-        "bounded_candidates": 57,
-        "candidate_horizon_records": 342,
-        "matched_rows_available_records": 276,
-        "explicitly_ineligible_candidate_horizon_records": 66,
+        "bounded_candidates": 66,
+        "candidate_horizon_records": 396,
+        "matched_rows_available_records": 300,
+        "explicitly_ineligible_candidate_horizon_records": 96,
     }
     if identities != expected:
         raise MaterializationBoundaryError("Materialization validation identities changed.")
@@ -124,9 +124,9 @@ def main() -> int:
     print(f"Protected materialization objects: {len(PROTECTED_PATHS)}")
     print("Development rows: 9852")
     print("Target primitive rows: 59070")
-    print("Candidate-horizon records: 342")
-    print("Matched records: 276")
-    print("Explicitly ineligible records: 66")
+    print("Candidate-horizon records: 396")
+    print("Matched records: 300")
+    print("Explicitly ineligible records: 96")
     print("Real development model fitting started: False")
     return 0
 

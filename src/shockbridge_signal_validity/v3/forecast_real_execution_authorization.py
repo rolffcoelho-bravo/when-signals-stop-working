@@ -122,9 +122,9 @@ def _candidate_coverage_frame(
         how="left",
         validate="many_to_one",
     )
-    if len(available) != 276:
+    if len(available) != 300:
         raise ForecastProtocolViolation(
-            f"Authorization requires 276 matched candidate-horizon records, observed {len(available)}."
+            f"Authorization requires 300 matched candidate-horizon records, observed {len(available)}."
         )
     if available["confirmatory_role"].isna().any():
         raise ForecastProtocolViolation("Authorization coverage contains an unknown candidate.")
