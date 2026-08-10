@@ -9,7 +9,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 LOCK_PATH = ROOT / "V3_G4_SIGNAL_ENGINE_LOCK.json"
-EXPECTED_VALIDATED_COMMIT = "3ffece4879ad26d8337f8fe0170aec742565bc55"
+EXPECTED_VALIDATED_COMMIT = "a422db066e4a2f8b50f682df6a17b07c9ce0534c"
 
 
 def sha256_file(path: Path) -> str:
