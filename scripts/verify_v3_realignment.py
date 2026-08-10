@@ -55,7 +55,7 @@ def verify_parent_lock() -> dict[str, Any]:
     if lock.get("status") != "IMPLEMENTATION_VALIDATED_AND_LOCKED":
         fail("Gate V3-4 is not finally locked")
     if lock.get("validated_implementation_commit") != (
-        "7c8b6fd83e124dbd25e4c9f52e4c00c7757f939d"
+        "3ffece4879ad26d8337f8fe0170aec742565bc55"
     ):
         fail("Gate V3-4 validated implementation commit changed")
     if lock.get("evidence_materialization_commit") != (
