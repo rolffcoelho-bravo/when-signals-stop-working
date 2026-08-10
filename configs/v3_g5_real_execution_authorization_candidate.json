@@ -34,7 +34,7 @@
     "batch_count_policy": "SUM_OF_STAGE_CEIL_JOB_COUNT_DIVIDED_BY_250",
     "expected_batch_count_min": 918,
     "expected_batch_count_max": 919,
-    "expected_final_batch_jobs": 130,
+    "expected_final_batch_jobs": 250,
     "maximum_parallel_batches": 1,
     "maximum_worker_processes": 1,
     "blas_threads_per_process": 1,

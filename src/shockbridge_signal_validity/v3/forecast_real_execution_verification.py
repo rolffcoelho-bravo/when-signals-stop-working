@@ -35,7 +35,7 @@ def verify_authorization_candidate_plan_strict(
         "job_count": 229500,
         "stage_count": 6,
         "jobs_per_batch": 250,
-        "final_batch_jobs": 130,
+        "final_batch_jobs": 250,
         "stage_boundary_alignment_verified": True,
         "candidate_pipeline_target_combinations": 45900,
         "outer_fold_jobs": 229500,
@@ -87,7 +87,7 @@ def verify_authorization_candidate_plan_strict(
         raise ForecastProtocolViolation(
             "Authorization batch count does not equal the sum of stage-specific ceilings."
         )
-    if int(batches.iloc[-1]["job_count"]) != 130:
+    if int(batches.iloc[-1]["job_count"]) != 250:
         raise ForecastProtocolViolation("Authorization final batch identity changed.")
     if plan.groupby("batch_ordinal")["stage_rank"].nunique().max() != 1:
         raise ForecastProtocolViolation("Authorization job plan contains a mixed-stage batch.")

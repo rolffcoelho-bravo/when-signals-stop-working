@@ -123,7 +123,7 @@ def main() -> int:
     print(f"Stage-aligned batches: {batch_count}")
     print("Valid stage-aligned batch range: 918-919")
     print("Jobs per full batch: 250")
-    print("Final batch jobs: 130")
+    print("Final batch jobs: 250")
     print("Execution stages: 6")
     print("No batch crosses a stage boundary: True")
     print(f"Python version: {expected_environment['python_version']}")

@@ -115,7 +115,7 @@ def test_exact_stage_aligned_batch_identity(authorization_bundle) -> None:
     assert plan["batch_ordinal"].nunique() == 918
     assert len(batches) == 918
     assert int(batches["job_count"].sum()) == 229500
-    assert int(batches.iloc[-1]["job_count"]) == 130
+    assert int(batches.iloc[-1]["job_count"]) == 250
     assert batches.iloc[-1]["batch_id"] == "v3g5batch:0918"
     assert batches.groupby("batch_ordinal")["stage_rank"].nunique().max() == 1
 

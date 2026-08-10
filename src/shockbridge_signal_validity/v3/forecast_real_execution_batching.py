@@ -37,7 +37,7 @@ def load_stage_aligned_authorization_candidate(path: str | Path) -> dict[str, An
         "jobs_per_batch": 250,
         "expected_batch_count_min": 918,
         "expected_batch_count_max": 919,
-        "expected_final_batch_jobs": 130,
+        "expected_final_batch_jobs": 250,
         "maximum_parallel_batches": 1,
         "maximum_worker_processes": 1,
         "blas_threads_per_process": 1,
@@ -102,7 +102,7 @@ def align_plan_batches_to_stages(
         authorization_contract["batching"]["expected_final_batch_jobs"]
     ):
         raise ForecastProtocolViolation(
-            "Stage-aligned final batch does not contain 130 jobs."
+            "Stage-aligned final batch does not contain 250 jobs."
         )
     mixed = aligned.groupby("batch_ordinal", sort=True)["stage_rank"].nunique()
     if not mixed.eq(1).all():
@@ -148,7 +148,7 @@ def build_stage_aligned_batch_manifest(
         raise ForecastProtocolViolation("Stage-aligned batch manifest count changed.")
     if int(manifest["job_count"].sum()) != 229500:
         raise ForecastProtocolViolation("Stage-aligned batch jobs do not sum to 229500.")
-    if int(manifest.iloc[-1]["job_count"]) != 130:
+    if int(manifest.iloc[-1]["job_count"]) != 250:
         raise ForecastProtocolViolation("Stage-aligned final batch identity changed.")
     if manifest.groupby("batch_ordinal")["stage_rank"].nunique().max() != 1:
         raise ForecastProtocolViolation("Stage-aligned batch manifest mixes stages.")
