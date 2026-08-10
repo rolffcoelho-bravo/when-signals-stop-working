@@ -76,17 +76,17 @@ def load_signal_registry_manifest(path: str | Path) -> dict[str, Any]:
         raise ForecastProtocolViolation("Signal registry manifest must be an object.")
     if payload.get("schema_version") != "v3.signal-registry-manifest.v1":
         raise ForecastProtocolViolation("Unexpected signal registry manifest schema.")
-    if payload.get("signal_count") != 48:
-        raise ForecastProtocolViolation("Gate V3-5 requires exactly 48 locked signals.")
+    if payload.get("signal_count") != 54:
+        raise ForecastProtocolViolation("Gate V3-5 requires exactly 54 locked signals.")
     if payload.get("automatic_selection_performed") is not False:
         raise ForecastProtocolViolation("Parent registry performed automatic selection.")
     definitions = payload.get("signal_definitions")
-    if not isinstance(definitions, list) or len(definitions) != 48:
-        raise ForecastProtocolViolation("Signal definition count is not 48.")
+    if not isinstance(definitions, list) or len(definitions) != 54:
+        raise ForecastProtocolViolation("Signal definition count is not 54.")
     signal_ids = [str(item.get("signal_id", "")) for item in definitions]
     if any(not value.startswith("v3sig:") for value in signal_ids):
         raise ForecastProtocolViolation("Malformed locked signal identifier.")
-    if len(set(signal_ids)) != 48:
+    if len(set(signal_ids)) != 54:
         raise ForecastProtocolViolation("Locked signal identifiers are not unique.")
     return payload
 
@@ -155,9 +155,9 @@ def build_candidate_inventory(manifest: dict[str, Any]) -> pd.DataFrame:
     )
 
     frame = pd.DataFrame.from_records(records)
-    if len(frame) != 57:
+    if len(frame) != 66:
         raise ForecastProtocolViolation(
-            f"Candidate inventory identity failed: expected 57, observed {len(frame)}."
+            f"Candidate inventory identity failed: expected 66, observed {len(frame)}."
         )
     if frame["candidate_id"].duplicated().any():
         raise ForecastProtocolViolation("Candidate identifiers are not unique.")

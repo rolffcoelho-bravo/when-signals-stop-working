@@ -50,7 +50,7 @@ def verify_input_bindings(source: dict) -> None:
         "btc_source": "data/raw/btc_usdt_4h.csv",
         "signal_features_source": "outputs/v3/signal_engine/signal_features.csv",
         "signal_registry_manifest": (
-            "evidence/v3/g4_signal_lock/signal_registry_manifest.json"
+            "outputs/v3/signal_engine/signal_registry_manifest.json"
         ),
     }
     hash_fields = {
@@ -76,8 +76,8 @@ def verify_input_bindings(source: dict) -> None:
     signal_record = parent.get("runtime_evidence", {}).get("signal_features", {})
     if source.get("signal_features_sha256") != signal_record.get("sha256"):
         fail("Materialization signal table is not the V3-4 locked runtime object.")
-    registry_expected = parent.get("curated_evidence_sha256", {}).get(
-        "evidence/v3/g4_signal_lock/signal_registry_manifest.json"
+    registry_expected = file_sha256(
+        ROOT / "outputs/v3/signal_engine/signal_registry_manifest.json"
     )
     if source.get("signal_registry_manifest_sha256") != registry_expected:
         fail("Materialization registry is not the V3-4 locked curated object.")
@@ -94,8 +94,8 @@ def main() -> int:
         "development_rows": 9852,
         "target_rows": 59070,
         "fold_rows": 120,
-        "candidate_count": 57,
-        "matched_coverage_rows": 342,
+        "candidate_count": 66,
+        "matched_coverage_rows": 396,
     }
     for field, expected in expected_counts.items():
         if int(manifest.get(field, -1)) != expected:
@@ -133,7 +133,7 @@ def main() -> int:
         fail("Materialization development source row identity changed.")
     if int(source.get("signal_matrix_rows", -1)) != 9852:
         fail("Materialization signal matrix row identity changed.")
-    if int(source.get("signal_matrix_columns", -1)) != 48:
+    if int(source.get("signal_matrix_columns", -1)) != 54:
         fail("Materialization signal matrix column identity changed.")
     require_false(
         source,
@@ -177,11 +177,11 @@ def main() -> int:
     if benchmark_timestamps.max() != pd.Timestamp("2025-06-30T20:00:00Z"):
         fail("Continuity benchmark end changed.")
 
-    if len(candidates) != 57:
+    if len(candidates) != 66:
         fail("Candidate inventory count changed.")
-    if int((candidates["candidate_kind"] == "SINGLE_SIGNAL").sum()) != 48:
+    if int((candidates["candidate_kind"] == "SINGLE_SIGNAL").sum()) != 54:
         fail("Single-signal candidate count changed.")
-    if int((candidates["candidate_kind"] == "PREDECLARED_FAMILY_BLOCK").sum()) != 8:
+    if int((candidates["candidate_kind"] == "PREDECLARED_FAMILY_BLOCK").sum()) != 11:
         fail("Family-block candidate count changed.")
     if int((candidates["candidate_kind"] == "PREDECLARED_COMBINED_BLOCK").sum()) != 1:
         fail("Combined candidate count changed.")

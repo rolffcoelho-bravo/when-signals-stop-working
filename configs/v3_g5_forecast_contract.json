@@ -54,8 +54,8 @@
   },
   "signal_registry": {
     "source": "V3_G4_SIGNAL_ENGINE_LOCK.json",
-    "registered_specifications": 48,
-    "base_specifications": 44,
+    "registered_specifications": 54,
+    "base_specifications": 50,
     "explicit_interactions": 4,
     "adaptive_templates": 2,
     "single_feature_augmentations": true,

@@ -36,6 +36,36 @@
         "standard_deviations": 2.0
       }
     },
+    "FIBONACCI_FIXED": {
+      "crossing_rule": "NONE",
+      "interpretation": "FIBONACCI_DISTANCE",
+      "lookback_or_window": 14,
+      "normalisation_rule": "RAW_PERCENT_B",
+      "orientation": "NEUTRAL",
+      "parameter_policy": "FIXED",
+      "persistence_rule": "NONE",
+      "regime_interaction_policy": "NONE",
+      "registry_version": "v1",
+      "signal_family": "FIBONACCI",
+      "threshold_or_band_parameter": {
+        "retracement_level": 0.618
+      }
+    },
+    "SPECTRAL_FIXED": {
+      "crossing_rule": "NONE",
+      "interpretation": "SPECTRAL_DOMINANT_EIGENVALUE_SPIKE",
+      "lookback_or_window": 14,
+      "normalisation_rule": "BINARY",
+      "orientation": "NEUTRAL",
+      "parameter_policy": "FIXED",
+      "persistence_rule": "NONE",
+      "regime_interaction_policy": "NONE",
+      "registry_version": "v1",
+      "signal_family": "SPECTRAL",
+      "threshold_or_band_parameter": {
+        "threshold": 0.5
+      }
+    },
     "RSI_ADAPTIVE": {
       "crossing_rule": "NONE",
       "interpretation": "RSI_LEVEL",
@@ -149,7 +179,13 @@
     {"crossing_rule":"NONE","feature_key":"bb_consecutive_outside","interpretation":"BB_CONSECUTIVE_OUTSIDE","normalisation_rule":"SIGNED_RUN_LENGTH","orientation":"SIGNED","persistence_rule":"SIGNED_CONSECUTIVE_OUTSIDE","template":"BB_FIXED"},
     {"crossing_rule":"OUTSIDE_TO_INSIDE","feature_key":"bb_reentry_timing","interpretation":"BB_REENTRY_TIMING","normalisation_rule":"OBSERVATION_COUNT","orientation":"NEUTRAL","persistence_rule":"TIME_SINCE_EVENT","template":"BB_FIXED"},
     {"crossing_rule":"SQUEEZE_RELEASE","feature_key":"bb_time_since_squeeze_release","interpretation":"BB_TIME_SINCE_SQUEEZE_RELEASE","normalisation_rule":"OBSERVATION_COUNT","orientation":"NEUTRAL","persistence_rule":"TIME_SINCE_EVENT","template":"BB_FIXED"},
-    {"crossing_rule":"NONE","feature_key":"bb_squeeze_adaptive","interpretation":"BB_SQUEEZE","normalisation_rule":"BINARY","orientation":"NEUTRAL","persistence_rule":"NONE","template":"BB_ADAPTIVE"}
+    {"crossing_rule":"NONE","feature_key":"bb_squeeze_adaptive","interpretation":"BB_SQUEEZE","normalisation_rule":"BINARY","orientation":"NEUTRAL","persistence_rule":"NONE","template":"BB_ADAPTIVE"},
+    {"crossing_rule":"NONE","feature_key":"fib_dist_618","interpretation":"FIBONACCI_DISTANCE","normalisation_rule":"RAW_PERCENT_B","orientation":"NEUTRAL","persistence_rule":"NONE","template":"FIBONACCI_FIXED"},
+    {"crossing_rule":"CROSS_UPPER_UP","feature_key":"fib_cross_above_618","interpretation":"FIBONACCI_CROSS_ABOVE","normalisation_rule":"BINARY","orientation":"BULLISH","persistence_rule":"NONE","template":"FIBONACCI_FIXED"},
+    {"crossing_rule":"CROSS_LOWER_DOWN","feature_key":"fib_cross_below_618","interpretation":"FIBONACCI_CROSS_BELOW","normalisation_rule":"BINARY","orientation":"BEARISH","persistence_rule":"NONE","template":"FIBONACCI_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"spectral_spike","interpretation":"SPECTRAL_DOMINANT_EIGENVALUE_SPIKE","normalisation_rule":"BINARY","orientation":"NEUTRAL","persistence_rule":"NONE","template":"SPECTRAL_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"spectral_drop","interpretation":"SPECTRAL_PARTICIPATION_DROP","normalisation_rule":"BINARY","orientation":"NEUTRAL","persistence_rule":"NONE","template":"SPECTRAL_FIXED"},
+    {"crossing_rule":"NONE","feature_key":"spectral_div","interpretation":"SPECTRAL_EIGENVECTOR_DIVERGENCE","normalisation_rule":"BINARY","orientation":"NEUTRAL","persistence_rule":"NONE","template":"SPECTRAL_FIXED"}
   ],
   "target_access_permitted": false,
   "title": "Unified RSI and Bollinger Interpretation Engine"

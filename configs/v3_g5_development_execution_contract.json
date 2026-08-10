@@ -82,9 +82,9 @@
     "forecast_horizons": 6,
     "outer_folds_per_horizon": 5,
     "inner_folds_per_outer_fold": 3,
-    "candidate_horizon_records": 342,
+    "candidate_horizon_records": 396,
     "matched_candidate_horizon_records": 276,
-    "explicitly_ineligible_candidate_horizon_records": 66,
+    "explicitly_ineligible_candidate_horizon_records": 120,
     "pipeline_specifications": 162,
     "executable_pipeline_specifications": 153,
     "gated_pipeline_specifications": 9
