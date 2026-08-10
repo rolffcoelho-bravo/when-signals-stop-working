@@ -55,7 +55,7 @@ def verify_parent_lock() -> dict[str, Any]:
     if lock.get("status") != "IMPLEMENTATION_VALIDATED_AND_LOCKED":
         fail("Gate V3-4 is not finally locked")
     if lock.get("validated_implementation_commit") != (
-        "a422db066e4a2f8b50f682df6a17b07c9ce0534c"
+        "4fa4722bc049a7359a87ae9a993d7afc634149eb"
     ):
         fail("Gate V3-4 validated implementation commit changed")
     if lock.get("evidence_materialization_commit") != (
@@ -113,7 +113,7 @@ def verify_v3_g4(payload: dict[str, Any], lock: dict[str, Any]) -> None:
         "interaction_signal_count": 4,
         "adaptive_template_count": 2,
         "validated_implementation_commit": (
-            "a422db066e4a2f8b50f682df6a17b07c9ce0534c"
+            "4fa4722bc049a7359a87ae9a993d7afc634149eb"
         ),
         "evidence_materialization_commit": (
             "705511de9e8ee22a9f8aff34506aebb6c26223e7"
@@ -302,7 +302,7 @@ def main() -> int:
     print("Historical chronology work reclassified: V3-RV1/V3-RV2")
     print("Event alignment: V3-RV3 PAUSED_NOT_STARTED")
     print("Gate V3-4 status: IMPLEMENTATION_VALIDATED_AND_LOCKED")
-    print("Validated V3-4 implementation commit: a422db066e4a2f8b50f682df6a17b07c9ce0534c")
+    print("Validated V3-4 implementation commit: 4fa4722bc049a7359a87ae9a993d7afc634149eb")
     print("V3-4 evidence materialization commit: 705511de9e8ee22a9f8aff34506aebb6c26223e7")
     print("Current core gate: V3-5 — Matched Benchmark-versus-Signal Forecast Selection")
     print("Gate V3-5 status: APPROVED_IMPLEMENTATION_STARTED_CONTRACT_FROZEN")

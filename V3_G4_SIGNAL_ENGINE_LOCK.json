@@ -51,14 +51,14 @@
   "parent_historical_boundary_commit": "7a7a5c55184aadfb436774ff1e497ce873a96b6e",
   "parent_lock": "V3_G1_DATA_ADAPTER_LOCK.json",
   "protected_files": {
-    "RUN_V3_G4_SIGNAL_ENGINE.ps1": "054b46b3b1dabbf81f7f0dcf4a6bbbd5daad6297",
+    "RUN_V3_G4_SIGNAL_ENGINE.ps1": "80efd42e7c853fbc1842775e13a3db36882dadb9",
     "RUN_V3_G4_SIGNAL_ENGINE.sh": "06748becf6267ee6c5397125ac4f822d5a2c17ea",
     "configs/v3_adapter_frozen_sol.json": "948b8ec5aecc9fad968e3a2ed973bd532dd991bc",
     "configs/v3_signal_engine_example.json": "06eb3a4fdc9723db708731d07a079bb88b717905",
     "configs/v3_signal_interpretation_registry.json": "faa5b10f2562dbd40043e221be0d50b0d8121cb0",
     "scripts/run_v3_signal_engine.py": "9a6e8d14488dde1970bb8955d91b00cb9d6fa38f",
     "scripts/verify_v3_g1_data_adapter.py": "642a335eecda07027822b2cf45674937b496ebb6",
-    "scripts/verify_v3_g4_signal_outputs.py": "e5222ff177d5936efcec592e23be2e63fab49dd0",
+    "scripts/verify_v3_g4_signal_outputs.py": "b60efbbed9ab9c87ad0ba8c0bae9d0ceca49f7f8",
     "src/shockbridge_signal_validity/v3/signal_bollinger.py": "8cea61d88c8e2e3fc4d60d2b13ba34cb1ddb4e3b",
     "src/shockbridge_signal_validity/v3/signal_engine.py": "4d9881608db22a673d7d71f91aeb93bc3a5bd73a",
     "src/shockbridge_signal_validity/v3/signal_math.py": "929df28cfa34d13164d3bed1edda839929003f0f",
@@ -66,8 +66,8 @@
     "src/shockbridge_signal_validity/v3/signal_reporting.py": "dd35fb3e2650810e139503d195b20090098cefe5",
     "src/shockbridge_signal_validity/v3/signal_rsi.py": "1091589db9b855ebbf7ce26b29282e5536fedb15",
     "src/shockbridge_signal_validity/v3/signal_runner.py": "235b6ac1602ad35dcb1b3ed7d494c315d7474ab4",
-    "tests/test_v3_signal_engine.py": "e26e3d9ef0e37f6185e7112991d205ea6819fdf1",
-    "tests/test_v3_signal_registry.py": "0157771b8682ed51314eea9a4e08f06dff8e8b45",
+    "tests/test_v3_signal_engine.py": "ffcbf3f14cde2d60bd6a5ccc13fd09a4cef79712",
+    "tests/test_v3_signal_registry.py": "c5d334ae96f9a1beff447197c7329884939dd381",
     "tests/test_v3_signal_runner.py": "7900a5530f86b50a9ec23fd6e59f102b230295ea"
   },
   "runtime_evidence": {
@@ -89,19 +89,19 @@
     },
     "signal_coverage_report": {
       "path": "outputs/v3/signal_engine/signal_coverage_report.json",
-      "sha256": "5f2dd5a1298030315f26c49dc40cbd54adb30873e447bc04762f5d3a30eccd41"
+      "sha256": "b4580bbcba692f3f4680ea05816573246e611cc8f790496bb4b101e4631cf785"
     },
     "signal_feature_manifest": {
       "path": "outputs/v3/signal_engine/signal_feature_manifest.json",
-      "sha256": "db633bfcc88932afe0f5db8372d040c7802fcd6905b54dad34ce20af5daf9c07"
+      "sha256": "5e2e9afbd7db707d71e384ddf05d0b5ec745fa29922443b89321d6297dc51315"
     },
     "signal_features": {
       "path": "outputs/v3/signal_engine/signal_features.csv",
-      "sha256": "03f160967b8dd182564c33c43df0c7a0820d4837974c96e51bbb4b6b8d13304f"
+      "sha256": "f2479c7924aaaef4c9e67041cf9bae890f7e942a7ca8a24dca0e4b6eff3b9bd2"
     },
     "signal_registry_manifest": {
       "path": "outputs/v3/signal_engine/signal_registry_manifest.json",
-      "sha256": "e5ae68f40b3d4c0a9a429ac5cccd7749c13b3354a24cde9a83b541cc7c8e7e33"
+      "sha256": "4eb04814bec24769ce132963a96d83dc5d1a3c26041f0f3ee9bdc870e19bdc73"
     },
     "signal_validation_report": {
       "path": "outputs/v3/signal_engine/signal_validation_report.json",
@@ -110,5 +110,5 @@
   },
   "schema_version": "v3.signal-engine-lock.v1",
   "status": "IMPLEMENTATION_VALIDATED_AND_LOCKED",
-  "validated_implementation_commit": "a422db066e4a2f8b50f682df6a17b07c9ce0534c"
+  "validated_implementation_commit": "4fa4722bc049a7359a87ae9a993d7afc634149eb"
 }
