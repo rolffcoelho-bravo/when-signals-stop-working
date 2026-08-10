@@ -55,7 +55,7 @@ def verify_parent_lock() -> dict[str, Any]:
     if lock.get("status") != "IMPLEMENTATION_VALIDATED_AND_LOCKED":
         fail("Gate V3-4 is not finally locked")
     if lock.get("validated_implementation_commit") != (
-        "ff2e7ecba3fa69f22e0b109437d23b52d30fba2b"
+        "7c8b6fd83e124dbd25e4c9f52e4c00c7757f939d"
     ):
         fail("Gate V3-4 validated implementation commit changed")
     if lock.get("evidence_materialization_commit") != (
@@ -139,7 +139,7 @@ def verify_v3_g4(payload: dict[str, Any], lock: dict[str, Any]) -> None:
             fail(f"Gate V3-4 locked evidence changed: {field}")
     if implementation.get("lock_blob_sha") != "721c559553f492427ca1f8792030c4bf32076a39":
         fail("Gate V3-4 promoted lock blob identity changed")
-    if lock.get("acceptance_evidence", {}).get("registered_signal_count") != 48:
+    if lock.get("acceptance_evidence", {}).get("registered_signal_count") != 54:
         fail("Gate V3-4 lock signal count changed")
 
 
@@ -255,8 +255,8 @@ def verify_documents_and_registry(payload: dict[str, Any]) -> None:
         require_file(relative)
 
     registry = read_json(require_file("configs/v3_signal_interpretation_registry.json"))
-    if len(validate_registry(registry)) != 48:
-        fail("Committed V3-4 registry does not expand to 48 specifications")
+    if len(validate_registry(registry)) != 54:
+        fail("Committed V3-4 registry does not expand to 54 specifications")
 
     required_phrases = {
         "PRACTITIONER_QUESTION.md": (

@@ -56,8 +56,8 @@ def test_engine_emits_every_registered_signal_for_every_source_row() -> None:
     specs = validate_registry(registry_value())
     result = compute_signal_feature_frame(source, registry_value())
     assert len(result.frame) == len(source) * len(specs)
-    assert result.frame["signal_id"].nunique() == len(specs) == 48
-    assert result.frame["feature_key"].nunique() == 48
+    assert result.frame["signal_id"].nunique() == len(specs) == 54
+    assert result.frame["feature_key"].nunique() == 54
     assert result.feature_manifest["source_rows"] == len(source)
     assert result.feature_manifest["automatic_selection_performed"] is False
     assert result.validation_report["target_accessed"] is False

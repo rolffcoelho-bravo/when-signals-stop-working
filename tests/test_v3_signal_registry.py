@@ -25,7 +25,7 @@ def registry_value() -> dict:
 def test_registry_is_bounded_target_blind_and_nonselective() -> None:
     value = registry_value()
     specs = validate_registry(value)
-    assert len(specs) == 48
+    assert len(specs) == 54
     assert len(specs) <= value["bounded_candidate_limit"] == 128
     assert value["automatic_selection_performed"] is False
     assert value["target_access_permitted"] is False
@@ -74,11 +74,11 @@ def test_registry_contains_required_families_interpretations_and_templates() -> 
 
 def test_registry_manifest_records_complete_definitions_and_no_selection() -> None:
     manifest = build_registry_manifest(registry_value())
-    assert manifest["signal_count"] == 48
-    assert manifest["base_signal_count"] == 44
+    assert manifest["signal_count"] == 54
+    assert manifest["base_signal_count"] == 50
     assert manifest["interaction_signal_count"] == 4
     assert manifest["adaptive_template_count"] == 2
-    assert len(manifest["signal_definitions"]) == 48
+    assert len(manifest["signal_definitions"]) == 54
     assert manifest["identifier_scheme"] == (
         "v3sig:<feature_key>:<sha256(canonical_specification)>"
     )
@@ -90,7 +90,7 @@ def test_registry_manifest_records_complete_definitions_and_no_selection() -> No
 def test_registry_rejects_unsupported_interpretation() -> None:
     value = copy.deepcopy(registry_value())
     value["signals"][0]["interpretation"] = "TAMPERED"
-    with pytest.raises(SignalRegistryError, match="Unsupported family or interpretation"):
+    with pytest.raises(SignalRegistryError, match="Unknown RSI interpretation"):
         validate_registry(value)
 
 

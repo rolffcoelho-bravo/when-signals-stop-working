@@ -75,7 +75,7 @@ def verify(output_directory: str | Path) -> dict[str, Any]:
     observed_rows = int(manifest.get("rows", -1))
     expected_rows = source_rows * signal_count
 
-    if signal_count != 48:
+    if signal_count != 54:
         raise SignalOutputVerificationError(
             f"Unexpected registered signal count: {signal_count}"
         )
@@ -102,14 +102,14 @@ def verify(output_directory: str | Path) -> dict[str, Any]:
             f"CSV row count differs from manifest: csv={actual_csv_rows}, manifest={observed_rows}"
         )
 
-    if int(registry.get("signal_count", -1)) != 48:
+    if int(registry.get("signal_count", -1)) != 54:
         raise SignalOutputVerificationError(
-            "Registry manifest does not contain 48 specifications"
+            "Registry manifest does not contain 54 specifications"
         )
     definitions = registry.get("signal_definitions")
-    if not isinstance(definitions, list) or len(definitions) != 48:
+    if not isinstance(definitions, list) or len(definitions) != 54:
         raise SignalOutputVerificationError(
-            "Registry manifest does not contain 48 complete signal definitions"
+            "Registry manifest does not contain 54 complete signal definitions"
         )
 
     prohibited_false = (

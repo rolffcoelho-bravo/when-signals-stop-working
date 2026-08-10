@@ -9,7 +9,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 LOCK_PATH = ROOT / "V3_G4_SIGNAL_ENGINE_LOCK.json"
-EXPECTED_VALIDATED_COMMIT = "ff2e7ecba3fa69f22e0b109437d23b52d30fba2b"
+EXPECTED_VALIDATED_COMMIT = "7c8b6fd83e124dbd25e4c9f52e4c00c7757f939d"
 
 
 def sha256_file(path: Path) -> str:
@@ -98,11 +98,11 @@ def verify_lock(lock: dict[str, Any]) -> None:
         "repository_realignment_tests_passed": 7,
         "exact_hardened_signal_tests_passed": 19,
         "canonical_source_rows": 12171,
-        "registered_signal_count": 48,
-        "expected_feature_rows": 584208,
-        "observed_feature_rows": 584208,
+        "registered_signal_count": 54,
+        "expected_feature_rows": 657234,
+        "observed_feature_rows": 657234,
         "row_count_identity_verified": True,
-        "registry_definition_count": 48,
+        "registry_definition_count": 54,
         "canonical_data_sha256": "3c49bfcab5fdf3aba9ada614873fa424e97c1f66e2690b790204fc29fdb5109c",
         "automatic_selection_performed": False,
         "target_accessed": False,
