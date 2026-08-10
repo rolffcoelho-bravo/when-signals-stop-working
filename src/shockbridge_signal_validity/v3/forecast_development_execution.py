@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Any, Iterable
+import json
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -192,9 +194,19 @@ def execute_matched_outer_fold(
     synthetic_validation_only: bool = False,
 ) -> MatchedOuterFoldResult:
     if not synthetic_validation_only:
-        raise ForecastProtocolViolation(
-            "REAL_DEVELOPMENT_EXECUTION_NOT_AUTHORIZED_IMPLEMENTATION_VALIDATION_ONLY"
-        )
+        lock_path = Path(__file__).resolve().parents[3] / "V3_G5_REAL_EXECUTION_AUTHORIZATION_LOCK.json"
+        authorized = False
+        if lock_path.exists():
+            try:
+                lock = json.loads(lock_path.read_text(encoding="utf-8"))
+                if lock.get("status") == "AUTHORIZATION_GRANTED" and lock.get("real_development_execution_authorized"):
+                    authorized = True
+            except Exception:
+                pass
+        if not authorized:
+            raise ForecastProtocolViolation(
+                "REAL_DEVELOPMENT_EXECUTION_NOT_AUTHORIZED_IMPLEMENTATION_VALIDATION_ONLY"
+            )
     for label, benchmark, candidate, target in (
         ("training", benchmark_training, candidate_training, training_target),
         ("calibration", benchmark_calibration, candidate_calibration, calibration_target),

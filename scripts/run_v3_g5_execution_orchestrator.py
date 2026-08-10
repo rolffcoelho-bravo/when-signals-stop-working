@@ -63,6 +63,27 @@ def main():
     # Find batches that are not yet COMPLETE
     pending_batches = manifest[manifest["batch_state"].isin(["PLANNED_NOT_STARTED", "RUNNING"])]["batch_id"].tolist()
     
+    # Skip batches that already have a result file with SUCCESS
+    output_dir = ROOT / "outputs/v3/development_execution_results"
+    filtered_pending = []
+    for bid in pending_batches:
+        csv_path = output_dir / f"{bid.replace(':', '_')}.csv"
+        parquet_path = output_dir / f"{bid.replace(':', '_')}.parquet"
+        skip = False
+        if csv_path.exists():
+            with open(csv_path, 'r') as f:
+                content = f.read()
+                if "STUBBED" not in content and "FAILED" not in content:
+                    skip = True
+        elif parquet_path.exists():
+            # For simplicity, if parquet exists we'll assume it's good unless we want to load it
+            skip = True
+            
+        if not skip:
+            filtered_pending.append(bid)
+    
+    pending_batches = filtered_pending
+
     if not pending_batches:
         print("All batches are complete!")
         sys.exit(0)

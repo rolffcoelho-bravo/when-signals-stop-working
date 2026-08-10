@@ -19,6 +19,9 @@ _BLOCKS = (
     "BOLLINGER_MEAN_REVERSION",
     "BOLLINGER_BREAKOUT",
     "BOLLINGER_VOLATILITY_STRUCTURE",
+    "SPECTRAL_EIGENVALUE",
+    "SPECTRAL_NETWORK",
+    "FIBONACCI_RETRACEMENT",
 )
 
 
@@ -50,6 +53,14 @@ def _block(definition: dict[str, Any]) -> str:
         ) or any(token in feature_key for token in ("bandwidth", "squeeze", "expansion")):
             return "BOLLINGER_VOLATILITY_STRUCTURE"
         return "BOLLINGER_POSITION"
+
+    if family == "SPECTRAL":
+        if "NETWORK" in interpretation or "PARTICIPATION" in interpretation:
+            return "SPECTRAL_NETWORK"
+        return "SPECTRAL_EIGENVALUE"
+
+    if family == "FIBONACCI":
+        return "FIBONACCI_RETRACEMENT"
 
     raise ForecastProtocolViolation(f"Unsupported signal family in manifest: {family!r}")
 

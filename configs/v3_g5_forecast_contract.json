@@ -65,9 +65,9 @@
       "RSI_CONTINUATION",
       "RSI_DIVERGENCE",
       "BOLLINGER_POSITION",
-      "BOLLINGER_MEAN_REVERSION",
       "BOLLINGER_BREAKOUT",
-      "BOLLINGER_VOLATILITY_STRUCTURE"
+      "BOLLINGER_VOLATILITY_STRUCTURE",
+      "FIBONACCI_RETRACEMENT"
     ],
     "combined_cross_family_block_role": "SECONDARY_ONLY",
     "full_cartesian_signal_combination_prohibited": true,

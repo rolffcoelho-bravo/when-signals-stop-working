@@ -12,6 +12,8 @@ from .signal_math import bollinger_frame, wilder_rsi
 from .signal_reporting import build_reports
 from .signal_registry import SignalSpec, validate_registry
 from .signal_rsi import compute_rsi_feature
+from .signal_spectral import compute_spectral_feature
+from .signal_fibonacci import compute_fibonacci_feature
 
 
 class SignalEngineError(ValueError):
@@ -150,6 +152,7 @@ def _parameters(
 
 def _base(
     data: pd.DataFrame,
+    context: pd.DataFrame | None,
     specs: tuple[SignalSpec, ...],
     supplied: Mapping[str, Mapping[str, Any]],
 ) -> tuple[dict[str, pd.Series], dict[str, pd.Series]]:
@@ -180,7 +183,16 @@ def _base(
         for (asset, venue), rows in groups:
             index = pd.Index(rows)
             close = data.loc[rows, "close"].astype(float)
-            if spec.signal_family == "RSI":
+            if spec.signal_family == "SPECTRAL":
+                if context is None:
+                    result = pd.Series(np.nan, index=index, dtype=float)
+                else:
+                    result = compute_spectral_feature(
+                        context.loc[rows],
+                        spec,
+                        parameters,
+                    )
+            elif spec.signal_family == "RSI":
                 cache_key = (str(asset), str(venue), spec.lookback_or_window)
                 if cache_key not in rsi_cache:
                     rsi_cache[cache_key] = wilder_rsi(
@@ -190,6 +202,16 @@ def _base(
                 result = compute_rsi_feature(
                     close,
                     rsi_cache[cache_key],
+                    spec,
+                    parameters,
+                )
+            elif spec.signal_family == "FIBONACCI":
+                high_s = data.loc[rows, "high"].astype(float)
+                low_s = data.loc[rows, "low"].astype(float)
+                result = compute_fibonacci_feature(
+                    high_s,
+                    low_s,
+                    close,
                     spec,
                     parameters,
                 )
@@ -266,7 +288,7 @@ def compute_signal_feature_frame(
         raise SignalEngineError("training_only_parameters must be a mapping")
     _validate_supplied_parameter_keys(specs, supplied)
     context, context_columns = _context(context_frame, data)
-    values, statuses = _base(data, specs, supplied)
+    values, statuses = _base(data, context, specs, supplied)
     records: list[pd.DataFrame] = []
     for spec in specs:
         if spec.regime_interaction_policy == "NONE":

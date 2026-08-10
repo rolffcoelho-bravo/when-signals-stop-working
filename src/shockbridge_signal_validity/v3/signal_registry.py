@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import re
 from typing import Any, Mapping
+import numpy as np
 
 REGISTRY_SCHEMA_VERSION = "v3.signal-interpretation-registry.v1"
 MAX_REGISTERED_SIGNALS = 128
@@ -68,6 +69,16 @@ _BB = {
     "BB_CONSECUTIVE_OUTSIDE",
     "BB_REENTRY_TIMING",
     "BB_TIME_SINCE_SQUEEZE_RELEASE",
+}
+_SPECTRAL = {
+    "SPECTRAL_DOMINANT_EIGENVALUE_SPIKE",
+    "SPECTRAL_PARTICIPATION_DROP",
+    "SPECTRAL_EIGENVECTOR_DIVERGENCE",
+}
+_FIBONACCI = {
+    "FIBONACCI_DISTANCE",
+    "FIBONACCI_CROSS_ABOVE",
+    "FIBONACCI_CROSS_BELOW",
 }
 
 
@@ -268,7 +279,7 @@ def _validate_parameters(value: Mapping[str, Any]) -> None:
             raise SignalRegistryError("RSI range window is invalid")
         if int(parameter.get("divergence_window", 0)) < 1:
             raise SignalRegistryError("RSI divergence window is invalid")
-    else:
+    elif family == "BOLLINGER":
         deviations = float(parameter.get("standard_deviations", float("nan")))
         if not deviations > 0.0:
             raise SignalRegistryError(
@@ -286,17 +297,34 @@ def _validate_parameters(value: Mapping[str, Any]) -> None:
                 raise SignalRegistryError(
                     "Adaptive Bollinger squeeze quantile is invalid"
                 )
+    elif family == "SPECTRAL":
+        threshold = float(parameter.get("threshold", float("nan")))
+        if not np.isfinite(threshold):
+            raise SignalRegistryError("Spectral threshold parameter is invalid")
+    elif family == "FIBONACCI":
+        level = float(parameter.get("retracement_level", float("nan")))
+        if not np.isfinite(level) or not (0.0 <= level <= 1.0):
+            raise SignalRegistryError("Fibonacci retracement level is invalid")
 
 
 def _spec(raw: Mapping[str, Any]) -> SignalSpec:
     value = _canonical(raw)
     family = value["family"]
     interpretation = value["interpretation"]
-    permitted = _RSI if family == "RSI" else _BB
-    if family not in {"RSI", "BOLLINGER"} or interpretation not in permitted:
-        raise SignalRegistryError(
-            f"Unsupported family or interpretation: {family}/{interpretation}"
-        )
+
+    def _validate_interpretation(family: str, interpretation: str) -> None:
+        if family == "RSI" and interpretation not in _RSI:
+            raise SignalRegistryError(f"Unknown RSI interpretation: {interpretation}")
+        if family == "BOLLINGER" and interpretation not in _BB:
+            raise SignalRegistryError(f"Unknown Bollinger interpretation: {interpretation}")
+        if family == "SPECTRAL" and interpretation not in _SPECTRAL:
+            raise SignalRegistryError(f"Unknown Spectral interpretation: {interpretation}")
+        if family == "FIBONACCI" and interpretation not in _FIBONACCI:
+            raise SignalRegistryError(f"Unknown Fibonacci interpretation: {interpretation}")
+        if family not in {"RSI", "BOLLINGER", "SPECTRAL", "FIBONACCI"}:
+            raise SignalRegistryError(f"Unknown signal family: {family}")
+
+    _validate_interpretation(family, interpretation)
     if value["window"] < 2:
         raise SignalRegistryError("Signal window is invalid")
     if value["parameter_policy"] not in {"FIXED", "TRAINING_ONLY_REQUIRED"}:
