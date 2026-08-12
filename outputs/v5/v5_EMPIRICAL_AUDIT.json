@@ -1,0 +1,38 @@
+{
+    "execution_timestamp": "2026-08-12T21:07:23.353969+00:00",
+    "cryptographic_prediction_hash_sha256": "bb2a11386ce32d3eefaec395abc1271db3fd5c592105b575defc848a4d074511",
+    "assets_evaluated": [
+        "SOL",
+        "BTC",
+        "ETH"
+    ],
+    "metrics": [
+        {
+            "Asset": "SOL",
+            "Samples": 1460,
+            "Incidence": 0.16524216524216523,
+            "v5_Log_Loss": 0.43274030118885354,
+            "Base_Log_Loss": 0.41802603504655095,
+            "v5_Brier": 0.13062496178724647,
+            "Base_Brier": 0.1254394617193665
+        },
+        {
+            "Asset": "BTC",
+            "Samples": 2695,
+            "Incidence": 0.06427688504326329,
+            "v5_Log_Loss": 0.20534154281255937,
+            "Base_Log_Loss": 0.18270281967972735,
+            "v5_Brier": 0.046795309875586256,
+            "Base_Brier": 0.041964248525958155
+        },
+        {
+            "Asset": "ETH",
+            "Samples": 965,
+            "Incidence": 0.1343669250645995,
+            "v5_Log_Loss": 0.37844534510955563,
+            "Base_Log_Loss": 0.3585744060441391,
+            "v5_Brier": 0.10856990456904081,
+            "Base_Brier": 0.10216902250536637
+        }
+    ]
+}
