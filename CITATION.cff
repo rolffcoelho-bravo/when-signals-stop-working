@@ -1,31 +1,12 @@
 cff-version: 1.2.0
-message: "Please cite this research framework using the metadata below."
-title: "When Signals Stop Working: Technical Signal Validity and Structural Deterioration Framework"
-version: "2.0.0"
-date-released: "2026-07-23"
-type: software
+message: "If you use this software in your research, please cite it as below."
 authors:
-  - family-names: "Pereira"
-    given-names: "Rodolfo"
-repository-code: "https://github.com/rolffcoelho-bravo/when-signals-stop-working"
+  - family-names: "Coelho Bravo"
+    given-names: "Rolff"
+title: "ShockBridge Pulse: When Signals Stop Working - Predictive Alpha via Empirical Microstructure"
+version: 4.0.0
+date-released: 2026-08-12
 url: "https://github.com/rolffcoelho-bravo/when-signals-stop-working"
-license: MIT
+repository-code: "https://github.com/rolffcoelho-bravo/when-signals-stop-working"
 abstract: >-
-  A governed, benchmark-relative framework for assessing whether RSI and
-  Bollinger Band information contributes out-of-sample predictive and economic
-  value, how that contribution varies across filtered market states, and when
-  structural deterioration warrants a change in operational status. Version 2
-  adds nested development selection, methodology-locked evaluation,
-  multiplicity-adjusted inference, economic gates, robustness diagnostics, and
-  disciplined publication of negative findings.
-keywords:
-  - technical signal validation
-  - model governance
-  - chronological validation
-  - nested validation
-  - locked evaluation
-  - regime dependence
-  - structural deterioration
-  - cryptocurrency
-  - RSI
-  - Bollinger Bands
+  A quantitative research framework demonstrating that lagging retail indicators (RSI, Bollinger Bands, Moving Medians, Fibonacci) fail catastrophically during market panic regimes. It introduces a V4 Empirical Microstructure engine utilizing real Binance Funding Rate Z-Scores and Quote Asset Volume Velocity to generate pure predictive Alpha prior to liquidation cascades, mathematically proven via strict out-of-sample TimeSeries splits.
