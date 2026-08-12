@@ -6,13 +6,13 @@ from sklearn.model_selection import TimeSeriesSplit
 
 # Add project root to sys path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from src.shockbridge_signal_validity.v4.alternative_data_adapter import AlternativeDataAdapter
+from src.shockbridge_signal_validity.v5.alternative_data_adapter import AlternativeDataAdapter
 
 def audit_synthetic_data():
     print("--- 1. AUDITING FOR FAKE/SYNTHETIC DATA INJECTION ---")
     adapter_path = os.path.abspath(os.path.join(
         os.path.dirname(__file__), 
-        '..', 'src', 'shockbridge_signal_validity', 'v4', 'alternative_data_adapter.py'
+        '..', 'src', 'shockbridge_signal_validity', 'v5', 'alternative_data_adapter.py'
     ))
     
     with open(adapter_path, 'r') as f:
@@ -36,7 +36,7 @@ def audit_lookahead_bias():
     dates = pd.date_range(start='2021-01-01', periods=100, freq='D')
     df = pd.DataFrame({'val': range(100)}, index=dates)
     
-    # Using the exact split strategy from V4
+    # Using the exact split strategy from v5
     tscv = TimeSeriesSplit(n_splits=5, gap=1)
     
     failed = False
@@ -60,7 +60,7 @@ def audit_lookahead_bias():
 
 if __name__ == "__main__":
     print("==================================================")
-    print("       SHOCKBRIDGE V4 CRYPTOGRAPHIC AUDIT         ")
+    print("       SHOCKBRIDGE v5 CRYPTOGRAPHIC AUDIT         ")
     print("==================================================")
     audit_synthetic_data()
     audit_lookahead_bias()

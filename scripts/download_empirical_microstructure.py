@@ -59,20 +59,22 @@ def main():
     args = parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
     
-    # 1. Download ETH OHLCV (BTC and SOL are already in raw/)
-    print("Downloading ETH empirical spot OHLCV data...")
-    eth = fetch_ccxt_ohlcv(
-        symbol="ETH/USDT",
-        timeframe="4h",
-        start=args.start,
-        end=args.end,
-        exchange_id="binance"
-    )
-    eth_path = args.output_dir / "eth_usdt_4h.csv"
-    eth_out = eth.copy()
-    eth_out.index.name = "Date"
-    eth_out.reset_index().to_csv(eth_path, index=False)
-    print(f"  Saved ETH OHLCV to {eth_path} ({len(eth)} rows)")
+    # 1. Download Empirical Spot OHLCV Data (15m Granularity)
+    assets = ["BTC", "ETH", "SOL"]
+    for asset in assets:
+        print(f"Downloading {asset} empirical spot OHLCV data (15m)...")
+        df_ohlcv = fetch_ccxt_ohlcv(
+            symbol=f"{asset}/USDT",
+            timeframe="15m",
+            start=args.start,
+            end=args.end,
+            exchange_id="binance"
+        )
+        csv_path = args.output_dir / f"{asset.lower()}_usdt_15m.csv"
+        df_out = df_ohlcv.copy()
+        df_out.index.name = "Date"
+        df_out.reset_index().to_csv(csv_path, index=False)
+        print(f"  Saved {asset} 15m OHLCV to {csv_path} ({len(df_ohlcv)} rows)")
     
     # 2. Download Empirical Funding Rates
     b = ccxt.binanceusdm()

@@ -13,8 +13,8 @@ from sklearn.metrics import log_loss, brier_score_loss
 # Add project root to sys path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from src.shockbridge_signal_validity.v4.alternative_data_adapter import AlternativeDataAdapter
-from src.shockbridge_signal_validity.v4.signal_microstructure import MicrostructureSignals
+from src.shockbridge_signal_validity.v5.alternative_data_adapter import AlternativeDataAdapter
+from src.shockbridge_signal_validity.v5.signal_microstructure import MicrostructureSignals
 
 def generate_target(df: pd.DataFrame, threshold: float = -0.03) -> pd.Series:
     """
@@ -23,8 +23,8 @@ def generate_target(df: pd.DataFrame, threshold: float = -0.03) -> pd.Series:
     future_return = df['Close'].pct_change().shift(-1)
     return (future_return < threshold).astype(int)
 
-def run_v4_pipeline(symbols=["SOL", "BTC", "ETH"]):
-    print("--- SHOCKBRIDGE V4 EMPIRICAL EXECUTION ENGINE ---")
+def run_v5_pipeline(symbols=["SOL", "BTC", "ETH"]):
+    print("--- SHOCKBRIDGE v5 EMPIRICAL EXECUTION ENGINE ---")
     
     results = []
     all_preds_string = ""
@@ -74,8 +74,8 @@ def run_v4_pipeline(symbols=["SOL", "BTC", "ETH"]):
         y_true = np.array(out_of_sample_trues)
         y_pred = np.array(out_of_sample_preds)
         
-        v4_log_loss = log_loss(y_true, y_pred)
-        v4_brier = brier_score_loss(y_true, y_pred)
+        v5_log_loss = log_loss(y_true, y_pred)
+        v5_brier = brier_score_loss(y_true, y_pred)
         
         random_preds = np.full_like(y_pred, positive_class_ratio)
         baseline_log_loss = log_loss(y_true, random_preds)
@@ -85,9 +85,9 @@ def run_v4_pipeline(symbols=["SOL", "BTC", "ETH"]):
             "Asset": symbol,
             "Samples": len(y_pred),
             "Incidence": positive_class_ratio,
-            "V4_Log_Loss": v4_log_loss,
+            "v5_Log_Loss": v5_log_loss,
             "Base_Log_Loss": baseline_log_loss,
-            "V4_Brier": v4_brier,
+            "v5_Brier": v5_brier,
             "Base_Brier": baseline_brier
         })
         
@@ -103,19 +103,19 @@ def run_v4_pipeline(symbols=["SOL", "BTC", "ETH"]):
         "metrics": results
     }
     
-    os.makedirs(os.path.join("outputs", "v4"), exist_ok=True)
-    audit_file = os.path.join("outputs", "v4", "V4_EMPIRICAL_AUDIT.json")
+    os.makedirs(os.path.join("outputs", "v5"), exist_ok=True)
+    audit_file = os.path.join("outputs", "v5", "v5_EMPIRICAL_AUDIT.json")
     with open(audit_file, "w") as f:
         json.dump(audit_data, f, indent=4)
         
     print("\n--- MULTI-ASSET RESULTS TABLE ---")
-    print(f"{'Asset':<10} | {'V4 Result (LogLoss)':<20} | {'Random Baseline':<20} | {'V3 Baseline (Failed)'}")
+    print(f"{'Asset':<10} | {'v5 Result (LogLoss)':<20} | {'Random Baseline':<20} | {'V3 Baseline (Failed)'}")
     print("-" * 80)
     for r in results:
-        print(f"{r['Asset']:<10} | {r['V4_Log_Loss']:<20.4f} | {r['Base_Log_Loss']:<20.4f} | 0.7006")
+        print(f"{r['Asset']:<10} | {r['v5_Log_Loss']:<20.4f} | {r['Base_Log_Loss']:<20.4f} | 0.7006")
     print("-" * 80)
     print(f"Audit Saved: {audit_file}")
     print(f"Cryptographic Hash: {audit_hash}")
     
 if __name__ == "__main__":
-    run_v4_pipeline()
+    run_v5_pipeline()

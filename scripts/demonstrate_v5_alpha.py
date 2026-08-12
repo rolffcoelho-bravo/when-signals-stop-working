@@ -6,13 +6,13 @@ from sklearn.calibration import CalibratedClassifierCV
 
 # Add project root to sys path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from src.shockbridge_signal_validity.v4.alternative_data_adapter import AlternativeDataAdapter
-from src.shockbridge_signal_validity.v4.signal_microstructure import MicrostructureSignals
-from scripts.run_v4_execution_engine import generate_target
+from src.shockbridge_signal_validity.v5.alternative_data_adapter import AlternativeDataAdapter
+from src.shockbridge_signal_validity.v5.signal_microstructure import MicrostructureSignals
+from scripts.run_v5_execution_engine import generate_target
 
 def demonstrate_ftx_crash_alpha():
     print("==================================================")
-    print("    V4 ALPHA DEMONSTRATION: FTX CRASH (NOV 2022)  ")
+    print("    v5 ALPHA DEMONSTRATION: FTX CRASH (NOV 2022)  ")
     print("==================================================")
     
     symbol = "SOL"
