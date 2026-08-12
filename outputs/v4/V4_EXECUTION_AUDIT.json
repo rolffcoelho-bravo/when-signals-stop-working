@@ -1,0 +1,13 @@
+{
+    "execution_timestamp": "2026-08-12T14:42:57.829311Z",
+    "asset": "SOL",
+    "n_samples": 10140,
+    "target_incidence": 0.06540136389778983,
+    "cryptographic_prediction_hash_sha256": "eacf560c34ba7f6e595c0e8f5c4cdd7d34305d277c2f7ee2d4ec69602c6e01ba",
+    "metrics": {
+        "v4_log_loss": 0.21257240022594046,
+        "v4_brier_score": 0.049911150057569,
+        "baseline_log_loss": 0.20402652128488102,
+        "baseline_brier_score": 0.0488515574870973
+    }
+}
