@@ -59,7 +59,7 @@
 Most retail trading models suffer from curve-fitting, failing drastically when market structural properties shift out-of-sample. ShockBridge operates on a strict two-phased philosophy:
 
 \subsection{Phase 1: Alpha Protection (V3)}
-The V3 engine was designed purely for capital preservation. By aggressively testing over 107,000 models across 918 historical market crashes using Purged Nested Time-Series Cross-Validation, V3 mathematically proved that classical lagging indicators yield a Log Loss worse than a random coin flip ($0.7006 > 0.6931$). The core utility of V3 is detecting this regime deterioration and quarantining capital before severe drawdowns occur.
+The V3 engine was designed purely for capital preservation. By aggressively testing over 107,000 models across 918 historical market crashes using Purged Nested Time-Series Cross-Validation, V3 mathematically proved that classical lagging indicators---including \textbf{Fibonacci Retracements, Relative Strength Index (RSI), Bollinger Bands, and Moving Medians}---yield a Log Loss worse than a random coin flip ($0.7006 > 0.6931$) when tested strictly out-of-sample. The core utility of V3 is detecting this structural deterioration (the exact onset of the \textbf{Panic Regime}) and immediately quarantining capital before severe drawdowns manifest.
 
 \subsection{Phase 2: Alpha Generation (V4 Microstructure Engine)}
 To generate positive expected value ($\mathbb{E}[R] > 0$), predictive models must utilize asymmetric, leading information. The V4 architecture introduces the \textbf{Microstructure Engine}. Instead of analyzing lagging price derivatives, V4 reads the latent leverage conditions of the derivatives market. By tracking extreme imbalances in Funding Rates (who is paying whom for leverage) and the velocity of Open Interest (total capital locked in contracts), V4 structurally predicts liquidation cascades.
@@ -124,7 +124,7 @@ Mean Squared Error & \textbf{0.0039} & N/A & N/A \\ \bottomrule
 \caption{V3 Proof of Regime Deterioration (No Alternative Data)}
 \end{table}
 
-The V3 results definitively proved that traditional lagging indicators possess a \textit{negative predictive edge} during market panics ($0.7006 > 0.6931$).
+The V3 results definitively proved that traditional lagging indicators (Fibonacci, RSI, Bollinger Bands, Median cross-overs) possess a \textit{negative predictive edge} during the Panic Regime ($0.7006 > 0.6931$).
 
 \vspace{0.5cm}
 \noindent \textbf{The V4 Mandate:} With the successful mathematical architecture of the V4 Microstructure Engine now complete, the model will ingest leading Alternative Data (Funding Z-Scores and OI Velocity). The upcoming training cycles aim to dramatically reduce the Log Loss below the $0.6931$ threshold, achieving true predictive Alpha generation.
