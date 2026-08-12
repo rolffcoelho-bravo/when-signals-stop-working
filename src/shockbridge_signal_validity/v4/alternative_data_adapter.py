@@ -19,7 +19,7 @@ class AlternativeDataAdapter:
     def fetch_binance_funding_rates(self, symbol: str) -> pd.DataFrame:
         """
         Loads empirical historical funding rates and open interest for the asset.
-        If the data is missing, it explicitly fails to guarantee no fake data is used.
+        If the data is missing, it explicitly fails to guarantee no fictional data is used.
         """
         filepath = os.path.join(self.raw_dir, f"{symbol.lower()}_microstructure.csv")
         
@@ -34,7 +34,7 @@ class AlternativeDataAdapter:
                 df['Date'] = pd.to_datetime(df['timestamp'])
             return df
             
-        raise FileNotFoundError(f"Empirical microstructure data for {symbol} not found at {filepath}. Run download_empirical_microstructure.py first. SYNTHETIC DATA IS STRICTLY PROHIBITED.")
+        raise FileNotFoundError(f"Empirical microstructure data for {symbol} not found at {filepath}. Run download_empirical_microstructure.py first. ARTIFICIAL DATA IS STRICTLY PROHIBITED.")
 
     def merge_with_price_data(self, symbol: str) -> pd.DataFrame:
         """
