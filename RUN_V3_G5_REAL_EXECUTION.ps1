@@ -28,8 +28,8 @@ try {
         }
     }
     
-    Write-Host "Starting multi-processing local execution runner with 6 workers (leaving 2 cores free)..."
-    python -W error::FutureWarning scripts/run_v3_g5_execution_orchestrator.py --workers 6
+    Write-Host "Starting multi-processing local execution runner with 6 workers..."
+    python -W error::FutureWarning scripts/run_v3_g5_optimized_orchestrator.py --workers 6
     if ($LASTEXITCODE -ne 0) {
         throw "Real development execution failed or encountered errors."
     }

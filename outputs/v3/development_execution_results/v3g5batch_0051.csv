@@ -1,251 +1,251 @@
 job_id,status,real_development_model_fitting_performed,coverage_fraction,brier_score,log_loss
-v3g5job:e07b23155ef76d7809b13c19acedd647b10df5d7420c50b004775e635dec59ec,SUCCESS,False,0.9993906154783668,0.2551707362505189,0.7035547558406043
-v3g5job:daab57fed95aa01a59bec46e9a3547914d22e5d9416ac5cc60a6449901b1239f,SUCCESS,False,0.13711151736745886,0.24947215294826658,0.6920912868334324
-v3g5job:786355cdbedcaf17d3cc0d462324dcd26fa21a70d1fabb8b62b3555b8fd368c1,SUCCESS,False,0.36258379037172456,0.2508532310212331,0.6948547762190559
-v3g5job:47494f64c6a8c7d9a2895b3be62208f4426911f8ccf0ca0a0190ffde40f7066c,SUCCESS,False,0.5405240706886045,0.2495720516659587,0.6922860219530417
-v3g5job:b7c190ff1d89a4d07dfb92cc6fa0d4163f078f86c12264c297ce2de8a80e0910,SUCCESS,False,0.19865935405240706,0.24972594851489305,0.6925999714996446
-v3g5job:800170db5cf3f13715acd7164cdee265574a84e7826b3f68603738fa83ce315d,SUCCESS,False,1.0,0.25438742606973924,0.7019594418597912
-v3g5job:45415833271695162699939558a5e6ccec192b306477ee06b1e75de1d0a2dddc,SUCCESS,False,0.0,0.2497906336908092,0.6927284292027128
-v3g5job:2de021fea9cf789dd132bec9d5596848af6fca18792c7d41c058189ec915871c,"FAILED: Unable to allocate 1.43 MiB for an array with shape (48, 3918) and data type float64",,,,
-v3g5job:db4e492946a325c0f8a3dd3f3e32e2ee9efa4cea2a002465f2aea8e50fe68c9a,SUCCESS,False,0.5655088360755637,0.2496468556139101,0.6924322324163816
-v3g5job:d3efb34286bda21cc4056844b5c3a5e2a76e76a731a896e3ae2dd77f7b0d74ee,SUCCESS,False,0.27787934186471663,0.24976192652695742,0.692671324179787
-v3g5job:8474864d9a7a8ed9f03bd7a941d4260b1a75730594f6569a7ecad8b5e6d3d30b,SUCCESS,False,1.0,0.2544214263271465,0.7020274206958084
-v3g5job:3e5a3a5e8c0a31aeda3a341a99d4992e1896655220828aafbaea2d714b1401cc,SUCCESS,False,0.2851919561243144,0.24955219714327037,0.6922515759345182
-v3g5job:34c60e8a42e50758e6a73fc0c10fea79f6687baa0252850ca190ebabb90736b7,SUCCESS,False,0.36258379037172456,0.2508889380872887,0.6949264245653887
-v3g5job:bedb461eba06b2538c740e68a76c9caa415ecebe02d33a54c3010ec0574f3892,SUCCESS,False,0.5009140767824497,0.24989178336619686,0.6929300019984017
-v3g5job:1d61938fb55b9110bccdb26230c6542ccd3d0df821c4f3786641c5c631bab5b8,"FAILED: Unable to allocate 2.40 MiB for an array with shape (48, 6544) and data type float64",,,,
-v3g5job:4ce916545dbbf8091a53bcb2beac7b9975d10250f54a715490c4795db3c386a8,SUCCESS,False,1.0,0.2546493595879346,0.702489018992122
-v3g5job:627e1405c3f80fd0388bf25da90ece6768387b1dad95e46a68dca5f8d75bb7fb,SUCCESS,False,0.06459475929311395,0.2496274531361275,0.6924020613475071
-v3g5job:6ec53e3d735b510adb8371ca06c5f939503fa61e546a5fc4e4ef2bcaa3888bdf,SUCCESS,False,0.0,0.25085183809292033,0.6948517970467711
-v3g5job:b406f0ba8e5dfc359d30840356b056108702b1331dfc5122b8b0e8592453b679,SUCCESS,False,0.5240706886045094,0.2497415724740079,0.692630632745621
-v3g5job:1d176a9c72d52c85a1682f6404ecc627b1e1b9db64d2b74b4214f01544279c63,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:245e8fa07a7a1c38213786ef6a0a724677840ba3728039a9396a297d63b4bed2,SUCCESS,False,1.0,0.25445683307796463,0.7020980439849921
-v3g5job:62d23f33d9f56f7ec168d75f1cffe326892c7f6ea9bdb9edaa506ee03f8a1881,SUCCESS,False,0.062157221206581355,0.24955940179510192,0.6922657073779438
-v3g5job:cbd7d4fec92ff01ef04f7442ba9855b3e27abe675c7e23a69ca6bf148252dca1,SUCCESS,False,0.07678244972577697,0.2508479116901622,0.6948439484600913
-v3g5job:5cc06c7ea0776668b134b45180a160b29807f715f9c4850ca13de83989d6c343,"FAILED: Unable to allocate 2.23 MiB for an array with shape (56, 5231) and data type float64",,,,
-v3g5job:92d72d48c012d581a45844dbe63a474eb3d4946fa2c55246ea4f82feeafb19b9,"FAILED: Unable to allocate 2.40 MiB for an array with shape (48, 6544) and data type float64",,,,
-v3g5job:1a8248a1f017a99ba65367d5fbbef346795228f42f856129e1359f7d2c1d29b8,SUCCESS,False,0.9993906154783668,0.2549956267731287,0.7031971746662354
-v3g5job:7d32c418be5fed7902ddb8d749b854f702e37e32623b07b186866084727803b2,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:e364135c48fef5349889c3948c36c99989336fd638b623c206f3736c797af68f,"FAILED: Unable to allocate 1.43 MiB for an array with shape (48, 3918) and data type float64",,,,
-v3g5job:a8927f34eeab21efb399da9e5a613c0208760de26225f884eb254b779cf9f7ef,"FAILED: Unable to allocate 2.23 MiB for an array with shape (56, 5231) and data type float64",,,,
-v3g5job:99901b446c850f40f0a3ab333a6a8c08b9ea64b616765678cec5c73af24a35ab,"FAILED: Unable to allocate 2.80 MiB for an array with shape (56, 6544) and data type float64",,,,
-v3g5job:13661aa74ede3ba7b99d28a9013d6441592f5b71a1973514f096a361f90be359,"FAILED: Unable to allocate 615. KiB for an array with shape (1641, 48) and data type float64",,,,
-v3g5job:e5b332e7d0c84f0ac03396b74419f60b694315838295bf173e1ec7cd9e614ea9,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:45a298f8fe1403598c8f1e811d7384f2d88d5dc76f4bc3c7cc5ef732cbdbc716,"FAILED: Unable to allocate 1.67 MiB for an array with shape (56, 3918) and data type float64",,,,
-v3g5job:2f123062f3cca7608c105efc0436887faaa30c3a8f68ec9f5446e33d689a0749,"FAILED: Unable to allocate 2.23 MiB for an array with shape (56, 5231) and data type float64",,,,
-v3g5job:bc5cca541c9ca0e3d57508ee4fe7fc4aa7fad5c7cd434fb73cddfb18298b2aa3,"FAILED: Unable to allocate 2.80 MiB for an array with shape (56, 6544) and data type float64",,,,
-v3g5job:02ff0be38ad6a69a178c55b8cb9a6197d0160c7b92ddbda1bcc7b95beeb863a3,"FAILED: Unable to allocate 615. KiB for an array with shape (48, 1641) and data type float64",,,,
-v3g5job:bd286e949a8244f8b4c7945f79adecabe53545bb38ed8b39d850c41458d0ba12,"FAILED: Unable to allocate 977. KiB for an array with shape (48, 2605) and data type float64",,,,
-v3g5job:89ef5ada93fa7481a2e4afca685d12e304e09156008ff0afd0eddb7d149d4fc1,"FAILED: Unable to allocate 1.67 MiB for an array with shape (56, 3918) and data type float64",,,,
-v3g5job:c293859a65ed6f804fb6dc4a4f6bc26d59960163855596fdfec872fb83f866f2,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:e9f8fc95a6a5b27ce261b781497983911b2f2a00b80174a96b6da9602a6327f2,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:dc79a9f3920402b13cff814760e53ba5b1fdb67f38a6cb664242a343a0a518aa,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:03b5bf6a7231bb67c65cf0107ef71dce3c3752168eb377cc3526c7c6b33492e9,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:4b359d1513b8213058ac0ceaadb7233c12717404d759f0d64e45c9ef50900bbc,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:e63952895ed573b7005c90956545b873d14e1290634c851715ae601eb377d782,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:25cda79f2aa91517c2c346b77d9ca78a19e14510edcb7e76ee8ca8978b94e882,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:938deaa5f49c91a598ad3074fa0b886ea44d99da00b3fe2f178e17bae4e48b6b,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:834bfa008a8d13949dd50c8992847021692725e4208d53aac538c4bf4e985ee9,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:4bf16ecc84036b7c0fcd5da4622c23a8921f3033f4447fe0aa4e59089400d0ed,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:eebb5bb21e56d8f0e4708adf9e128abfe6e496f96394e5e7db18d8a6734411d2,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:010f384cbf774f40d6a47eb32a99b9553162ebd84ea8fb6e65c1505874628593,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:b4c41a291031c3ee9e2eef2092d06555569ffa96078e516a55167d405b360bfd,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:9584f9256831cbbc72abbcef353448b029bb1d47723859e7da9f88c684417ab8,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:ce093f94e4db637b93bcd185a8a9218164c25b7784f030ecd4335dda90f822cc,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:d2a6a3716659a4b74074109afba353499826564ba90dbcbd6da2ee01646ecc17,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:ba98e0579a18b30c043199b47a0772f073e416fad7a2922a3e8e98136655eb3f,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:be0d523a0449dce922443b20ab5a501b3041982011eaad81eeb835313e671752,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:23aac247c98b9ca715ecb438d32083d991442d09b5dcada63c574d000d1c9e9e,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:a2d1c2fd8905da10f97c30d141ad7a627b6440dd919674cb48b0ed75e5b11bd8,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:b14b1f7d513a5edfc1a2364fff19a26c3aea1fe6d7b50a75bd1286c102cd9edc,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:266d3e97f3770326a3a7dbeff21927c7ce9ba3f2cb8d538f3a0bed1efea3b4e8,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:d9d83f8920821363315864ea065a53a2944cfab17c0d03a670ca62177da39b1e,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:efd69ef2cba530505c5385748dfce718c4c4f40739a99724d1c14870d186627d,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:384650f26fe74b84e29df626c4a029084fea8aeac5924d4658cec1f0b7bb8c39,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:2ff7147d451c02ca6abe78d2be589eb7650606d0356782078ce786a38e7972df,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:d83ca87393c6aef9da4fb936a26e62385fc5075460b9b8a6f1b542a494b77c6d,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:85c5a65eafa3f9fb015daeab411b8d45d46c7c852a87c97f6ad1a7f508ab1c30,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:a684782473b53e205a6a3018104eb1feb2b9d566128112be533bbe80990ea054,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:c4c9eac760f2ec06e652948bf73779c108d1b995abd4fc9d7cb867d36929c5cf,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:881f511c14122861675aa6a24933c0627f50fd40333f6d5e3b22f1c21585f750,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:cd13ef239aaa9c78f3c40fdf0fab10adeadc2c906c82fd5d3c227b0cc90c2bae,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:cf650cbd3f1b4ecdf5ff92625945a0422c71633d1ba364172e731d44ea84d0fa,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:9703a3e908263713fc79c6346bba8291488a01f1a5769c5c7c34401de5754dba,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:f0730574c25d6afbf7e34781dc12570bc71061a451b70a96fb73d06321ee23eb,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:f2f5877230f025a3b6507d2ebf1f42a2076a249cbf1c4d059fb1ef46747fbb2a,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:79c2a511fc72f021c8b01e9f551d706ecb19d69031ac42636615fe7451ac7a5e,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:d91383d76e25c495fbe41c41f36b518e6cc4cfd6143ef1f714b8a036e6691374,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:dd39b19a34757452fec595096b2ba15af3f8bbeabcdfbce479653a5c328100ad,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:eb1ca7be6d769d9cc2079eef984423ef82b0b160ad53aad633e7fc18582efae6,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:a57af0b1cd770a87a03de0a8d15d1e6ab71fbe54429e3927b31105ef118cebf7,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:0bc05071bb9f736fad552803d0c3d2ddd34acd27454b0f64041d663e7e409660,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:e11a395f78fbf3b6a202d8f4ef164a8f0161f5f21ce6c63046a0b02fe082ac38,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:fa3371b3447ee303caac8710b1e99a2ec13615fec0a48546bb1c4615c0e7f112,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:c177c9cf149efc79a398d4fa20c187f43eb385c535306ae68f28c9fe0bd778d4,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:36ce2a98d6186f6723829245b3900b28bf0295819a7c86084ffa1dc6b707c417,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:ea9f5a901e715baae5e1f530aad57b703e5e240edcd12e2217c6d25943603087,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:537ff0b4db10a24ada43e621d209676c323528ee54c253237ea301645c91fef8,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:593f28070ca7b8b1f20671b26cb0df07ba6843dd7f03930b9a59f310344a81b6,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:958f927633ab58b011b07fc7c117620c6d309dac416480351b33fc27b84086bc,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:6979992e9178ef3e49e8a7b139bf4835edda4040b176ef2b38626ea0200983a2,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:38dda994c6e6b8d38dc0597fdd20de8acd865877ef74d37e4cb17fcd5cbdd036,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:b027e3abc65e7415a2df33da09561644eb4fc05dc5b6967f0ce6890f83ef13f2,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:85201b0e40f8ae1d75294abf4aaf8973307e397097a9ca868b255e26139200e9,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:2690ee5d5aef9ae2fb63b17fa45b8628f1d0e5c1eeff86ca8b313b246b134cb7,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:14024cda4e46ea81c61f4970a3ee58ad0f3c48ae06e4b8092ed8693213913138,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:416f5994e71553742a84a8b511bd6356d1e7a413da21442bf34c3791308b97d6,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:e8a800847e5cc561aa7416130f5cd7c4f20b83dec01bc082d936497e3e5e5dbb,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:518d02f694a7d96f268d5e200120bba95002affd159c9dcb24b03e1bbada80a1,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:3576f6bee204e1926cdd41fa4179856032f535b6fc9ca39a52cdf89226b293d9,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:1ae635ed2f21061c8cb7239c632d3803ae48c64b1f351461a315650ee4931312,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:d15b2220a89ddffd29305b784be57446d39f4d1cb53e8b66e053856a475a2437,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:209c2a4b49d1fea637b6872a6c162a4e8aa3ccce2ac9a9d0f163474c0d794289,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:0575a5d5da3cef58bcbe9c3a09fcfe5e4fc44a78416fcb9f1ac24cc469a8b6ae,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:9f171c400500e833c480764bda9c163da4c10b85564500dd99bdcb969054daee,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:efc372124d5c381360eccc79a1675dd30a4bb0eb033d8d772d0c44073df58f35,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:0d726d32d1b04bfdbc2e06d74502cedb73f095a5a2adcc07633ccaf276ca611b,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:b7b746f93b4c72b18e6684c4a6ae4672ae53985a9eeb10658bb6716ec18f947a,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:6083b3059d5a2537ebe98b081213a54dfe8ae5af62df11a3be084ad114b78e1b,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:9d88df44426607ce0006bf32f7b9eb13ec23cfa2befc034952230a908044864d,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:eeac55f30bbc1c2c009ac4558177e1bf24039fd0cdf13f0c823444e0744a5905,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:2a256e8d966efa7a7829c53ec183186030eeb442db0d91111102f886656704bc,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:bfdcb7b57c95fdbf354311278f675fd35553ef6b2884c96cc6ac10fffc4fa41a,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:9a7af4b13d2da889be770c29d4da73a42989595f491f47d77db29ca7e02f426e,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:9af3d024d77c050f54d32dea7c2cc3f4647ae23fa4a2c2c72b2aac939ad0d06e,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:1f34f7aaa538118e11e99a4a64a772ca24e1912e18a9c665ff6d321503ee2e3a,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:62cdbefff96f60bc052e1abcdc4859b189ec73885aba9cd2edfc5ea90d1df37e,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:c71814e6b8b0f08de33b89a9b59b19247611c7cce68337da9b2f129ebd8aeb49,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:4a9d6440463d2a49acfc58009815f9b9954063524ec6993910820b398a37fa6d,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:c2e5a1e332c9b9e21d60890dda34afdf357135da7cca8d5282791352e24bf53e,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:144eb9036d20b8cd6f5f43e11497491bbef15de371075da69c9a5f0738afb8c0,"FAILED: Unable to allocate 2.23 MiB for an array with shape (56, 5231) and data type float64",,,,
-v3g5job:4b28824038cc38c7d5f37b8d326dcfbe6ebcc716e8d547964d16fa8058929f35,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:859bbc9459fc7661139fa9f1131979f828ce916cb0aaa204a393075b1ede9628,"FAILED: Unable to allocate 565. KiB for an array with shape (56, 1292) and data type float64",,,,
-v3g5job:d5b36789c82e829a7ad9a5ab837fa85710663bedc0ea0308619c0f8625529b96,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:28c9a1834c9e0a1995e5e82ab072bff9b730214b0378e970f7fae31afee59757,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:80e87ce44f3e16c0d4ba7e1998fa83892031fc986051673b4b7bd5110dcb7ff4,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:8ffbeb47e4f0c0a5d8dc9232c1b506e027edc1c7b6c5f541a44ec9f5cac3c61d,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:a916ed4ba6d210a7fdf9b5b7fe1f979036fc0a6358a026e2d6942b4e4f8aba8f,"FAILED: Unable to allocate 484. KiB for an array with shape (48, 1292) and data type float64",,,,
-v3g5job:4ba98aa1a995b5aa5d521192517bd62e536c6971afe8322d8763ec2ce28e05c7,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:537f06b4e26ccebb4f659ccb391ab0d4380558747c86842d9606f6af1a84cdc9,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:acd96546fb0b49b8d13c93c36e6b3920e496777f2796cfa8180c52c45608feab,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:c572af534b3c80a1084fdc3b795d787f2b00f5c778055c1bf94d747c73bd100c,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:1bfde4d8c01b7ccf942d3444cde42d6296282ab1382865b4ca14e23dce9a5ca2,"FAILED: Unable to allocate 565. KiB for an array with shape (56, 1292) and data type float64",,,,
-v3g5job:ec6edf7460ddddf7a594c047874fbbbbfacf4af3d3c37983f5b3008f6e4e253a,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:49a8ada1afb354cc9b51b912291e3c004a9cddbce9f69dbf29636e7d9d7a77d0,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:c05101df2a85d19a829184fb7c9bbda501c460e0201b9c23fc89e4752efb020c,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:8096f56f273e03a91699a8a72d672e99f00172764805cbe0f20b329e696956a3,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:c00c8e36eff242545484d44cc048b37d95074be9651f5082e6f1adba5513b2d0,SUCCESS,False,1.0,0.2545817352680229,0.7023504313765784
-v3g5job:9fa5972d9cb0dba0e8c3e81f68d24f6ad9e25ef95cf387221cdb53d2a3614ecb,"FAILED: Unable to allocate 3.51 MiB for an array with shape (280, 1641) and data type float64",,,,
-v3g5job:b771a0bffa1e8a863e20939313df3e79b67ce92fd5750b3d1d1a46fd9c8be545,"FAILED: Unable to allocate 1.43 MiB for an array with shape (48, 3918) and data type float64",,,,
-v3g5job:3bcd6affda9a25241acc4e23dabc0c43dc46821a5e1983d7344896cd781e307d,"FAILED: Unable to allocate 2.23 MiB for an array with shape (56, 5231) and data type float64",,,,
-v3g5job:a1c7ab730e98372d449a53c69baab1520d5251e8dede1588ea296620782fce10,"FAILED: Unable to allocate 2.80 MiB for an array with shape (56, 6544) and data type float64",,,,
-v3g5job:5674fb5d1e04fdb944723a0c0785f9b19b0be45f0dd141fe9d094893d8662354,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:9fba218e16399ab63fb78241801fb40f6cedd960a5f6f20c74367c55e33da334,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:29d474bb75ad8c6e0c186b1c5152c4052075b813640cdca3ba1972a6b3352d79,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:bc612fa1a6528bcb3fc74d2dbbb534148d4c4f7c27944f25a0641d10937edae8,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:f7a735eaf9d50e92226d9424e9566cf991e8d6e6450daee00fc104a483b9b084,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:996de136c3d763615d4849de119c0e44a1933b3f2f43ec161a8302e0a2518419,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:549ccb9ce7ec7786e9bdf0413f4c3aea817a01a7b6dab1844034298f016b99db,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:7f313b4838d6d86636b9e6e2ed7d6a72952d87a0d1aebf2ae3c9824e1eef9e30,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:4500adfebae87b1aa9d10b41d1ba5064b27cf7a70d9a1f004d743ae25ab8467b,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:12db70bf340233c697913b14d9fc0e1fa76a90f5aead9234c531ec653b06a5b6,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:ecdb03c4f306b62febd0daeac9b7196ddc43a2fb44d65932d6960fd1f52b6687,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:70eeebfc59139578c396ba00e74bb174318fa766f5e3ede2bd7bda21ba156a70,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:d635c3487858770eb33e392896571fd7593edb4dd6a958b4022fa0daf86ca7be,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:a5512b354ff05754f18ccbfe8d5a34752e1428b83f9617179980673874d186e8,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:8904f1b1f0b304c6ab7eedba2f27ca212fba691e3086165eeea2ca4c331f8118,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:34e34554fd1d3d9fde0b57b7c6b88f8333a490362a517fa8a395687dff467b64,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:7ed87aa10a73882bc37ac212e3b06ba8d308922da527c6911bad5f6e78801c00,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:c68e40dc73509cc3882c8dc8b1108644850615ba46c034b53e908a24840e6d41,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:a49749273b61e83169198147e3eeee05bb0a00e7b56eb550cbcd5bb4cce4adbd,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:4e72ebf115f72de32ceef7414fbec1b7cfa3a3c30cad8446fe8a48790189b192,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:1cfc8884e5846f74d2b18be7120c9aa43d4faf2570289ead9844d329f6b989e6,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:4273d33d4a4c4f143c2c312183a47a842684044b01efb938a72f2276540d7a4c,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:0025145f1dd36d6c6db0a6e68290a83c539f1fd17219be07f9a471ca05af21b9,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:20e1d7e2465466fd8fae0adb6aea63bc2eeee6786fa6b89ee851a49dbd8aabab,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:be6b1848d22709ba7c45db983cb3a2055e9bf180348de98f2e35ab6bd594dc09,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:8bedcf3d60833808c3f1c73c72d74ee66ec7a94075a7cd76ec9f24865eac172a,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:d98e857ecc0b0dc2fdf82fc7a8aacc7ee137c840ed343999d9a958fa22bdadec,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:072674f054d0a2007be8e516a82856c2dd0ed95cfca7c4e83fe07804182f9739,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:8ea82adeb38d912a38a664f920f00a2d1552579d74bda4d2c96071562a4516fd,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:6b7015e49db1d42b2e097662adee6f315c8ccfbd53d4096fce7fa6dce5cb88c9,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:0dc25cd685c2d8ae239af5adbdf935045e7ec5a9ef128f1c69e70bcc076cce11,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:27a4599c57340c547f87a3d150d7b5d1344b80cf2eb054e3838f953f0531a3e1,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:c4c21ccd4ace10b3bc45d84a83088ebdc56b6f7570fe22eaab0bdbd183ba7197,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:6b944567ed53916169276a4636d053e7ab308f761f566b6b721b2c01b7ebcc71,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:5609652a6d31a50f8e4964d1ff1e752dd4d9fc4cc59451a37a542919640ed356,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:a1a871057a8ab76b709b91fc1ade8e10039d39055e7523c57cd1f88ebb31cf87,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:e1b184c325bfb4024e9592d9aa7006c2d8b03cedc706beeec66a0d0c8c92bf7a,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:2f01c047bddaccfe2d568fd96f183cdb1afdd30759e893d234876010a84c7f38,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:955a00151c471237d63ba8e639255198cba33966a5a5afff145050b166a0c575,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:52d554a92477c1132d0ce899b6934630ac192f979535cbe3a9e46244c856d7d1,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:6e73679c55e1dbdbc57f4625847dfa97efe96f43c970307a5dbaa183048d9a6d,"FAILED: Unable to allocate 484. KiB for an array with shape (1292, 48) and data type float64",,,,
-v3g5job:2b00245df76808c9912f0142012892713122e6a4db0c64e80be31c9ef31105ac,"FAILED: Unable to allocate 977. KiB for an array with shape (48, 2605) and data type float64",,,,
-v3g5job:e290cbd4ee63451d69b2bfe1708120001c417ab80a71adc6786219fc17a042c1,"FAILED: Unable to allocate 1.67 MiB for an array with shape (56, 3918) and data type float64",,,,
-v3g5job:a5cd169977df8687030dff055c3d4c5090f07c702311b779eb9e6ab96954d831,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:c8f3c348e3944a379d8a2c58a36a661e168e6d71dca5d53e3100678c3fc1baef,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:d3811e9e9b89c83f4befb80c5773035c27c0136e3b41a7062c36be34125053b6,"FAILED: Unable to allocate 565. KiB for an array with shape (56, 1292) and data type float64",,,,
-v3g5job:b4fca15b8efa92bdcac3703c1cb192d006659ce2720e20a0a5accba13436b2a1,"FAILED: Unable to allocate 977. KiB for an array with shape (2605, 48) and data type float64",,,,
-v3g5job:bf63326a564fdbe6995e2c6a6b67e4c3bef9652bbd124f0eb6475dd0ca051d7b,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:d2939a4f055ddce48cbc6c595b216f6548f9dcb3d8d927f05697ed46ad76c65b,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:c5355665c08ab9b6b392baad45448b62141d16535b6c5c132983ef493ce66ad7,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:56be213591a7ec080399a1e8a31fb9ff87ca9ef35aa8e140bd933c04b6e395ca,SUCCESS,False,1.0,0.2544214263271465,0.7020274206958084
-v3g5job:63dc1152df2c072faefc23525f030f869b56d25d5e7b5af6dc95d9d283022ecb,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:62748b5c467646f34206071ea5a1b3677c8b90982b77e1d56016814b96ea8eda,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:acd87d95382797b130fa58a4f442a4ecbec4f8c264d84181dcd447c995db7625,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:3702c2365114af193d7dec2c59f04d331b067697fc6db0a95f00aa996e2236cf,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:0b9f5c4e72468243d85e8add8b42705575b9ff0a4a5a1d95ab3276f312060d59,"FAILED: Unable to allocate 565. KiB for an array with shape (56, 1292) and data type float64",,,,
-v3g5job:b9e4bc5bb4738aac6b9d4d924dfc829468ffd8ff758fc228692254d1cb49bb43,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:f1219ec9924adebe3649b581f8c3751ffd54e0cf6a4c2dd9ac14ae70a4e11147,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:445518cb67c3eb7d9747875ca8c59675e51b414f5f69db5f3e137c42cfd81abc,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:d469c7250d86aaa490318c5ee244b0b5e53e7c5ea5e18dcb3453f8f16c1a2fb2,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:900b2414e1c0b29573a6c43cd4f84863f9a8eac02f5714828611cf002e0adae9,"FAILED: Unable to allocate 484. KiB for an array with shape (48, 1292) and data type float64",,,,
-v3g5job:a5ec7c1d550334a21eea9efea360e4d3a04755612041e58130b071c753c00abb,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:7f92d3e53b07010fae2837a7a7d9366508fdefd89587b11ffb8e8bce8985c36f,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:2c191428b30d00d17468cc02d7d6c80084bd4030160a41cdcc2ddbcd290fa070,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:0a94fe0d4393d8e507f7f647c61b9a109755b51e52f8e771f4364b82c290878d,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:cc07c00b579eb0d2c865d9065ff6e7107880064bcb1c62b18f4be8d7282c7087,"FAILED: Unable to allocate 615. KiB for an array with shape (48, 1641) and data type float64",,,,
-v3g5job:8c3d6beaada2d96252f59d61e37d6c9d331f20bcef5118f2e645a6cfece55daf,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:2f0925858248b5bdb4c6159117690ef6510232696581390aef0467bba87677f6,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:2f6ac3e2f722b03af3b9a92e57a166b05a053f2abaf3c2bd9ad44313b89c63a0,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:d0e8795f52f29e6dfc483b90108eff7b13117035b806414e2279c71ebe0c38de,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:b7c0c3c49d814a2f04b184200a206787d050a8798671c2232bb3478226be9ef4,"FAILED: Unable to allocate 484. KiB for an array with shape (1292, 48) and data type float64",,,,
-v3g5job:6b8b17e2c1a27291702d4f626d8eb26071213f256440359bcbf3eef9583df757,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:2754faefafd8e64c1fa57e50e081d8cb35d9d1a152941ec0974a78908b70425b,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:baa1af0a527e3184223aa48aa600b25a9609e14fcc57796eccb314275c626e81,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:7d54500b60b6f4b1484b2eef624b43c688d69a166b273a0e80b96358dcad45c1,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:4c9f87442496189085a099ab69241b7c0160b1f71af13fbdbd0ef067cd768e65,"FAILED: Unable to allocate 615. KiB for an array with shape (1641, 48) and data type float64",,,,
-v3g5job:501e9af56c716afb2c1a5bb4c9bbb4b31ac6e1bbba1c953b517da1013db2612d,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:e070a82ddf7e5f78db249bf10f9a6d73296be46b04e3e9f165512bf14f69a376,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:7af61ff7ead27dc726f06868355c5ebc8471ac27451aaa473ce7cc145fbb6a15,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:6a4198851fff6e85c03d78c2e9aabf23471710fd324d6449ff37699f3980d1f1,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:1ae0135380e5dda8927cc21ea92ce9c04ffc3b9bb7b6ff56505df1f10a7d57c0,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:7686e3d39458a26af463cdec0ba39144f7f402173b0fa586a8b0217b1ebd09d7,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:3c0640f6013094e621434abf5e2f6e59d754136da4630e6faffd2f10ea59c75e,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:877bb6aa0ae93b77f7f1facc536e1d0d1b9abf73d8387f8198c697ddcffaef2f,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:5b2c50c33db0527abbb6ad345cd32e18632979f1f362dd91137241aa7ff6fb70,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:f8d748850d0e6cba17e011191ecef6b0d8c7fe5fc6884d410f6c426236695c6d,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:489f5b7262715a883f5c0c7e76c5e89f9a8c29df344c0d76632c2239d35c7685,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:57a25afd5ff984a3ff5e1995c09031f4ad5435a3a6f27e5aa21b34ea0789a037,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:412e63878c79a6529f7b38d6c806cee4d35d7604ceb760261453a19a93c8ff8e,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:51a76fa422cfe1ef3745eab9fb50952ab168824b080a2d106ea20c0db3e8375b,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:93cd6d82b15f4dc7123f2134af3f2150716a4fac19fbd38699cedb297b70abae,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:a36e864769a972e5464b267a80c305e7a67e616825400afc7513ecda831e9d48,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:ab110258975182f050975683fb7a6bf18a38db3446546eee134ef9f83e9f6c37,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:646771bd5d93ecfd7db18038903592a66918448f68895bf9facd10fdf69b581a,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:3cbd54f7e784871f005775c1db51831ba079b33028954b2f8918ee7152b3463e,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:d3e6c0254f4bb9d18bc60823b29f5892c2c6347943889dfc40550aac7e5d3e36,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:735100507463951d9fbbeebd6b3ac72fca78f011ec9ee92edded19559d549ef8,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:81348aa549d278ddce246c50d438abe05d25421aa382327d3eadadf22d264896,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:0a7f0ec01727f8c3abd4f2a3c50bc3ad6aea9b2e6b20b114bfd5c0b499cbfc11,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:6b3b0265deae97a6ae1d96172740f2525e2ec2741acd66d67c0a5b8ad4646591,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:2e8c948fec7882d1aef39577188b4d15888425d2586e6a9d07a496f9152aff99,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:755c7b11bc5bd2bc9c2b8dfb2b0ea1fb8679848056cc9d5174e8aa7a73c73db0,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:17e3fd3a5881247bc3469d1c9ba89ea023cd31d6fd379b35efb7cd044ab8b164,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:5cc8e30cd208bbcbda14c179c1171865d579545c99f7a63d082045aeccde8031,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:984ac2c8ac8ccc1a1a49c3fed71d613bb0dc163b7f4b68ccf412801029a46da7,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
-v3g5job:9ea52d899e421e7afcfc50a46b796fbbea254eecb230ab899d122c82c583c5ed,FAILED: Training fold is shorter than the registered rolling window.,,,,
-v3g5job:3ffce517f23a3466679a972c946e8a51738c9766c655e18926b9142832722c1a,"FAILED: Unable to allocate 1.11 MiB for an array with shape (56, 2605) and data type float64",,,,
-v3g5job:d20e15b2d38afe0af5c18ccca4ae7c394e4149c510c854af473f71a955676041,"FAILED: Unable to allocate 1.43 MiB for an array with shape (3918, 48) and data type float64",,,,
-v3g5job:949d97d6634ca43b851e762bfe4cbed4b1da3f91d3f2bcacfe67a15fa6017471,"FAILED: Unable to allocate 1.92 MiB for an array with shape (5231, 48) and data type float64",,,,
-v3g5job:07dd9cd02888e60b3082f5c0c13eadbe33f01487a7a76a81691036cf174b31df,"FAILED: Unable to allocate 2.40 MiB for an array with shape (6544, 48) and data type float64",,,,
+v3g5job:082a61bc6e5db6999db6d9be3159a890ec4a45a71a3b08cc017f310cb2664555,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:8b8e2374cc9c36f24e8d62275b86fd5c2a44cd4f73f3966f88994c6df9ab8ef1,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:fa165c11b11c73c79d4b2ff3f3a3c36e3f868b556fff37470295a6663d329921,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:dc241ca6acfc0dbf0aded5681dac478d6e07ef321202086f7ed2f5d3edfe4faf,SUCCESS,False,1.0,0.25527968359246417,0.7038378044728523
+v3g5job:7f003cf864bb7e6ac5a9d9a7fac30a0616ff0671a8b3c03a9510401135a976de,SUCCESS,False,0.0,0.24998208603505817,0.6931113581768703
+v3g5job:119ce827f6fc57511b4ca28e21953e98a6dffa7df9f5b109e79923eadc67ace1,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:894b6727eb4e1ef5031a4d7bcfbc6d8f8b6233a4232db9c46189c81d1e0979ee,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:b1fc5dc17c345d01721b2fe73d4f3b05a57475ba400165994dbfabdbe49aad01,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:aa924dcaa2b3762484f642c02523d08c47d1226cae582132a273fedeb7b8ad37,SUCCESS,False,1.0,0.25529210306483574,0.7038631985110668
+v3g5job:0532c43b6867affee3ea86cd7219bba0465c612fed9f092a39a47fa321d9a3fa,SUCCESS,False,0.0,0.24997449017778875,0.6930961616865418
+v3g5job:42857bf672aad22333ff873ba53608f8c37a1413e4f7f711d70a31f2187f788e,SUCCESS,False,0.9891304347826086,0.35730054403391776,0.9670916147902836
+v3g5job:244e87d6b194a655fe3f8066db017059e99d6a4b650c88ab1760c5d18b41c2a6,SUCCESS,False,1.0,0.248407332144311,0.6899711600858924
+v3g5job:9c973e67f17b1553060225cf2f3c6800d137c27f5ae2975ab60ba65f65d725f2,SUCCESS,False,1.0,0.25812931568095265,0.7095135566113687
+v3g5job:36e9c26d3fbdc101616fa0db61c7b977ccd21b826cd4d14108c39e2a406e443c,SUCCESS,False,1.0,0.2553217807791153,0.7039251215515453
+v3g5job:2edeeaec3249bebbbe7d0af102421ab16c86b114f76651af04c2f7b4c18fdbf3,SUCCESS,False,0.010869565217391304,0.24961318641412383,0.6923736839943593
+v3g5job:7f28f411eb07e438f0c2cfa6f161e8b087a69eff6bb6e3d5528e3794b0839d58,SUCCESS,False,0.9891304347826086,0.3612898759600379,0.9807374315603028
+v3g5job:5b916beb4372bafcae6abb3911d5805d947b7933a4abf8d30bc742bad488738a,SUCCESS,False,1.0,0.24838082539856718,0.6899178083049191
+v3g5job:1efaf60e889f7d52abbdf4919bd60030663c42d3fbdcd8ca10f185b1a138275d,SUCCESS,False,1.0,0.25812540699600933,0.7095055351275379
+v3g5job:39be6260a6195cb879a117d4d48c391f818dc959068d498df2de013e4bfef5ac,SUCCESS,False,1.0,0.25532089814322734,0.7039232659739164
+v3g5job:445f06b16f71da9de0f3555e3a96a32db9c2dc1781c4288de5d5c02f73f71596,SUCCESS,False,0.010869565217391304,0.24961622556180854,0.6923797553709409
+v3g5job:d97b42ac8bbed6cc317b695c5e42cfe85859a167f1b9207878d25fb0fc60859b,SUCCESS,False,0.9891304347826086,0.3762095914962337,1.0362817436909064
+v3g5job:8e9aef48cfd18ca771fbbcb898b14a1aeddee123925f73600a2a76941f235f90,SUCCESS,False,1.0,0.24819149800857485,0.6895363566505986
+v3g5job:caae08771aa03d7c06a3048e4ed1d9f98b8cbe696f4fa92c4fbbeb7b568190f4,SUCCESS,False,1.0,0.2580946399428399,0.7094428616556172
+v3g5job:a2cb54d03a08de0cbe175912f3e9df66276c71f2a0ada66313420d4dab6aa9e0,SUCCESS,False,1.0,0.25531349559006994,0.7039077204948707
+v3g5job:8cc1a86f66f7c2c7a49d72546eb9f70eec06db583d44e22dd50983b0dfac5d5a,SUCCESS,False,0.010869565217391304,0.24963017331604975,0.6924076175547083
+v3g5job:dcb7416aa0af3ca13512149bb5a81fbf0218bd5de4dd6be5694ceb3d42096b8c,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:5ca7034e25bb1afcac3d0a51740a40cd4a4c1f1acd5323de70a3182f5e6be412,SUCCESS,False,1.0,0.24737232680546759,0.6878632258913495
+v3g5job:5142f2ecf30eeae6dc0a7616589c4f45262b663bead757659c2e4508e6a00bf4,SUCCESS,False,1.0,0.25757542188967486,0.7083953164855371
+v3g5job:1853e70f395f507b09bdd8c1b5327ba4a1c28e170ae3269489b719a437be60c7,SUCCESS,False,1.0,0.25511257498468726,0.7034956906983969
+v3g5job:b2e2958085cf18e120ce895004a1abcf32cec97d8a3e52b0a17eda326884f8cf,SUCCESS,False,0.0,0.24999812380630193,0.6931434281715692
+v3g5job:f85b6119c9cd65c1185752d0d13456e8133d1d966ecf7eb47cdcaee22fc58b81,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:a071116fe21955d42a1dc3207cc3103976d42137537f2f0e9e28003478f78abf,SUCCESS,False,1.0,0.24738488445762363,0.6878896980286091
+v3g5job:98f6b9ae897d7308c84e6d9aace78cf2fca27c31bbfd20f1277235d99bf82b90,SUCCESS,False,1.0,0.2575805030156907,0.7084056550561109
+v3g5job:7ebd38795f7e34f28f19ef24966489677a29c39bbabd4059da76648dd81d6e9c,SUCCESS,False,1.0,0.25513159075645003,0.7035345965962602
+v3g5job:4ce9b3ee61653367746465f4b0b44f2b2afcc6108f5ae245bb91f8495433a2e5,SUCCESS,False,0.0,0.2499973628043853,0.6931419061656313
+v3g5job:931ca7f6a0f6c525f3fdb6a959afc6656180e5d7c39d5896813b79e7c21f77ab,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:d332a6c3d13172fe8812040473bc51d321d4f7d91ff1cf4a4a64c83dbd5dfd1d,SUCCESS,False,0.9891304347826086,0.24728833567607006,0.687681908256789
+v3g5job:87c4b8690811bafe139d11d454bdc129d3f17ca0d853894cce047a89a262b310,SUCCESS,False,1.0,0.25756111018372646,0.7083665145932712
+v3g5job:5685b836738ee358d50caaeb9901bf387704fd233d453fa52e093faa16dc38a3,SUCCESS,False,1.0,0.25494835841889296,0.7031599019729997
+v3g5job:01e81e841d8e01bd6a77f6941fa92d2bd9c63f68eaad9e24200a21d1832389d2,SUCCESS,False,0.0,0.25004655469388176,0.6932402914998399
+v3g5job:9e83760656f042c2b7b96d206c3c87556a4561ea3daa7f94a2ee4d65cfe5ab3f,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:4ede70a0eb688c9fdf2023697843baee35af0aacdced9d005205da79d411b1ae,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:802d6efefac9a82635d7bf527267940647e71e368af2542ba4ac4ae1f710ab63,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:8f8d6de124b8cd9cf626dab4657d5da38ce305d80fd491164240f923853f4521,SUCCESS,False,1.0,0.2552769572273688,0.703832243984288
+v3g5job:bb5dbd00d31b513b42bd10c6ef3912b3b1edea2b645d2417086cba85cc150a65,SUCCESS,False,0.0,0.249983245187583,0.6931136775222758
+v3g5job:a1729a78d62f545af94e5f77b709f62809847858f6c28295a96553c5f8cba376,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:f5c7bc4b91fee8e3eee512c405d57045533329d4637c504cd1d831cb3ff4ae40,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:e722ffcded399ce8679cfdbb430992b55e147b97d374b38a61ff6a4239254d2c,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:04742b057e544403bb5a066c30478429874ce0c9eb6ff38ff8717419a26ecc5d,SUCCESS,False,1.0,0.25527968359246417,0.7038378044728523
+v3g5job:ff35db4e33ecc25e5f16b31e15605c7b44b3b71cb01decf02b8b322e4f723a15,SUCCESS,False,0.0,0.24998208603505817,0.6931113581768703
+v3g5job:b71fb961bf2dc9c775b0fc30e4fbe2406d59913f91c54073caebd5af722cb5e2,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:7399fb24e4208d2674bb8b6ca195eb000527a20094c5a94aa3fba8371d0d1f07,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:8e54548ccea36a4bd2c4ef4b2dc7d8cb2542299fc611971459b2e6197485a3a9,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:bcdb6f5c0df922b1b33f0aee1a41243d77ca1b1729b2b5c22c6f4a1503bdfdab,SUCCESS,False,1.0,0.25529210306483574,0.7038631985110668
+v3g5job:957a5bd30d8bd052e1979f263b6dcbfddb1c0d2a2b8ecac9e221db0a6dab0cad,SUCCESS,False,0.0,0.24997449017778875,0.6930961616865418
+v3g5job:72937fe3357514ffa9aa210f256d73beca912c77fbc2ff006020927dcf85b531,SUCCESS,False,0.9891304347826086,0.35730054403391776,0.9670916147902836
+v3g5job:3949c2fff06b8162ceb45342bf7e9b65f8412b18466c6af4f3a6d01d78060c47,SUCCESS,False,1.0,0.248407332144311,0.6899711600858924
+v3g5job:8e159d80631a1f0fc1fbbf14cb14aa82560ca3c2fa197096d999d4f0f12d78e4,SUCCESS,False,1.0,0.25812931568095265,0.7095135566113687
+v3g5job:1297ff4e43e28eef5721f5567af34ed91a2b3820d34bd2b8b1d655b1fb059d0a,SUCCESS,False,1.0,0.2553217807791153,0.7039251215515453
+v3g5job:47d309dca8a18550e2dc9d4a85981ac972ffd38014ece09d34b4c0d507121022,SUCCESS,False,0.010869565217391304,0.24961318641412383,0.6923736839943593
+v3g5job:55c04ddff480a51612abaf5a4850512e2515256c681c8f6a0bd92d64e0fea925,SUCCESS,False,0.9891304347826086,0.3612898759600379,0.9807374315603028
+v3g5job:f0f7c612dd2d86c70b22f0cf56efc3b2723a9fdf22ead63511027384d027af61,SUCCESS,False,1.0,0.24838082539856718,0.6899178083049191
+v3g5job:e271706ff3ede8a0a6bff440ce2f1442e59dd870d8a38535673cb66e6e022a51,SUCCESS,False,1.0,0.25812540699600933,0.7095055351275379
+v3g5job:45fe563ca9332c78b663dc3e91538ea25e88af4f9e56cd2beebe7145bf668ff2,SUCCESS,False,1.0,0.25532089814322734,0.7039232659739164
+v3g5job:ee20992fb1f033a542cf32f45ad746e2ac710e42496b4bcf3d1438c667e343df,SUCCESS,False,0.010869565217391304,0.24961622556180854,0.6923797553709409
+v3g5job:d44416cfc4ca7a69d7036fd8481a789a3f703d9fb26d796cf042afbea3e7415c,SUCCESS,False,0.9891304347826086,0.3762095914962337,1.0362817436909064
+v3g5job:58ada610d5cb2994163df923b24727c59e286bce51b949094bd0497241a5ce1c,SUCCESS,False,1.0,0.24819149800857485,0.6895363566505986
+v3g5job:26f1ad9225267c00e5afc32828521ed3ffe25720f42346a4d224b40e5717278e,SUCCESS,False,1.0,0.2580946399428399,0.7094428616556172
+v3g5job:6985169811763f5732ac14252d0f5d57b6a059934f816e46dd6f51b8742e5b60,SUCCESS,False,1.0,0.25531349559006994,0.7039077204948707
+v3g5job:3295271565327c92e39905f3e2ec7fc7826a3cc70e134274a246531fbfc221a1,SUCCESS,False,0.010869565217391304,0.24963017331604975,0.6924076175547083
+v3g5job:6c9776a5bda9879600cadbb3daabd323ea2d3e86e9f8671771522f5319595d8a,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:fb58a1a9e8a3dfc7f49171ebe57747efff4a069bb7e5bf32ce5fff954c20da54,SUCCESS,False,1.0,0.24737232680546759,0.6878632258913495
+v3g5job:ec4c739cb0a8eeee0d7fbfbab8e540a2f62cb9bb04378f346b05abfe028917cc,SUCCESS,False,1.0,0.25757542188967486,0.7083953164855371
+v3g5job:48791cd07656c0fa538af88eff37757bd7a383e0b6495a8ba711fd328507c700,SUCCESS,False,1.0,0.25511257498468726,0.7034956906983969
+v3g5job:7be13e6299c5b22b1369faba543d99b4e7c9d9e92584676e0c3f95da8114d211,SUCCESS,False,0.0,0.24999812380630193,0.6931434281715692
+v3g5job:2a741fd08e940f6ddff10f9a760529960bb6b5aa4a34259135ef252e3f2dba2b,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:8f1a0b71829643bd8f0fa38d3865f74a776f547cdaa72c5a3772aac9f8636e1e,SUCCESS,False,1.0,0.24738488445762363,0.6878896980286091
+v3g5job:40f0851f44b210dd1a93c11092f7ed87d70b9a88765057778d6c2ae963b62ff2,SUCCESS,False,1.0,0.2575805030156907,0.7084056550561109
+v3g5job:47b6dbd71be8a4a215ea654039ff852871ff0e08c8173e729db628b77922c199,SUCCESS,False,1.0,0.25513159075645003,0.7035345965962602
+v3g5job:60c3c9cf2d8f59bbf4a84a1be4ebaa6b320efacd03e0b862590cd8f9d7043cb2,SUCCESS,False,0.0,0.2499973628043853,0.6931419061656313
+v3g5job:ac67a93cb38f63ac3f7c5c952cb031b41508d710b69241958261145adfefaa94,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:f3c74a7743e5cccbd01f07f75e3304c69f3c03fe7de83abd11a750da5cdd629e,SUCCESS,False,0.9891304347826086,0.24728833567607006,0.687681908256789
+v3g5job:52ed308b132bd7a60306eae7e55d9118d947db4941a52cbd1029144031b3d9ef,SUCCESS,False,1.0,0.25756111018372646,0.7083665145932712
+v3g5job:fe7f46a5784a761948c86a38f66f26a114ad5007de64e46ea005dac527ea7446,SUCCESS,False,1.0,0.25494835841889296,0.7031599019729997
+v3g5job:84eba86c824e830c224e0a72f1fdbfc386498b28837cb1fa4949c30f6b56e8af,SUCCESS,False,0.0,0.25004655469388176,0.6932402914998399
+v3g5job:328131180429e181e12c735f618d07ce51c6a0e3bc9baa4912d8bc61d3b098ab,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:8616c492c86f3045c987cc146a5cffa92fb43be6154f0ac931224af5e4e21984,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:e0c581a4ef9d55b84b120f0a1ace4653c9f25e25a33fcc3d790ecef81601be79,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:279a4a98436b1296cb60cb855351e17d5b7e26648072fee21446cf93903d7360,SUCCESS,False,1.0,0.2552769572273688,0.703832243984288
+v3g5job:9e2f3784a893cadb20d11835d9f82101df5849eafa56eed942731d04b7bdd1f7,SUCCESS,False,0.0,0.249983245187583,0.6931136775222758
+v3g5job:625e6cf0d350c8b687ac5306f061e604600cf7689d504a087ad0fe30115e00b1,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:3037077a71880ed0a581542af6eddf94f377322ba10db6c418fd0d4c6d96b744,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:4a2508b3d100bbef030b9878bbfacff98a24d506b5b852ffeb56061b6a2d7712,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:302648e074e7e13a2be89639286f92cd4fa100a6eda6abe0e6206ecb25025da4,SUCCESS,False,1.0,0.25527968359246417,0.7038378044728523
+v3g5job:3e1893dfd4ae09a9e81e71812885b9cfef411135f06459ad39331169f3d48f5f,SUCCESS,False,0.0,0.24998208603505817,0.6931113581768703
+v3g5job:739f2cbb1c910cf80ad8557e4a5225ef44c39cefffb14eb5304568874620c127,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:e7be2507eda4243f4fc82ff8f33ab988966d623e7d345d5825cb0757f447be7f,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:71b01fc4652c444a282afdafbd93cfe3ee62005a8dab7020127f1c4a2afe76e8,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:857ad899bc3dfd2b8f769e8765afa74a2ee578d12d6c283846e423fe4f0506f9,SUCCESS,False,1.0,0.25529210306483574,0.7038631985110668
+v3g5job:4a86e7c93076d6b7f73df329324b068eb8928115a65fdf5d678ada3462c563eb,SUCCESS,False,0.0,0.24997449017778875,0.6930961616865418
+v3g5job:30e0d6756b454bcf9e0d163874790b9d792bb4922f9959025d5782e4b4e58f60,SUCCESS,False,0.9891304347826086,0.35730054403391776,0.9670916147902836
+v3g5job:40338bb9bbca4e29269d44558f996ababc6717196cb85c7f1ca1e695dd2a8d2b,SUCCESS,False,1.0,0.248407332144311,0.6899711600858924
+v3g5job:347657b7f089a4c6f4f2ff62f688cee991d37fd8eb1dc3bada010ff4b622a5f4,SUCCESS,False,1.0,0.25812931568095265,0.7095135566113687
+v3g5job:adbbb4882892e2986b2d6072b9bc38af18207618910a10a17d5bd4cc67ee343b,SUCCESS,False,1.0,0.2553217807791153,0.7039251215515453
+v3g5job:6b8ccf2349a049334cedd4d22ea5cf1a4ce8955ae4f8684685c8d2fdeb644020,SUCCESS,False,0.010869565217391304,0.24961318641412383,0.6923736839943593
+v3g5job:10b603dd7b3560c504b58e50e7dd50beb5edf4c84dd47ce30181dd16d8a0e274,SUCCESS,False,0.9891304347826086,0.3612898759600379,0.9807374315603028
+v3g5job:02b3d9c27b9ba453f41a5ea480bdf1fd5c4bc0b372314fc150ece7452b099709,SUCCESS,False,1.0,0.24838082539856718,0.6899178083049191
+v3g5job:796efe6d7ce8934e45086f50d251b0d1a16dd5f84fc88ded0bf8c83a4ff086b3,SUCCESS,False,1.0,0.25812540699600933,0.7095055351275379
+v3g5job:1fc76b65b50a0aef40831b2995923088ee3ab820b98914e1686b797a760328e5,SUCCESS,False,1.0,0.25532089814322734,0.7039232659739164
+v3g5job:6375b699b30234cdfe1bd23581d0db67365bb1217c7bfd4da3c360e3805b4cfb,SUCCESS,False,0.010869565217391304,0.24961622556180854,0.6923797553709409
+v3g5job:ebaf615d7168085412f39c6abb106e6738a5ce2e5a9e75c4d7549ddea440b749,SUCCESS,False,0.9891304347826086,0.3762095914962337,1.0362817436909064
+v3g5job:66b1649327ddb18b359c09ab207ef49bf7b71005c8a735935b9223eb4ba33726,SUCCESS,False,1.0,0.24819149800857485,0.6895363566505986
+v3g5job:2e55db52ab6397ba8c1d6d13e2cca22bc6c8908dd0e811d9f7ccf4e84735ecea,SUCCESS,False,1.0,0.2580946399428399,0.7094428616556172
+v3g5job:863de70bceb67f3c22f5d5acc5a72814a6deac848a61cde1209a062273d605bf,SUCCESS,False,1.0,0.25531349559006994,0.7039077204948707
+v3g5job:648ffb7366678b961112f5e52686f5be41789c67f6885f021ad98aee1176b3f0,SUCCESS,False,0.010869565217391304,0.24963017331604975,0.6924076175547083
+v3g5job:f5b2fe25acc1fa4e872fffe0bf31f044c1c123a979839ff54f53a3d8a680d985,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:24d3fdc56d01c0c6bb4dd2daa09565f97f71990c6c5615ecfe6d4f682acea30f,SUCCESS,False,1.0,0.24737232680546759,0.6878632258913495
+v3g5job:2a27363d1a90e8d1dd73f3c6b4401170945e2a1134a1d78c5d581d87050b873c,SUCCESS,False,1.0,0.25757542188967486,0.7083953164855371
+v3g5job:10793c19fcc9e8a68aac7ce4faddc7aff6982cc22eb4cd063e973097f3ae1f07,SUCCESS,False,1.0,0.25511257498468726,0.7034956906983969
+v3g5job:0fd7ebf400078a8cd27eb764b804349c5177c717babe849170660dee815d77d5,SUCCESS,False,0.0,0.24999812380630193,0.6931434281715692
+v3g5job:49daaa6ac3a5f887882e755fdf8ceaf4d3fcab8353f62da3316f8b7cbb5f14c1,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:d5c52ff73b5a4911d36d17c798590b9c2555ca209510091180b290aa11839009,SUCCESS,False,1.0,0.24738488445762363,0.6878896980286091
+v3g5job:7a71591a29ba9a2f798f07eb5e77e817430c07b6576c02cff0ecd703906daf8d,SUCCESS,False,1.0,0.2575805030156907,0.7084056550561109
+v3g5job:093f5cad120c2989144295b6a4b5fe6ae01bb4e99b7e87496e763722adc5f689,SUCCESS,False,1.0,0.25513159075645003,0.7035345965962602
+v3g5job:f40d8d54e2ac16002f2bcb02dda25ac76a37ef9128302804ab11b6443b68e37a,SUCCESS,False,0.0,0.2499973628043853,0.6931419061656313
+v3g5job:fee119cec0319e42b8c4bc20e54ee2cc38cf5da96465b54454616541526e40cb,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:c6bb9aa01177dd00d2a3e2ce00978ad605eb944e86706a1b8268f6c428458040,SUCCESS,False,0.9891304347826086,0.24728833567607006,0.687681908256789
+v3g5job:6b728fd28c9a7742c9bcf0b254cebe9197680f2e1a84818ad1610cb15be079b0,SUCCESS,False,1.0,0.25756111018372646,0.7083665145932712
+v3g5job:3060886cd48b9f3bed58286bc19b8476e6c41b731231586807ff929ea23daa09,SUCCESS,False,1.0,0.25494835841889296,0.7031599019729997
+v3g5job:4f2c169a5a2df92560ac22a387a18323cd5812c5d182748976686ef1f71ddeb0,SUCCESS,False,0.0,0.25004655469388176,0.6932402914998399
+v3g5job:eace358b6d1cdb2edae85756a77bcf2bb35b5a8b6a1d0d919a88db87af31ec92,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:b50010b9c73c592189e18a2f745a850e5fbb8894a7cd4ce24d88a7e1bfbafe2c,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:cec4d8d6c5454f83c4debc3fae87139464202f742f1a415a5c5c451d08f0f59a,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:8e70f7abe950d85e6169a6b9512430e9611447742bea536bcf69215c5c3fc2cd,SUCCESS,False,1.0,0.2552769572273688,0.703832243984288
+v3g5job:27426bddf6bf90bf35289047a43696c1c801d4809420b593c2a0747fdf4c8faf,SUCCESS,False,0.0,0.249983245187583,0.6931136775222758
+v3g5job:e88bda56979517128c31aa979a3a5aa24c85b5c64385e35d2656e2c2e32e6dec,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:cd4337c98b76a896d76a6ae8b3a064a2deb727f926de2379887298efa57e7499,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:89256cfec4226000e7ff3614e0e9a09abc37fcb3765296368ec83cf17511f1b3,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:91b884305eec5ddf7eed2460ded5df0e4c8f1976872429b6f93e79a47771285d,SUCCESS,False,1.0,0.25527968359246417,0.7038378044728523
+v3g5job:03f1b67241b0a6dd405794b1f2d8452fff31a4c9034ce142f7300d732ad9e84a,SUCCESS,False,0.0,0.24998208603505817,0.6931113581768703
+v3g5job:ee673d2933b7ca1a329d12c77de9cc954e0e252d2f46ddf345e6e7daa106c5f7,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:7f3f1a00676e0ff1296092b39f6129d381523d4bdf3739310bc361a01112e266,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:39a77459ac02c4fcf42b7a765bd1e557da36bd910cc5f3f4bf8da8f684f8d290,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:a1146304092941c88b6aac5a769b63d95058fe01c53197d7cf688441bb9f0698,SUCCESS,False,1.0,0.25529210306483574,0.7038631985110668
+v3g5job:f85e41b3f080a31e1c1e78c1ca04d401e0f2e9474532c604b95ceba4aa42aea8,SUCCESS,False,0.0,0.24997449017778875,0.6930961616865418
+v3g5job:3f046c8f916bc9c3b4c2989ade9a582a287bd2be33c9fcb176602622134fcbe1,SUCCESS,False,0.9891304347826086,0.35730054403391776,0.9670916147902836
+v3g5job:8728daf6a8fa4c0cb21a827c388d02569c18f3ae5eccae4c8b5a09294c20fba7,SUCCESS,False,1.0,0.248407332144311,0.6899711600858924
+v3g5job:a258314c61c7f94826889832983adce4069b90c5556631bcc21fbdcb1082a8e2,SUCCESS,False,1.0,0.25812931568095265,0.7095135566113687
+v3g5job:76177d748a24a17f9ab13dbd53b583f5e8c742d2c1d91e8e87dec21cfe3ea5f3,SUCCESS,False,1.0,0.2553217807791153,0.7039251215515453
+v3g5job:1adf7335a7ac52ea03cfef0bb82b44da91bb4bf146e63bcfd7c08a5817745cd2,SUCCESS,False,0.010869565217391304,0.24961318641412383,0.6923736839943593
+v3g5job:b23d95e392f111efd76cd090e164d24972e8c142c365024164a5071a1c463b9e,SUCCESS,False,0.9891304347826086,0.3612898759600379,0.9807374315603028
+v3g5job:05c3b82da7385392cc94fb7e503e4953751ad89d36096d50b9896ce7288e7c24,SUCCESS,False,1.0,0.24838082539856718,0.6899178083049191
+v3g5job:50ca786e535edd137f85158778eb292c8fc91db5299134bc9c78da93a28cfe9d,SUCCESS,False,1.0,0.25812540699600933,0.7095055351275379
+v3g5job:d590e0f7e8185fd2232704752f6360c718d264178f227a559e3b19ac4f6be877,SUCCESS,False,1.0,0.25532089814322734,0.7039232659739164
+v3g5job:f3398d014e61ab49775cc78ed37fbbc3f4ed1523fd941ba3979749bdc8ea6334,SUCCESS,False,0.010869565217391304,0.24961622556180854,0.6923797553709409
+v3g5job:3adb3ca2713450b90862e17323c50cd5609ae1cff8993eda92dec7695be0a102,SUCCESS,False,0.9891304347826086,0.3762095914962337,1.0362817436909064
+v3g5job:74fda80a5b38622d6ce68cd6b9fea14304221b41be74603d1714a134620ef97b,SUCCESS,False,1.0,0.24819149800857485,0.6895363566505986
+v3g5job:6a241e46d6b32f23545b52a099b826c4a3bd5dbcce0712acbb562e4cecfb27d2,SUCCESS,False,1.0,0.2580946399428399,0.7094428616556172
+v3g5job:a94b8d837e2636f2dbc2f9bb45bef55301193692aefd052c8d51fcff2ad5fb80,SUCCESS,False,1.0,0.25531349559006994,0.7039077204948707
+v3g5job:ede63bedd1f9a412144cd3c8066a25558e2f9e3c25c204304bb40a42161d71d2,SUCCESS,False,0.010869565217391304,0.24963017331604975,0.6924076175547083
+v3g5job:c33390d03310056a18f2b7c44fc9bdfe296923126ff1145dbef8f681aafcad44,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:7d51496df50407d9f9bbd1bf2abd2af76cc181f30ba43e37d0609fd2d5a99493,SUCCESS,False,1.0,0.24737232680546759,0.6878632258913495
+v3g5job:0e06e2875605f90899e942b17faeb6d2d39f4599ba0d4f0646575134962715aa,SUCCESS,False,1.0,0.25757542188967486,0.7083953164855371
+v3g5job:0b9f87bc1f685265d48e9378859f01700b1b9da1c1c6b368cf6e51daea241eae,SUCCESS,False,1.0,0.25511257498468726,0.7034956906983969
+v3g5job:f3631f76842ce0c1d7386bc2ca815fc3f63f60484f6c9a21f09418fa2e605e85,SUCCESS,False,0.0,0.24999812380630193,0.6931434281715692
+v3g5job:b2028d7638fa75da8996c4b60d1e90cc22ddd04cb5372e44504253b614b90101,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:95cb50fb53cb40560a3bbd29e0d7a7fb82dad4be38a4fbc34805996080345452,SUCCESS,False,1.0,0.24738488445762363,0.6878896980286091
+v3g5job:f371351ba1c76fc309ad21e2602ddc0763c18d79aa9bc1a60ab1fe3f2200f1dc,SUCCESS,False,1.0,0.2575805030156907,0.7084056550561109
+v3g5job:74212c541a58857ad819697a41113a8e7a9ee5c9194e84b5247476d03d8ef9f9,SUCCESS,False,1.0,0.25513159075645003,0.7035345965962602
+v3g5job:ad978bfca778d2511f8c8665beec3460c67d47a58a9c07a2289058eb5cebd398,SUCCESS,False,0.0,0.2499973628043853,0.6931419061656313
+v3g5job:b9243e2ee08b533ca2cd80de29384fdba9bab1b1886263bd26150487882a764a,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:ae932849c7e13230278914c31fa719a5048e49ea177c1ee7bb0ad86d0659cc8c,SUCCESS,False,0.9891304347826086,0.24728833567607006,0.687681908256789
+v3g5job:84175d5aa4551f625cc8ce44ce8490305f0f49f276ccd3ed50699fce137d5b0b,SUCCESS,False,1.0,0.25756111018372646,0.7083665145932712
+v3g5job:21a879f901106263cbfe1c9238cfaa55219e26fd3f42690f29dccda50c2697b5,SUCCESS,False,1.0,0.25494835841889296,0.7031599019729997
+v3g5job:569d419f506b4d5a75440b14cf4fb67debeac51ca4845d18969931e559692da6,SUCCESS,False,0.0,0.25004655469388176,0.6932402914998399
+v3g5job:66767913761c54e1d98dbf069843ada9b7013e7bf89586cfb2105492674385b2,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:20b99872ee75324a53644805021bb5d89e8aabfbd004d24388018356b4c3365e,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:3f36abb18b96f2afe80789ce5e9e608a10e55e7e210832e81427741c1b2db1b8,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:13e426d0ac3cfc9d78cf9e432f197821ed5f2faa9f6ea5729e1ef733f6934769,SUCCESS,False,1.0,0.2552769572273688,0.703832243984288
+v3g5job:c3cdb7eb554e5ab944da37ca43efc438ffc26c6e0214d19a09581538e904f276,SUCCESS,False,0.0,0.249983245187583,0.6931136775222758
+v3g5job:8e7bc654265a7cb4b5dec56f779358e6564ee47600585f1a571e5e24ccf27127,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:6d875f4c212426541438aee56476b5473d7b5d9d295a60979a2417fc573b5e5f,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:5e62955558c99d1c1d0001f2db7dd1332a4ae0f26f156c4297161483309d8baf,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:89e4a7a415b6e2f27264150b5bb8842d9bf1b34c8a6ef3fb293240fd854c82f8,SUCCESS,False,1.0,0.25527968359246417,0.7038378044728523
+v3g5job:417f935ca262a1bd22b046accc7c644afaaeeefdb8238571de0094e7b9d2453e,SUCCESS,False,0.0,0.24998208603505817,0.6931113581768703
+v3g5job:a370ebfebbd8f0c0f957f868521c1aafe0258d7cae5371499dac9d6373f37002,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:fd57a213345ad67e70c54206cfb9636077ad340b39120388b9d54a53d2f1b052,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:25254ddb0fd657700457781bef5fc67d50ef669e317822e622932d6a18929140,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:8dd8dde539bed1674de5f883eb662ff584081b2c41693743c96b7780fb01806d,SUCCESS,False,1.0,0.25529210306483574,0.7038631985110668
+v3g5job:2c7efeea44c094a1365c317d78c57997fc995133f95a56c3ebb20cf2aadf0c2a,SUCCESS,False,0.0,0.24997449017778875,0.6930961616865418
+v3g5job:8ff5df189d86644b1b511e656ac523b9029d28bb833314f342b0eedb57cf0e20,SUCCESS,False,0.9891304347826086,0.35730054403391776,0.9670916147902836
+v3g5job:77c5563de81124ffb9ba5fdbe3acc415dac3c0261f3f09c8e93a00b17e98afb0,SUCCESS,False,1.0,0.248407332144311,0.6899711600858924
+v3g5job:28e5764e9e67e49d9903bd54c84696d5c2d773f540b3459801605eaecaf4197c,SUCCESS,False,1.0,0.25812931568095265,0.7095135566113687
+v3g5job:9737edbb839618205e80f2e06c27d7b52c80d4991b3cb4acfd1deab9240b2122,SUCCESS,False,1.0,0.2553217807791153,0.7039251215515453
+v3g5job:1afb86d5f9bce7c4bc1bbb6f909c8ac573db45ba6957967e70e7899c2efd3e1b,SUCCESS,False,0.010869565217391304,0.24961318641412383,0.6923736839943593
+v3g5job:e1b751273f6ffd830fd161b85d510b06313faa2bf5312633e056f250786c16f2,SUCCESS,False,0.9891304347826086,0.3612898759600379,0.9807374315603028
+v3g5job:76cd13eb24032cf0db7b8a4e21c813f6c97ed3c63896932e51937e32de2ed86a,SUCCESS,False,1.0,0.24838082539856718,0.6899178083049191
+v3g5job:564e21d5317bce7284fe75a08f94e443acf97e603709f89d3a59f485c7054551,SUCCESS,False,1.0,0.25812540699600933,0.7095055351275379
+v3g5job:6d1492f01345d794c0fd76456d9c474915bc00e8dd0f93f1c3d563dc4cda00b5,SUCCESS,False,1.0,0.25532089814322734,0.7039232659739164
+v3g5job:63dfb67154ab2315d8ad96e16b4b5b7a1c4003db8b31f5d4146456c5d7851cba,SUCCESS,False,0.010869565217391304,0.24961622556180854,0.6923797553709409
+v3g5job:d313007a2660f4229b38927ce4dad49a8edaeddf52335f182d8119b5f4e332e6,SUCCESS,False,0.9891304347826086,0.3762095914962337,1.0362817436909064
+v3g5job:d5f5233f80183380d6f197542e2cf44b0c440ffc8fc557e016cfbcb4204298e3,SUCCESS,False,1.0,0.24819149800857485,0.6895363566505986
+v3g5job:f5315accbadca005d1bc2f62ab7b9a62ac7488f03fadaa15083538261dab9c3d,SUCCESS,False,1.0,0.2580946399428399,0.7094428616556172
+v3g5job:bfb043140c0ee2acdb9fbf0cb9ae34dece1760c5ff676055990954a410a177cf,SUCCESS,False,1.0,0.25531349559006994,0.7039077204948707
+v3g5job:bac1549ba3b6e9143964e86f087c18474ed6164467a55d01cdc88a693607d377,SUCCESS,False,0.010869565217391304,0.24963017331604975,0.6924076175547083
+v3g5job:ea022a09f5ebcda6c1266257219924302ff6d2ed2b88000c34e7abc6e5ba7561,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:fc7c4e2bc1521f0614ade9bc2946d2f7a425b7c4cfcfcee52f1ced456f5f90e9,SUCCESS,False,1.0,0.24737232680546759,0.6878632258913495
+v3g5job:18a7a531c58c6e753fda7f1250f54378a1b04896dcf693d782002c4d4abe77c7,SUCCESS,False,1.0,0.25757542188967486,0.7083953164855371
+v3g5job:30fe6753653a40c238b04f4aecb44a62aa75b5cfca097212affaf19e29822485,SUCCESS,False,1.0,0.25511257498468726,0.7034956906983969
+v3g5job:302108e3aca5d0208949913b813923fc5c86f324553ce716db81d5998dba8cf3,SUCCESS,False,0.0,0.24999812380630193,0.6931434281715692
+v3g5job:43256b47519649d532deac366324e2442cea73b37e2419bfde3d7d3e69e82bcc,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:14cf3f0b505b443a25f95688684c62e7b981a493e9fcc4f774c618fc850a9a95,SUCCESS,False,1.0,0.24738488445762363,0.6878896980286091
+v3g5job:84360b384468823372dc916e92978215af31deb1dd7ba02d108648f9ec7f8c89,SUCCESS,False,1.0,0.2575805030156907,0.7084056550561109
+v3g5job:7cf1127714faa3c7223c1b693322508d4d45e0dd1156b34077e2f454a53047e4,SUCCESS,False,1.0,0.25513159075645003,0.7035345965962602
+v3g5job:f829dfddceadbd005df4e550e6c7fff99f0571ade99de3160ef072098326b28f,SUCCESS,False,0.0,0.2499973628043853,0.6931419061656313
+v3g5job:685331da5626895f72ce3127b34ec26beaa5c43c4711522852dd32e3a85394f3,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:878b14b076677a425fe8dacc3a8ef5e8df02f294dd67a8bb3e705cec87b9ce0b,SUCCESS,False,0.9891304347826086,0.24728833567607006,0.687681908256789
+v3g5job:9f892be748438e7e96610eb57ea6908bfb593b018d1514d6597e4c0b14832e3f,SUCCESS,False,1.0,0.25756111018372646,0.7083665145932712
+v3g5job:1eb25aba8fe855e6b034424e5bd6eda6eb650a276cf204316aad41ee5dc1ae11,SUCCESS,False,1.0,0.25494835841889296,0.7031599019729997
+v3g5job:d09fcf4000668f421934ebf0890a126124f52118b68ea07adcfca44dffa05a55,SUCCESS,False,0.0,0.25004655469388176,0.6932402914998399
+v3g5job:363f671a7f9dcfbe67bb7898fda6f19746177e608442d67895944a44ea27a38a,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:7eb4ff9df288dc807474700d39ab85265a9a5389f5a44803369ec6c4e3bf7237,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:04411797924c869ab50d4780b8a32ec99861a6a330a3710b3663ee999a33f2bf,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:b7f4950916501351186a1e743e95e4abf9565a19e72b9f8b057a98d8ac3fd183,SUCCESS,False,1.0,0.2552769572273688,0.703832243984288
+v3g5job:9d52dc593e756a024533de3e8afb18e965f4de6b6dab33bd020e6d3adcab0c37,SUCCESS,False,0.0,0.249983245187583,0.6931136775222758
+v3g5job:59a5afed59eaa64686fde02e72abc86b72846cdae6eacb20c04a0cdba1fb20d0,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:bfdd3e67c8932aab20d7c9f7543519c5f8b28ec7e02be362293619ed18370627,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:f4497c6c81c3ab66d3dcd30a676faf0a212c783fd8f24fb94d51d7d0a54c9662,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:2ebdfd49dc8e8323ec7cf8202318b12520a03d4c28f559b97a86c9f6426c6979,SUCCESS,False,1.0,0.25527968359246417,0.7038378044728523
+v3g5job:91596c3de3c8c899fb649ab3e0b5a1eddac661f122820befff01592180eac6b0,SUCCESS,False,0.0,0.24998208603505817,0.6931113581768703
+v3g5job:8f4dd63936d9084e24884bb0b607f4b1a9556d98dfa9af6c18eb3b5d489ecc8e,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:86d0622449798889b02e161731399aa47adbbecc42a818016a5e6eb15670d264,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:f057357d8dc865cc92907c5fb9552bc695f3711856572f66f3ebae20431302cc,FAILED: Training fold is shorter than the registered rolling window.,,,,
+v3g5job:7691636e68d21aecdd39aa5dadc0ef5e0c42d2a71cf5599b4aa80cc1ae5e433e,SUCCESS,False,1.0,0.25529210306483574,0.7038631985110668
+v3g5job:95b54766cccf0bec3e919ba9c514b227ea2f5d9e70ce107fe6e2a7f1900f1083,SUCCESS,False,0.0,0.24997449017778875,0.6930961616865418
+v3g5job:1a1b80579414b2b6c504842223478143583d5e8c7bebd237baf6e9b2eba4636b,SUCCESS,False,0.9891304347826086,0.35730054403391776,0.9670916147902836
+v3g5job:f6543acaef95fcd77ef584698d1901575583b3509969562e8e7a6e193cfabaa6,SUCCESS,False,1.0,0.248407332144311,0.6899711600858924
+v3g5job:1bad9f129ffca337df6e0a876265ad14541e394afe438e3c3c96e3f618533238,SUCCESS,False,1.0,0.25812931568095265,0.7095135566113687
+v3g5job:5371a148e1ea9eab73620988ce63dace7c8c9dcdd4900fe7943c8d2c14da81f5,SUCCESS,False,1.0,0.2553217807791153,0.7039251215515453
+v3g5job:66a2d1e659d7b52f2e62e6b52c87d793ab4a01b723434bca9052b23c448b559f,SUCCESS,False,0.010869565217391304,0.24961318641412383,0.6923736839943593
+v3g5job:a632c3ad4056bfd7d6db442291a69185a5e9074744a9bf5d03865be43a916238,SUCCESS,False,0.9891304347826086,0.3612898759600379,0.9807374315603028
+v3g5job:2e2765b8bd75463447c14f922fb1005836dd9920404361f513dce463bc98d945,SUCCESS,False,1.0,0.24838082539856718,0.6899178083049191
+v3g5job:90a5ccc177570f821ff0d1392439d9dedd549027f6cc801c3dc08feaa19ff57e,SUCCESS,False,1.0,0.25812540699600933,0.7095055351275379
+v3g5job:b00a66fe4e879fc04a8f5673e1da413b7700fff65e903b9aba961e1612e7188b,SUCCESS,False,1.0,0.25532089814322734,0.7039232659739164
+v3g5job:b562149b52654e9b6c1d32a51aae84a1bd1b158ba7b108b8ee1b62c75a947894,SUCCESS,False,0.010869565217391304,0.24961622556180854,0.6923797553709409
+v3g5job:d5f7006ede9942652176b9a6e88cbcb2e53cdfff646af408acb06d6afb6e3817,SUCCESS,False,0.9891304347826086,0.3762095914962337,1.0362817436909064
+v3g5job:81a9e84547d260bf819e103ba67648291ac8b130af4153258c4f5605af5dc397,SUCCESS,False,1.0,0.24819149800857485,0.6895363566505986
+v3g5job:585032378e3087e7f3f1e53a14dbe2e1155c813d1c5594c7f39835b92abfeb10,SUCCESS,False,1.0,0.2580946399428399,0.7094428616556172
+v3g5job:002f83e7a9a60960170d8c02d7c2e3e3020e5b5298be4eab3ffabbd5498676bd,SUCCESS,False,1.0,0.25531349559006994,0.7039077204948707
+v3g5job:3a040e0fbaaf775e8a0adcf7d68e76d0ccab0e2b4b809d7dc725e40471f03e39,SUCCESS,False,0.010869565217391304,0.24963017331604975,0.6924076175547083

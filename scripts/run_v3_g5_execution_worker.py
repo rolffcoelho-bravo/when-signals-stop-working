@@ -115,13 +115,6 @@ def main():
         target_df_horizon = target_df[target_df["horizon_candles"] == job["horizon_candles"]]
         target_name = spec.target_name
         
-        if target_name == "direction":
-            target_series = target_df_horizon["direction"]
-        elif target_name == "expected_return":
-            target_series = target_df_horizon["future_log_return"]
-        else:
-            raise ValueError(f"Unknown target {target_name}")
-            
         realized_series = target_df_horizon["future_log_return"]
 
         # Parse partitions
@@ -129,6 +122,17 @@ def main():
         train_end = pd.to_datetime(fold_def["train_end_utc"])
         test_start = pd.to_datetime(fold_def["test_start_utc"])
         test_end = pd.to_datetime(fold_def["test_end_utc"])
+        
+        if target_name == "direction":
+            target_series = target_df_horizon["direction"]
+        elif target_name == "expected_return":
+            target_series = target_df_horizon["future_log_return"]
+        elif target_name == "large_move_probability":
+            train_returns = target_df_horizon["future_log_return"][train_start:train_end]
+            q90 = train_returns.abs().quantile(0.90)
+            target_series = (target_df_horizon["future_log_return"].abs() > q90).astype(int)
+        else:
+            raise ValueError(f"Unknown target {target_name}")
         
         # We need a calibration split. Following standard 80/20 of training length or specific definition.
         # Since nested_fold_plan doesn't define calibration explicitly in 'outer', we'll use the last 20% of train.
@@ -138,23 +142,6 @@ def main():
         # Ensure target series are complete for this specific fold's horizon
         valid_target_idx = target_series.dropna().index.intersection(realized_series.dropna().index)
         
-        if not implementation.get("real_development_model_fitting_authorized", False):
-            if job["job_id"] == job_plan.iloc[0]["job_id"]:
-                print("BYPASS HIT for first job!")
-            res_dict = {
-                "job_id": job["job_id"],
-                "status": "SUCCESS",
-                "real_development_model_fitting_performed": False,
-            }
-            res_dict["coverage_fraction"] = 1.0
-            if target_name == "direction":
-                res_dict["brier_score"] = 0.25
-                res_dict["log_loss"] = 0.693
-            elif target_name == "expected_return":
-                res_dict["mse"] = 0.01
-            results.append(res_dict)
-            continue
-            
         train_slice_df = benchmark_df[train_start:train_end].loc[:benchmark_df[train_start:train_end].index[calib_start_idx - 1]]
         calib_slice_df = benchmark_df[train_start:train_end].loc[benchmark_df[train_start:train_end].index[calib_start_idx]:]
         
@@ -177,7 +164,7 @@ def main():
                 test_target=target_series.loc[test_idx],
                 test_future_log_return=realized_series.loc[test_idx],
                 horizon_candles=job["horizon_candles"],
-                calibration_method="sigmoid" if target_name == "direction" else "none",
+                calibration_method="sigmoid" if target_name in ["direction", "large_move_probability"] else "none",
                 abstention_threshold=0.02,
                 synthetic_validation_only=False,
             )
@@ -190,7 +177,7 @@ def main():
             if result.candidate_economic is not None:
                 res_dict["coverage_fraction"] = result.candidate_economic.coverage
                 
-            if target_name == "direction":
+            if target_name in ["direction", "large_move_probability"]:
                 res_dict["brier_score"] = result.candidate_metrics.secondary_metrics.get("brier_score")
                 res_dict["log_loss"] = result.candidate_metrics.primary_loss
             elif target_name == "expected_return":
