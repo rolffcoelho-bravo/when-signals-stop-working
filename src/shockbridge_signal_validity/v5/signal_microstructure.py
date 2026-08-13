@@ -46,8 +46,14 @@ class MicrostructureSignals:
             features['micro_vol_vel'] = 0
             
         # 3. Liquidation Hazard Flag
-        # Hazard is high when Volume spikes heavily alongside extreme funding skew
-        features['micro_liq_hazard'] = np.where(
-            (features['micro_funding_z'] > 1.5) & (features['micro_vol_vel'] > 0.5), 1, 0
-        )
+        # Hazard is high when Volume spikes heavily alongside extreme absolute funding skew
+        abs_z = np.abs(features['micro_funding_z'])
+        k = 2.5
+        z_prob = 1 / (1 + np.exp(-k * (abs_z - 1.5)))
+        vel_multiplier = np.clip(1.0 + (features['micro_vol_vel'] * 2.0), 1.0, 2.5)
+        
+        features['micro_liq_hazard'] = np.clip(z_prob * vel_multiplier * 100, 0.0, 100.0)
+        
+        # Forward-fill any NaNs to prevent statistical bias from zeroes
+        features.ffill(inplace=True)
         return features

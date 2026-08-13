@@ -50,6 +50,17 @@ class MicrostructureEngine:
         funding_z = MicrostructureEngine.calculate_funding_premium(df, window=24)
         oi_vel = MicrostructureEngine.calculate_oi_velocity(df, window=12)
         
-        # Hazard is high when both are highly positive
-        hazard = np.where((funding_z > 1.5) & (oi_vel > 0.05), 1.0, 0.0)
-        return pd.Series(hazard, index=df.index)
+        # Hazard should scale with        # Compute raw multiplier feature
+        abs_z = np.abs(funding_z)
+        vel_multiplier = np.clip(1.0 + (oi_vel * 2.0), 1.0, 2.5)
+        raw_hazard_feature = abs_z * vel_multiplier
+        
+        # Rigorous LogLoss Calibration via Non-Parametric Isotonic Regression
+        from src.shockbridge_signal_validity.v5.calibration import V5Calibrator
+        calibrator = V5Calibrator()
+        
+        # Predict True Empirical Probabilities (returns bounded 0-1)
+        calibrated_probs = calibrator.predict_proba(raw_hazard_feature.fillna(0).values)
+        
+        # Convert back to Series and multiply by 100 for percentage visualization
+        return pd.Series(calibrated_probs * 100.0, index=df.index)
