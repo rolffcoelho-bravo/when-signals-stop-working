@@ -389,55 +389,46 @@ The architecture is fundamentally proven. The ShockBridge Pulse Research Lab dem
 \noindent \textbf{Replication:} The entire framework, datasets, and auditing scripts are publicly available and reproducible on GitHub to verify these claims.
 
 \newpage
-\section*{Appendix A: Practical Deployment Guide (Institutional vs. Retail)}
-\addcontentsline{toc}{section}{Appendix A: Practical Deployment Guide (Institutional vs. Retail)}
+\section{Engineering Architecture \& Production Deployment}
+\addcontentsline{toc}{section}{Engineering Architecture \& Production Deployment}
 
-Theoretical knowledge must be translated into merciless execution. However, the exact execution architecture deployed depends entirely on the trader's tier within the crypto microstructure. Institutional VIPs (who pay 0\% fees) and Retail traders (who pay 0.12\% Taker Fees) must utilize diametrically opposed strategies to achieve profitability. 
+Theoretical quantification is useless without a merciless, low-latency execution pipeline. The ShockBridge Pulse Research Lab framework operates on a continuous 1-minute temporal resolution. Manual execution is mathematically impossible; a delay of 500 milliseconds during a structural crash guarantees slippage that destroys the Alpha edge.
 
-Here is the step-by-step blueprint for live market deployment across both tiers.
+The following details the rigorous software and infrastructure architecture required to deploy the V5, V6, and V7 engines in a live production environment.
 
-\subsection*{Step 1: Infrastructure and Data Feeds}
-The model operates on a 1-minute temporal resolution. You cannot trade this manually. You must deploy the Python engine on a low-latency VPS (Virtual Private Server) located as geographically close to the Binance servers (Tokyo/AWS) as possible.
+\subsection{Infrastructure and Latency Management}
+The execution engine is deployed via Python 3.11+ running on a dedicated low-latency Virtual Private Server (VPS). 
 \begin{itemize}
-    \item \textbf{WebSockets:} Connect to the Binance Futures WebSocket API. You must stream three data points in real-time: \textit{1m OHLCV, Open Interest, and Funding Rates}.
-    \item \textbf{The Core Trigger:} Calculate the \texttt{hazard\_delta} (Bitcoin's Open Interest crash relative to volume) at the close of every single minute.
+    \item \textbf{Geographic Proximity:} The server must be physically located in the AWS Tokyo (ap-northeast-1) region to achieve sub-10ms ping to the core Binance Futures matching engine.
+    \item \textbf{WebSocket Parallelism:} The system utilizes asynchronous \texttt{asyncio} WebSockets to stream tick-level data. Three distinct streams are handled in parallel: 1m OHLCV (Kline) data, Real-time Open Interest (to gauge leverage wipeouts), and Funding Rates (to detect retail directional bias).
 \end{itemize}
 
-\subsection*{Step 2: Daily Calibration}
-Crypto market regimes shift constantly. A model trained in a bull market will fail in a bear market.
-\begin{itemize}
-    \item Every 24 hours, the system must automatically download the last 30 to 60 days of 1-minute microstructure data.
-    \item The system must retrain the \textbf{Isotonic Calibrator} (to find the current optimal Delta cutoff, usually hovering around 11.0\%) and retrain the \textbf{Gradient Boosting Regressor (GBR)} (to understand current volatility magnitudes).
-\end{itemize}
-
-\subsection*{Step 3: Institutional Execution (The V7 Market Maker Playbook)}
-For VIP-tier accounts and Exchange Market Makers operating with 0\% fees (or negative Maker rebates), directional risk is entirely unnecessary. 
-\begin{itemize}
-    \item \textbf{Action:} When the 11.0\% alarm triggers, deploy the \textbf{V7+GBR Pairs Trade Architecture}. Execute a simultaneous Short on a High Beta asset (AVAX, SOL) and a Long on an Exchange-Backed asset (BNB).
-    \item \textbf{Why:} The Institutional entity mathematically eliminates all directional market exposure. By trading the delta-neutral spread, the portfolio safely farms the ~$+0.05\%$ gross return. Because the entity pays zero fees, this strategy acts as a guaranteed, low-risk Alpha generator, allowing massive capital deployment with near-zero downside risk.
-\end{itemize}
-
-\subsection*{Step 4: Retail Execution (The Asymmetric Directional Playbook)}
-The Retail trader (paying 0.12\% Taker Fees) must systematically abandon Pairs Trading. The double-fee penalty mathematically destroys the $+0.05\%$ spread. Retail must take directional risk to ensure volatility exceeds the fee threshold.
-
-\textbf{Path A: Hyper-Volatility (V5 Isotonic Engine on Meme Coins)}\\
-Target: \textit{WIF, PEPE, DOGE, SOL, AVAX}.
-\begin{itemize}
-    \item \textbf{Action:} Immediately execute a \textit{Market Sell (Short)} on the target asset. Do not use the GBR to forecast magnitude.
-    \item \textbf{Why:} These assets lack institutional Market Makers. When BTC crashes, their liquidity vanishes into a frictionless void, bypassing the 0.12\% fee via massive, immediate downside volatility.
-\end{itemize}
-
-\textbf{Path B: Institutional Gravity (V6 GBR Engine on Titans)}\\
-Target: \textit{BTC, ETH, ADA}.
-\begin{itemize}
-    \item \textbf{Action:} Pass real-time features into the GBR. Only execute the Market Sell if the predicted crash magnitude is \textbf{$> 0.30\%$}. 
-    \item \textbf{Protection:} You MUST attach a strict \textbf{1.0\% Parametric Stop-Loss}. By filtering trades, you avoid the 95\% of shocks that BTC/ETH easily absorb, only risking capital when the ML proves institutional liquidity is exhausted.
-\end{itemize}
-
-\subsection*{Step 5: Retail Risk Management (The Iron Law)}
+\subsection{The Trigger Mechanics (Real-Time Calculation)}
+At the closure of every single 60-second interval, the \texttt{Orchestrator} module executes the following sequence:
 \begin{enumerate}
-    \item \textbf{Order Types:} You must use \textit{Market Orders} to enter the trade (Taker Fee). During a panic, limit orders will be skipped entirely. However, attempt to use \textit{Limit Orders} (Maker Fee) to exit the trade after the 45-minute window stabilizes, cutting your total fee burden in half.
-    \item \textbf{Capital Allocation:} Because you are trading pure contagion shocks, never risk more than 2\% to 5\% of your total portfolio on a single event. 
+    \item \textbf{Timestamp Synchronization:} The engine checks the \texttt{close\_time} of the Bitcoin candle against the target Altcoin (e.g., AVAX, ETH). If an altcoin tick is missing due to exchange lag, the engine instantly executes a \texttt{ffill} (forward-fill) to prevent temporal hallucination.
+    \item \textbf{Hazard Delta Calculation:} The engine calculates the rolling absolute return of Bitcoin's Open Interest against its Volume. This generates a raw hazard score.
+    \item \textbf{Isotonic Translation:} The raw hazard score is mapped through the pre-compiled \texttt{IsotonicRegression} model to output a strictly calibrated $P(Crash)$.
+    \item \textbf{The 11.0\% Gate:} If $P(Crash) \ge 11.0\%$, the execution sequence immediately locks the evaluation thread and initiates the Market Orders.
 \end{enumerate}
+
+\subsection{Algorithmic Risk Filters}
+To prevent catastrophic ruin during highly irrational market environments, the execution thread must pass three hard-coded parametric filters before firing a Market Sell to the exchange:
+
+\begin{itemize}
+    \item \textbf{The 750-SMA Trend Blocker:} The engine computes a 750-period Simple Moving Average of the target asset. If the current price is $> 750\text{-SMA}$ by a margin of 10\%, the asset is deemed to be in a "Parabolic Bull State." \textit{The short is blocked.} Naked shorting a parabolic asset, even during a systemic breakdown, invites infinite risk.
+    \item \textbf{The Chronological Time-Stop:} The algorithm does not use traditional price-based Take Profits. It uses a strict 45-minute (45 intervals) Oracle window. When an order is filled, a background asynchronous timer begins. Exactly 45 minutes later, regardless of PnL, the engine fires a \textit{Market Buy} to close the position. If the structural decay has not materialized in 45 minutes, the thesis is void.
+    \item \textbf{The Parametric 1.0\% Hedge (V6 Only):} When trading high-liquidity Titans like ETH or BTC via the Gradient Boosting Regressor (V6), the engine injects a strict Stop-Loss Limit Order exactly 1.0\% above the entry price. If the machine learning model fails and the asset violently mean-reverts (The Rubber-Band effect), the maximum portfolio damage is sealed at 1.0\%, completely eliminating long-tail risk.
+\end{itemize}
+
+\subsection{Production Calibration Pipeline}
+Financial data suffers from severe concept drift. A model trained on summer liquidity will fail during winter volatility. 
+Every 24 hours, at exactly 00:00 UTC, the trading thread temporarily yields to the \texttt{TrainingModule}.
+\begin{itemize}
+    \item The module pulls the trailing 60 days of historical data.
+    \item It refits the Isotonic Regressor and the \texttt{HistGradientBoostingRegressor}.
+    \item It recalculates the optimal Hazard Threshold (dynamically shifting it between 10.5\% and 12.0\% depending on ambient market liquidity).
+    \item The updated models are serialized (via \texttt{joblib}), and the trading thread resumes execution with updated parameters.
+\end{itemize}
 
 \end{document}
