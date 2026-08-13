@@ -302,16 +302,16 @@ Can a more sophisticated strategy force Pairs Trading to be profitable for retai
 \begin{table}[h]
 \centering
 \renewcommand{\arraystretch}{1.3}
-\begin{tabular}{@{}llccclc@{}}
+\begin{tabular}{@{}llccclcc@{}}
 \toprule
-\textbf{Asset Pair} & \textbf{Trades} & \textbf{Win Rate} & \textbf{Short PnL} & \textbf{Long PnL} & \textbf{Gross Return} & \textbf{Retail ROI (0.12\% Fee)} \\ \midrule
-\textbf{AVAX / BNB} & 36 & 50.00\% & +0.10\% & +0.02\% & +0.06\% & \textcolor{red}{-2.27\%} \\
-\textbf{ETH / BNB} & 25 & 60.00\% & +0.19\% & -0.10\% & +0.05\% & \textcolor{red}{-1.86\%} \\
-\textbf{SOL / BNB} & 27 & 62.96\% & +0.05\% & +0.00\% & +0.02\% & \textcolor{red}{-2.62\%} \\
-\textbf{BTC / BNB} & 0 & -- & -- & -- & -- & \textcolor{gray}{Filtered (No Signal)} \\
+\textbf{Asset Pair} & \textbf{Trades} & \textbf{Win Rate} & \textbf{Short PnL} & \textbf{Long PnL} & \textbf{Gross Return} & \textbf{Inst ROI (0\% Fee)} & \textbf{Retail ROI (0.12\% Fee)} \\ \midrule
+\textbf{AVAX / BNB} & 36 & 50.00\% & +0.10\% & +0.02\% & +0.06\% & \textcolor{green}{+2.04\%} & \textcolor{red}{-2.27\%} \\
+\textbf{ETH / BNB} & 25 & 60.00\% & +0.19\% & -0.10\% & +0.05\% & \textcolor{green}{+1.13\%} & \textcolor{red}{-1.86\%} \\
+\textbf{SOL / BNB} & 27 & 62.96\% & +0.05\% & +0.00\% & +0.02\% & \textcolor{green}{+0.59\%} & \textcolor{red}{-2.62\%} \\
+\textbf{BTC / BNB} & 0 & -- & -- & -- & -- & -- & \textcolor{gray}{Filtered (No Signal)} \\
 \bottomrule
 \end{tabular}
-\caption{Empirical Validation: Multi-Asset V7+GBR Pairs Trade proves the universal Retail Fee Barrier. (Inst ROI averaged ~+1.2\% across all executed assets).}
+\caption{Empirical Validation: Multi-Asset V7+GBR Pairs Trade proves the universal Retail Fee Barrier.}
 \end{table}
 
 The empirical results are utterly devastating to the retail Pairs Trading hypothesis. Across both High Beta (AVAX, SOL) and Medium Beta (ETH) assets, the GBR successfully filtered for high win rates (up to 62.96\%). Yet, the average gross pair return remained fundamentally choked at a microscopic $+0.02\%$ to $+0.06\%$. The Retail ROI remained decisively negative across the entire topography. Furthermore, Bitcoin's immense institutional gravity caused the GBR to filter out 100\% of trades, mathematically concluding that a $0.30\%$ structural collapse is impossible to guarantee against the BNB peg. Why does this happen? 
