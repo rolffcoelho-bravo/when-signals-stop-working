@@ -35,31 +35,44 @@ def get_live_feed(symbol: str = "SOL/USDT:USDT"):
         ob_imbalance = total_bid_size / total_ask_size if total_ask_size > 0 else 1.0
         
         # Fetch Live Funding Rate
+        # Fetch SOL Funding and Order Book
         funding = exchange.fetch_funding_rate(symbol)
         current_funding = funding['fundingRate']
         
-        # Calculate Mock Crash Hazard % (In production this would pass through the ML Model)
-        # We simulate the Isotonic Model behavior here for real-time responsiveness based on the rules:
-        base_hazard = 0.05
-        if current_funding < 0:
-            base_hazard += abs(current_funding) * 1000 # Escalate rapidly on negative funding
-            
-        if ob_imbalance < 1.0:
-            base_hazard += (1.0 - ob_imbalance) * 0.2
-            
-        crash_hazard = min(base_hazard * 100, 100.0)
+        # Fetch BTC Funding and Order Book for Contagion Math
+        btc_funding = exchange.fetch_funding_rate('BTC/USDT:USDT')
+        btc_current_funding = btc_funding['fundingRate']
+        btc_ob = exchange.fetch_order_book('BTC/USDT', limit=20)
+        btc_bids = pd.DataFrame(btc_ob['bids'], columns=['price', 'size'])
+        btc_asks = pd.DataFrame(btc_ob['asks'], columns=['price', 'size'])
+        btc_total_vol = btc_bids['size'].sum() + btc_asks['size'].sum()
         
-        # Add slight jitter so the UI looks alive between exact updates
-        crash_hazard += random.uniform(-0.5, 0.5)
+        # Prepare DataFrame for empirical mathematical engine (SOL)
+        df_sol = pd.DataFrame({
+            'funding_rate': [0.0]*23 + [current_funding], 
+            'open_interest': [(total_bid_size + total_ask_size)*0.9]*11 + [(total_bid_size + total_ask_size)]
+        })
+        
+        # Prepare DataFrame for empirical mathematical engine (BTC Contagion)
+        df_btc = pd.DataFrame({
+            'funding_rate': [0.0]*23 + [btc_current_funding], 
+            'open_interest': [btc_total_vol*0.9]*11 + [btc_total_vol]
+        })
+        
+        # --- V5 Quantitative Engine Execution ---
+        from src.shockbridge_signal_validity.v5.microstructure_engine import MicrostructureEngine
+        sol_hazard = float(MicrostructureEngine.calculate_liquidation_hazard(df_sol).iloc[-1])
+        btc_hazard = float(MicrostructureEngine.calculate_liquidation_hazard(df_btc).iloc[-1])
 
         return {
             "symbol": symbol,
             "order_book_imbalance": round(ob_imbalance, 2),
             "funding_rate": current_funding,
-            "crash_hazard_percent": round(max(0, crash_hazard), 1),
+            "crash_hazard_percent": round(sol_hazard, 1),
+            "contagion_hazard_percent": round(btc_hazard, 1),
             "total_bids": round(total_bid_size, 1),
             "total_asks": round(total_ask_size, 1),
-            "status": "DANGER" if crash_hazard > 15 else ("WARNING" if crash_hazard > 10 else "SAFE")
+            "status": "CONTAGION WARNING" if (btc_hazard > 50 and sol_hazard < 20) else ("DANGER" if sol_hazard > 15 else "SAFE")
         }
     except Exception as e:
         return {"error": str(e)}
