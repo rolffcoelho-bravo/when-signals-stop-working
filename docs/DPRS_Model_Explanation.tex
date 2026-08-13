@@ -261,6 +261,14 @@ Crucially, to manage risk against Ethereum's immense liquidity, we instituted a 
 \textbf{The Algorithmic Breakthrough \& 1\% Stop-Loss Hedge:} 
 By simply redefining the mathematical target, the model bypassed the rubber-band paradox entirely. Crucially, to manage risk against Ethereum's immense liquidity and volatility, we instituted a \textbf{1.0\% Parametric Stop-Loss} as a capital hedge. This ensures that if the GBR prediction fails and the asset experiences a sudden, violent uprising before the 45-minute window closes, the portfolio is strictly protected. Even with Ethereum's volatility occasionally hitting the 1\% stop-loss before 45 minutes, the Gradient Boosting model is so surgically accurate that the portfolio easily absorbs the hedged losses and still generates a positive yield.
 
+\subsection{The Beta Topography of Cryptocurrency Microstructure}
+To deploy the correct mathematical model, one must strictly define the \textit{Beta Topography} of the ecosystem. While traditional finance views all crypto as "High Beta," within the internal microstructure, the asset classes possess radically different defensive mechanisms against liquidity shocks:
+\begin{itemize}
+    \item \textbf{Low Beta (The Anchor):} Bitcoin (BTC) acts as the anchor of the ecosystem. It possesses immense institutional liquidity and massive limit-buy walls. When a systemic shock occurs, it dictates the gravity of the space but moves the least. It is the hardest to manipulate and the quickest to stabilize.
+    \item \textbf{Medium Beta (The Titans):} Ethereum (ETH) and Cardano (ADA). These are massive layer-1 networks with deep institutional backing. They move slightly harder than Bitcoin but retain strong Market Maker defenses that cushion liquidity shocks, heavily dampening the V5 engine's predictive Alpha.
+    \item \textbf{High \& Ultra-High Beta (The Proxies):} Solana (SOL), Avalanche (AVAX), and Meme Coins (WIF, PEPE, DOGE). These assets lack structural institutional defenses. They act as leveraged proxies for Bitcoin. When BTC sneezes, their liquidity evaporates into a frictionless void, triggering massive, immediate downside volatility. They are the optimal targets for V5 predictive contagion.
+\end{itemize}
+
 \textbf{The V6 Architectural Blueprint (Dual-Filter Architecture):}\\
 V6 requires two mathematical models working together sequentially to successfully trade Medium Beta assets like Ethereum:
 \begin{enumerate}
